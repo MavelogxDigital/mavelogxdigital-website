@@ -1,0 +1,179 @@
+---
+/** Case study template — Build Bible 10.1, the eleven blocks.
+ *  One template, every case study. Optional blocks are omitted entirely when
+ *  the material does not exist; they are never filled with placeholder text. */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Stat from '../../components/Stat.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE } from '../../site';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('work', (e) => !e.data.draft))
+    .sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: all[(i + 1) % all.length] },
+  }));
+}
+
+const { entry, next } = Astro.props;
+const d = entry.data;
+const isDev = import.meta.env.DEV;
+---
+<BaseLayout
+  page="work"
+  title={`${d.client} — Case Study | MavelogxDigital`}
+  description={`${d.descriptor}. ${d.sector}, ${d.year}.`}
+  ogImage={d.hero}
+>
+  {/* ---------- 01 HERO ---------- */}
+  <section class="container cs-hero">
+    <Eyebrow rule>Case Study</Eyebrow>
+    <h1 class="cs-hero__h1" style="margin-top:var(--s-2)">{d.client}</h1>
+    <p class="cs-hero__desc">{d.descriptor}</p>
+    <div class="cs-hero__media rv">
+      <img src={d.hero} alt={d.heroAlt} width="1280" height="720" fetchpriority="high" decoding="async" />
+    </div>
+  </section>
+
+  {/* ---------- 02 META STRIP ---------- */}
+  <section class="container">
+    <dl class="cs-meta">
+      <div><dt>Client</dt><dd>{d.client}</dd></div>
+      <div><dt>Sector</dt><dd>{d.sector}</dd></div>
+      <div><dt>Services</dt><dd>{d.services.join(' · ')}</dd></div>
+      <div><dt>Year</dt><dd>{d.year}</dd></div>
+      {d.live && <div><dt>Live site</dt><dd><a href={d.live} rel="noopener">Visit ↗</a></dd></div>}
+    </dl>
+  </section>
+
+  {/* ---------- 03 LEAD ---------- */}
+  <section class="container"><p class="cs-lead rv">{d.lead}</p></section>
+
+  {/* ---------- 04 THE BRIEF ---------- */}
+  {d.brief && (
+    <section class="container cs-block rv">
+      <h2>The brief</h2>
+      {d.brief.map((para) => <p>{para}</p>)}
+    </section>
+  )}
+
+  {/* ---------- 05 THE CHALLENGE ---------- */}
+  {d.challenge && (
+    <section class="container cs-block rv">
+      <h2>The challenge</h2>
+      {d.challenge.map((para) => <p>{para}</p>)}
+    </section>
+  )}
+
+  {/* ---------- 06 STRATEGY & DIRECTION ---------- */}
+  {d.strategy && (
+    <section class="container cs-block rv">
+      <h2>Strategy and direction</h2>
+      {d.strategy.map((para) => <p>{para}</p>)}
+    </section>
+  )}
+
+  {/* ---------- 07 IDENTITY & DESIGN SYSTEM (optional) ---------- */}
+  {d.identity && (
+    <section class="container cs-block rv">
+      <h2>Identity and design system</h2>
+      <p>{d.identity.note}</p>
+      {d.identity.palette && (
+        <div class="cs-swatches">
+          {d.identity.palette.map((c) => (
+            <div class="cs-swatch"><span style={`background:${c.hex}`}></span>
+              <small>{c.name}<br />{c.hex}</small></div>
+          ))}
+        </div>
+      )}
+      {d.identity.type && <p style="margin-top:var(--s-3)">{d.identity.type.join(' · ')}</p>}
+    </section>
+  )}
+
+  {/* ---------- 08 THE BUILD ---------- */}
+  {d.shots && d.shots.length > 0 && (
+    <section class="section container">
+      <h2 style="font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--s-4)">The build</h2>
+      <div class="cs-shots">
+        {d.shots.map((s, i) => (
+          <div class="cs-shot rv" data-d={Math.min(i, 6)}>
+            <figure>
+              <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+              {s.caption && <figcaption>{s.caption}</figcaption>}
+            </figure>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {/* ---------- 09 KEY DECISIONS ---------- */}
+  {d.decisions && d.decisions.length > 0 && (
+    <section class="section container">
+      <h2 style="font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--s-4)">Key decisions</h2>
+      <div class="cs-decisions">
+        {d.decisions.map((x, i) => (
+          <div class="cs-decision rv" data-d={Math.min(i, 6)}>
+            <h3>{x.title}</h3><p>{x.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {/* ---------- 10 OUTCOME ---------- */}
+  {d.outcome && (
+    <section class="container cs-block rv">
+      <h2>Outcome</h2>
+      {d.outcome.map((para) => <p>{para}</p>)}
+      {d.metrics && d.metrics.length > 0 && (
+        <div class="cs-metrics">{d.metrics.map((m) => <Stat figure={m.figure} label={m.label} />)}</div>
+      )}
+    </section>
+  )}
+
+  {/* ---------- 11 CLIENT QUOTE + NEXT ---------- */}
+  {d.quote && (
+    <section class="section container">
+      <div style="max-width:var(--reading)">
+        <Testimonial feature quote={d.quote.text} name={d.quote.name} role={d.quote.role} />
+      </div>
+      {d.live && (
+        <p style="margin-top:var(--s-4)">
+          <a class="btn btn--ghost" href={d.live} rel="noopener">Visit the live site ↗</a>
+        </p>
+      )}
+    </section>
+  )}
+
+  {/* Author-only: what this case study is still waiting on. Dev builds only. */}
+  {isDev && d.pending.length > 0 && (
+    <section class="container">
+      <div class="cs-pending">
+        <h2>Awaiting material — not shown in production</h2>
+        <ul>
+          {d.pending.map((x) => <li>{x}</li>)}
+        </ul>
+        <p style="font-size:var(--fs-small);color:var(--text-2);margin-top:var(--s-2)">
+          Collect with the intake questionnaire in Appendix B, then add to
+          <code> src/content/work/{entry.id}.md</code>.
+        </p>
+      </div>
+    </section>
+  )}
+
+  <section class="container cs-next">
+    <Eyebrow>Next project</Eyebrow>
+    <a href={`/work/${next.id}/`} style="text-decoration:none">
+      <h2 style="font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em;margin-top:var(--s-2)">
+        {next.data.client} →
+      </h2>
+    </a>
+  </section>
+
+  <CtaBand heading="Want work like this?" lead="Tell us what you're building and we'll tell you honestly what it needs." />
+</BaseLayout>

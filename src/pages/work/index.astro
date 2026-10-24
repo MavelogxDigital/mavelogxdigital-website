@@ -1,0 +1,46 @@
+---
+/** Portfolio index — Build Bible 9.2.
+ *  Filter row is deliberately absent: with four projects it is decoration.
+ *  Build it at five, per 9.2. */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const all = (await getCollection('work', (e) => !e.data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const [lead, ...rest] = all;
+---
+<BaseLayout
+  page="work"
+  title="Our Work — Case Studies | MavelogxDigital"
+  description="Recent brand identity, web design and digital strategy projects across spoken word, community, B2B procurement and publishing."
+>
+  <section class="section container">
+    <Eyebrow rule>Our Work</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      Ideas turned into impact.
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-2)">
+      A selection of recent projects across brand identity, web design and digital strategy.
+      Two are client engagements; two are our own ventures, and each is labelled as such.
+    </p>
+  </section>
+
+  <section class="section container" style="padding-top:0">
+    <div class="grid" style="margin-bottom:var(--s-4)">
+      <ProjectCard wide slug={lead.id} client={lead.data.client} tags={lead.data.services}
+        inHouse={lead.data.inHouse} imgAlt={lead.data.heroAlt} />
+    </div>
+    <div class="grid grid-2">
+      {rest.map((p, i) => (
+        <ProjectCard slug={p.id} client={p.data.client} tags={p.data.services}
+          inHouse={p.data.inHouse} imgAlt={p.data.heroAlt} delay={Math.min(i + 1, 6)} />
+      ))}
+    </div>
+  </section>
+
+  <CtaBand heading="Working on something?" lead="Tell us about your project. We'll come back within one business day with honest thoughts on what it needs." />
+</BaseLayout>

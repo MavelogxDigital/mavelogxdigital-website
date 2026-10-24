@@ -1,0 +1,202 @@
+---
+/** Phase 0 acceptance surface: every component, every state, one page.
+    Verify at 360px, 768px and 1440px. Not linked from the site; noindex. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ServiceRow from '../components/ServiceRow.astro';
+import Pillar from '../components/Pillar.astro';
+import Step from '../components/Step.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Stat from '../components/Stat.astro';
+import InsightCard from '../components/InsightCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Field from '../components/Field.astro';
+import { SERVICES, PILLARS, PROCESS, PROJECTS } from '../site';
+
+const swatches = [
+  ['--coral','#E85C6E','Primary action'], ['--amber','#F5A825','Emphasis'],
+  ['--purple','#7070BB','Depth — large text only'], ['--purple-lt','#8F8FD0','Purple, small text'],
+  ['--teal','#3BBFA0','Eyebrow / success'],
+  ['--bg','#0B0B0D','Page'], ['--bg-alt','#131316','Band'], ['--bg-card','#18181C','Card'],
+  ['--border','#222228','Rules'], ['--text-1','#EFEFF3','Headings/body'], ['--text-2','#9898A8','Secondary'],
+];
+const scale = [
+  ['--fs-display','Display — hero H1'], ['--fs-h1','H1 — page title'],
+  ['--fs-h2','H2 — section'], ['--fs-h3','H3 — block'], ['--fs-h4','H4 — card title'],
+  ['--fs-lead','Lead'], ['--fs-body','Body'], ['--fs-small','Small / caption'],
+];
+---
+<BaseLayout title="Style Guide — MavelogxDigital" description="Phase 0 component library." page="">
+  <Fragment slot="head"><meta name="robots" content="noindex" /></Fragment>
+
+  <section class="section container">
+    <Eyebrow rule>Phase 0 · Build Bible v2.0</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      Component Library
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-2)">
+      Every component from Section 07, in every state from 6.8. Resize to 360px, 768px and
+      1440px to sign off Phase 0.
+    </p>
+  </section>
+
+  <hr class="hr container" />
+
+  <!-- Tokens -->
+  <section class="section container">
+    <SectionHead eyebrow="6.1 · Colour" heading="Tokens" lead="Four accents, each with an assigned job. Steel Blue and Orange are retired." />
+    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(190px,1fr))">
+      {swatches.map(([t,hex,role]) => (
+        <div style="border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden">
+          <div style={`background:${hex};height:62px`}></div>
+          <div style="padding:var(--s-2)">
+            <code style="font-size:13px;color:var(--text-1)">{t}</code>
+            <p style="font-size:12px;color:var(--text-2)">{hex} · {role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Type -->
+  <section class="section section--band"><div class="container">
+    <SectionHead eyebrow="6.3 / 6.4 · Typography" heading="Type scale" lead="Plus Jakarta Sans throughout. Cormorant Garamond only in the four places 6.3 permits." />
+    {scale.map(([t,label]) => (
+      <div style="border-top:1px solid var(--border);padding:var(--s-3) 0">
+        <code style="font-size:12px;color:var(--teal)">{t}</code>
+        <p style={`font-size:var(${t});font-weight:${t==='--fs-display'?800:t.startsWith('--fs-h')?700:400};line-height:1.1;letter-spacing:-.02em;margin-top:6px`}>{label}</p>
+      </div>
+    ))}
+    <div style="border-top:1px solid var(--border);padding:var(--s-3) 0">
+      <code style="font-size:12px;color:var(--amber)">--fs-quote · Cormorant Garamond</code>
+      <p class="quote__text" style="margin-top:6px">Creative thinking. Intelligent execution.</p>
+    </div>
+  </div></section>
+
+  <!-- 01/02 Buttons, all states -->
+  <section class="section container">
+    <SectionHead eyebrow="07 · #01–02" heading="Buttons" lead="Coral is the only colour permitted on a solid button. Tab to each to see the focus ring." />
+    <div style="display:flex;flex-wrap:wrap;gap:var(--s-2);align-items:center">
+      <a class="btn btn--primary" href="#0">Start a Project ↗</a>
+      <a class="btn btn--ghost" href="#0">Explore Our Work →</a>
+      <button class="btn btn--primary" disabled>Disabled</button>
+      <button class="btn btn--ghost" disabled>Disabled ghost</button>
+    </div>
+  </section>
+
+  <!-- 03/04 -->
+  <section class="section container">
+    <SectionHead eyebrow="07 · #03–04" heading="Eyebrow & section head" lead="The most repeated element on the site. Always 13px, 700, 0.14em, Teal." />
+    <Eyebrow>Plain eyebrow</Eyebrow>
+    <div style="height:var(--s-2)"></div>
+    <Eyebrow rule>Eyebrow with rule</Eyebrow>
+  </section>
+
+  <!-- 05 Project cards -->
+  <section class="section container">
+    <SectionHead eyebrow="07 · #05" heading="Project cards" lead="Asymmetric stack: one wide, two beside it. Hover and keyboard focus give the same result." linkHref="/work/" linkLabel="All work →" />
+    <p style="color:var(--text-2);font-size:var(--fs-small);margin-bottom:var(--s-3)">
+      Art below is placeholder: only the two in-house brands have usable assets today.
+      Real 1440×900 screenshots per 6.7 land in Phase 2.
+    </p>
+    <div class="grid" style="margin-bottom:var(--s-4)">
+      <ProjectCard wide plate slug="mavelogx-enterprise" client="Mavelogx Enterprise"
+        tags={PROJECTS[2].tags} inHouse
+        img="/img/mavelogx-enterprise-640.webp" imgAlt="Mavelogx Enterprise brand mark" />
+    </div>
+    <div class="grid grid-2">
+      <ProjectCard plate slug="mavels-corner" client="Mavel's Corner" tags={PROJECTS[3].tags} inHouse
+        img="/img/mavels-corner-640.webp" imgAlt="Mavel's Corner brand mark" delay={1} />
+      <ProjectCard slug="floks-speaks" client="Floks Speaks" tags={PROJECTS[0].tags}
+        img="/img/placeholder.svg" imgAlt="Screenshot pending — Phase 2" delay={2} />
+    </div>
+  </section>
+
+  <!-- 06 Service rows -->
+  <section class="section section--band"><div class="container">
+    <SectionHead eyebrow="07 · #06" heading="Service rows" lead="Numbered rows, not a card grid. Each carries its assigned accent on the top border." />
+    {SERVICES.map((s,i) => <ServiceRow {...s} delay={Math.min(i,6)} />)}
+  </div></section>
+
+  <!-- 07 Pillars -->
+  <section class="section container">
+    <SectionHead eyebrow="07 · #07" heading="Pillar cards" lead="2×2 on desktop. One accent per card, in order: Coral, Amber, Purple, Teal." />
+    <div class="grid grid-2">{PILLARS.map((p,i) => <Pillar {...p} delay={i} />)}</div>
+  </section>
+
+  <!-- 08 Steps -->
+  <section class="section container">
+    <SectionHead eyebrow="07 · #08" heading="Process steps" lead="Cormorant numerals at 24% opacity, aria-hidden. Connected by a rule on desktop." />
+    <div class="steps">{PROCESS.map((s,i) => <Step {...s} delay={i} />)}</div>
+  </section>
+
+  <!-- 09 Testimonials -->
+  <section class="section section--band"><div class="container">
+    <SectionHead eyebrow="07 · #09" heading="Testimonials" lead="Every quote carries a name and the project it refers to. No floating quotes." />
+    <div class="split-7-5">
+      <Testimonial feature
+        quote="MavelogxDigital completely transformed the way we show up online. They understood our vision from day one and delivered a brand identity that truly captures who we are. The quality was outstanding."
+        name="Mavelogx Enterprise" role="Brand Identity & Web Design" projectHref="/work/mavelogx-enterprise/" />
+      <div class="grid" style="gap:var(--s-5)">
+        <Testimonial
+          quote="They helped us craft a voice and visual identity that resonates deeply with our readers. Every detail was handled with real intention."
+          name="Mavel's Corner" role="Brand Voice & Content" projectHref="/work/mavels-corner/" delay={1} />
+        <div style="display:flex;gap:var(--s-5);flex-wrap:wrap">
+          <Stat figure="5" label="Projects shipped" />
+          <Stat figure="2" label="Markets served" />
+          <Stat figure="15+" label="Years of practice" />
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- 11 Insights, light theme -->
+  <section class="section theme-light" style="background:var(--bg)">
+    <div class="container">
+      <SectionHead eyebrow="07 · #11 · light break" heading="Insight cards" lead="The light section proves the theme-light scope: neutrals re-point, accents are untouched." linkHref="/insights/" linkLabel="All insights →" />
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <InsightCard href="#0" tag="AI workflow" title="What an AI-augmented studio actually changes for a client"
+          excerpt="Less about speed, more about where senior attention goes." readTime="6 min read" />
+        <InsightCard href="#0" tag="Market" title="Designing for the Canada–Ghana corridor"
+          excerpt="Bandwidth, devices and payment habits differ more than most briefs assume." readTime="8 min read" delay={1} />
+        <InsightCard href="#0" tag="Brand" title="Why identity work should start with positioning"
+          excerpt="A logo cannot answer a question the business has not asked yet." readTime="5 min read" delay={2} />
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 Form fields, all states -->
+  <section class="section container">
+    <SectionHead eyebrow="07 · #13" heading="Form fields" lead="Rest, focus, filled, error and success. No budget field — see 9.6." />
+    <div class="split-7-5">
+      <form style="display:grid;gap:var(--s-3)" onsubmit="return false">
+        <Field name="sg-name" label="Name" required autocomplete="name" placeholder="Your name" />
+        <Field name="sg-email" label="Email" type="email" required placeholder="you@company.com" />
+        <Field name="sg-project" label="Tell us about your project" textarea required placeholder="What are you building?" />
+        <div class="field field--hp" aria-hidden="true">
+          <label for="bot-field">Do not fill this in</label>
+          <input id="bot-field" name="bot-field" tabindex="-1" autocomplete="off" />
+        </div>
+        <button class="btn btn--primary" type="submit" style="justify-self:start">Send Enquiry ↗</button>
+      </form>
+      <div class="grid" style="gap:var(--s-3);align-content:start">
+        <div class="field field--filled">
+          <label for="sg-f">Filled</label><input id="sg-f" value="Emmanuel Avleshie" readonly />
+          <p class="field__msg"></p>
+        </div>
+        <div class="field field--error">
+          <label for="sg-e">Error</label><input id="sg-e" value="not-an-email" aria-invalid="true" aria-describedby="sg-e-msg" readonly />
+          <p class="field__msg" id="sg-e-msg">Enter a valid email address.</p>
+        </div>
+        <div class="field field--success">
+          <label for="sg-s">Success</label><input id="sg-s" value="you@company.com" readonly />
+          <p class="field__msg" style="color:var(--teal)">Looks good.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

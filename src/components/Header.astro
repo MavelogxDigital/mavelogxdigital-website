@@ -1,0 +1,62 @@
+---
+import { NAV, SITE } from '../site';
+interface Props { page?: string; transparent?: boolean }
+const { page = '', transparent = false } = Astro.props;
+---
+<header class="nav" data-transparent={transparent ? 'true' : 'false'}>
+  <div class="container nav__in">
+    <a class="nav__brand" href="/" aria-label={`${SITE.name} — home`}>
+      Mavelogx<b>Digital</b>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {NAV.map(i => (
+        <a class="nav__link" href={i.href}
+           aria-current={page === i.key ? 'page' : undefined}>{i.label}</a>
+      ))}
+    </nav>
+
+    <a class="btn btn--primary nav__cta" href="/contact/">Start a Project ↗</a>
+
+    <button class="nav__burger" type="button"
+            aria-label="Open menu" aria-expanded="false" aria-controls="navpanel">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" aria-hidden="true">
+        <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="nav__panel" id="navpanel" data-open="false" hidden>
+  {NAV.map(i => <a href={i.href} aria-current={page === i.key ? 'page' : undefined}>{i.label}</a>)}
+  <a class="btn btn--primary" href="/contact/">Start a Project ↗</a>
+</div>
+
+<script>
+  // Mobile nav: aria-expanded, focus trap, Escape to close, focus returns (5.2 / 13.1)
+  const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
+  const panel  = document.querySelector<HTMLElement>('.nav__panel');
+  if (burger && panel) {
+    const focusables = () => panel.querySelectorAll<HTMLElement>('a,button');
+    const setOpen = (open: boolean) => {
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) panel.hidden = false;
+      panel.dataset.open = String(open);
+      if (open) focusables()[0]?.focus();
+      else { burger.focus(); setTimeout(() => { if (panel.dataset.open === 'false') panel.hidden = true; }, 300); }
+    };
+    burger.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (panel.dataset.open !== 'true') return;
+      if (e.key === 'Escape') { setOpen(false); return; }
+      if (e.key !== 'Tab') return;
+      const f = Array.from(focusables());
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+  }
+</script>

@@ -1,0 +1,5 @@
+---
+interface Props { rule?: boolean; class?: string }
+const { rule = false, class: cls = '' } = Astro.props;
+---
+<p class={`eyebrow ${rule ? 'eyebrow--rule' : ''} ${cls}`}><slot /></p>

@@ -1,0 +1,205 @@
+---
+/** Homepage — Build Bible v2.1 Section 08.
+ *  Section order is deliberate: proof (02) precedes explanation (03).
+ *  Section 08 Insights is omitted until three real articles exist — see 8.8.
+ *  No price-led language anywhere; see the retire list in 3.3.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ServiceRow from '../components/ServiceRow.astro';
+import Pillar from '../components/Pillar.astro';
+import Step from '../components/Step.astro';
+import Testimonial from '../components/Testimonial.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, SERVICES, PILLARS, PROCESS, FEATURED } from '../site';
+
+const [lead, ...rest] = FEATURED;
+
+/** Card art: real screenshots captured at 1280x631 and cropped to the card ratios.
+ *  Phase 2 recaptures at 1440x900 retina plus mobile, per 6.7. */
+const ALT: Record<string, string> = {
+  'floks-speaks':        'The Floks Speaks homepage — a Christ-centred spoken-word brand for Felix Lokko',
+  'syndei-embassy':      'The Syndei Embassy homepage — a church in Accra, Ghana',
+  'mavelogx-enterprise': 'The Mavelogx Enterprise homepage — B2B sourcing and procurement',
+};
+---
+<BaseLayout
+  page=""
+  transparentNav
+  title="MavelogxDigital | From Idea To Impact"
+  description="Strategy-led digital agency in Toronto and Accra. Brand identity, web design and digital experiences for ambitious brands. From Idea To Impact."
+>
+
+  {/* ---------- 01 · HERO ---------- */}
+  <section class="section section--hero hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="container hero__in">
+      <Eyebrow rule class="rv">AI-Augmented. Strategy-Led. Built to Scale.</Eyebrow>
+      <h1 class="hero__h1 rv" data-d="1">We Turn Bold Ideas<br />Into Digital Impact.</h1>
+      <p class="hero__lead rv" data-d="2">
+        A strategy-led digital agency helping ambitious brands grow through thoughtful design,
+        high-performing websites and intelligent technology.
+      </p>
+      <div class="hero__actions rv" data-d="3">
+        <a class="btn btn--primary" href="/contact/">Start a Project ↗</a>
+        <a class="btn btn--ghost" href="/work/">Explore Our Work →</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="hero__foot rv" data-d="4">
+        Toronto, Canada &nbsp;•&nbsp; Accra, Ghana &nbsp;•&nbsp; Working with brands worldwide
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- 02 · SELECTED WORK — proof before explanation ---------- */}
+  <section class="section">
+    <div class="container">
+      <SectionHead
+        eyebrow="Selected Work"
+        heading="Ideas turned into impact."
+        lead="A selection of recent projects across brand identity, web design and digital strategy."
+        linkHref="/work/" linkLabel="All work →"
+      />
+      <div class="grid" style="margin-bottom:var(--s-4)">
+        <ProjectCard wide slug={lead.slug} client={lead.client} tags={lead.tags}
+          inHouse={lead.inHouse} imgAlt={ALT[lead.slug]} />
+      </div>
+      <div class="grid grid-2">
+        {rest.map((p, i) => (
+          <ProjectCard slug={p.slug} client={p.client} tags={p.tags} inHouse={p.inHouse}
+            imgAlt={ALT[p.slug]} delay={i + 1} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- 03 · AGENCY INTRODUCTION — light break ---------- */}
+  <section class="section theme-light" style="background:var(--bg)">
+    <div class="container split-5-7">
+      <div class="rv">
+        <Eyebrow>The Agency</Eyebrow>
+        <h2 style="font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em;margin-top:var(--s-2)">
+          Creative thinking. Intelligent execution. Real impact.
+        </h2>
+      </div>
+      <div class="rv" data-d="1" style="display:grid;gap:var(--s-3);align-content:start">
+        <p>
+          MavelogxDigital is a digital creative agency working across Toronto and Accra. We help
+          ambitious businesses build brands, websites and digital experiences that hold up under
+          scrutiny — commercially, visually and technically.
+        </p>
+        <p>
+          Every engagement starts with the business problem, not the deliverable. Fifteen years of
+          design practice sits behind that, and AI-augmented workflows sit underneath it — so the
+          strategic thinking gets the time it deserves and the production work still moves faster
+          than it used to.
+        </p>
+        <p>
+          We work with founders directly. One team, one point of contact, from the first
+          conversation to the day the site goes live.
+        </p>
+        <a class="quote__proj" href="/about/" style="font-weight:600">Read our story →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- 04 · SERVICES ---------- */}
+  <section class="section">
+    <div class="container">
+      <SectionHead
+        eyebrow="What We Do"
+        heading="Six ways we build your brand."
+        lead="From the first brand touchpoint to a fully scaled digital presence — under one accountable team."
+      />
+      {SERVICES.map((s, i) => <ServiceRow {...s} delay={Math.min(i, 6)} />)}
+      <div style="margin-top:var(--s-5)">
+        <a class="btn btn--ghost" href="/services/">See all services →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- 05 · WHY MAVELOGXDIGITAL ---------- */}
+  <section class="section section--band">
+    <div class="container">
+      <SectionHead eyebrow="Why MavelogxDigital" heading="Four reasons clients stay." />
+      <div class="grid grid-2">
+        {PILLARS.map((p, i) => <Pillar {...p} delay={i} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- 06 · HOW WE WORK ---------- */}
+  <section class="section">
+    <div class="container">
+      <SectionHead
+        eyebrow="How We Work"
+        heading="From conversation to launch."
+        lead="Four steps, built for clarity and speed. No guesswork, no surprises."
+      />
+      <div class="steps">{PROCESS.map((s, i) => <Step {...s} delay={i} />)}</div>
+      <div style="margin-top:var(--s-5)">
+        <a class="quote__proj" href="/process/" style="font-weight:600">See the full process →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- 07 · TESTIMONIALS — two at launch, built to take four (8.7) ---------- */}
+  <section class="section section--band">
+    <div class="container">
+      <SectionHead eyebrow="Client Voice" heading="What our clients say." />
+      <div class="split-7-5">
+        <Testimonial feature
+          quote="MavelogxDigital completely transformed the way we show up online. They understood our vision from day one and delivered a brand identity that truly captures who we are. The quality was outstanding."
+          name="Mavelogx Enterprise" role="Brand Identity & Web Design"
+          projectHref="/work/mavelogx-enterprise/" />
+        <Testimonial
+          quote="Working with MavelogxDigital felt like having a creative partner who genuinely cared about the mission. They helped us craft a voice and visual identity that resonates deeply with our readers. Every detail was handled with real intention and professionalism."
+          name="Mavel's Corner" role="Brand Voice & Content Strategy"
+          projectHref="/work/mavels-corner/" delay={1} />
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- 08 · INSIGHTS — omitted until three real articles exist (8.8) ---------- */}
+
+  {/* ---------- 09 · FINAL CTA ---------- */}
+  <CtaBand />
+
+  {/* ---------- 10 · FOOTER — rendered by BaseLayout ---------- */}
+</BaseLayout>
+
+<style>
+  /* Hero is the only section with bespoke styles; everything else is components.css. */
+  /* flex, not grid: flex items stretch on the cross axis, so a .container child
+     fills the row and its own margin-inline:auto does the centring. A single-column
+     grid sizes the track to content and throws the container off the page grid. */
+  .hero { position: relative; display: flex; flex-direction: column; justify-content: center;
+          min-height: 78vh; overflow: hidden; }
+  @media (min-width: 900px) { .hero { min-height: 92vh } }
+  .hero__glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(44% 44% at 22% 38%, rgba(232, 92, 110, .14), transparent 70%);
+    filter: blur(28px);
+  }
+  /* .container children of a grid must be told to fill the track, or the track
+     collapses to content width and margin-inline:auto centres it off-grid. */
+  /* .container sets margin-inline:auto, which disables cross-axis stretch in a
+     flex or grid parent and shrink-wraps the item. Direct children need width:100%. */
+  .hero > .container { width: 100%; }
+  .hero__in { position: relative; z-index: 1; display: grid; gap: var(--s-3); justify-items: start; }
+  .hero__h1 {
+    font-size: var(--fs-display); font-weight: 800; letter-spacing: -.03em; line-height: .98;
+    max-width: 16ch;
+  }
+  .hero__lead { font-size: var(--fs-lead); color: var(--text-2); max-width: 46ch }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2) }
+  .hero__foot {
+    position: relative; z-index: 1; margin-top: var(--s-7);
+    padding-top: var(--s-3); border-top: 1px solid var(--border);
+    font-size: var(--fs-eyebrow); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-2);
+  }
+</style>

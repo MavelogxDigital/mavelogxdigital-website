@@ -1,0 +1,22 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import { SITE } from '../site';
+interface Props { eyebrow?: string; heading?: string; lead?: string }
+const {
+  eyebrow = 'Get in touch',
+  heading = 'Ready to go from idea to impact?',
+  lead = "Tell us about your project. Whether you're starting from scratch or rebuilding something that has outgrown itself, we'll tell you honestly what it needs.",
+} = Astro.props;
+---
+<section class="cta-band">
+  <div class="cta-band__glow" aria-hidden="true"></div>
+  <div class="container cta-band__in rv">
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h2>{heading}</h2>
+    <p class="lead">{lead}</p>
+    <div class="cta-band__actions">
+      <a class="btn btn--primary" href="/contact/">Start a Project ↗</a>
+      <a class="btn btn--ghost" href={SITE.whatsapp} rel="noopener">Chat on WhatsApp</a>
+    </div>
+  </div>
+</section>

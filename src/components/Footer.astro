@@ -1,0 +1,45 @@
+---
+/** Bible 5.4: footer links are rendered into every page's HTML, never injected,
+    so crawlers and non-JS visitors can traverse the site. */
+import { SITE, SERVICES, PROJECTS } from '../site';
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <a class="nav__brand" href="/" style="margin-bottom:var(--s-2)">Mavelogx<b>Digital</b></a>
+        <p style="color:var(--text-2);font-size:var(--fs-small);max-width:34ch">
+          {SITE.tagline}. A digital creative agency helping ambitious brands build stronger digital experiences.
+        </p>
+        <p style="color:var(--text-2);font-size:var(--fs-small);margin-top:var(--s-2)">
+          <a href={SITE.phoneHref}>{SITE.phone}</a><br />
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/process/">Our Process</a></li>
+          <li><a href="/insights/">Insights</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>{SERVICES.map(s => <li><a href={`/services/#${s.slug}`}>{s.title}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>Work</h3>
+        <ul>
+          {PROJECTS.map(p => <li><a href={`/work/${p.slug}/`}>{p.client}</a></li>)}
+          <li><a href="/work/">All work</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span>© {new Date().getFullYear()} {SITE.name}. All rights reserved. {SITE.locations}.</span>
+      <span><a href="/privacy/">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms/">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
