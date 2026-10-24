@@ -8,6 +8,8 @@ lead: >
   Almost every identity project starts with a client asking for a logo. Almost
   every good one starts somewhere else. The gap between those two sentences is
   where most brand work goes wrong.
+relatedService: brand-identity
+relatedWork: floks-speaks
 ---
 
 A logo is a compression format. It takes a set of decisions the business has already made and reduces them to a mark people can recognise in a quarter of a second. Compression is lossless only if there was something there to compress.

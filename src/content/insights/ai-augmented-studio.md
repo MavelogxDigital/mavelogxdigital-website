@@ -8,6 +8,8 @@ lead: >
   The phrase is on half the agency websites in the world now. Here is the
   specific version: what changes on your project, what does not, and what you
   should be checking before you believe anybody who says it.
+relatedService: web
+relatedWork: floks-speaks
 ---
 
 Most agencies describing themselves as AI-augmented mean one of two things. Either they are using it to produce more work for the same money, or they are using it to produce the same work for less. Both are real. Neither is the interesting part.

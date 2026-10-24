@@ -414,6 +414,9 @@
 .choice input:checked+span{border-color:var(--teal);color:var(--text-1);
   background:rgba(59,191,160,.12)}
 .choice input:focus-visible+span{outline:2px solid var(--text-1);outline-offset:3px}
+.form-privacy{color:var(--text-2);font-size:var(--fs-small);max-width:46ch;
+  line-height:1.55}
+.form-privacy a{color:var(--text-1);text-decoration:underline;text-underline-offset:3px}
 .form-success{border:1px solid var(--teal-ink);border-radius:var(--r-md);padding:var(--s-4);
   background:rgba(59,191,160,.08)}
 .form-success h2{font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--s-2)}
@@ -460,6 +463,23 @@
 .art__body blockquote{border-left:2px solid var(--coral);padding-left:var(--s-3);
   font-family:var(--ff-serif);font-style:italic;font-size:var(--fs-quote);
   line-height:1.42;color:var(--text-1)}
+/* Contextual links out of an article, to the service and the case study it
+   argues for (review item, 24 Oct 2026). */
+.art__related{margin-top:var(--s-6);padding-top:var(--s-4);
+  border-top:1px solid var(--border)}
+.art__related-h{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-2);font-weight:700;margin-bottom:var(--s-3)}
+.art__related ul{display:grid;gap:var(--s-2);list-style:none;padding:0}
+.art__related li{padding:0}
+.art__related li::before{content:none}
+.art__related a{display:grid;gap:2px;text-decoration:none;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:var(--s-3);transition:border-color var(--t-fast),background var(--t-fast)}
+.art__related a:hover{border-color:var(--text-2)}
+.art__related-k{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal-text);font-weight:700}
+.art__related-t{font-size:var(--fs-h4);font-weight:600;color:var(--text-1)}
+@media (min-width:700px){ .art__related ul{grid-template-columns:1fr 1fr} }
 .art__draft{border:1px dashed var(--amber);border-radius:var(--r-md);
   padding:var(--s-3);margin-bottom:var(--s-5)}
 .art__draft p{color:var(--text-2);font-size:var(--fs-small)}

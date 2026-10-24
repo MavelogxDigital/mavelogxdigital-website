@@ -4,7 +4,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { SITE } from '../../site';
+import { SITE, SERVICES, PROJECTS } from '../../site';
 
 export async function getStaticPaths() {
   const all = (await getCollection('insights', (e) => !e.data.draft))
@@ -20,6 +20,12 @@ const d = entry.data;
 const { Content } = await render(entry);
 const fmt = (x: Date) => x.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
 const isDev = import.meta.env.DEV;
+
+/* Contextual links out of the article (review item). Rendered only where the
+   article names one, so an article with nothing to point at shows nothing
+   rather than a filler link. */
+const service = SERVICES.find((x) => x.slug === d.relatedService);
+const work = PROJECTS.find((x) => x.slug === d.relatedWork);
 ---
 <BaseLayout page="insights" title={`${d.title} | MavelogxDigital`} description={d.description}>
   <article class="section container">
@@ -47,6 +53,30 @@ const isDev = import.meta.env.DEV;
 
       <p class="art__lead">{d.lead}</p>
       <div class="art__body"><Content /></div>
+
+      {(service || work) && (
+        <aside class="art__related" aria-label="Related">
+          <h2 class="art__related-h">Where this shows up in the work</h2>
+          <ul>
+            {service && (
+              <li>
+                <a href={`/services/#${service.slug}`}>
+                  <span class="art__related-k">Service</span>
+                  <span class="art__related-t">{service.title}</span>
+                </a>
+              </li>
+            )}
+            {work && (
+              <li>
+                <a href={`/work/${work.slug}/`}>
+                  <span class="art__related-k">Case study</span>
+                  <span class="art__related-t">{work.client}</span>
+                </a>
+              </li>
+            )}
+          </ul>
+        </aside>
+      )}
     </div>
   </article>
 

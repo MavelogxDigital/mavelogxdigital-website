@@ -8,6 +8,8 @@ lead: >
   A site that works in Toronto can fail quietly in Accra, and the failure rarely
   shows up in the places people look. Here is what actually differs, and what to
   do about each one.
+relatedService: web
+relatedWork: syndei-embassy
 ---
 
 Most briefs that mention two markets mean translation and a currency switcher. For Canada and Ghana, neither is usually the issue. The differences that matter are quieter, and they show up in whether the site gets used rather than whether it loads.

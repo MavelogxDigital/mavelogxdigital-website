@@ -58,6 +58,10 @@ const insights = defineCollection({
     readTime: z.string(),
     lead: z.string(),
     draft: z.boolean().default(false),
+    /* Contextual cross-links rendered at the foot of the article. Slugs, so a
+       retitled service or case study does not strand the link. */
+    relatedService: z.string().optional(),
+    relatedWork: z.string().optional(),
   }),
 });
 
