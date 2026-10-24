@@ -213,8 +213,9 @@
 .nav__panel-links a[aria-current="page"]{color:var(--text-1)}
 .nav__panel-links a[aria-current="page"]::after{content:"";position:absolute;
   left:0;bottom:8px;width:22px;height:2px;background:var(--coral)}
-/* 5.2: the CTA is pinned to the bottom of the panel as a full-width button. */
-.nav__panel .btn{margin-top:auto;justify-content:center}
+/* The CTA follows Contact directly, rather than being pinned to the bottom
+   of the panel. Owner decision, 24 Oct 2026, supersedes 5.2. */
+.nav__panel .btn{margin-top:var(--s-3);justify-content:center}
 
 .footer{background:var(--bg);border-top:1px solid var(--border);padding-block:var(--s-6)}
 .footer__top{display:grid;gap:var(--s-5)}
