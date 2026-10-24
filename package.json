@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "qa": "node scripts/qa.js"
+    "qa": "node scripts/qa.cjs"
   },
   "keywords": [],
   "author": "",

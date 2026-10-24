@@ -1,3 +1,6 @@
+/* Site QA. Needs a build served at localhost:4321 first:
+     npm run build && npm run preview
+   Run with: npm run qa  (CommonJS, hence .cjs, since package.json is type:module) */
 const {chromium}=require('playwright');
 const ROUTES=['/','/services/','/work/','/about/','/process/','/contact/','/insights/','/privacy/','/terms/',
  '/work/floks-speaks/','/work/syndei-embassy/','/work/mavelogx-enterprise/','/work/mavels-corner/',
