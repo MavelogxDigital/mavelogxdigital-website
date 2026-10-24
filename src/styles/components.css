@@ -175,8 +175,9 @@
    ring. -webkit-text-fill-color:transparent would otherwise hide an outline
    drawn on the glyphs themselves. */
 .brandmark:focus-visible{outline:2px solid var(--text-1);outline-offset:4px;border-radius:4px}
-.nav__links{display:none;gap:var(--s-4);align-items:center}
-@media (min-width:900px){ .nav__links{display:flex} }
+.nav__links{display:none;gap:var(--s-3);align-items:center}
+@media (min-width:1000px){ .nav__links{display:flex} }
+@media (min-width:1180px){ .nav__links{gap:var(--s-4)} }
 .nav__link{text-decoration:none;color:var(--text-2);font-size:15px;font-weight:500;
   padding:10px 2px;position:relative;transition:color var(--t-fast)}
 .nav__link:hover{color:var(--text-1)}
@@ -185,9 +186,9 @@
   height:2px;background:var(--coral)}
 .nav__burger{display:grid;place-items:center;width:44px;height:44px;
   background:none;border:0;cursor:pointer}
-@media (min-width:900px){ .nav__burger{display:none} }
+@media (min-width:1000px){ .nav__burger{display:none} }
 .nav__cta{display:none}
-@media (min-width:900px){ .nav__cta{display:inline-flex} }
+@media (min-width:1000px){ .nav__cta{display:inline-flex} }
 .nav__panel{position:fixed;inset:0 0 0 auto;width:min(86vw,360px);z-index:95;
   background:var(--bg);border-left:1px solid var(--border);
   padding:var(--s-6) var(--s-4) var(--s-4);

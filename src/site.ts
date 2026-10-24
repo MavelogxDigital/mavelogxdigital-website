@@ -11,6 +11,7 @@ export const SITE = {
 } as const;
 
 export const NAV = [
+  { label: 'Home',     href: '/',          key: 'home' },
   { label: 'Work',     href: '/work/',     key: 'work' },
   { label: 'Services', href: '/services/', key: 'services' },
   { label: 'About',    href: '/about/',    key: 'about' },
