@@ -122,3 +122,44 @@ export const INDUSTRIES = [
   { name:'Professional Services' },
   { name:'Health & Wellness' },
 ] as const;
+
+
+/** Process detail for /process/ (Bible 9.4). Durations are ranges, not promises. */
+export const PROCESS_DETAIL = [
+  { n:'01', title:'Discover', duration:'Typically 3 to 5 days',
+    body:'We start with a deep dive into your brand, goals, audience and competitive landscape, so the work that follows answers a real question rather than a guessed one.',
+    need:['A conversation of about 90 minutes','Access to any existing brand or marketing material',
+      'Whatever analytics or sales data you have','The name of the person who signs things off'],
+    get:['A written summary of what we heard','A clear statement of the problem we are solving',
+      'The audience we are designing for'] },
+  { n:'02', title:'Strategize', duration:'Typically 5 to 8 days',
+    body:'We map the creative and digital strategy, covering every touchpoint from brand voice to visual direction, and agree it with you before anything is designed.',
+    need:['One round of feedback, consolidated','A decision on direction where we present options'],
+    get:['Positioning and messaging direction','Sitemap and content plan','Visual direction with references'] },
+  { n:'03', title:'Build', duration:'Typically 2 to 5 weeks, depending on scope',
+    body:'We execute with precision, crafting your assets, designs and content to a professional standard. You see work in progress weekly rather than a reveal at the end.',
+    need:['Copy, photography or product data where you are supplying it',
+      'Weekly review of about 30 minutes','Prompt answers on blockers'],
+    get:['Weekly progress you can look at','Two rounds of revisions included','A staging link before anything goes live'] },
+  { n:'04', title:'Launch', duration:'Typically 2 to 3 days',
+    body:'We deliver, review with you, and get the work live in front of the right people. Then we show you how to run it.',
+    need:['Domain and hosting access, or permission to set it up','Final sign-off'],
+    get:['The work live and tested','A handover walkthrough','Source files and documentation','30 days of post-launch support'] },
+] as const;
+
+export const FAQ = [
+  { q:'How long does a full website take?',
+    a:'Most sites run four to seven weeks end to end. A brand identity on its own is usually two to three. The variable is rarely the build, it is how quickly feedback and content come back.' },
+  { q:'How many rounds of revisions are included?',
+    a:'Two rounds at each stage. In practice the weekly reviews mean most changes happen as we go, so formal rounds are rarely both used.' },
+  { q:'Who owns the files when we finish?',
+    a:'You do. On final payment you receive the source files, the domain and hosting in your own accounts, and documentation. Nothing is held hostage.' },
+  { q:'What happens after launch?',
+    a:'30 days of support is included for anything that breaks or needs adjusting. After that you can run it yourself with the handover walkthrough, or arrange ongoing maintenance.' },
+  { q:'Can I update the site myself?',
+    a:'Yes. The handover covers how to edit content, add a project or publish a post. If you can edit a document you can run the site.' },
+  { q:'Do you work with clients outside Canada and Ghana?',
+    a:'Yes. Those are the two markets we know best and design for by default, but the work is not limited to them.' },
+  { q:'What do you need from me to start?',
+    a:'A conversation, any existing brand material, and one person who can make decisions. Everything else we work out together in Discover.' },
+] as const;

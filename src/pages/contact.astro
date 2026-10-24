@@ -1,0 +1,160 @@
+---
+/** Contact, Build Bible 9.6. The highest-intent page on the site.
+ *  No budget field, deliberately: it anchors the prospect before they
+ *  understand scope and undercuts the repositioning in Section 03. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Field from '../components/Field.astro';
+import { SITE } from '../site';
+
+const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce','Not sure yet'];
+---
+<BaseLayout
+  page="contact"
+  title="Contact | MavelogxDigital"
+  description="Tell us about your project. We reply within one business day with honest thoughts on what it needs."
+>
+  <section class="section container">
+    <Eyebrow>Contact</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      Let's talk about your project.
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-2)">
+      Tell us what you are building. We will come back within one business day with honest
+      thoughts on what it needs, whether or not that turns into a project.
+    </p>
+  </section>
+
+  <section class="container" style="padding-bottom:var(--s-8)">
+    <div class="contact__grid">
+      <div>
+        <form id="enquiry" name="enquiry" method="POST" data-netlify="true"
+              netlify-honeypot="bot-field" style="display:grid;gap:var(--s-4)">
+          <input type="hidden" name="form-name" value="enquiry" />
+          <div class="field field--hp" aria-hidden="true">
+            <label for="bot-field">Do not fill this in</label>
+            <input id="bot-field" name="bot-field" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="started-at" id="started-at" />
+
+          <Field name="name" label="Name" required autocomplete="name" placeholder="Your name" />
+          <Field name="email" label="Email" type="email" required autocomplete="email" placeholder="you@company.com" />
+          <Field name="business" label="Business name" autocomplete="organization" placeholder="Optional" />
+
+          <fieldset style="border:0;padding:0;margin:0">
+            <legend class="field" style="font-size:var(--fs-eyebrow);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s-2)">
+              What do you need?
+            </legend>
+            <div class="choices">
+              {NEEDS.map((n) => (
+                <label class="choice">
+                  <input type="checkbox" name="needs" value={n} />
+                  <span>{n}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <Field name="project" label="Tell us about your project" textarea required
+                 placeholder="What are you building, and what is getting in the way?" />
+          <Field name="source" label="How did you find us?" placeholder="Optional" />
+
+          <button class="btn btn--primary" type="submit" style="justify-self:start">
+            Send Enquiry
+          </button>
+        </form>
+
+        <div class="form-success" id="sent" hidden>
+          <h2>Thank you. We have got it.</h2>
+          <p style="color:var(--text-2)">
+            We will reply within one business day. If it is urgent, WhatsApp is faster.
+          </p>
+        </div>
+      </div>
+
+      <dl class="contact__channels">
+        <div class="channel">
+          <dt>WhatsApp</dt>
+          <dd><a href={SITE.whatsapp} rel="noopener">{SITE.phone}</a></dd>
+        </div>
+        <div class="channel">
+          <dt>Email</dt>
+          <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+        </div>
+        <div class="channel">
+          <dt>Where we are</dt>
+          <dd style="color:var(--text-2)">{SITE.locations}</dd>
+        </div>
+        <div class="channel">
+          <dt>Response time</dt>
+          <dd style="color:var(--text-2)">Within one business day</dd>
+        </div>
+        <p style="color:var(--text-2);font-size:var(--fs-small);border-top:1px solid var(--border);padding-top:var(--s-3)">
+          We do not ask for numbers on this form. Scope first, costing once we both
+          understand what the work involves.
+        </p>
+      </dl>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Validation on blur, not on submit (9.6). Plus a time-to-submit check
+  // alongside the honeypot, which is enough spam defence at this volume (11.5).
+  const form = document.querySelector<HTMLFormElement>('#enquiry');
+  const sent = document.querySelector<HTMLElement>('#sent');
+  const startedAt = document.querySelector<HTMLInputElement>('#started-at');
+  if (startedAt) startedAt.value = String(Date.now());
+
+  const setState = (el: HTMLInputElement | HTMLTextAreaElement, ok: boolean, msg = '') => {
+    const wrap = el.closest('.field');
+    const out = wrap?.querySelector('.field__msg');
+    wrap?.classList.toggle('field--error', !ok);
+    wrap?.classList.toggle('field--filled', ok && !!el.value);
+    el.setAttribute('aria-invalid', String(!ok));
+    if (out) out.textContent = ok ? '' : msg;
+  };
+
+  const check = (el: HTMLInputElement | HTMLTextAreaElement) => {
+    if (el.hasAttribute('required') && !el.value.trim()) {
+      setState(el, false, 'This one is needed.'); return false;
+    }
+    if (el.type === 'email' && el.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value)) {
+      setState(el, false, 'Enter a valid email address.'); return false;
+    }
+    setState(el, true); return true;
+  };
+
+  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[name], textarea[name]')
+    .forEach((el) => {
+      if (el.name === 'bot-field' || el.type === 'hidden') return;
+      el.addEventListener('blur', () => check(el));
+    });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fields = [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[name], textarea[name]')]
+      .filter((el) => el.name !== 'bot-field' && el.type !== 'hidden');
+    const valid = fields.map(check).every(Boolean);
+    if (!valid) { fields.find((f) => f.getAttribute('aria-invalid') === 'true')?.focus(); return; }
+    if (Date.now() - Number(startedAt?.value || 0) < 2000) return;   // submitted too fast
+
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+    btn.disabled = true; btn.textContent = 'Sending';
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form) as any).toString(),
+      });
+      // Replace the form in place. Never navigate away: it loses context
+      // and breaks the back button (9.6).
+      form.hidden = true;
+      if (sent) { sent.hidden = false; sent.setAttribute('tabindex', '-1'); sent.focus(); }
+    } catch {
+      btn.disabled = false; btn.textContent = 'Send Enquiry';
+      const msg = form.querySelector('#project-msg');
+      if (msg) msg.textContent = 'That did not send. Try again, or reach us on WhatsApp.';
+    }
+  });
+</script>

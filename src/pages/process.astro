@@ -1,0 +1,69 @@
+---
+/** Our Process, Build Bible 9.4. Deliberately not in the top navigation:
+ *  six nav items plus a CTA is the practical ceiling (5.2). */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { PROCESS_DETAIL, FAQ } from '../site';
+---
+<BaseLayout
+  page=""
+  title="Our Process | MavelogxDigital"
+  description="Discover, Strategize, Build, Launch. How a MavelogxDigital engagement actually runs, what we need from you, and what you receive at each stage."
+>
+  <section class="section container">
+    <Eyebrow>Process</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      How an engagement actually runs.
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-2)">
+      Four stages. For each one: what happens, what we need from you, what you receive, and
+      roughly how long it takes. Setting this out in advance prevents the most common cause
+      of a project slipping.
+    </p>
+  </section>
+
+  <section class="container" style="padding-bottom:var(--s-6)">
+    {PROCESS_DETAIL.map((s) => (
+      <article class="proc rv">
+        <div class="proc__grid">
+          <div>
+            <span class="proc__num" aria-hidden="true">{s.n}</span>
+            <h2 class="proc__title">{s.title}</h2>
+            <p class="proc__dur">{s.duration}</p>
+          </div>
+          <div>
+            <p style="margin-bottom:var(--s-4);max-width:56ch">{s.body}</p>
+            <div class="proc__cols">
+              <div>
+                <h3>What we need from you</h3>
+                <ul>{s.need.map((x) => <li><span>{x}</span></li>)}</ul>
+              </div>
+              <div>
+                <h3>What you receive</h3>
+                <ul>{s.get.map((x) => <li><span>{x}</span></li>)}</ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="section section--band">
+    <div class="container">
+      <SectionHead eyebrow="Questions" heading="The ones we are asked most." />
+      <div class="faq rv">
+        {FAQ.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Ready to start at stage one?" lead="Tell us about your project and we will come back within one business day." />
+</BaseLayout>

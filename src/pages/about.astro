@@ -1,0 +1,123 @@
+---
+/** About, Build Bible 9.3. The founder block is the highest-value single
+ *  addition to this page: a prospect evaluating a young agency wants to know
+ *  there is a competent human accountable for the work. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Pillar from '../components/Pillar.astro';
+import Stat from '../components/Stat.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { PILLARS, SITE } from '../site';
+---
+<BaseLayout
+  page="about"
+  title="About | MavelogxDigital"
+  description="A digital creative agency working across Toronto and Accra, built on fifteen years of design practice and AI-augmented delivery."
+>
+  <section class="section container">
+    <Eyebrow>About</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      The agency behind the work.
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-2)">
+      We help ambitious businesses build brands, websites and digital experiences that hold up
+      under scrutiny. Commercially, visually and technically.
+    </p>
+  </section>
+
+  <section class="container" style="padding-bottom:var(--s-6)">
+    <div class="reading rv" style="display:grid;gap:var(--s-3)">
+      <p>
+        MavelogxDigital works across two places at once. Toronto, where the agency is based,
+        and Accra, where much of the work lands. That is not a line about reach. It changes
+        what gets built, because a site read on a phone over mobile data in Ghana has
+        different requirements to one read on a laptop in Ontario.
+      </p>
+      <p>
+        Every engagement starts with the business problem rather than the deliverable. A
+        client who asks for a logo often needs positioning first. A client who asks for a
+        website sometimes needs to know who they are talking to before a single page is
+        designed. Saying so is part of the job.
+      </p>
+      <p>
+        Fifteen years of design practice sits behind that judgement. AI-augmented workflows
+        sit underneath it, absorbing research, iteration and production load. The result is
+        that the thinking gets the time it deserves and the build still moves quickly.
+      </p>
+      <p>
+        You work with the person doing the work. One point of contact, from the first
+        conversation to the day the site goes live.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--band">
+    <div class="container">
+      <SectionHead eyebrow="Who you work with" heading="One accountable person." />
+      <div class="founder rv">
+        <div class="founder__photo">
+          <img src="/img/founder-placeholder.svg" width="800" height="1000"
+               alt="Portrait of Emmanuel Kofi Avleshie, founder of MavelogxDigital" />
+        </div>
+        <div>
+          <p class="founder__name" style="margin:0">Emmanuel Kofi Avleshie</p>
+          <p class="founder__role">Founder</p>
+          <p>
+            Emmanuel has spent fifteen years in design practice, and founded MavelogxDigital
+            to do the kind of work that starts with a business problem rather than a brief.
+          </p>
+          <p>
+            He runs the agency from Toronto and delivers across Ghana and Canada, which means
+            he designs for both markets rather than treating one as the default. Clients deal
+            with him directly at every stage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="grid grid-2">
+      <div class="rv">
+        <Eyebrow>Mission</Eyebrow>
+        <p style="margin-top:var(--s-2);max-width:40ch">
+          To help ambitious businesses close the gap between what they can imagine and what
+          they can execute. We build creative strategies and digital experiences that turn
+          ideas into brands people trust.
+        </p>
+      </div>
+      <div class="rv" data-d="1">
+        <Eyebrow>Vision</Eyebrow>
+        <p style="margin-top:var(--s-2);max-width:40ch">
+          To be a digital partner ambitious businesses return to, and to prove what becomes
+          possible when creative thinking meets intelligent execution. Work of this standard
+          should not depend on where a business happens to be.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <SectionHead eyebrow="Why MavelogxDigital" heading="Four reasons clients stay." />
+    <div class="grid grid-2">{PILLARS.map((p, i) => <Pillar {...p} delay={i} />)}</div>
+  </section>
+
+  <section class="section section--band">
+    <div class="container">
+      <SectionHead eyebrow="The facts" heading="Where things stand."
+        lead="Only what can be verified. No satisfaction percentages." />
+      <div class="rv" style="display:flex;flex-wrap:wrap;gap:var(--s-6)">
+        <Stat figure="2026" label="Founded" />
+        <Stat figure="15+" label="Years of design practice" />
+        <Stat figure="2" label="Markets served" />
+        <Stat figure="4" label="Projects shipped" />
+      </div>
+      <p style="color:var(--text-2);font-size:var(--fs-small);margin-top:var(--s-4)">
+        Based in {SITE.locations}.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
