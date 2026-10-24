@@ -184,18 +184,36 @@
 .nav__link[aria-current="page"]{color:var(--text-1)}
 .nav__link[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:2px;
   height:2px;background:var(--coral)}
-.nav__burger{display:grid;place-items:center;width:44px;height:44px;
-  background:none;border:0;cursor:pointer}
+.nav__burger{display:inline-flex;align-items:center;gap:8px;
+  min-height:44px;padding:0 10px;
+  background:none;border:0;cursor:pointer;color:var(--text-1)}
+.nav__burger-label{font-size:14px;font-weight:600;letter-spacing:.02em}
 @media (min-width:1000px){ .nav__burger{display:none} }
 .nav__cta{display:none}
 @media (min-width:1000px){ .nav__cta{display:inline-flex} }
 .nav__panel{position:fixed;inset:0 0 0 auto;width:min(86vw,360px);z-index:95;
   background:var(--bg);border-left:1px solid var(--border);
-  padding:var(--s-6) var(--s-4) var(--s-4);
-  display:grid;align-content:start;gap:var(--s-2);
+  padding:var(--s-3) var(--s-4) var(--s-4);
+  display:flex;flex-direction:column;gap:var(--s-2);
   transform:translateX(100%);transition:transform var(--t-base) var(--ease)}
 .nav__panel[data-open="true"]{transform:none}
-.nav__panel a{text-decoration:none;font-size:20px;font-weight:600;padding:12px 0}
+/* Identity and a way out, at the top of the panel. */
+.nav__panel-top{display:flex;align-items:center;justify-content:space-between;
+  min-height:44px;margin-bottom:var(--s-3);
+  border-bottom:1px solid var(--border);padding-bottom:var(--s-2)}
+.nav__panel-brand{font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--text-1)}
+.nav__close{display:grid;place-items:center;width:44px;height:44px;margin-right:-10px;
+  background:none;border:0;cursor:pointer;color:var(--text-2)}
+.nav__close:hover{color:var(--text-1)}
+.nav__panel-links{display:flex;flex-direction:column}
+.nav__panel-links a{text-decoration:none;font-size:20px;font-weight:600;
+  padding:12px 0;color:var(--text-2);position:relative;
+  transition:color var(--t-fast)}
+.nav__panel-links a:hover{color:var(--text-1)}
+.nav__panel-links a[aria-current="page"]{color:var(--text-1)}
+.nav__panel-links a[aria-current="page"]::after{content:"";position:absolute;
+  left:0;bottom:8px;width:22px;height:2px;background:var(--coral)}
+/* 5.2: the CTA is pinned to the bottom of the panel as a full-width button. */
 .nav__panel .btn{margin-top:auto;justify-content:center}
 
 .footer{background:var(--bg);border-top:1px solid var(--border);padding-block:var(--s-6)}
