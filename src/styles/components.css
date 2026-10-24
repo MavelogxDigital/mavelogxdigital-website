@@ -1,5 +1,5 @@
 /* ===========================================================
-   MavelogxDigital — components.css
+   MavelogxDigital, components.css
    The 14 components from Build Bible Section 07,
    in the build order set by 7.1, with every state from 6.8.
    =========================================================== */
@@ -167,7 +167,8 @@
 .nav[data-transparent="true"]{background:transparent;border-bottom-color:transparent}
 .nav.is-scrolled{background:rgba(11,11,13,.88);backdrop-filter:blur(12px);
   border-bottom-color:var(--border)}
-.nav__in{display:flex;align-items:center;justify-content:space-between;width:100%}
+.nav__in{display:flex;align-items:center;justify-content:space-between;width:100%;gap:var(--s-2)}
+.nav__right{display:flex;align-items:center;gap:var(--s-1)}
 .nav__brand{display:flex;align-items:center;gap:10px;text-decoration:none;
   font-weight:800;letter-spacing:-.01em;font-size:18px}
 .nav__brand b{color:var(--coral);font-weight:800}
@@ -207,7 +208,7 @@
 
 
 /* ===========================================================
-   Case study — Build Bible 10.1, the eleven blocks
+   Case study, Build Bible 10.1, the eleven blocks
    =========================================================== */
 .cs-hero{padding-block:var(--s-6) var(--s-5)}
 .cs-hero__h1{font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em}
@@ -226,7 +227,7 @@
 .cs-meta a{color:var(--teal);text-decoration:none}
 .cs-meta a:hover{text-decoration:underline}
 
-/* 03 lead — the only serif block on the page (6.3) */
+/* 03 lead, the only serif block on the page (6.3) */
 .cs-lead{font-family:var(--ff-serif);font-size:clamp(1.375rem,2.4vw,1.75rem);
   font-style:italic;line-height:1.45;max-width:30ch;margin-block:var(--s-6)}
 
@@ -255,7 +256,7 @@
 .cs-swatch span{display:block;height:52px}
 .cs-swatch small{display:block;padding:8px 10px;font-size:12px;color:var(--text-2)}
 
-/* 10 metrics — only rendered when confirmed in writing (10.2) */
+/* 10 metrics, only rendered when confirmed in writing (10.2) */
 .cs-metrics{display:flex;flex-wrap:wrap;gap:var(--s-5);margin-top:var(--s-4)}
 
 /* next project */

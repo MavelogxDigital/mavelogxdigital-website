@@ -35,11 +35,11 @@ export const SERVICES = [
 
 export const PILLARS = [
   { title:'Strategy Before Pixels', accent:'var(--coral)',
-    body:'Every engagement opens with the business problem, the audience and the competitive position. Design decisions follow from that — which is why they hold up when a client asks why.' },
+    body:'Every engagement opens with the business problem, the audience and the competitive position. Design decisions follow from that. It is why they hold up when a client asks why.' },
   { title:'AI-Augmented Delivery', accent:'var(--amber)',
     body:'Intelligent workflows absorb the research, iteration and production load. The thinking gets the time it deserves and the timeline still shortens.' },
   { title:'Built for Two Markets', accent:'var(--purple)',
-    body:'Active delivery across Canada and Ghana means designing for real differences in device, bandwidth, payment habit and cultural read — not one assumed default audience.' },
+    body:'Active delivery across Canada and Ghana means designing for real differences in device, bandwidth, payment habit and cultural read. Not one assumed default audience.' },
   { title:'One Accountable Team', accent:'var(--teal)',
     body:'Strategy, identity, build and launch under a single point of contact. Nothing is subcontracted into a gap where accountability disappears.' },
 ] as const;
@@ -52,10 +52,10 @@ export const PROCESS = [
 ] as const;
 
 /** Portfolio.
- *  inHouse   — drives the transparency label required by Bible 10.3.
- *  featured  — appears in homepage Selected Work. Cap at 3: the asymmetric
+ *  inHouse, drives the transparency label required by Bible 10.3.
+ *  featured, appears in homepage Selected Work. Cap at 3: the asymmetric
  *              stack in 8.2 is one wide card plus two beside it.
- *  caseStudy — gets a full case study page in Phase 2. Array order is build order.
+ *  caseStudy, gets a full case study page in Phase 2. Array order is build order.
  */
 export const PROJECTS = [
   { slug:'floks-speaks', client:'Floks Speaks', live:'https://floksspeaks.org',
@@ -69,16 +69,16 @@ export const PROJECTS = [
     tags:['Brand Identity','Web Design','Digital Presence'],
     blurb:'A church in Accra given a restrained, confident digital home with WhatsApp built into the visit journey.' },
   { slug:'mavelogx-enterprise', client:'Mavelogx Enterprise', live:'https://mavelogx.com',
-    sector:'In-house venture — B2B procurement', year:'2026', inHouse:true,
+    sector:'In-house venture, B2B procurement', year:'2026', inHouse:true,
     featured:true, caseStudy:true,
     tags:['Brand Identity','Web Design','Strategy'],
     blurb:'B2B sourcing and procurement across the China\u2013Ghana\u2013Canada corridor, presented as a system rather than a brochure.' },
   { slug:'mavels-corner', client:"Mavel's Corner", live:'https://mavelscorner.blog',
-    sector:'In-house venture — faith lifestyle', year:'2026', inHouse:true,
+    sector:'In-house venture, faith lifestyle', year:'2026', inHouse:true,
     featured:false, caseStudy:true,
     tags:['Blog Design','Content Strategy','Brand Voice'],
     blurb:'A faith-lifestyle publication with a documented brand voice and a publishing rhythm, shown through editorial and voice work rather than visual design alone.' },
-  // Torah Farms & Properties — removed from the site entirely (Bible 12.1).
+  // Torah Farms & Properties, removed from the site entirely (Bible 12.1).
   // Not withheld: the card, footer link, testimonial and case study are all gone.
 ] as const;
 

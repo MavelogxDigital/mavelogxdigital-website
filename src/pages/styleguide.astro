@@ -17,18 +17,18 @@ import { SERVICES, PILLARS, PROCESS, PROJECTS } from '../site';
 
 const swatches = [
   ['--coral','#E85C6E','Primary action'], ['--amber','#F5A825','Emphasis'],
-  ['--purple','#7070BB','Depth — large text only'], ['--purple-lt','#8F8FD0','Purple, small text'],
+  ['--purple','#7070BB','Depth, large text only'], ['--purple-lt','#8F8FD0','Purple, small text'],
   ['--teal','#3BBFA0','Eyebrow / success'],
   ['--bg','#0B0B0D','Page'], ['--bg-alt','#131316','Band'], ['--bg-card','#18181C','Card'],
   ['--border','#222228','Rules'], ['--text-1','#EFEFF3','Headings/body'], ['--text-2','#9898A8','Secondary'],
 ];
 const scale = [
-  ['--fs-display','Display — hero H1'], ['--fs-h1','H1 — page title'],
-  ['--fs-h2','H2 — section'], ['--fs-h3','H3 — block'], ['--fs-h4','H4 — card title'],
+  ['--fs-display','Display, hero H1'], ['--fs-h1','H1, page title'],
+  ['--fs-h2','H2, section'], ['--fs-h3','H3, block'], ['--fs-h4','H4, card title'],
   ['--fs-lead','Lead'], ['--fs-body','Body'], ['--fs-small','Small / caption'],
 ];
 ---
-<BaseLayout title="Style Guide — MavelogxDigital" description="Phase 0 component library." page="">
+<BaseLayout title="Style Guide, MavelogxDigital" description="Phase 0 component library." page="">
   <Fragment slot="head"><meta name="robots" content="noindex" /></Fragment>
 
   <section class="section container">
@@ -77,7 +77,7 @@ const scale = [
 
   <!-- 01/02 Buttons, all states -->
   <section class="section container">
-    <SectionHead eyebrow="07 · #01–02" heading="Buttons" lead="Coral is the only colour permitted on a solid button. Tab to each to see the focus ring." />
+    <SectionHead eyebrow="07 · #01-02" heading="Buttons" lead="Coral is the only colour permitted on a solid button. Tab to each to see the focus ring." />
     <div style="display:flex;flex-wrap:wrap;gap:var(--s-2);align-items:center">
       <a class="btn btn--primary" href="#0">Start a Project ↗</a>
       <a class="btn btn--ghost" href="#0">Explore Our Work →</a>
@@ -88,7 +88,7 @@ const scale = [
 
   <!-- 03/04 -->
   <section class="section container">
-    <SectionHead eyebrow="07 · #03–04" heading="Eyebrow & section head" lead="The most repeated element on the site. Always 13px, 700, 0.14em, Teal." />
+    <SectionHead eyebrow="07 · #03-04" heading="Eyebrow & section head" lead="The most repeated element on the site. Always 13px, 700, 0.14em, Teal." />
     <Eyebrow>Plain eyebrow</Eyebrow>
     <div style="height:var(--s-2)"></div>
     <Eyebrow rule>Eyebrow with rule</Eyebrow>
@@ -110,7 +110,7 @@ const scale = [
       <ProjectCard plate slug="mavels-corner" client="Mavel's Corner" tags={PROJECTS[3].tags} inHouse
         img="/img/mavels-corner-640.webp" imgAlt="Mavel's Corner brand mark" delay={1} />
       <ProjectCard slug="floks-speaks" client="Floks Speaks" tags={PROJECTS[0].tags}
-        img="/img/placeholder.svg" imgAlt="Screenshot pending — Phase 2" delay={2} />
+        img="/img/placeholder.svg" imgAlt="Screenshot pending, Phase 2" delay={2} />
     </div>
   </section>
 
@@ -153,13 +153,13 @@ const scale = [
   </div></section>
 
   <!-- 11 Insights, light theme -->
-  <section class="section theme-light" style="background:var(--bg)">
+  <section class="section section--invert">
     <div class="container">
       <SectionHead eyebrow="07 · #11 · light break" heading="Insight cards" lead="The light section proves the theme-light scope: neutrals re-point, accents are untouched." linkHref="/insights/" linkLabel="All insights →" />
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
         <InsightCard href="#0" tag="AI workflow" title="What an AI-augmented studio actually changes for a client"
           excerpt="Less about speed, more about where senior attention goes." readTime="6 min read" />
-        <InsightCard href="#0" tag="Market" title="Designing for the Canada–Ghana corridor"
+        <InsightCard href="#0" tag="Market" title="Designing for the Canada to Ghana corridor"
           excerpt="Bandwidth, devices and payment habits differ more than most briefs assume." readTime="8 min read" delay={1} />
         <InsightCard href="#0" tag="Brand" title="Why identity work should start with positioning"
           excerpt="A logo cannot answer a question the business has not asked yet." readTime="5 min read" delay={2} />
@@ -169,7 +169,7 @@ const scale = [
 
   <!-- 13 Form fields, all states -->
   <section class="section container">
-    <SectionHead eyebrow="07 · #13" heading="Form fields" lead="Rest, focus, filled, error and success. No budget field — see 9.6." />
+    <SectionHead eyebrow="07 · #13" heading="Form fields" lead="Rest, focus, filled, error and success. No budget field, see 9.6." />
     <div class="split-7-5">
       <form style="display:grid;gap:var(--s-3)" onsubmit="return false">
         <Field name="sg-name" label="Name" required autocomplete="name" placeholder="Your name" />

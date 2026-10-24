@@ -1,5 +1,5 @@
 ---
-/** Bible 11.1 — every page carries its own complete metadata set. No inheritance. */
+/** Bible 11.1, every page carries its own complete metadata set. No inheritance. */
 import { SITE } from '../site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -51,6 +51,16 @@ const ogAbs = new URL(ogImage, SITE.url).href;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" />
 
+  <!-- Theme: applied before first paint so there is no flash of the wrong one. -->
+  <script is:inline>
+    (function () {
+      try {
+        var t = localStorage.getItem('mxd-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- 5.3: hash fragments never reach the server; resolve them here. -->
   <script is:inline>
     (function () {
@@ -69,7 +79,7 @@ const ogAbs = new URL(ogImage, SITE.url).href;
   <Footer />
 
   <script>
-    // Reveal on scroll (6.6) — fires once, then unobserves.
+    // Reveal on scroll (6.6), fires once, then unobserves.
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const items = document.querySelectorAll<HTMLElement>('.rv');
     if (reduce) { items.forEach(el => el.classList.add('in')); }
@@ -81,6 +91,28 @@ const ogAbs = new URL(ogImage, SITE.url).href;
       }, { threshold: 0.12 });
       items.forEach(el => io.observe(el));
     }
+    // Theme toggle. localStorage is a per-viewer convenience, so every access
+    // is guarded: it throws in private mode and returns null with site data cleared.
+    const root = document.documentElement;
+    const stored = (() => { try { return localStorage.getItem('mxd-theme'); } catch { return null; } })();
+    const systemLight = matchMedia('(prefers-color-scheme: light)');
+    const current = () => root.dataset.theme || (systemLight.matches ? 'light' : 'dark');
+    const btn = document.querySelector<HTMLButtonElement>('.theme-btn');
+    const label = () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      btn?.setAttribute('aria-label', `Switch to ${next} theme`);
+      btn?.setAttribute('title', `Switch to ${next} theme`);
+    };
+    label();
+    btn?.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('mxd-theme', next); } catch {}
+      label();
+    });
+    // Follow the OS only while the visitor has not chosen for themselves.
+    if (!stored) systemLight.addEventListener('change', label);
+
     // Nav scroll state (5.2)
     const nav = document.querySelector('.nav');
     if (nav) {

@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-/** Case study schema — the eleven blocks of Build Bible 10.1.
+/** Case study schema, the eleven blocks of Build Bible 10.1.
  *  Optional blocks are omitted from the page when absent (10.1), never
  *  rendered with placeholder text. `pending` lists the blocks still waiting
  *  on material from the client intake in Appendix B. */
@@ -20,12 +20,12 @@ const work = defineCollection({
 
     hero: z.string(),                    // /img/<slug>-1280.webp
     heroAlt: z.string(),
-    lead: z.string(),                    // block 03 — the serif paragraph
+    lead: z.string(),                    // block 03, the serif paragraph
 
     brief: z.array(z.string()).optional(),        // 04
     challenge: z.array(z.string()).optional(),    // 05
     strategy: z.array(z.string()).optional(),     // 06
-    identity: z.object({                          // 07 — optional per 10.1
+    identity: z.object({                          // 07, optional per 10.1
       note: z.string(),
       palette: z.array(z.object({ name: z.string(), hex: z.string() })).optional(),
       type: z.array(z.string()).optional(),

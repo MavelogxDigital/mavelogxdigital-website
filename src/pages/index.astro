@@ -1,7 +1,7 @@
 ---
-/** Homepage — Build Bible v2.1 Section 08.
+/** Homepage, Build Bible v2.1 Section 08.
  *  Section order is deliberate: proof (02) precedes explanation (03).
- *  Section 08 Insights is omitted until three real articles exist — see 8.8.
+ *  Section 08 Insights is omitted until three real articles exist, see 8.8.
  *  No price-led language anywhere; see the retire list in 3.3.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -20,9 +20,9 @@ const [lead, ...rest] = FEATURED;
 /** Card art: real screenshots captured at 1280x631 and cropped to the card ratios.
  *  Phase 2 recaptures at 1440x900 retina plus mobile, per 6.7. */
 const ALT: Record<string, string> = {
-  'floks-speaks':        'The Floks Speaks homepage — a Christ-centred spoken-word brand for Felix Lokko',
-  'syndei-embassy':      'The Syndei Embassy homepage — a church in Accra, Ghana',
-  'mavelogx-enterprise': 'The Mavelogx Enterprise homepage — B2B sourcing and procurement',
+  'floks-speaks':        'The Floks Speaks homepage. A Christ-centred spoken-word brand for Felix Lokko',
+  'syndei-embassy':      'The Syndei Embassy homepage. A church in Accra, Ghana',
+  'mavelogx-enterprise': 'The Mavelogx Enterprise homepage. B2B sourcing and procurement',
 };
 ---
 <BaseLayout
@@ -54,7 +54,7 @@ const ALT: Record<string, string> = {
     </div>
   </section>
 
-  {/* ---------- 02 · SELECTED WORK — proof before explanation ---------- */}
+  {/* ---------- 02 · SELECTED WORK, proof before explanation ---------- */}
   <section class="section">
     <div class="container">
       <SectionHead
@@ -76,8 +76,8 @@ const ALT: Record<string, string> = {
     </div>
   </section>
 
-  {/* ---------- 03 · AGENCY INTRODUCTION — light break ---------- */}
-  <section class="section theme-light" style="background:var(--bg)">
+  {/* ---------- 03 · AGENCY INTRODUCTION, light break ---------- */}
+  <section class="section section--invert">
     <div class="container split-5-7">
       <div class="rv">
         <Eyebrow>The Agency</Eyebrow>
@@ -88,14 +88,13 @@ const ALT: Record<string, string> = {
       <div class="rv" data-d="1" style="display:grid;gap:var(--s-3);align-content:start">
         <p>
           MavelogxDigital is a digital creative agency working across Toronto and Accra. We help
-          ambitious businesses build brands, websites and digital experiences that hold up under
-          scrutiny — commercially, visually and technically.
+          ambitious businesses build brands, websites and digital experiences that hold up.
+          Commercially, visually and technically.
         </p>
         <p>
-          Every engagement starts with the business problem, not the deliverable. Fifteen years of
-          design practice sits behind that, and AI-augmented workflows sit underneath it — so the
-          strategic thinking gets the time it deserves and the production work still moves faster
-          than it used to.
+          Every engagement starts with the business problem, not the deliverable. Fifteen years
+          of design practice sits behind that. AI-augmented workflows sit underneath it, so the
+          thinking gets the time it deserves and the production work still moves faster.
         </p>
         <p>
           We work with founders directly. One team, one point of contact, from the first
@@ -112,7 +111,7 @@ const ALT: Record<string, string> = {
       <SectionHead
         eyebrow="What We Do"
         heading="Six ways we build your brand."
-        lead="From the first brand touchpoint to a fully scaled digital presence — under one accountable team."
+        lead="From the first brand touchpoint to a fully scaled digital presence, under one accountable team."
       />
       {SERVICES.map((s, i) => <ServiceRow {...s} delay={Math.min(i, 6)} />)}
       <div style="margin-top:var(--s-5)">
@@ -146,7 +145,7 @@ const ALT: Record<string, string> = {
     </div>
   </section>
 
-  {/* ---------- 07 · TESTIMONIALS — two at launch, built to take four (8.7) ---------- */}
+  {/* ---------- 07 · TESTIMONIALS, two at launch, built to take four (8.7) ---------- */}
   <section class="section section--band">
     <div class="container">
       <SectionHead eyebrow="Client Voice" heading="What our clients say." />
@@ -163,12 +162,12 @@ const ALT: Record<string, string> = {
     </div>
   </section>
 
-  {/* ---------- 08 · INSIGHTS — omitted until three real articles exist (8.8) ---------- */}
+  {/* ---------- 08 · INSIGHTS, omitted until three real articles exist (8.8) ---------- */}
 
   {/* ---------- 09 · FINAL CTA ---------- */}
   <CtaBand />
 
-  {/* ---------- 10 · FOOTER — rendered by BaseLayout ---------- */}
+  {/* ---------- 10 · FOOTER, rendered by BaseLayout ---------- */}
 </BaseLayout>
 
 <style>

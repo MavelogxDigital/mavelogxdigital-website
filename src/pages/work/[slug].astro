@@ -1,5 +1,5 @@
 ---
-/** Case study template — Build Bible 10.1, the eleven blocks.
+/** Case study template, Build Bible 10.1, the eleven blocks.
  *  One template, every case study. Optional blocks are omitted entirely when
  *  the material does not exist; they are never filled with placeholder text. */
 import { getCollection } from 'astro:content';
@@ -25,7 +25,7 @@ const isDev = import.meta.env.DEV;
 ---
 <BaseLayout
   page="work"
-  title={`${d.client} — Case Study | MavelogxDigital`}
+  title={`${d.client}, Case Study | MavelogxDigital`}
   description={`${d.descriptor}. ${d.sector}, ${d.year}.`}
   ogImage={d.hero}
 >
@@ -154,7 +154,7 @@ const isDev = import.meta.env.DEV;
   {isDev && d.pending.length > 0 && (
     <section class="container">
       <div class="cs-pending">
-        <h2>Awaiting material — not shown in production</h2>
+        <h2>Awaiting material, not shown in production</h2>
         <ul>
           {d.pending.map((x) => <li>{x}</li>)}
         </ul>

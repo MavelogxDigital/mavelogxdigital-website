@@ -1,32 +1,31 @@
 /* ===========================================================
-   MavelogxDigital — global.css
+   MavelogxDigital, global.css
    Build Bible v2.0 · Appendix D token set + base layer
    Nothing in this project may use a value absent from :root
    =========================================================== */
 
 :root{
-  /* ---- Accents — four only (6.1) ---- */
-  --coral:#E85C6E;        /* primary action — clickable things only */
-  --amber:#F5A825;        /* emphasis, numerals, stats — never a button */
-  --purple:#7070BB;       /* depth, tags — LARGE text only (4.0:1) */
+  /* ---- Accents, four only (6.1) ---- */
+  --coral:#E85C6E;        /* primary action, clickable things only */
+  --amber:#F5A825;        /* emphasis, numerals, stats, never a button */
+  --purple:#7070BB;       /* depth, tags, LARGE text only (4.0:1) */
   --purple-lt:#8F8FD0;    /* purple for small text on dark (5.6:1) */
   --teal:#3BBFA0;         /* eyebrows, progress, success */
 
-  /* ---- Dark theme — default ---- */
-  --bg:#0B0B0D;
-  --bg-alt:#131316;
-  --bg-card:#18181C;
-  --border:#222228;
-  --text-1:#EFEFF3;
-  --text-2:#9898A8;
+  /* ---- Neutral sets. Accents never change between themes (6.1). ----
+     --*-d is the dark set, --*-l the light set. The active theme points
+     --bg and friends at one set, and .section--invert at the other, so the
+     light-break rhythm in Section 08 survives in both themes. */
+  --bg-d:#0B0B0D;   --bg-alt-d:#131316; --bg-card-d:#18181C;
+  --border-d:#222228; --text-1-d:#EFEFF3; --text-2-d:#9898A8;
 
-  /* ---- Light break sections ---- */
-  --bg-l:#FAFAFA;
-  --bg-alt-l:#F2F2F4;
-  --bg-card-l:#FFFFFF;
-  --border-l:#E4E4EC;
-  --text-1-l:#0D0D10;
-  --text-2-l:#5C5C6A;
+  --bg-l:#FAFAFA;   --bg-alt-l:#F2F2F4; --bg-card-l:#FFFFFF;
+  --border-l:#E4E4EC; --text-1-l:#0D0D10; --text-2-l:#5C5C6A;
+
+  /* Active set, dark by default. */
+  --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
+  --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
+  color-scheme:dark;
 
   /* ---- Type ---- */
   --ff-sans:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
@@ -42,7 +41,7 @@
   --fs-eyebrow:.8125rem;
   --fs-quote:clamp(1.375rem,2.5vw,1.875rem);
 
-  /* ---- Space — 8px base ---- */
+  /* ---- Space, 8px base ---- */
   --s-1:8px;  --s-2:16px; --s-3:24px; --s-4:32px;
   --s-5:48px; --s-6:64px; --s-7:96px; --s-8:128px; --s-9:160px;
 
@@ -64,10 +63,60 @@
 @media (min-width:768px){ :root{ --gutter:40px } }
 @media (min-width:1100px){ :root{ --gutter:64px } }
 
-/* ---- Light section scope: re-point the neutrals, accents unchanged ---- */
-.theme-light{
+/* ---- Light theme ---- */
+:root[data-theme="light"]{
   --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
   --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
+  color-scheme:light;
+}
+/* Honour the OS preference until the visitor chooses for themselves. */
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
+    --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
+    color-scheme:light;
+  }
+}
+
+/* ---- Inverted sections: always the opposite of the active theme. ----
+   Replaces the old .theme-light, which hard-coded light values and so
+   collapsed into the page once the whole site could go light. */
+.section--invert,.theme-light{
+  --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
+  --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
+  background:var(--bg); color:var(--text-1);
+}
+:root[data-theme="light"] .section--invert,
+:root[data-theme="light"] .theme-light{
+  --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
+  --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .section--invert,
+  :root:not([data-theme="dark"]) .theme-light{
+    --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
+    --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
+  }
+}
+
+/* The grain reads as dirt on a light ground, so soften it there. */
+:root[data-theme="light"] body::after{opacity:.018}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) body::after{opacity:.018}
+}
+
+/* ---- Theme toggle ---- */
+.theme-btn{display:grid;place-items:center;width:44px;height:44px;flex:none;
+  background:none;border:0;border-radius:var(--r-full);color:var(--text-2);cursor:pointer;
+  transition:color var(--t-fast),background var(--t-fast)}
+.theme-btn:hover{color:var(--text-1);background:rgba(128,128,150,.12)}
+.theme-btn svg{width:19px;height:19px}
+.theme-btn .i-sun{display:none}
+:root[data-theme="light"] .theme-btn .i-sun{display:block}
+:root[data-theme="light"] .theme-btn .i-moon{display:none}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .theme-btn .i-sun{display:block}
+  :root:not([data-theme="dark"]) .theme-btn .i-moon{display:none}
 }
 
 /* =========================== reset =========================== */
@@ -97,7 +146,7 @@ ul[class],ol[class]{list-style:none;padding:0}
   font-weight:600;transition:top var(--t-fast)}
 .skip:focus-visible{top:var(--s-2)}
 
-/* ---- Grain overlay (6.6) — CSS only, no image request ---- */
+/* ---- Grain overlay (6.6), CSS only, no image request ---- */
 body::after{
   content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
