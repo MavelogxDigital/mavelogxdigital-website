@@ -98,12 +98,31 @@ const isDev = import.meta.env.DEV;
   {d.shots && d.shots.length > 0 && (
     <section class="section container">
       <h2 style="font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--s-4)">The build</h2>
-      <div class="cs-shots">
+      <div class={`cs-shots ${d.shots.length === 2 && d.shots.some(x => x.device === "mobile") && !d.shots.some(x => x.device === "full") ? "cs-shots--pair" : ""}`}>
         {d.shots.map((s, i) => (
-          <div class="cs-shot rv" data-d={Math.min(i, 6)}>
+          <div class={`cs-shot cs-shot--${s.device} rv`} data-d={Math.min(i, 6)}>
             <figure>
-              <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
-              {s.caption && <figcaption>{s.caption}</figcaption>}
+              {s.device === 'full' ? (
+                <>
+                  <div class="cs-frame">
+                    <div class="cs-frame__bar" aria-hidden="true">
+                      <span class="cs-frame__dot"></span><span class="cs-frame__dot"></span>
+                      <span class="cs-frame__dot"></span>
+                      <span class="cs-frame__url">{d.live ?? d.client}</span>
+                    </div>
+                    <div class="cs-frame__scroll" tabindex="0" role="group"
+                         aria-label={`Full page capture of the ${d.client} site, scrollable`}>
+                      <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+                    </div>
+                  </div>
+                  {s.caption && <figcaption>{s.caption}</figcaption>}
+                </>
+              ) : (
+                <>
+                  <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+                  {s.caption && <figcaption>{s.caption}</figcaption>}
+                </>
+              )}
             </figure>
           </div>
         ))}

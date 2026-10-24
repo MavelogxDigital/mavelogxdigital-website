@@ -30,7 +30,10 @@ const work = defineCollection({
       palette: z.array(z.object({ name: z.string(), hex: z.string() })).optional(),
       type: z.array(z.string()).optional(),
     }).optional(),
-    shots: z.array(z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() })).optional(), // 08
+    shots: z.array(z.object({
+      src: z.string(), alt: z.string(), caption: z.string().optional(),
+      device: z.enum(['desktop','mobile','full']).default('desktop'),
+    })).optional(), // 08
     decisions: z.array(z.object({ title: z.string(), body: z.string() })).optional(),  // 09
     outcome: z.array(z.string()).optional(),      // 10
     metrics: z.array(z.object({ figure: z.string(), label: z.string() })).optional(),  // only when confirmed in writing
