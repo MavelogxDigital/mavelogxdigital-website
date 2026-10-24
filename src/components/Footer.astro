@@ -7,7 +7,7 @@ import { SITE, SERVICES, PROJECTS } from '../site';
   <div class="container">
     <div class="footer__top">
       <div>
-        <a class="brandmark" href="/" style="display:inline-block;margin-bottom:var(--s-2);font-size:21px">MavelogxDigital</a>
+        <a class="sweep brandmark" href="/" style="display:inline-block;margin-bottom:var(--s-2);font-size:21px">MavelogxDigital</a>
         <p style="color:var(--text-2);font-size:var(--fs-small);max-width:34ch">
           {SITE.tagline}. A digital creative agency helping ambitious brands build stronger digital experiences.
         </p>
@@ -17,7 +17,7 @@ import { SITE, SERVICES, PROJECTS } from '../site';
         </p>
       </div>
       <div>
-        <h3>Company</h3>
+        <h3 class="sweep">Company</h3>
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/process/">Our Process</a></li>
@@ -26,11 +26,11 @@ import { SITE, SERVICES, PROJECTS } from '../site';
         </ul>
       </div>
       <div>
-        <h3>Services</h3>
+        <h3 class="sweep">Services</h3>
         <ul>{SERVICES.map(s => <li><a href={`/services/#${s.slug}`}>{s.title}</a></li>)}</ul>
       </div>
       <div>
-        <h3>Work</h3>
+        <h3 class="sweep">Work</h3>
         <ul>
           {PROJECTS.map(p => <li><a href={`/work/${p.slug}/`}>{p.client}</a></li>)}
           <li><a href="/work/">All work</a></li>

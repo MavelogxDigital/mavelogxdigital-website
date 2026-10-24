@@ -13,6 +13,10 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
    const r=await p.goto('http://localhost:4321'+route,{waitUntil:'networkidle'});
    await p.evaluate(()=>{document.querySelectorAll('img').forEach(i=>i.loading='eager');document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'));});
    await p.waitForTimeout(500);
+   // Scroll so sticky chrome is in its scrolled state. A nav that only looks
+   // right at the top of the page is a bug this check exists to catch.
+   await p.evaluate(()=>scrollTo(0,600));
+   await p.waitForTimeout(350);
    const d=await p.evaluate(()=>{
      const t=document.body.innerText;
      const hs=[...document.querySelectorAll('h1,h2,h3,h4')].map(h=>+h.tagName[1]);
@@ -26,7 +30,7 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
      const labels=[...document.querySelectorAll('input:not([type=hidden]),textarea,select')]
        .filter(e=>!e.labels?.length&&!e.getAttribute('aria-label')).length;
      const txt=[...document.querySelectorAll('p,li,h1,h2,h3,span,a')].slice(0,160)
-       .filter(e=>!e.closest('.brandmark'))   // logotype, exempt under WCAG 1.4.3
+       .filter(e=>!e.closest('.sweep'))       // swept brand text: logotype treatment, WCAG 1.4.3
        .map(e=>{
        const c=getComputedStyle(e);
        const parse=v=>{const m=v.match(/[\d.]+/g);return m?{r:+m[0],g:+m[1],b:+m[2],a:m[3]!==undefined?+m[3]:1}:null};

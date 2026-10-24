@@ -38,6 +38,7 @@
   /* Active set, dark by default. */
   --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
   --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
+  --nav-scrim:rgba(11,11,13,.88);
   color-scheme:dark;
 
   /* ---- Type ---- */
@@ -79,6 +80,7 @@
 /* ---- Light theme ---- */
 :root[data-theme="light"]{
   --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
+  --nav-scrim:rgba(250,250,250,.9);
   --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
   --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
   color-scheme:light;
@@ -87,6 +89,7 @@
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
     --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
+    --nav-scrim:rgba(250,250,250,.9);
     --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
     --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
     color-scheme:light;

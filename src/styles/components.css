@@ -165,13 +165,16 @@
   transition:background var(--t-base),backdrop-filter var(--t-base)}
 @media (min-width:768px){ .nav{height:72px} }
 .nav[data-transparent="true"]{background:transparent;border-bottom-color:transparent}
-.nav.is-scrolled{background:rgba(11,11,13,.88);backdrop-filter:blur(12px);
+.nav.is-scrolled{background:var(--nav-scrim);backdrop-filter:blur(12px);
   border-bottom-color:var(--border)}
 .nav__in{display:flex;align-items:center;justify-content:space-between;width:100%;gap:var(--s-2)}
 .nav__right{display:flex;align-items:center;gap:var(--s-1)}
-.nav__brand{display:flex;align-items:center;gap:10px;text-decoration:none;
-  font-weight:800;letter-spacing:-.01em;font-size:18px}
-.nav__brand b{color:var(--coral);font-weight:800}
+.nav__brand{font-size:18px;line-height:1.2;flex:none;
+  display:inline-flex;align-items:center;min-height:28px}
+/* The sweep is a paint effect on text, so the link still needs a real focus
+   ring. -webkit-text-fill-color:transparent would otherwise hide an outline
+   drawn on the glyphs themselves. */
+.brandmark:focus-visible{outline:2px solid var(--text-1);outline-offset:4px;border-radius:4px}
 .nav__links{display:none;gap:var(--s-4);align-items:center}
 @media (min-width:900px){ .nav__links{display:flex} }
 .nav__link{text-decoration:none;color:var(--text-2);font-size:15px;font-weight:500;
@@ -198,7 +201,7 @@
 .footer__top{display:grid;gap:var(--s-5)}
 @media (min-width:900px){ .footer__top{grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--s-4)} }
 .footer h3{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
-  color:var(--text-2);margin-bottom:var(--s-2);font-weight:700}
+  margin-bottom:var(--s-2);font-weight:700;display:inline-block}
 .footer ul{display:grid;gap:4px;list-style:none;padding:0;margin:0}
 .footer a{text-decoration:none;color:var(--text-2);font-size:var(--fs-small);
   display:inline-flex;align-items:center;min-height:24px;padding-block:2px}
@@ -461,15 +464,17 @@
   /* four-accent alternative:
      linear-gradient(90deg,#E85C6E,#F5A825,#7070BB,#3BBFA0,#E85C6E); */
 }
-.brandmark{
-  display:inline-block;
-  font-weight:800;letter-spacing:-.01em;text-decoration:none;
+.sweep{
   color:var(--coral-strong);                 /* fallback where clip is unsupported */
   background-image:var(--brandmark-sweep);
   background-size:200% auto;
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;
   animation:brandmark-sweep 4s linear infinite;
+}
+.brandmark{
+  display:inline-block;
+  font-weight:800;letter-spacing:-.01em;text-decoration:none;
   transition:opacity var(--t-base);
 }
 .brandmark:hover{opacity:.82}
@@ -479,9 +484,9 @@
 }
 /* Reduced motion: hold the sweep still rather than removing the colour. */
 @media (prefers-reduced-motion:reduce){
-  .brandmark{animation:none;background-position:0% center}
+  .sweep{animation:none;background-position:0% center}
 }
 /* Forced colours: drop the clip so the text is painted by the OS palette. */
 @media (forced-colors:active){
-  .brandmark{-webkit-text-fill-color:currentColor;background-image:none;animation:none}
+  .sweep{-webkit-text-fill-color:currentColor;background-image:none;animation:none}
 }
