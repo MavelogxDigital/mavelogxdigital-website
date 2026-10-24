@@ -32,6 +32,9 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
               action="https://formspree.io/f/myeezylv"
               style="display:grid;gap:var(--s-4)">
           <input type="hidden" name="_subject" value="New enquiry from mavelogxdigital.com" />
+          <!-- Replies go to the enquirer. The destination inbox is set in the
+               Formspree dashboard: MavelogxDigital@gmail.com -->
+          <input type="hidden" name="_replyto" id="_replyto" />
           <div class="field field--hp" aria-hidden="true">
             <label for="_gotcha">Do not fill this in</label>
             <input id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off" />
@@ -137,6 +140,9 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
     const fields = [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[name], textarea[name]')]
       .filter((el) => el.name !== '_gotcha' && el.type !== 'hidden');
     const valid = fields.map(check).every(Boolean);
+    const rt = form.querySelector<HTMLInputElement>('#_replyto');
+    const em = form.querySelector<HTMLInputElement>('#email');
+    if (rt && em) rt.value = em.value;
     if (!valid) { fields.find((f) => f.getAttribute('aria-invalid') === 'true')?.focus(); return; }
     if (Date.now() - Number(startedAt?.value || 0) < 2000) return;   // submitted too fast
 

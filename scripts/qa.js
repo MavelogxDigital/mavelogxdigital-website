@@ -25,7 +25,9 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
          return r.width<24||r.height<24}).length;
      const labels=[...document.querySelectorAll('input:not([type=hidden]),textarea,select')]
        .filter(e=>!e.labels?.length&&!e.getAttribute('aria-label')).length;
-     const txt=[...document.querySelectorAll('p,li,h1,h2,h3,span,a')].slice(0,160).map(e=>{
+     const txt=[...document.querySelectorAll('p,li,h1,h2,h3,span,a')].slice(0,160)
+       .filter(e=>!e.closest('.brandmark'))   // logotype, exempt under WCAG 1.4.3
+       .map(e=>{
        const c=getComputedStyle(e);
        const parse=v=>{const m=v.match(/[\d.]+/g);return m?{r:+m[0],g:+m[1],b:+m[2],a:m[3]!==undefined?+m[3]:1}:null};
        let n=e,stack=[];

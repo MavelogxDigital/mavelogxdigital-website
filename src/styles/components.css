@@ -199,9 +199,9 @@
 @media (min-width:900px){ .footer__top{grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--s-4)} }
 .footer h3{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
   color:var(--text-2);margin-bottom:var(--s-2);font-weight:700}
-.footer ul{display:grid;gap:10px}
+.footer ul{display:grid;gap:4px;list-style:none;padding:0;margin:0}
 .footer a{text-decoration:none;color:var(--text-2);font-size:var(--fs-small);
-  display:inline-block;padding-block:3px;min-height:24px}
+  display:inline-flex;align-items:center;min-height:24px;padding-block:2px}
 .footer a:hover{color:var(--text-1)}
 .footer__base{margin-top:var(--s-5);padding-top:var(--s-3);
   border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:var(--s-2);
@@ -444,3 +444,44 @@
   border-top:1px solid var(--border);text-decoration:none;color:inherit}
 @media (min-width:860px){.insight-row{grid-template-columns:3fr 9fr;gap:var(--s-5)}}
 .insight-row:hover .insight__title{text-decoration:underline;text-underline-offset:4px}
+
+/* ===========================================================
+   Footer brandmark: the animated sweep used on the credit line
+   of client sites, brought onto our own footer.
+
+   This is the one place the two retired accents (Steel Blue, Orange)
+   still appear. They are in the logo artwork, and the sweep is the
+   logotype rather than interface, so 6.1 does not apply here. Nothing
+   else on the site may use them. Switch to the four-accent version by
+   swapping --brandmark-sweep below.
+   =========================================================== */
+:root{
+  --brandmark-sweep:linear-gradient(90deg,
+    #E85C6E,#F5A825,#7070BB,#3BBFA0,#4A9DC4,#F47820,#E85C6E);
+  /* four-accent alternative:
+     linear-gradient(90deg,#E85C6E,#F5A825,#7070BB,#3BBFA0,#E85C6E); */
+}
+.brandmark{
+  display:inline-block;
+  font-weight:800;letter-spacing:-.01em;text-decoration:none;
+  color:var(--coral-strong);                 /* fallback where clip is unsupported */
+  background-image:var(--brandmark-sweep);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:brandmark-sweep 4s linear infinite;
+  transition:opacity var(--t-base);
+}
+.brandmark:hover{opacity:.82}
+@keyframes brandmark-sweep{
+  0%{background-position:0% center}
+  100%{background-position:200% center}
+}
+/* Reduced motion: hold the sweep still rather than removing the colour. */
+@media (prefers-reduced-motion:reduce){
+  .brandmark{animation:none;background-position:0% center}
+}
+/* Forced colours: drop the clip so the text is painted by the OS palette. */
+@media (forced-colors:active){
+  .brandmark{-webkit-text-fill-color:currentColor;background-image:none;animation:none}
+}
