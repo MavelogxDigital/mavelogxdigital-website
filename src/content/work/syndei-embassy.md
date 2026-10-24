@@ -15,10 +15,14 @@ lead: >
   is whether they would belong there, and one action, which is planning a visit.
 shots:
   - src: /img/syndei-embassy-full-960.webp
+    w: 960
+    h: 4159
     device: full
     alt: The complete Syndei Embassy homepage, from the hero through service times, ministries, prayer, giving and the footer
     caption: The full homepage, scrollable. Navigation runs down the right edge, leaving the full width to the display type and the portrait.
   - src: /img/syndei-embassy-mobile-780.webp
+    w: 780
+    h: 1689
     device: mobile
     alt: The Syndei Embassy homepage on a phone, with the WhatsApp control pinned bottom right
     caption: Mobile. The right rail collapses to a single menu control and the WhatsApp button stays pinned, where it matters most.

@@ -12,6 +12,19 @@
   --purple-lt:#8F8FD0;    /* purple for small text on dark (5.6:1) */
   --teal:#3BBFA0;         /* eyebrows, progress, success */
 
+  /* Contrast-safe variants. The four accents were validated as text on dark
+     only. White on Coral is 3.39:1 and Teal on a light ground is 2.20:1, both
+     below AA, so fills and light contexts use these instead. Same hues. */
+  --coral-strong:#E12C43; /* button fill: white on it is 4.52:1 */
+  --amber-ink:#BF7C09;    /* amber as large text on a light ground: 3.08:1 */
+  --teal-ink:#267C68;     /* teal as text on a light ground: 4.51:1 on #F2F2F4 */
+  --purple-ink:#6565BE;   /* purple as text on a light ground: 4.52:1 on #F2F2F4 */
+
+  /* Theme-resolved ink tones, repointed in light contexts below. */
+  --teal-text:var(--teal);
+  --purple-text:var(--purple-lt);
+  --amber-text:var(--amber);
+
   /* ---- Neutral sets. Accents never change between themes (6.1). ----
      --*-d is the dark set, --*-l the light set. The active theme points
      --bg and friends at one set, and .section--invert at the other, so the
@@ -65,6 +78,7 @@
 
 /* ---- Light theme ---- */
 :root[data-theme="light"]{
+  --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
   --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
   --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
   color-scheme:light;
@@ -72,6 +86,7 @@
 /* Honour the OS preference until the visitor chooses for themselves. */
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
+    --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
     --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
     --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
     color-scheme:light;
@@ -82,18 +97,21 @@
    Replaces the old .theme-light, which hard-coded light values and so
    collapsed into the page once the whole site could go light. */
 .section--invert,.theme-light{
+  --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
   --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
   --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
   background:var(--bg); color:var(--text-1);
 }
 :root[data-theme="light"] .section--invert,
 :root[data-theme="light"] .theme-light{
+  --teal-text:var(--teal); --purple-text:var(--purple-lt); --amber-text:var(--amber);
   --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
   --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]) .section--invert,
   :root:not([data-theme="dark"]) .theme-light{
+    --teal-text:var(--teal); --purple-text:var(--purple-lt); --amber-text:var(--amber);
     --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
     --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
   }
@@ -142,7 +160,7 @@ ul[class],ol[class]{list-style:none;padding:0}
 
 /* ---- Skip link (13.1) ---- */
 .skip{position:absolute;left:var(--s-2);top:-60px;z-index:200;
-  background:var(--coral);color:#fff;padding:12px 20px;border-radius:var(--r-sm);
+  background:var(--coral-strong);color:#fff;padding:12px 20px;border-radius:var(--r-sm);
   font-weight:600;transition:top var(--t-fast)}
 .skip:focus-visible{top:var(--s-2)}
 

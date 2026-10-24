@@ -33,6 +33,7 @@ const work = defineCollection({
     shots: z.array(z.object({
       src: z.string(), alt: z.string(), caption: z.string().optional(),
       device: z.enum(['desktop','mobile','full']).default('desktop'),
+      w: z.number().optional(), h: z.number().optional(),
     })).optional(), // 08
     decisions: z.array(z.object({ title: z.string(), body: z.string() })).optional(),  // 09
     outcome: z.array(z.string()).optional(),      // 10
@@ -45,4 +46,19 @@ const work = defineCollection({
   }),
 });
 
-export const collections = { work };
+
+/** Articles for /insights/ (8.8). Body is markdown. */
+const insights = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/insights' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.string(),
+    date: z.coerce.date(),
+    readTime: z.string(),
+    lead: z.string(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { work, insights };

@@ -1,0 +1,63 @@
+---
+/** Article template, Build Bible 9.5. Reading width, serif lead, body in sans. */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE } from '../../site';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('insights', (e) => !e.data.draft))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: all[(i + 1) % all.length] },
+  }));
+}
+
+const { entry, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const fmt = (x: Date) => x.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+const isDev = import.meta.env.DEV;
+---
+<BaseLayout page="insights" title={`${d.title} | MavelogxDigital`} description={d.description}>
+  <article class="section container">
+    <div class="art">
+      <Eyebrow>{d.category}</Eyebrow>
+      <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+        {d.title}
+      </h1>
+      <p class="art__meta">
+        <span>{SITE.name}</span><span>·</span>
+        <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>
+        <span>·</span><span>{d.readTime}</span>
+      </p>
+
+      {isDev && (
+        <div class="art__draft">
+          <strong>Draft for review</strong>
+          <p>
+            Written in the agency voice and not yet approved. Read it as yours before this
+            ships: the argument should be one you would make out loud. This note appears in
+            development builds only.
+          </p>
+        </div>
+      )}
+
+      <p class="art__lead">{d.lead}</p>
+      <div class="art__body"><Content /></div>
+    </div>
+  </article>
+
+  <section class="container cs-next">
+    <Eyebrow>Read next</Eyebrow>
+    <a href={`/insights/${next.id}/`} style="text-decoration:none">
+      <h2 style="font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em;margin-top:var(--s-2);max-width:22ch">
+        {next.data.title}
+      </h2>
+    </a>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

@@ -32,12 +32,12 @@ const [lead, ...rest] = all;
   <section class="section container" style="padding-top:0">
     <div class="grid" style="margin-bottom:var(--s-4)">
       <ProjectCard wide slug={lead.id} client={lead.data.client} tags={lead.data.services}
-        inHouse={lead.data.inHouse} imgAlt={lead.data.heroAlt} />
+        inHouse={lead.data.inHouse} imgAlt={lead.data.heroAlt} level={2} />
     </div>
     <div class="grid grid-2">
       {rest.map((p, i) => (
         <ProjectCard slug={p.id} client={p.data.client} tags={p.data.services}
-          inHouse={p.data.inHouse} imgAlt={p.data.heroAlt} delay={Math.min(i + 1, 6)} />
+          inHouse={p.data.inHouse} imgAlt={p.data.heroAlt} level={2} delay={Math.min(i + 1, 6)} />
       ))}
     </div>
   </section>

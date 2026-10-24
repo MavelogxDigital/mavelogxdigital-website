@@ -1,0 +1,50 @@
+---
+/** Insights index, Build Bible 9.5. */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const posts = (await getCollection('insights', (e) => !e.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+---
+<BaseLayout
+  page="insights"
+  title="Insights | MavelogxDigital"
+  description="Articles on brand strategy, AI-augmented design workflows and building digital products for the Canada to Ghana corridor."
+>
+  <section class="section container">
+    <Eyebrow>Insights</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      Thinking out loud.
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-2)">
+      Notes on positioning, design and building for two markets at once. Written because
+      the questions keep coming up, not because a content calendar said so.
+    </p>
+  </section>
+
+  <section class="container" style="padding-bottom:var(--s-8)">
+    <div class="insight-list">
+      {posts.map((post, i) => (
+        <a class="insight-row rv" data-d={Math.min(i, 6)} href={`/insights/${post.id}/`}>
+          <div>
+            <span class="insight__tag">{post.data.category}</span>
+            <p class="insight__meta" style="margin-top:var(--s-2)">
+              {fmt(post.data.date)} · {post.data.readTime}
+            </p>
+          </div>
+          <div>
+            <h2 class="insight__title">{post.data.title}</h2>
+            <p class="insight__excerpt" style="margin-top:var(--s-1);max-width:56ch">
+              {post.data.description}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand heading="Have a question none of these answer?" lead="Ask it. We would rather have the conversation than guess what you needed to read." />
+</BaseLayout>

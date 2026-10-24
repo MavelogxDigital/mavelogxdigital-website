@@ -15,10 +15,14 @@ lead: >
   Carry the weight of the work, and make listening the first thing a visitor does.
 shots:
   - src: /img/floks-speaks-full-960.webp
+    w: 960
+    h: 4034
     device: full
     alt: The complete Floks Speaks homepage, from the hero through releases, the artist profile, themes, blog, events, merchandise and the footer
     caption: The full homepage, scrollable. The featured track sits above the fold with its title and runtime, so listening is one click from arrival.
   - src: /img/floks-speaks-mobile-780.webp
+    w: 780
+    h: 1697
     device: mobile
     alt: The Floks Speaks homepage on a phone, photography stacked above the headline
     caption: Mobile. The photograph moves above the headline and the two calls to action stack full width.

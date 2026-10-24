@@ -8,9 +8,12 @@ interface Props {
   /** Omit to use /img/<slug>-<w>.{webp,jpg}; pass `img` for a one-off like the placeholder. */
   img?: string;
   wide?: boolean; inHouse?: boolean; delay?: number; plate?: boolean;
+  /** h2 directly under a page h1, h3 when nested under a section h2. */
+  level?: 2 | 3;
 }
 const { slug, client, tags, imgAlt, img, wide = false, inHouse = false,
-        delay = 0, plate = false } = Astro.props;
+        delay = 0, plate = false, level = 3 } = Astro.props;
+const H = `h${level}` as 'h2' | 'h3';
 
 const widths = wide ? [1280, 960] : [960, 480];
 const w = wide ? 1280 : 960;
@@ -33,7 +36,7 @@ const sizes  = wide ? '(min-width: 900px) 1216px, 100vw' : '(min-width: 900px) 5
     )}
   </div>
   <div class="proj-card__body">
-    <h3 class="proj-card__name">{client}</h3>
+    <H class="proj-card__name">{client}</H>
     <ul class="proj-card__tags">{tags.map(t => <li>{t}</li>)}</ul>
     {inHouse && <span class="proj-card__tags" style="color:var(--text-2)">In-house venture</span>}
     <span class="proj-card__cta">View case study</span>

@@ -13,7 +13,13 @@ import Pillar from '../components/Pillar.astro';
 import Step from '../components/Step.astro';
 import Testimonial from '../components/Testimonial.astro';
 import CtaBand from '../components/CtaBand.astro';
+import InsightCard from '../components/InsightCard.astro';
+import { getCollection } from 'astro:content';
 import { SITE, SERVICES, PILLARS, PROCESS, FEATURED } from '../site';
+
+const posts = (await getCollection('insights', (e) => !e.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 
 const [lead, ...rest] = FEATURED;
 
@@ -162,7 +168,32 @@ const ALT: Record<string, string> = {
     </div>
   </section>
 
-  {/* ---------- 08 · INSIGHTS, omitted until three real articles exist (8.8) ---------- */}
+  {/* ---------- 08 · INSIGHTS, light break. Rendered now that real articles
+         exist; 8.8 says never ship this section with placeholders. ---------- */}
+  {posts.length >= 3 && (
+    <section class="section section--invert">
+      <div class="container">
+        <SectionHead
+          eyebrow="Insights"
+          heading="Thinking out loud."
+          lead="Notes on positioning, design and building for two markets at once."
+          linkHref="/insights/" linkLabel="All insights"
+        />
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+          {posts.map((post, i) => (
+            <InsightCard
+              href={`/insights/${post.id}/`}
+              tag={post.data.category}
+              title={post.data.title}
+              excerpt={post.data.description}
+              readTime={post.data.readTime}
+              delay={i}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   {/* ---------- 09 · FINAL CTA ---------- */}
   <CtaBand />

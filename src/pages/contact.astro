@@ -28,12 +28,13 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
   <section class="container" style="padding-bottom:var(--s-8)">
     <div class="contact__grid">
       <div>
-        <form id="enquiry" name="enquiry" method="POST" data-netlify="true"
-              netlify-honeypot="bot-field" style="display:grid;gap:var(--s-4)">
-          <input type="hidden" name="form-name" value="enquiry" />
+        <form id="enquiry" name="enquiry" method="POST"
+              action="https://formspree.io/f/myeezylv"
+              style="display:grid;gap:var(--s-4)">
+          <input type="hidden" name="_subject" value="New enquiry from mavelogxdigital.com" />
           <div class="field field--hp" aria-hidden="true">
-            <label for="bot-field">Do not fill this in</label>
-            <input id="bot-field" name="bot-field" tabindex="-1" autocomplete="off" />
+            <label for="_gotcha">Do not fill this in</label>
+            <input id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off" />
           </div>
           <input type="hidden" name="started-at" id="started-at" />
 
@@ -127,14 +128,14 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
 
   form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[name], textarea[name]')
     .forEach((el) => {
-      if (el.name === 'bot-field' || el.type === 'hidden') return;
+      if (el.name === '_gotcha' || el.type === 'hidden') return;
       el.addEventListener('blur', () => check(el));
     });
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fields = [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[name], textarea[name]')]
-      .filter((el) => el.name !== 'bot-field' && el.type !== 'hidden');
+      .filter((el) => el.name !== '_gotcha' && el.type !== 'hidden');
     const valid = fields.map(check).every(Boolean);
     if (!valid) { fields.find((f) => f.getAttribute('aria-invalid') === 'true')?.focus(); return; }
     if (Date.now() - Number(startedAt?.value || 0) < 2000) return;   // submitted too fast
@@ -142,11 +143,12 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
     const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
     btn.disabled = true; btn.textContent = 'Sending';
     try {
-      await fetch('/', {
+      const res = await fetch(form.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form) as any).toString(),
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
       });
+      if (!res.ok) throw new Error(String(res.status));
       // Replace the form in place. Never navigate away: it loses context
       // and breaks the back button (9.6).
       form.hidden = true;
