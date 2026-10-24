@@ -57,8 +57,14 @@ import { PILLARS, SITE } from '../site';
       <SectionHead eyebrow="Who you work with" heading="One accountable person." />
       <div class="founder rv">
         <div class="founder__photo">
-          <img src="/img/founder-placeholder.svg" width="800" height="1000"
-               alt="Portrait of Emmanuel Kofi Avleshie, founder of MavelogxDigital" />
+          <picture>
+            <source type="image/webp" sizes="(min-width: 860px) 420px, 100vw"
+              srcset="/img/founder-400.webp 400w, /img/founder-600.webp 600w, /img/founder-900.webp 900w" />
+            <source type="image/jpeg" sizes="(min-width: 860px) 420px, 100vw"
+              srcset="/img/founder-400.jpg 400w, /img/founder-600.jpg 600w, /img/founder-900.jpg 900w" />
+            <img src="/img/founder-600.jpg" width="600" height="750" fetchpriority="low" decoding="async"
+                 alt="Emmanuel Kofi Avleshie, founder of MavelogxDigital, photographed outdoors" />
+          </picture>
         </div>
         <div>
           <p class="founder__name" style="margin:0">Emmanuel Kofi Avleshie</p>
