@@ -1,0 +1,91 @@
+---
+/** Services, Build Bible 9.1.
+ *  A page that justifies a price without naming one: real depth per service,
+ *  concrete deliverables, and linked proof where a case study exists. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Step from '../components/Step.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SERVICES, INDUSTRIES, PROCESS } from '../site';
+import { getCollection } from 'astro:content';
+
+const work = await getCollection('work', (e) => !e.data.draft);
+const clientOf = (slug?: string) => work.find((w) => w.id === slug)?.data.client;
+---
+<BaseLayout
+  page="services"
+  title="Services | MavelogxDigital"
+  description="Brand strategy and identity, web design and development, content, social media, e-commerce and digital consultation. Six capabilities, one accountable team."
+>
+  <section class="section container">
+    <Eyebrow>Services</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      What we build.
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-2)">
+      Six capabilities under one accountable team. Each one below lists what you actually
+      receive, who it suits, and the work that proves it.
+    </p>
+  </section>
+
+  <section class="container" style="padding-bottom:var(--s-7)">
+    {SERVICES.map((s) => (
+      <article class="svc-block rv" id={s.slug} style={`--accent:${s.accent}`}>
+        <div class="svc-block__grid">
+          <div>
+            <span class="svc-block__num" aria-hidden="true">{s.n}</span>
+            <h2 class="svc-block__title">{s.title}</h2>
+            <p class="svc-block__desc">{s.desc}</p>
+          </div>
+          <div>
+            <h3>What you get</h3>
+            <ul class="svc-list">
+              {s.deliverables.map((d) => <li><span>{d}</span></li>)}
+            </ul>
+            <h3>Best suited to</h3>
+            <p class="svc-fit">{s.fit}</p>
+            {'proof' in s && s.proof && (
+              <a class="btn btn--ghost" href={`/work/${s.proof}/`}>
+                See this in {clientOf(s.proof)}
+              </a>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="section section--band" id="industries">
+    <div class="container">
+      <SectionHead
+        eyebrow="Industries"
+        heading="Where we have worked."
+        lead="Four of these are backed by a project you can read. The rest are sectors we build for, and we would rather say which is which."
+      />
+      <div class="ind-grid rv">
+        {INDUSTRIES.map((i) => (
+          'proof' in i && i.proof
+            ? <a class="ind ind--proven" href={`/work/${i.proof}/`}>
+                {i.name}<span class="ind__tag">Proven</span>
+              </a>
+            : <span class="ind">{i.name}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <SectionHead
+      eyebrow="How We Work"
+      heading="From conversation to launch."
+      lead="Four steps, built for clarity and speed. No guesswork, no surprises."
+    />
+    <div class="steps">{PROCESS.map((s, i) => <Step {...s} delay={i} />)}</div>
+    <div style="margin-top:var(--s-5)">
+      <a class="quote__proj" href="/process/" style="font-weight:600">See the full process</a>
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure which of these you need?" lead="Tell us the problem rather than the deliverable. We will tell you honestly what it takes to solve." />
+</BaseLayout>

@@ -31,7 +31,7 @@ const isDev = import.meta.env.DEV;
 >
   {/* ---------- 01 HERO ---------- */}
   <section class="container cs-hero">
-    <Eyebrow rule>Case Study</Eyebrow>
+    <Eyebrow>Case Study</Eyebrow>
     <h1 class="cs-hero__h1" style="margin-top:var(--s-2)">{d.client}</h1>
     <p class="cs-hero__desc">{d.descriptor}</p>
     <div class="cs-hero__media rv">
@@ -46,7 +46,7 @@ const isDev = import.meta.env.DEV;
       <div><dt>Sector</dt><dd>{d.sector}</dd></div>
       <div><dt>Services</dt><dd>{d.services.join(' · ')}</dd></div>
       <div><dt>Year</dt><dd>{d.year}</dd></div>
-      {d.live && <div><dt>Live site</dt><dd><a href={d.live} rel="noopener">Visit ↗</a></dd></div>}
+      {d.live && <div><dt>Live site</dt><dd><a href={d.live} rel="noopener">Visit</a></dd></div>}
     </dl>
   </section>
 
@@ -163,7 +163,7 @@ const isDev = import.meta.env.DEV;
       </div>
       {d.live && (
         <p style="margin-top:var(--s-4)">
-          <a class="btn btn--ghost" href={d.live} rel="noopener">Visit the live site ↗</a>
+          <a class="btn btn--ghost" href={d.live} rel="noopener">Visit the live site</a>
         </p>
       )}
     </section>
@@ -189,7 +189,7 @@ const isDev = import.meta.env.DEV;
     <Eyebrow>Next project</Eyebrow>
     <a href={`/work/${next.id}/`} style="text-decoration:none">
       <h2 style="font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em;margin-top:var(--s-2)">
-        {next.data.client} →
+        {next.data.client}
       </h2>
     </a>
   </section>

@@ -36,15 +36,15 @@ const ALT: Record<string, string> = {
   <section class="section section--hero hero">
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="container hero__in">
-      <Eyebrow rule class="rv">AI-Augmented. Strategy-Led. Built to Scale.</Eyebrow>
+      <Eyebrow class="rv">AI-Augmented. Strategy-Led. Built to Scale.</Eyebrow>
       <h1 class="hero__h1 rv" data-d="1">We Turn Bold Ideas<br />Into Digital Impact.</h1>
       <p class="hero__lead rv" data-d="2">
         A strategy-led digital agency helping ambitious brands grow through thoughtful design,
         high-performing websites and intelligent technology.
       </p>
       <div class="hero__actions rv" data-d="3">
-        <a class="btn btn--primary" href="/contact/">Start a Project ↗</a>
-        <a class="btn btn--ghost" href="/work/">Explore Our Work →</a>
+        <a class="btn btn--primary" href="/contact/">Start a Project</a>
+        <a class="btn btn--ghost" href="/work/">Explore Our Work</a>
       </div>
     </div>
     <div class="container">
@@ -61,7 +61,7 @@ const ALT: Record<string, string> = {
         eyebrow="Selected Work"
         heading="Ideas turned into impact."
         lead="A selection of recent projects across brand identity, web design and digital strategy."
-        linkHref="/work/" linkLabel="All work →"
+        linkHref="/work/" linkLabel="All work"
       />
       <div class="grid" style="margin-bottom:var(--s-4)">
         <ProjectCard wide slug={lead.slug} client={lead.client} tags={lead.tags}
@@ -100,7 +100,7 @@ const ALT: Record<string, string> = {
           We work with founders directly. One team, one point of contact, from the first
           conversation to the day the site goes live.
         </p>
-        <a class="quote__proj" href="/about/" style="font-weight:600">Read our story →</a>
+        <a class="quote__proj" href="/about/" style="font-weight:600">Read our story</a>
       </div>
     </div>
   </section>
@@ -115,7 +115,7 @@ const ALT: Record<string, string> = {
       />
       {SERVICES.map((s, i) => <ServiceRow {...s} delay={Math.min(i, 6)} />)}
       <div style="margin-top:var(--s-5)">
-        <a class="btn btn--ghost" href="/services/">See all services →</a>
+        <a class="btn btn--ghost" href="/services/">See all services</a>
       </div>
     </div>
   </section>
@@ -140,7 +140,7 @@ const ALT: Record<string, string> = {
       />
       <div class="steps">{PROCESS.map((s, i) => <Step {...s} delay={i} />)}</div>
       <div style="margin-top:var(--s-5)">
-        <a class="quote__proj" href="/process/" style="font-weight:600">See the full process →</a>
+        <a class="quote__proj" href="/process/" style="font-weight:600">See the full process</a>
       </div>
     </div>
   </section>

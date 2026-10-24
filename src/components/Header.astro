@@ -29,7 +29,7 @@ const { page = '', transparent = false } = Astro.props;
       </svg>
     </button>
 
-    <a class="btn btn--primary nav__cta" href="/contact/">Start a Project ↗</a>
+    <a class="btn btn--primary nav__cta" href="/contact/">Start a Project</a>
 
     <button class="nav__burger" type="button"
             aria-label="Open menu" aria-expanded="false" aria-controls="navpanel">
@@ -44,7 +44,7 @@ const { page = '', transparent = false } = Astro.props;
 
 <div class="nav__panel" id="navpanel" data-open="false" hidden>
   {NAV.map(i => <a href={i.href} aria-current={page === i.key ? 'page' : undefined}>{i.label}</a>)}
-  <a class="btn btn--primary" href="/contact/">Start a Project ↗</a>
+  <a class="btn btn--primary" href="/contact/">Start a Project</a>
 </div>
 
 <script>
