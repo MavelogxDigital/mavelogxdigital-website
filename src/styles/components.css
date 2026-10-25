@@ -198,6 +198,7 @@
   background:none;border:1px solid var(--border);border-radius:var(--r-full);
   cursor:pointer;color:var(--text-1);transition:border-color var(--t-fast)}
 .nav__burger:hover{border-color:var(--text-2)}
+.nav__burger:active{background:rgba(128,128,150,.18)}
 .nav__burger-label{font-size:15px;font-weight:600;letter-spacing:.01em}
 .nav__burger .i-close{display:none}
 .nav__burger[aria-expanded="true"] .i-open{display:none}
@@ -240,6 +241,8 @@
   font-size:var(--fs-small);font-weight:600;
   transition:border-color var(--t-fast),background var(--t-fast)}
 .ra__btn:hover{border-color:var(--teal-text)}
+.ra__btn:active{background:color-mix(in srgb, var(--teal-text) 16%, var(--bg-card))}
+.ra__stop:active{background:rgba(128,128,150,.18);color:var(--text-1)}
 .ra__icon{display:grid;place-items:center;width:16px;height:16px;color:var(--teal-text)}
 .ra__pause{display:none}
 .ra[data-state="playing"] .ra__play{display:none}

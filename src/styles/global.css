@@ -131,6 +131,7 @@
   background:none;border:0;border-radius:var(--r-full);color:var(--text-2);cursor:pointer;
   transition:color var(--t-fast),background var(--t-fast)}
 .theme-btn:hover{color:var(--text-1);background:rgba(128,128,150,.12)}
+.theme-btn:active{color:var(--text-1);background:rgba(128,128,150,.22)}
 .theme-btn svg{width:19px;height:19px}
 .theme-btn .i-sun{display:none}
 :root[data-theme="light"] .theme-btn .i-sun{display:block}
@@ -160,6 +161,14 @@ ul[class],ol[class]{list-style:none;padding:0}
 /* ---- Focus ring (6.8): --text-1 of the active theme, never coral ---- */
 :focus-visible{outline:2px solid var(--text-1);outline-offset:3px;border-radius:2px}
 :focus:not(:focus-visible){outline:none}
+
+/* ---- Touch ----
+   Chrome's default tap highlight is a 40% blue rectangle that ignores
+   border-radius, so every pill on the site flashed a square box on tap.
+   Off site-wide. Every rounded control carries its own :active state
+   instead, so touch still gets feedback. Colour change, not motion, so
+   it holds under prefers-reduced-motion. */
+a,button,summary,label,input,select,textarea{-webkit-tap-highlight-color:transparent}
 
 /* ---- Skip link (13.1) ---- */
 .skip{position:absolute;left:var(--s-2);top:-60px;z-index:200;
