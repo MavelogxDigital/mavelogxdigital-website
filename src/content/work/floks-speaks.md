@@ -119,6 +119,15 @@ shots:
     alt: The Contact page on a light ground, an enquiry type selector set to Booking above fields for name, email, event date and venue
     caption: The booking path. Enquiry type first, then the date and venue fields that make a booking answerable in one reply.
 decisions:
+  - title: The feed was verified episode by episode before cutover
+    body: >
+      A podcast migration fails quietly. Move a feed badly and directories republish the
+      back catalogue as duplicates, or stop following the show altogether, and nobody is
+      told. The artist finds out weeks later when a new episode reaches no one. So the
+      move was not made on trust. Every episode identifier and every audio file length was
+      checked against the archived original feed first, eight for eight, and only then did
+      the redirect go live. It was held open for thirty days so every directory had time
+      to follow.
   - title: The play control comes before the navigation
     body: >
       The hero gives a featured track its own play control with the title and runtime visible
