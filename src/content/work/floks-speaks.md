@@ -94,6 +94,30 @@ shots:
     device: mobile
     alt: The Floks Speaks homepage on a phone, photography stacked above the headline
     caption: Mobile. The photograph moves above the headline and the two calls to action stack full width.
+  - src: /img/floks-speaks-listen-1200.webp
+    w: 1200
+    h: 610
+    device: desktop
+    alt: The Listen page on Floks Speaks, a full-bleed performance photograph behind the heading Every word, in one place
+    caption: The library. One address for everything he has recorded, searchable by theme or by a line you half remember.
+  - src: /img/floks-speaks-listen-mobile-376.webp
+    w: 376
+    h: 855
+    device: mobile
+    alt: The Listen page on a phone, the performance photograph stacked above the heading and the first recording below it
+    caption: The library on a phone. The photograph crops to a band and the first piece sits immediately beneath it.
+  - src: /img/floks-speaks-piece-1200.webp
+    w: 1200
+    h: 610
+    device: desktop
+    alt: A single recording page on Floks Speaks, cover artwork beside the title My Real Gee with a theme tag, date, runtime and a play control
+    caption: A single piece. Cover art, theme, date and runtime, and a play control before any description. Each recording has its own URL.
+  - src: /img/floks-speaks-piece-mobile-376.webp
+    w: 376
+    h: 855
+    device: mobile
+    alt: A single recording page on a phone, cover artwork above the title and the play control at the foot
+    caption: The same piece on a phone. Artwork first, then the title, then the reason to press play.
 decisions:
   - title: Listening is the primary action, not reading
     body: >
@@ -110,8 +134,18 @@ decisions:
     body: >
       One warm accent against a dark ground, used for the headline emphasis, the play control
       and the eyebrow. The restraint keeps it feeling like a record sleeve, not a church bulletin.
+outcome:
+  - >
+    He is getting booked. Enquiries arrive through the site rather than through a direct
+    message, which is the difference between a request he might miss and one that waits
+    for him in one place.
+  - >
+    He publishes without us. Episodes go up through his own CMS and out through his own
+    feed, and the six platforms carry them as they always did. The handover worked, which
+    is the only real test of a CMS build.
+  - >
+    The merchandise sells. It had nowhere to live before this, which was the clearest of
+    the costs of not having an address of his own.
 pending:
-  - "08 The build: two more captures. The Listen page and one other interior page, desktop and mobile."
-  - "10 Outcome: what changed since launch, evidenced only"
-  - "11 Client quote: Felix's words, approved and verbatim"
+  - "11 Client quote: Felix's own words. Permission to publish is granted, the sentence itself is still outstanding."
 ---
