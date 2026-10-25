@@ -96,20 +96,16 @@ const scale = [
   <!-- 05 Project cards -->
   <section class="section container">
     <SectionHead eyebrow="07 · #05" heading="Project cards" lead="Asymmetric stack: one wide, two beside it. Hover and keyboard focus give the same result." linkHref="/work/" linkLabel="All work" />
-    <p style="color:var(--text-2);font-size:var(--fs-small);margin-bottom:var(--s-3)">
-      Art below is placeholder: only the two in-house brands have usable assets today.
-      Real 1440×900 screenshots per 6.7 land in Phase 2.
-    </p>
     <div class="grid" style="margin-bottom:var(--s-4)">
-      <ProjectCard wide plate slug="mavelogx-enterprise" client="Mavelogx Enterprise"
+      <ProjectCard wide slug="mavelogx-enterprise" client="Mavelogx Enterprise"
         tags={PROJECTS[2].tags} inHouse
-        img="/img/mavelogx-enterprise-640.webp" imgAlt="Mavelogx Enterprise brand mark" />
+        imgAlt="The Mavelogx Enterprise homepage" />
     </div>
     <div class="grid grid-2">
-      <ProjectCard plate slug="mavels-corner" client="Mavel's Corner" tags={PROJECTS[3].tags} inHouse
-        img="/img/mavels-corner-640.webp" imgAlt="Mavel's Corner brand mark" delay={1} />
+      <ProjectCard slug="mavels-corner" client="Mavel's Corner" tags={PROJECTS[3].tags} inHouse
+        imgAlt="The Mavel's Corner homepage" delay={1} />
       <ProjectCard slug="floks-speaks" client="Floks Speaks" tags={PROJECTS[0].tags}
-        img="/img/placeholder.svg" imgAlt="Screenshot pending, Phase 2" delay={2} />
+        imgAlt="The Floks Speaks homepage" delay={2} />
     </div>
   </section>
 

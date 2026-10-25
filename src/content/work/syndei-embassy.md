@@ -2,7 +2,7 @@
 client: Syndei Embassy
 descriptor: Brand identity and digital presence for a church in Accra
 sector: Church / community
-services: [Brand Identity, Web Design, Digital Presence]
+services: [Web Design & Development, Digital Presence]
 year: "2026"
 live: https://syndeiembassy.org
 inHouse: false
@@ -13,6 +13,78 @@ lead: >
   Syndei Embassy is a church in Accra. A church website is usually asked to be everything to
   everyone. This one was built around one question a first-time visitor actually has, which
   is whether they would belong there, and one action, which is planning a visit.
+brief:
+  - >
+    Syndei Embassy is a Christ-centred ministry in Accra, registered as a Company Limited
+    by Guarantee under Ghanaian law. It did not begin as a church. It began in January 2015
+    with a three day fast, out of which came Christ Impacting Believers Network, a ministry
+    built on grassroots evangelism in the underreached communities of northern Ghana. The
+    church is what that teaching ministry grew into.
+  - >
+    The name carries the argument. Syndei is Greek, συνδεί, to bind together or join. The
+    conviction underneath everything is that Christ binds what sin separated, God to man and
+    believer to believer. The brief asked that the site reinforce that idea in structure and
+    language, not just state it on an about page.
+  - >
+    They came with the writing already done. A full content package, a logo, a palette and
+    a live teaching podcast. What they did not have was a website. The ask was the build.
+challenge:
+  - >
+    There was no site at all. A ministry with a registered legal identity, an active podcast
+    and a daily social following at @ankulawrencek had no address of its own. Everything ran
+    through TikTok, Instagram and Facebook, which are good at reaching people and poor at
+    answering them.
+  - >
+    The cost shows up at the moment someone decides to come. A person who hears a teaching
+    and wants to visit needs to know when the service is, where the building is, what will
+    happen when they walk in, and what to do if they cannot travel. None of that could be
+    answered from a social profile. The ministry was reaching people it could not then receive.
+  - >
+    Giving had the same problem. Tithes, offerings and a missions fund all needed somewhere
+    to live that was not a direct message.
+strategy:
+  - >
+    A church website is usually asked to be everything to everyone, and that is how it ends up
+    saying nothing. This one was built around the single question a first-time visitor actually
+    has, which is whether they would belong here, and the single action that follows from it,
+    which is planning a visit. Every section is measured against one or the other.
+  - >
+    The podcast does work no amount of copy can. The Spirit Word is verse-by-verse teaching
+    that already exists on Spotify, Apple Podcasts, Audible and Amazon Music, so a visitor can
+    hear the church before deciding to attend it. That is a better answer to would I belong
+    here than any description of the culture.
+  - >
+    What we rejected was the conventional church homepage, which leads with a mission statement
+    and buries service times somewhere below the fold. Service times, address and what to expect
+    are given early and plainly, and a WhatsApp control stays within thumb reach down the whole
+    page, because in Accra that is the channel people actually use to ask a question.
+  - >
+    The binding idea shapes the structure rather than decorating it. The story runs as a dated
+    timeline from the fast to the Embassy, the Greek word gets its own explanation, and the
+    ministries are framed as ways in rather than programmes to admire.
+  - >
+    One build constraint worth stating: every scripture on the site is NKJV and is pulled from
+    a licensed source rather than copied from a verse site. Quoting scripture is a licensing
+    question, not a copy and paste one.
+identity:
+  note: >
+    The logo, the Imperial Purple and the Gold were theirs and were already running across
+    print. The work was turning two brand colours into a system that survives contact with a
+    screen. Gold at brand strength holds on a deep purple ground, 5.43 to 1, but drops to 2.82
+    on the ivory sections, which fails accessibility outright. So the palette carries two inks
+    of the same hue: a lighter gold for dark grounds at 9.50, and a deeper one for light. The
+    brand colours are never edited, they are resolved per context.
+  palette:
+    - { name: Imperial Purple, hex: "#3B1D5C" }
+    - { name: Purple Deep, hex: "#28103D" }
+    - { name: Gold, hex: "#B08D2B" }
+    - { name: Gold on dark, hex: "#E0BE60" }
+    - { name: Gold on light, hex: "#7A5F12" }
+    - { name: Ivory, hex: "#F7F2EC" }
+  type:
+    - Outfit for display
+    - Instrument Sans for body and controls
+    - Instrument Serif for scripture and pull quotes
 shots:
   - src: /img/syndei-embassy-full-960.webp
     w: 960
@@ -65,10 +137,6 @@ decisions:
       The primary nav runs vertically down the right-hand side rather than across the top. That frees the full width for the display type and
       the portrait. It is the detail a visitor is most likely to remember.
 pending:
-  - "04 The brief: what the church came to you with"
-  - "05 The challenge: what was in place before, and its cost"
-  - "06 Strategy and direction: the central insight, and what you rejected"
-  - "07 Identity and design system: logo rules, palette values, type specimen"
   - "10 Outcome: what changed, evidenced only"
   - "11 Client quote: approved, verbatim"
 ---
