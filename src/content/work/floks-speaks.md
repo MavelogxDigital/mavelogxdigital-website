@@ -155,19 +155,25 @@ decisions:
       and the eyebrow. The restraint keeps it feeling like a record sleeve, not a church bulletin.
 outcome:
   - >
-    He is getting booked. Enquiries arrive through the site rather than through a direct
-    message, which is the difference between a request he might miss and one that waits
-    for him in one place.
+    He is getting booked through the site. Since launch the contact form has brought in
+    church programmes for November and December 2026 and a run of wedding engagements.
+    That is the difference between a request he might miss in a message thread and one
+    that waits for him in one place.
   - >
     He publishes without us. Episodes go up through his own editor and out through his own
     feed, and the six platforms carry them as they always did.
   - >
-    The merchandise has somewhere to live and has started selling. Ordering still runs
-    through WhatsApp while the shop is finished, so that leg has not moved yet. Booking has.
+    The merchandise has somewhere to live and is selling. Ordering still runs through
+    WhatsApp while the shop is finished, so that leg has not moved yet. Booking has.
   - >
     He owns his feed, his audio, his domain and his words. He publishes without asking
     anyone.
-pending:
-  - "10 Outcome: written from Felix's account. Nothing is confirmed in writing yet, so no metrics block."
-  - "11 Client quote: Felix's own words. Permission to publish is granted, the sentence itself is still outstanding."
+quote:
+  text: >
+    By providing a centralized, permanent repository for my creative content, the website
+    ensures global accessibility beyond the limitations of social media. This initiative
+    serves as a strategic investment in my long-term professional legacy.
+  name: Felix Lokko
+  role: Floks Speaks, spoken-word artist
+pending: []
 ---
