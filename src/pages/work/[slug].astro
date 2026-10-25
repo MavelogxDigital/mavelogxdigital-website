@@ -8,6 +8,7 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import Stat from '../../components/Stat.astro';
 import Testimonial from '../../components/Testimonial.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import ReadAloud from '../../components/ReadAloud.astro';
 
 export async function getStaticPaths() {
   const all = (await getCollection('work', (e) => !e.data.draft))
@@ -51,6 +52,10 @@ const isDev = import.meta.env.DEV;
 
   {/* ---------- 03 LEAD ---------- */}
   <section class="container"><p class="cs-lead rv">{d.lead}</p></section>
+
+  <section class="container">
+    <ReadAloud target=".cs-block, .cs-decisions, .cs-outcome" label="Listen to this case study" />
+  </section>
 
   {/* ---------- 04 THE BRIEF ---------- */}
   {d.brief && (
@@ -147,7 +152,7 @@ const isDev = import.meta.env.DEV;
   {d.outcome && (
     <section class="container cs-block rv">
       <h2>Outcome</h2>
-      {d.outcome.map((para) => <p>{para}</p>)}
+      <div class="cs-outcome">{d.outcome.map((para) => <p>{para}</p>)}</div>
       {d.metrics && d.metrics.length > 0 && (
         <div class="cs-metrics">{d.metrics.map((m) => <Stat figure={m.figure} label={m.label} />)}</div>
       )}

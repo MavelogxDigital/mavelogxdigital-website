@@ -98,8 +98,12 @@
 }
 
 /* ---- 09  Testimonial ------------------------------------------------ */
-.quote{border-left:2px solid var(--coral);padding-left:var(--s-4);
-  display:grid;gap:var(--s-3)}
+/* No rule down the side. At 478px it was the longest line on the site and it
+   earned nothing: the serif italic, the stars and the attribution already say
+   testimonial. Owner decision, 25 Oct 2026, supersedes 6.5. The shorter rules
+   on blockquotes, key decisions and service notes stay: at 50 to 151px they
+   are conventional markers, not long lines. */
+.quote{display:grid;gap:var(--s-3)}
 .quote__stars{display:flex;gap:3px;color:var(--amber-text)}
 .quote__text{font-family:var(--ff-serif);font-size:var(--fs-quote);
   font-style:italic;line-height:1.42}
@@ -221,6 +225,45 @@
   left:0;right:0;bottom:6px;height:2px;background:var(--coral)}
 .nav__panel-cta{margin-top:var(--s-3);justify-content:center}
 @media (min-width:1000px){ .nav__panel{display:none} }
+
+/* ===========================================================
+   Read aloud (v2.2). Browser speech, so the control must look native to
+   the page and disappear entirely where the API is missing.
+   =========================================================== */
+.ra{display:flex;align-items:center;flex-wrap:wrap;gap:var(--s-2);
+  margin-block:var(--s-4);max-width:var(--reading)}
+.ra[hidden]{display:none}
+.ra__btn{display:inline-flex;align-items:center;gap:10px;
+  min-height:44px;padding:0 20px;cursor:pointer;
+  background:var(--bg-card);color:var(--text-1);
+  border:1px solid var(--border);border-radius:var(--r-full);
+  font-size:var(--fs-small);font-weight:600;
+  transition:border-color var(--t-fast),background var(--t-fast)}
+.ra__btn:hover{border-color:var(--teal-text)}
+.ra__icon{display:grid;place-items:center;width:16px;height:16px;color:var(--teal-text)}
+.ra__pause{display:none}
+.ra[data-state="playing"] .ra__play{display:none}
+.ra[data-state="playing"] .ra__pause{display:block}
+.ra__stop{display:grid;place-items:center;width:44px;height:44px;cursor:pointer;
+  background:none;color:var(--text-2);
+  border:1px solid var(--border);border-radius:var(--r-full);
+  transition:color var(--t-fast),border-color var(--t-fast)}
+.ra__stop:hover{color:var(--text-1);border-color:var(--text-2)}
+.ra__stop[hidden]{display:none}
+.ra__status{flex:1 1 100%;order:3;margin:0;
+  color:var(--text-2);font-size:var(--fs-eyebrow);letter-spacing:.06em}
+.ra__status:empty{display:none}
+.ra__track{flex:1 1 100%;order:4;height:2px;border-radius:2px;
+  background:var(--border);overflow:hidden}
+.ra[data-state="idle"] .ra__track{opacity:0}
+.ra__fill{display:block;height:100%;width:0;background:var(--teal-text);
+  transition:width var(--t-base) linear}
+@media (prefers-reduced-motion:reduce){ .ra__fill{transition:none} }
+/* The block being spoken. Deliberately faint: it follows the voice, it does
+   not compete with it. */
+.ra-now{background:color-mix(in srgb, var(--teal-text) 12%, transparent);
+  border-radius:var(--r-sm);
+  box-shadow:0 0 0 6px color-mix(in srgb, var(--teal-text) 12%, transparent)}
 
 /* ===========================================================
    Tagline lockup. Logotype, documented exception to 6.2.

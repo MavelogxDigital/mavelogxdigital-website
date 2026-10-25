@@ -1,0 +1,134 @@
+---
+/** Read aloud, Build Bible v2.2 addition, 25 Oct 2026.
+ *
+ *  Uses the browser's own speechSynthesis. No third-party script, no hosted
+ *  audio, no cost, which is why it satisfies 11.6's no-dependency rule.
+ *
+ *  Four constraints shape the implementation:
+ *  1. Chrome stops a long utterance after roughly 15 seconds, so the text is
+ *     spoken one block at a time rather than handed over in one piece.
+ *  2. iOS needs a user gesture to start and allows one queue, so nothing
+ *     autoplays and a second player cancels the first.
+ *  3. Voices load asynchronously, so selection waits for voiceschanged.
+ *  4. Where the API is missing the control removes itself. A dead button is
+ *     worse than no button.
+ */
+interface Props {
+  target: string;         // selector for the content root to read
+  label?: string;         // idle label
+}
+const { target, label = 'Listen to this article' } = Astro.props;
+---
+<div class="ra" data-target={target} hidden>
+  <button class="ra__btn" type="button" aria-describedby="ra-status">
+    <span class="ra__icon" aria-hidden="true">
+      <svg class="ra__play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg class="ra__pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z"/>
+      </svg>
+    </span>
+    <span class="ra__label">{label}</span>
+  </button>
+
+  <button class="ra__stop" type="button" aria-label="Stop reading" hidden>
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+      <rect x="6" y="6" width="12" height="12" rx="2"/>
+    </svg>
+  </button>
+
+  <p class="ra__status" id="ra-status" role="status" aria-live="polite"></p>
+  <div class="ra__track" aria-hidden="true"><span class="ra__fill"></span></div>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('.ra');
+  const synth = typeof window !== 'undefined' ? window.speechSynthesis : undefined;
+
+  if (root && synth) {
+    root.hidden = false;
+
+    const btn    = root.querySelector<HTMLButtonElement>('.ra__btn')!;
+    const stopBtn= root.querySelector<HTMLButtonElement>('.ra__stop')!;
+    const labelEl= root.querySelector<HTMLElement>('.ra__label')!;
+    const status = root.querySelector<HTMLElement>('.ra__status')!;
+    const fill   = root.querySelector<HTMLElement>('.ra__fill')!;
+    const idle   = labelEl.textContent || 'Listen';
+
+    /* target may name several containers, because a case study's prose is
+       split across sections rather than held in one body. */
+    const scopes = [...document.querySelectorAll<HTMLElement>(root.dataset.target || '')];
+    const blocks = scopes.flatMap((sc) =>
+      [...sc.querySelectorAll<HTMLElement>('h2, h3, p, li, blockquote')]
+        .filter((el) => !el.closest('.ra') && (el.textContent || '').trim().length > 1));
+
+    if (!blocks.length) { root.hidden = true; }
+
+    let i = 0;
+    let voice: SpeechSynthesisVoice | null = null;
+
+    // UK English throughout, to match the written voice. Falls back to any
+    // English voice, then to whatever the device offers.
+    const pickVoice = () => {
+      const all = synth.getVoices();
+      if (!all.length) return;
+      voice = all.find((v) => v.lang === 'en-GB')
+           || all.find((v) => v.lang.startsWith('en'))
+           || all[0];
+    };
+    pickVoice();
+    synth.addEventListener('voiceschanged', pickVoice);
+
+    const paint = (state: 'idle' | 'playing' | 'paused') => {
+      root.dataset.state = state;
+      labelEl.textContent = state === 'playing' ? 'Pause'
+                          : state === 'paused'  ? 'Resume'
+                          : idle;
+      stopBtn.hidden = state === 'idle';
+      fill.style.width = state === 'idle' ? '0%'
+                       : Math.round((i / blocks.length) * 100) + '%';
+      status.textContent = state === 'idle' ? ''
+        : `${state === 'paused' ? 'Paused' : 'Reading'} section ${Math.min(i + 1, blocks.length)} of ${blocks.length}`;
+    };
+
+    const clearMark = () => blocks.forEach((b) => b.classList.remove('ra-now'));
+
+    const speakFrom = (n: number) => {
+      if (n >= blocks.length) { stop(); return; }
+      i = n;
+      clearMark();
+      blocks[i].classList.add('ra-now');
+      const u = new SpeechSynthesisUtterance((blocks[i].textContent || '').trim());
+      if (voice) { u.voice = voice; u.lang = voice.lang; }
+      u.rate = 1; u.pitch = 1;
+      u.onend = () => { if (root.dataset.state === 'playing') speakFrom(i + 1); };
+      u.onerror = () => stop();
+      synth.speak(u);
+      paint('playing');
+    };
+
+    function stop() {
+      synth.cancel();
+      clearMark();
+      i = 0;
+      paint('idle');
+    }
+
+    btn.addEventListener('click', () => {
+      const state = root.dataset.state;
+      if (state === 'playing') { synth.pause(); paint('paused'); return; }
+      if (state === 'paused')  { synth.resume(); paint('playing'); return; }
+      synth.cancel();          // one queue per device: never stack two readers
+      speakFrom(0);
+    });
+
+    stopBtn.addEventListener('click', stop);
+
+    // Leaving the page must not keep a voice running in a background tab.
+    addEventListener('pagehide', stop);
+    addEventListener('beforeunload', stop);
+
+    paint('idle');
+  }
+</script>

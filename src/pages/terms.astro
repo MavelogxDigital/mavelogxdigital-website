@@ -4,12 +4,14 @@
  *  current one, per defect 12.2. Edit here from now on. */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
+import ReadAloud from '../components/ReadAloud.astro';
 ---
 <BaseLayout page="" title="Terms of Service | MavelogxDigital" description="The terms governing MavelogxDigital services, project agreements, fees, intellectual property and liability.">
   <section class="section container">
     <Eyebrow>Legal</Eyebrow>
     <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">Terms of Service</h1>
-    <div class="legal" style="margin-top:var(--s-5)">
+    <ReadAloud target=".legal" label="Listen to this page" />
+      <div class="legal" style="margin-top:var(--s-5)">
       <p class="legal__meta">Effective Date: May 2026 • MavelogxDigital, Toronto, Ontario, Canada • Governing Law: Province of Ontario, Canada</p>
       <h2>1. Agreement to Terms</h2>
       <p>By accessing our website or engaging MavelogxDigital for any service, you ("Client") agree to be legally bound by these Terms. These Terms constitute a binding agreement between you and MavelogxDigital ("Agency," "we," "us"). If you do not agree, do not use our website or services.</p>
