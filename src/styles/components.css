@@ -97,6 +97,8 @@
   .steps .step{border-top:1px solid var(--border);padding-top:var(--s-6)}
 }
 
+.quote-stack{display:grid;gap:var(--s-5);align-content:start}
+
 /* ---- 09  Testimonial ------------------------------------------------ */
 /* No rule down the side. At 478px it was the longest line on the site and it
    earned nothing: the serif italic, the stars and the attribution already say

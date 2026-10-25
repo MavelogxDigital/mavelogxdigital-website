@@ -155,15 +155,23 @@ const ALT: Record<string, string> = {
   <section class="section section--band">
     <div class="container">
       <SectionHead eyebrow="Client Voice" heading="What our clients say." />
+      {/* Felix leads: the only third-party voice here. The other two are our own
+          ventures, so they sit beside rather than above him. */}
       <div class="split-7-5">
         <Testimonial feature
-          quote="MavelogxDigital completely transformed the way we show up online. They understood our vision from day one and delivered a brand identity that truly captures who we are. The quality was outstanding."
-          name="Mavelogx Enterprise" role="Brand Identity & Web Design"
-          projectHref="/work/mavelogx-enterprise/" />
-        <Testimonial
-          quote="Working with MavelogxDigital felt like having a creative partner who genuinely cared about the mission. They helped us craft a voice and visual identity that resonates deeply with our readers. Every detail was handled with real intention and professionalism."
-          name="Mavel's Corner" role="Brand Voice & Content Strategy"
-          projectHref="/work/mavels-corner/" delay={1} />
+          quote="It has given my creative pieces a permanent home beyond my phone and social media platforms, allowing my work to remain accessible to people across the world. More than just a website, it is an investment in the legacy I hope to leave behind."
+          name="Felix Lokko" role="Floks Speaks, brand identity and web design"
+          projectHref="/work/floks-speaks/" />
+        <div class="quote-stack">
+          <Testimonial
+            quote="MavelogxDigital completely transformed the way we show up online. They understood our vision from day one and delivered a brand identity that truly captures who we are. The quality was outstanding."
+            name="Mavelogx Enterprise" role="Brand Identity & Web Design"
+            projectHref="/work/mavelogx-enterprise/" delay={1} />
+          <Testimonial
+            quote="Working with MavelogxDigital felt like having a creative partner who genuinely cared about the mission. They helped us craft a voice and visual identity that resonates deeply with our readers."
+            name="Mavel's Corner" role="Brand Voice & Content Strategy"
+            projectHref="/work/mavels-corner/" delay={2} />
+        </div>
       </div>
     </div>
   </section>

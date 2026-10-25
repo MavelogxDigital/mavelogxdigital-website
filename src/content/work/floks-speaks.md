@@ -168,12 +168,6 @@ outcome:
   - >
     He owns his feed, his audio, his domain and his words. He publishes without asking
     anyone.
-quote:
-  text: >
-    By providing a centralized, permanent repository for my creative content, the website
-    ensures global accessibility beyond the limitations of social media. This initiative
-    serves as a strategic investment in my long-term professional legacy.
-  name: Felix Lokko
-  role: Floks Speaks, spoken-word artist
-pending: []
+pending:
+  - "11 Client quote: carried on the homepage rather than here. Owner decision, 25 Oct 2026."
 ---
