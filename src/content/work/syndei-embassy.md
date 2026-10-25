@@ -16,16 +16,40 @@ lead: >
 shots:
   - src: /img/syndei-embassy-full-960.webp
     w: 960
-    h: 4159
+    h: 5144
     device: full
-    alt: The complete Syndei Embassy homepage, from the hero through service times, ministries, prayer, giving and the footer
-    caption: The full homepage, scrollable. Navigation runs down the right edge, leaving the full width to the display type and the portrait.
-  - src: /img/syndei-embassy-mobile-780.webp
+    alt: The complete Syndei Embassy homepage, from the pastor portrait hero through service times, the welcome, the vision band, the podcast, four ministries, next steps, prayer, giving and a closing invitation
+    caption: The full homepage. Every section answers either whether you would belong here or how to turn up.
+  - src: /img/syndei-embassy-home-mobile-780.webp
     w: 780
-    h: 1689
+    h: 1688
     device: mobile
-    alt: The Syndei Embassy homepage on a phone, with the WhatsApp control pinned bottom right
-    caption: Mobile. The right rail collapses to a single menu control and the WhatsApp button stays pinned, where it matters most.
+    alt: The homepage on a phone, the pastor portrait above the headline Revealing Jesus, Living bound to Him, with Plan Your Visit as the first action
+    caption: On a phone. Plan Your Visit is the first thing a hand reaches, and a WhatsApp control stays within thumb reach throughout.
+  - src: /img/syndei-embassy-ministries-1200.webp
+    w: 1200
+    h: 750
+    device: desktop
+    alt: The ministries page, Find your place among us over a photograph of the congregation, above a plan-your-visit panel covering when, where, what to expect and joining remotely
+    caption: Ministries answers the question underneath the question. When, where, what to expect, and what to do if you cannot come in person.
+  - src: /img/syndei-embassy-ministries-mobile-780.webp
+    w: 780
+    h: 1688
+    device: mobile
+    alt: The ministries page on a phone, the congregation photograph behind the heading with Plan Your Visit and Request Prayer stacked full width
+    caption: The same two actions on a phone, both full width.
+  - src: /img/syndei-embassy-spirit-word-1200.webp
+    w: 1200
+    h: 750
+    device: desktop
+    alt: The Spirit Word page, Revealing Christ, Restoring Hope over an open Bible, with Spotify, Apple Podcasts, Audible and Amazon Music buttons
+    caption: The teaching podcast, with the platforms stated plainly. A visitor can hear the church before deciding to visit it.
+  - src: /img/syndei-embassy-about-1200.webp
+    w: 1200
+    h: 750
+    device: desktop
+    alt: The about page story section, From a fast to an Embassy, a dated timeline beginning January 2015 with photographs of the early congregation
+    caption: The story as a dated timeline. A church that can show where it came from is easier to trust than one that only states what it believes.
 decisions:
   - title: Service times are a destination, not a footnote
     body: >
@@ -45,7 +69,6 @@ pending:
   - "05 The challenge: what was in place before, and its cost"
   - "06 Strategy and direction: the central insight, and what you rejected"
   - "07 Identity and design system: logo rules, palette values, type specimen"
-  - "08 The build: four or more screenshots. Full-page desktop, mobile, two interior pages."
   - "10 Outcome: what changed, evidenced only"
   - "11 Client quote: approved, verbatim"
 ---
