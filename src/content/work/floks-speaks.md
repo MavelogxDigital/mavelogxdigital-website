@@ -1,8 +1,8 @@
 ---
 client: Floks Speaks
-descriptor: Brand identity and web design for a Christ-centred spoken-word artist
+descriptor: Brand identity, website and podcast infrastructure for a Christ-centred spoken-word artist
 sector: Spoken word / faith
-services: [Brand Identity, Web Design & Development, Photography Direction]
+services: [Brand Identity, Web Design & Development, Podcast Infrastructure, Photography Direction]
 year: "2026"
 live: https://floksspeaks.org
 inHouse: false
@@ -11,8 +11,9 @@ hero: /img/floks-speaks-1280.webp
 heroAlt: The Floks Speaks homepage, the headline and a play control on the left beside studio photography of Felix Lokko at a microphone
 lead: >
   Floks Speaks is the digital home of Felix Lokko, a spoken-word artist working at the
-  intersection of faith, rhythm and everyday life. The site had to do two jobs.
-  Carry the weight of the work, and make listening the first thing a visitor does.
+  intersection of faith, rhythm and everyday life. Eight published pieces lived inside a
+  hosting platform he did not own. No address of his own, no way to publish without a
+  middleman, and no way to take a booking or sell a shirt.
 brief:
   - >
     Felix Lokko is a graphic designer and a spoken-word artist. Floks Speaks is his
@@ -36,27 +37,33 @@ challenge:
     It worked. It also meant that every episode he published went out through somebody
     else's pipe.
   - >
-    The cost of that was not technical, it was commercial. There was nowhere to put the
+    What it cost him was commercial rather than technical. There was nowhere to show the
     merchandise. There was no way for a church or a camp organiser to book him without
-    going through a direct message. An artist whose work was reaching six platforms had
+    opening a direct message. An artist whose work was reaching six platforms had
     no address of his own to send anyone to.
   - >
-    Nothing about the schedule or the commercials constrained this one, which is rarer
-    than it sounds and worth saying plainly. The constraint was technical. Moving a live
+    The project itself ran without a deadline or a spending limit. The difficulty was all
+    in the engineering. Moving a live
     podcast off a hosted anchor feed without breaking six downstream platforms is the
     kind of migration that only announces itself when it goes wrong.
 strategy:
   - >
     The decision the whole project turns on is that Floks Speaks publishes its own feed.
-    He uploads through his own CMS, the site generates the RSS, and the six platforms
-    subscribe to him rather than the other way round. He already owned the audience. He
-    was renting the pipe. The site is what ended that.
+    He uploads through his own editor, the site generates the RSS, and the six platforms
+    subscribe to him rather than the other way round. The feed is served from his own
+    domain, at floksspeaks.org/feed.xml, which is the whole claim in one URL. He already
+    owned the audience. He was renting the pipe. The site is what ended that.
   - >
-    Everything else follows from it. A content studio he publishes from without us. Audio
-    hosted somewhere that does not meter him for being listened to. A static front end that
-    stays fast on a mid-range Android phone in Accra, which is what his audience is actually
-    holding. The six platforms stay exactly where they are, still carrying him, now fed from
-    his own address.
+    Everything else follows from it. Six pages, plus a page of its own for every recording
+    and every article. A library where search and theme filtering work together. A player
+    that persists across the site, with queue playback and lock-screen controls on a phone.
+    A static front end that stays fast on a mid-range Android device in Accra, which is what
+    his audience is actually holding.
+  - >
+    The publishing side is his. He uploads audio straight from the editor, and he posts
+    episodes, articles and events himself with no developer in the loop. Audio sits on
+    storage that does not meter him for being listened to. The six platforms stay exactly
+    where they are, still carrying him, now fed from his own address.
   - >
     What we rejected was the obvious version: an embedded player pointed at the Spotify
     feed, with a site wrapped around it. It would have looked the same and shipped faster.
@@ -64,13 +71,17 @@ strategy:
     existed to fix.
   - >
     Listening is the primary action. A visitor can hear the work before they have read a
-    sentence about it, because for a spoken-word artist the recording is the argument.
+    sentence about it.
 identity:
   note: >
     The logo was his and stayed his. The work was building a palette and a type system
     around it that could carry long-form text without losing the register of a record
     sleeve. Dark ground, warm ivory text, one amber accent that does the work of a
     highlight, and a muted lilac held back for the editorial moments.
+    Both accents were measured rather than assumed, and both failed where it mattered.
+    Amber is a comfortable 9.03 to 1 on the near-black ground and collapses to 1.79 on
+    the ivory sections. Lilac does the same, 8.28 down to 1.95. So the light sections
+    carry darker inks of the same hues instead, and the brand colours stay untouched.
   palette:
     - { name: Midnight Black, hex: "#111116" }
     - { name: Charcoal, hex: "#22232B" }
@@ -128,6 +139,13 @@ decisions:
       checked against the archived original feed first, eight for eight, and only then did
       the redirect go live. It was held open for thirty days so every directory had time
       to follow.
+  - title: The booking form asks what makes a booking answerable
+    body: >
+      An enquiry starts by naming itself: booking, collaboration, media, or general. A
+      booking then asks for the date and the venue before the message. That is the
+      difference between a thread that takes four exchanges to become useful and one that
+      can be answered in a single reply. Bookings were the thing a direct message handled
+      worst, so the form is built around them.
   - title: The play control comes before the navigation
     body: >
       The hero gives a featured track its own play control with the title and runtime visible
@@ -149,12 +167,14 @@ outcome:
     message, which is the difference between a request he might miss and one that waits
     for him in one place.
   - >
-    He publishes without us. Episodes go up through his own CMS and out through his own
-    feed, and the six platforms carry them as they always did. The handover worked, which
-    is the only real test of a CMS build.
+    He publishes without us. Episodes go up through his own editor and out through his own
+    feed, and the six platforms carry them as they always did.
   - >
-    The merchandise sells. It had nowhere to live before this, which was the clearest of
-    the costs of not having an address of his own.
+    The merchandise has somewhere to live and has started selling. Ordering still runs
+    through WhatsApp while the shop is finished, so that leg has not moved yet. Booking has.
+  - >
+    He owns his feed, his audio, his domain and his words. He publishes without asking
+    anyone.
 pending:
   - "10 Outcome: written from Felix's account. Nothing is confirmed in writing yet, so no metrics block."
   - "11 Client quote: Felix's own words. Permission to publish is granted, the sentence itself is still outstanding."
