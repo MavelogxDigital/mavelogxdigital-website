@@ -58,15 +58,24 @@ const { target, label = 'Listen to this article' } = Astro.props;
 
     /* target may name several containers, because a case study's prose is
        split across sections rather than held in one body. */
+    const BLOCK = 'h2, h3, p, li, blockquote';
     const scopes = [...document.querySelectorAll<HTMLElement>(root.dataset.target || '')];
+    // A scope can be a block in its own right, which is how the standfirst,
+    // a single paragraph, gets read before the body.
     const blocks = scopes.flatMap((sc) =>
-      [...sc.querySelectorAll<HTMLElement>('h2, h3, p, li, blockquote')]
+      (sc.matches(BLOCK) ? [sc] : [...sc.querySelectorAll<HTMLElement>(BLOCK)])
         .filter((el) => !el.closest('.ra') && (el.textContent || '').trim().length > 1));
 
     if (!blocks.length) { root.hidden = true; }
 
     let i = 0;
     let voice: SpeechSynthesisVoice | null = null;
+    // Set when we cancel on purpose, so our own cancel is not mistaken for
+    // the system cutting us off.
+    let cancelling = false;
+    // Set when the system cut us off, typically a screen lock. The position
+    // is kept and Resume restarts the interrupted block.
+    let interrupted = false;
 
     // UK English throughout, to match the written voice. Falls back to any
     // English voice, then to whatever the device offers.
@@ -80,7 +89,7 @@ const { target, label = 'Listen to this article' } = Astro.props;
     pickVoice();
     synth.addEventListener('voiceschanged', pickVoice);
 
-    const paint = (state: 'idle' | 'playing' | 'paused') => {
+    const paint = (state: 'idle' | 'playing' | 'paused', note?: string) => {
       root.dataset.state = state;
       labelEl.textContent = state === 'playing' ? 'Pause'
                           : state === 'paused'  ? 'Resume'
@@ -89,6 +98,7 @@ const { target, label = 'Listen to this article' } = Astro.props;
       fill.style.width = state === 'idle' ? '0%'
                        : Math.round((i / blocks.length) * 100) + '%';
       status.textContent = state === 'idle' ? ''
+        : note ? note
         : `${state === 'paused' ? 'Paused' : 'Reading'} section ${Math.min(i + 1, blocks.length)} of ${blocks.length}`;
     };
 
@@ -103,13 +113,28 @@ const { target, label = 'Listen to this article' } = Astro.props;
       if (voice) { u.voice = voice; u.lang = voice.lang; }
       u.rate = 1; u.pitch = 1;
       u.onend = () => { if (root.dataset.state === 'playing') speakFrom(i + 1); };
-      u.onerror = () => stop();
+      u.onerror = (e) => {
+        if (cancelling) return;
+        // A screen lock or the OS taking the audio arrives as an interrupted
+        // or cancelled utterance. Hold the place rather than starting over.
+        if (e.error === 'interrupted' || e.error === 'canceled') { holdPlace(); return; }
+        stop();
+      };
+      interrupted = false;
       synth.speak(u);
       paint('playing');
     };
 
+    const quietCancel = () => { cancelling = true; synth.cancel(); cancelling = false; };
+
+    function holdPlace() {
+      interrupted = true;
+      paint('paused', 'Paused when the screen locked. Tap Resume to carry on.');
+    }
+
     function stop() {
-      synth.cancel();
+      quietCancel();
+      interrupted = false;
       clearMark();
       i = 0;
       paint('idle');
@@ -117,17 +142,41 @@ const { target, label = 'Listen to this article' } = Astro.props;
 
     btn.addEventListener('click', () => {
       const state = root.dataset.state;
-      if (state === 'playing') { synth.pause(); paint('paused'); return; }
-      if (state === 'paused')  { synth.resume(); paint('playing'); return; }
-      synth.cancel();          // one queue per device: never stack two readers
+      /* Pause and resume are built on cancel and restart, never on the API's
+         own pause() and resume(). Those are unreliable: on Android Chrome
+         resume() often does nothing, and desktop Chrome drops a paused
+         utterance after about fifteen seconds. Resume restarts the current
+         paragraph from its first word, the same path a screen lock takes. */
+      if (state === 'playing') {
+        quietCancel();
+        interrupted = false;
+        paint('paused');
+        return;
+      }
+      if (state === 'paused') { quietCancel(); speakFrom(i); return; }
+      quietCancel();           // one queue per device: never stack two readers
       speakFrom(0);
     });
 
     stopBtn.addEventListener('click', stop);
 
-    // Leaving the page must not keep a voice running in a background tab.
-    addEventListener('pagehide', stop);
-    addEventListener('beforeunload', stop);
+    // Some browsers drop the queue on lock without firing any error. On return,
+    // a reader that thinks it is playing but has nothing queued was cut off.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible') return;
+      if (root.dataset.state === 'playing' && !synth.speaking && !synth.pending) {
+        quietCancel();
+        holdPlace();
+      }
+    });
+
+    // Real navigation away: stop. A page restored from the back-forward cache
+    // comes back paused at its place rather than reset.
+    addEventListener('pagehide', (e) => {
+      if ((e as PageTransitionEvent).persisted && root.dataset.state !== 'idle') {
+        quietCancel(); holdPlace();
+      } else { stop(); }
+    });
 
     paint('idle');
   }

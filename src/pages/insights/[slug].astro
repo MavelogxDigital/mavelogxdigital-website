@@ -53,7 +53,7 @@ const work = PROJECTS.find((x) => x.slug === d.relatedWork);
       )}
 
       <p class="art__lead">{d.lead}</p>
-      <ReadAloud target=".art__body" label="Listen to this article" />
+      <ReadAloud target=".art__lead, .art__body" label="Listen to this article" />
       <div class="art__body"><Content /></div>
 
       {(service || work) && (
