@@ -50,8 +50,7 @@ strategy:
   - >
     The decision the whole project turns on is that Floks Speaks publishes its own feed.
     He uploads through his own editor, the site generates the RSS, and the six platforms
-    subscribe to him rather than the other way round. The feed is served from his own
-    domain, at floksspeaks.org/feed.xml, which is the whole claim in one URL. He already
+    subscribe to him rather than the other way round. He already
     owned the audience. He was renting the pipe. The site is what ended that.
   - >
     Everything else follows from it. Six pages, plus a page of its own for every recording
@@ -139,13 +138,6 @@ decisions:
       checked against the archived original feed first, eight for eight, and only then did
       the redirect go live. It was held open for thirty days so every directory had time
       to follow.
-  - title: The booking form asks what makes a booking answerable
-    body: >
-      An enquiry starts by naming itself: booking, collaboration, media, or general. A
-      booking then asks for the date and the venue before the message. That is the
-      difference between a thread that takes four exchanges to become useful and one that
-      can be answered in a single reply. Bookings were the thing a direct message handled
-      worst, so the form is built around them.
   - title: The play control comes before the navigation
     body: >
       The hero gives a featured track its own play control with the title and runtime visible
