@@ -160,14 +160,19 @@
 .field--hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* ---- Nav + 14 Footer ------------------------------------------------- */
-.nav{position:sticky;top:0;z-index:90;height:64px;display:flex;align-items:center;
+.nav{position:sticky;top:0;z-index:90;display:block;
   background:var(--bg);border-bottom:1px solid var(--border);
   transition:background var(--t-base),backdrop-filter var(--t-base)}
-@media (min-width:768px){ .nav{height:72px} }
+.nav__in{height:64px}
+@media (min-width:768px){ .nav__in{height:72px} }
 .nav[data-transparent="true"]{background:transparent;border-bottom-color:transparent}
 .nav.is-scrolled{background:var(--nav-scrim);backdrop-filter:blur(12px);
   border-bottom-color:var(--border)}
-.nav__in{display:flex;align-items:center;justify-content:space-between;width:100%;gap:var(--s-2)}
+/* An open menu always needs a solid ground, including over the Home hero
+   where the bar itself is transparent. */
+.nav.is-menu-open{background:var(--bg);border-bottom-color:var(--border);
+  backdrop-filter:none}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:var(--s-2)}
 .nav__right{display:flex;align-items:center;gap:var(--s-1)}
 .nav__brand{font-size:18px;line-height:1.2;flex:none;
   display:inline-flex;align-items:center;min-height:28px}
@@ -185,37 +190,37 @@
 .nav__link[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:2px;
   height:2px;background:var(--coral)}
 .nav__burger{display:inline-flex;align-items:center;gap:8px;
-  min-height:44px;padding:0 10px;
-  background:none;border:0;cursor:pointer;color:var(--text-1)}
-.nav__burger-label{font-size:14px;font-weight:600;letter-spacing:.02em}
+  min-height:44px;padding:0 18px;
+  background:none;border:1px solid var(--border);border-radius:var(--r-full);
+  cursor:pointer;color:var(--text-1);transition:border-color var(--t-fast)}
+.nav__burger:hover{border-color:var(--text-2)}
+.nav__burger-label{font-size:15px;font-weight:600;letter-spacing:.01em}
+.nav__burger .i-close{display:none}
+.nav__burger[aria-expanded="true"] .i-open{display:none}
+.nav__burger[aria-expanded="true"] .i-close{display:block}
 @media (min-width:1000px){ .nav__burger{display:none} }
 .nav__cta{display:none}
 @media (min-width:1000px){ .nav__cta{display:inline-flex} }
-.nav__panel{position:fixed;inset:0 0 0 auto;width:min(86vw,360px);z-index:95;
-  background:var(--bg);border-left:1px solid var(--border);
-  padding:var(--s-3) var(--s-4) var(--s-4);
-  display:flex;flex-direction:column;gap:var(--s-2);
-  transform:translateX(100%);transition:transform var(--t-base) var(--ease)}
-.nav__panel[data-open="true"]{transform:none}
-/* Identity and a way out, at the top of the panel. */
-.nav__panel-top{display:flex;align-items:center;justify-content:space-between;
-  min-height:44px;margin-bottom:var(--s-3);
-  border-bottom:1px solid var(--border);padding-bottom:var(--s-2)}
-.nav__panel-brand{font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--text-1)}
-.nav__close{display:grid;place-items:center;width:44px;height:44px;margin-right:-10px;
-  background:none;border:0;cursor:pointer;color:var(--text-2)}
-.nav__close:hover{color:var(--text-1)}
-.nav__panel-links{display:flex;flex-direction:column}
-.nav__panel-links a{text-decoration:none;font-size:20px;font-weight:600;
-  padding:12px 0;color:var(--text-2);position:relative;
+/* Expands in the flow of the header, so the page below is pushed down rather
+   than covered. The 0fr to 1fr row is what lets an auto height animate. */
+.nav__panel{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows var(--t-base) var(--ease)}
+.nav__panel[data-open="true"]{grid-template-rows:1fr}
+.nav__panel-clip{overflow:hidden;visibility:hidden;
+  transition:visibility var(--t-base)}
+.nav__panel[data-open="true"] .nav__panel-clip{visibility:visible}
+.nav__panel-in{display:flex;flex-direction:column;align-items:start;
+  padding-block:var(--s-3) var(--s-4)}
+.nav__panel-links{display:flex;flex-direction:column;align-items:start;width:100%}
+.nav__panel-links a{text-decoration:none;font-size:22px;font-weight:600;
+  padding:12px 0;color:var(--text-2);position:relative;width:fit-content;
   transition:color var(--t-fast)}
 .nav__panel-links a:hover{color:var(--text-1)}
 .nav__panel-links a[aria-current="page"]{color:var(--text-1)}
 .nav__panel-links a[aria-current="page"]::after{content:"";position:absolute;
-  left:0;bottom:8px;width:22px;height:2px;background:var(--coral)}
-/* The CTA follows Contact directly, rather than being pinned to the bottom
-   of the panel. Owner decision, 24 Oct 2026, supersedes 5.2. */
-.nav__panel .btn{margin-top:var(--s-3);justify-content:center}
+  left:0;right:0;bottom:6px;height:2px;background:var(--coral)}
+.nav__panel-cta{margin-top:var(--s-3);justify-content:center}
+@media (min-width:1000px){ .nav__panel{display:none} }
 
 .footer{background:var(--bg);border-top:1px solid var(--border);padding-block:var(--s-6)}
 .footer__top{display:grid;gap:var(--s-5)}
