@@ -4,8 +4,13 @@ export const SITE = {
   tagline: 'From Idea To Impact',
   url: 'https://mavelogxdigital.com',          // non-www, per Appendix F decision
   email: 'MavelogxDigital@gmail.com',
-  phone: '+233 24 749 3949',
-  phoneHref: 'tel:+233247493949',
+  /* Phone and WhatsApp are two different numbers and two different channels.
+     Owner decision, 24 Oct 2026, supersedes the single-number entry in 11.4
+     and closes defect 12.2: the Canadian line is the voice number, the
+     Ghanaian line is WhatsApp only. Never label one with the other. */
+  phone: '+1 (437) 259-1010',
+  phoneHref: 'tel:+14372591010',
+  whatsappNumber: '+233 24 749 3949',
   whatsapp: 'https://wa.me/233247493949',
   locations: 'Toronto, Canada & Accra, Ghana',
 } as const;

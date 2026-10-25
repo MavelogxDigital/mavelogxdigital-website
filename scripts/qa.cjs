@@ -47,6 +47,12 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
        return {fg:c.color,bg,size:parseFloat(c.fontSize),w:+c.fontWeight,txt:(e.textContent||'').trim().slice(0,28)};
      }).filter(x=>x.txt);
      return {t,hs:hs.length,skip,small,labels,txt,
+       // The voice line and the WhatsApp line are different numbers. Labelling
+       // one with the other is the failure this guards (11.4, as amended).
+       miswired:[...document.querySelectorAll('a[href^="https://wa.me/"]')]
+           .filter(a=>/437/.test(a.textContent||'')).length
+         +[...document.querySelectorAll('a[href^="tel:"]')]
+           .filter(a=>/233/.test(a.getAttribute('href')||'')).length,
        h1:document.querySelectorAll('h1').length,
        lang:document.documentElement.lang,
        skiplink:!!document.querySelector('.skip'),
@@ -70,7 +76,8 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
    if(d.small) fails.push(`${tag}: ${d.small} target under 24px (WCAG 2.2)`);
    if(d.emptyhref) fails.push(`${tag}: ${d.emptyhref} empty href`);
    if(/[↗→←]|—|–/.test(d.t)) fails.push(`${tag}: arrow or dash in text`);
-   if(/budget|affordab|price tag|without the premium|437/i.test(d.t)) fails.push(`${tag}: retired phrase`);
+   if(/budget|affordab|price tag|without the premium/i.test(d.t)) fails.push(`${tag}: retired phrase`);
+   if(d.miswired) fails.push(`${tag}: ${d.miswired} contact link labelled with the wrong number`);
    if(errs.length) fails.push(`${tag}: JS error ${errs[0].slice(0,60)}`);
    for(const x of d.txt){ checks++;
      const big=x.size>=24||(x.size>=18.66&&x.w>=700); const need=big?3:4.5;
