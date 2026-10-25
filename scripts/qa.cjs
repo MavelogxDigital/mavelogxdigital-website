@@ -50,7 +50,7 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
        // The voice line and the WhatsApp line are different numbers. Labelling
        // one with the other is the failure this guards (11.4, as amended).
        miswired:[...document.querySelectorAll('a[href^="https://wa.me/"]')]
-           .filter(a=>/437/.test(a.textContent||'')).length
+           .filter(a=>/\d{3}/.test(a.textContent||'')).length
          +[...document.querySelectorAll('a[href^="tel:"]')]
            .filter(a=>/233/.test(a.getAttribute('href')||'')).length,
        h1:document.querySelectorAll('h1').length,
@@ -77,7 +77,7 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
    if(d.emptyhref) fails.push(`${tag}: ${d.emptyhref} empty href`);
    if(/[↗→←]|—|–/.test(d.t)) fails.push(`${tag}: arrow or dash in text`);
    if(/budget|affordab|price tag|without the premium/i.test(d.t)) fails.push(`${tag}: retired phrase`);
-   if(d.miswired) fails.push(`${tag}: ${d.miswired} contact link labelled with the wrong number`);
+   if(d.miswired) fails.push(`${tag}: ${d.miswired} contact link showing a number it should not`);
    if(errs.length) fails.push(`${tag}: JS error ${errs[0].slice(0,60)}`);
    for(const x of d.txt){ checks++;
      const big=x.size>=24||(x.size>=18.66&&x.w>=700); const need=big?3:4.5;

@@ -2,7 +2,7 @@
 client: Floks Speaks
 descriptor: Brand identity and web design for a Christ-centred spoken-word artist
 sector: Spoken word / faith
-services: [Brand Identity, Web Design, Content]
+services: [Brand Identity, Web Design & Development, Content]
 year: "2026"
 live: https://floksspeaks.org
 inHouse: false
@@ -13,6 +13,74 @@ lead: >
   Floks Speaks is the digital home of Felix Lokko, a spoken-word artist working at the
   intersection of faith, rhythm and everyday life. The site had to do two jobs.
   Carry the weight of the work, and make listening the first thing a visitor does.
+brief:
+  - >
+    Felix Lokko is a graphic designer and a spoken-word artist. Floks Speaks is his
+    Christian spoken-word podcast, running since September 2021. Words that cut through
+    the noise, is how he puts it. Each episode is a declaration, a reminder, and a call
+    to return to the one truth that never changes.
+  - >
+    The audience is Christian youth and young adults, church communities, and the people
+    who book speakers for youth camps, schools and weddings. Mostly Ghana and the wider
+    continent, with a diaspora audience that finds him through the podcast platforms.
+    They need to hear the work before they will trust it, which puts listening ahead of
+    reading on every screen.
+  - >
+    He did not come asking for a brand. He came asking for a home. The podcast already
+    existed and was already distributed. What he wanted was a place that was his.
+challenge:
+  - >
+    Before this he had social accounts and six podcast platforms, and that was the whole
+    estate. We had built that distribution for him: a Spotify for Creators anchor feed
+    pushing out to Spotify, Apple Podcasts, Amazon Music, iHeartRadio, Deezer and Audible.
+    It worked. It also meant that every episode he published went out through somebody
+    else's pipe.
+  - >
+    The cost of that was not technical, it was commercial. There was nowhere to put the
+    merchandise. There was no way for a church or a camp organiser to book him without
+    going through a direct message. An artist whose work was reaching six platforms had
+    no address of his own to send anyone to.
+  - >
+    Nothing about the schedule or the commercials constrained this one, which is rarer
+    than it sounds and worth saying plainly. The constraint was technical. Moving a live
+    podcast off a hosted anchor feed without breaking six downstream platforms is the
+    kind of migration that only announces itself when it goes wrong.
+strategy:
+  - >
+    The decision the whole project turns on is that Floks Speaks publishes its own feed.
+    He uploads through his own CMS, the site generates the RSS, and the six platforms
+    subscribe to him rather than the other way round. He already owned the audience. He
+    was renting the pipe. The site is what ended that.
+  - >
+    Everything else follows from it. Sanity Studio so he can publish without us. Cloudflare
+    R2 so the audio sits somewhere that will not meter him for being listened to. Next.js
+    on Netlify so the pages are fast on a mid-range Android phone in Accra, which is what
+    his audience is actually holding. The six platforms stay exactly where they are, still
+    carrying him, now fed from his own address.
+  - >
+    What we rejected was the obvious version: an embedded player pointed at the Spotify
+    feed, with a site wrapped around it. It would have looked the same and shipped faster.
+    It would also have left the dependency untouched, which was the one thing the project
+    existed to fix.
+  - >
+    Listening is the primary action. A visitor can hear the work before they have read a
+    sentence about it, because for a spoken-word artist the recording is the argument.
+identity:
+  note: >
+    The logo was his and stayed his. The work was building a palette and a type system
+    around it that could carry long-form text without losing the register of a record
+    sleeve. Dark ground, warm ivory text, one amber accent that does the work of a
+    highlight, and a muted lilac held back for the editorial moments.
+  palette:
+    - { name: Midnight Black, hex: "#111116" }
+    - { name: Charcoal, hex: "#22232B" }
+    - { name: Warm Ivory, hex: "#F2EDE5" }
+    - { name: Vibrant Amber, hex: "#F2A33A" }
+    - { name: Muted Lilac, hex: "#B5A5CE" }
+  type:
+    - Sora for display headlines
+    - Playfair Display for poetry and editorial titles
+    - Inter for navigation, body and metadata
 shots:
   - src: /img/floks-speaks-full-960.webp
     w: 960
@@ -43,11 +111,7 @@ decisions:
       One warm accent against a dark ground, used for the headline emphasis, the play control
       and the eyebrow. The restraint keeps it feeling like a record sleeve, not a church bulletin.
 pending:
-  - "04 The brief: what Felix came to you with, in his words"
-  - "05 The challenge: what was in place before, and its cost"
-  - "06 Strategy and direction: the central insight, and what you rejected"
-  - "07 Identity and design system: logo rules, palette values, type specimen"
-  - "08 The build: four or more screenshots. Full-page desktop, mobile, two interior pages."
-  - "10 Outcome: what changed, evidenced only"
-  - "11 Client quote: approved, verbatim"
+  - "08 The build: two more captures. The Listen page and one other interior page, desktop and mobile."
+  - "10 Outcome: what changed since launch, evidenced only"
+  - "11 Client quote: Felix's words, approved and verbatim"
 ---
