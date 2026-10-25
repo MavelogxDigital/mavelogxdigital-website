@@ -8,7 +8,6 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import Stat from '../../components/Stat.astro';
 import Testimonial from '../../components/Testimonial.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { SITE } from '../../site';
 
 export async function getStaticPaths() {
   const all = (await getCollection('work', (e) => !e.data.draft))
@@ -155,17 +154,21 @@ const isDev = import.meta.env.DEV;
     </section>
   )}
 
-  {/* ---------- 11 CLIENT QUOTE + NEXT ---------- */}
+  {/* ---------- 11 CLIENT QUOTE ---------- */}
   {d.quote && (
     <section class="section container">
       <div style="max-width:var(--reading)">
         <Testimonial feature quote={d.quote.text} name={d.quote.name} role={d.quote.role} />
       </div>
-      {d.live && (
-        <p style="margin-top:var(--s-4)">
-          <a class="btn btn--ghost" href={d.live} rel="noopener">Visit the live site</a>
-        </p>
-      )}
+    </section>
+  )}
+
+  {/* The live-site CTA is the end-of-page conversion and does not depend on a
+      quote existing. It used to be nested inside the block above, so it never
+      rendered on any case study. */}
+  {d.live && (
+    <section class="container">
+      <p><a class="btn btn--ghost" href={d.live} rel="noopener">Visit the live site</a></p>
     </section>
   )}
 

@@ -78,6 +78,11 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
    if(/[↗→←]|—|–/.test(d.t)) fails.push(`${tag}: arrow or dash in text`);
    if(/budget|affordab|price tag|without the premium/i.test(d.t)) fails.push(`${tag}: retired phrase`);
    if(d.miswired) fails.push(`${tag}: ${d.miswired} contact link showing a number it should not`);
+   // Case studies describe what was built, not the plumbing it was built on.
+   // Naming a client's host, CMS, form handler or framework helps a competitor
+   // and a reconnaissance scan, and tells a prospect nothing. Owner rule, 25 Oct 2026.
+   {const v=d.t.match(/\b(sanity|cloudflare|next\.?js|netlify|formspree|azure|eleventy|decap|firebase|nunjucks|wordpress)\b/i);
+    if(v) fails.push(`${tag}: names infrastructure in copy ("${v[0]}")`);}
    if(errs.length) fails.push(`${tag}: JS error ${errs[0].slice(0,60)}`);
    for(const x of d.txt){ checks++;
      const big=x.size>=24||(x.size>=18.66&&x.w>=700); const need=big?3:4.5;

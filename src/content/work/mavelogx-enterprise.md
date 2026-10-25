@@ -2,7 +2,7 @@
 client: Mavelogx Enterprise
 descriptor: Brand identity, web design and strategy for a B2B sourcing business
 sector: In-house venture, B2B procurement and logistics
-services: [Brand Identity, Web Design, Strategy]
+services: [Web Design & Development, Brand Identity]
 year: "2026"
 live: https://mavelogx.com
 inHouse: true
@@ -10,7 +10,8 @@ order: 3
 hero: /img/mavelogx-enterprise-1280.webp
 heroAlt: The Mavelogx Enterprise homepage, "Your Trusted Source" beside a panel of sourcing capabilities
 lead: >
-  Mavelogx Enterprise connects businesses to verified suppliers from China to Ghana and Canada.
+  Mavelogx Enterprise connects businesses and individuals to verified suppliers across three
+  trade corridors: China to Ghana, China to Canada, and Canada to Ghana.
   The problem a procurement site solves is not persuasion but trust. A buyer sending money
   abroad needs to know what happens, in what order, and who is accountable at each step.
 shots:
@@ -31,7 +32,7 @@ shots:
     h: 1688
     device: mobile
     alt: The sourcing request form on a phone, fields for name, business email, WhatsApp, country and company stacked full width
-    caption: The same form on a phone, where a buyer sourcing from a warehouse is most likely to fill it in.
+    caption: The form a buyer is most likely to fill in standing up, in a warehouse.
   - src: /img/mavelogx-enterprise-process-1200.webp
     w: 1200
     h: 750
@@ -56,12 +57,12 @@ decisions:
       "Your Trusted Source" occupies the left of the hero while a four-cell capability panel sits
       to its right. Direct China supplier access, Ghana and Canada delivery, quality control,
       end-to-end logistics. The claim and its evidence share the first screen.
-  - title: Two different buyers, two different buttons
+  - title: A returning client and a first-time buyer need different doors
     body: >
       "Submit a Sourcing Request" and "How It Works" sit side by side, and "Get a Quote" and
       "Pay Now" both appear in the header. A returning client settling an invoice and a
       first-time buyer learning the process need different doors. The header gives them both.
-  - title: Red as a signal, not decoration
+  - title: Red is reserved for the next step
     body: >
       The accent is reserved for the action words and the single emphasised line of the headline.
       On a near-black ground that keeps the next step

@@ -17,6 +17,12 @@ const { title, description, page = '', ogImage = '/og-facebook-whatsapp-linkedin
         transparentNav = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogAbs = new URL(ogImage, SITE.url).href;
+/* Share cards must declare the real size. The default card is 1200x630; a case
+   study passes its 1280x720 hero instead, and announcing 1200x630 for it made
+   every case study share card lie about its own dimensions. */
+const ogIsHero = /-1280\.(webp|jpg|png)$/.test(ogImage);
+const ogW = ogIsHero ? '1280' : '1200';
+const ogH = ogIsHero ? '720'  : '630';
 ---
 <!doctype html>
 <html lang="en">
@@ -36,8 +42,8 @@ const ogAbs = new URL(ogImage, SITE.url).href;
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogAbs} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content={ogW} />
+  <meta property="og:image:height" content={ogH} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />

@@ -2,13 +2,13 @@
 client: Floks Speaks
 descriptor: Brand identity and web design for a Christ-centred spoken-word artist
 sector: Spoken word / faith
-services: [Brand Identity, Web Design & Development, Content]
+services: [Brand Identity, Web Design & Development, Photography Direction]
 year: "2026"
 live: https://floksspeaks.org
 inHouse: false
 order: 1
 hero: /img/floks-speaks-1280.webp
-heroAlt: The Floks Speaks homepage, hero headline over studio photography of Felix Lokko at a microphone
+heroAlt: The Floks Speaks homepage, the headline and a play control on the left beside studio photography of Felix Lokko at a microphone
 lead: >
   Floks Speaks is the digital home of Felix Lokko, a spoken-word artist working at the
   intersection of faith, rhythm and everyday life. The site had to do two jobs.
@@ -52,11 +52,11 @@ strategy:
     subscribe to him rather than the other way round. He already owned the audience. He
     was renting the pipe. The site is what ended that.
   - >
-    Everything else follows from it. Sanity Studio so he can publish without us. Cloudflare
-    R2 so the audio sits somewhere that will not meter him for being listened to. Next.js
-    on Netlify so the pages are fast on a mid-range Android phone in Accra, which is what
-    his audience is actually holding. The six platforms stay exactly where they are, still
-    carrying him, now fed from his own address.
+    Everything else follows from it. A content studio he publishes from without us. Audio
+    hosted somewhere that does not meter him for being listened to. A static front end that
+    stays fast on a mid-range Android phone in Accra, which is what his audience is actually
+    holding. The six platforms stay exactly where they are, still carrying him, now fed from
+    his own address.
   - >
     What we rejected was the obvious version: an embedded player pointed at the Spotify
     feed, with a site wrapped around it. It would have looked the same and shipped faster.
@@ -93,7 +93,7 @@ shots:
     h: 1688
     device: mobile
     alt: The Floks Speaks homepage on a phone, the studio photograph above the headline with both calls to action stacked beneath
-    caption: The same hero on a phone. Photograph first, then the claim, then the play control.
+    caption: Photograph first, then the claim, then the play control.
   - src: /img/floks-speaks-listen-full-960.webp
     w: 960
     h: 2646
@@ -105,7 +105,7 @@ shots:
     h: 1688
     device: mobile
     alt: The Listen page on a phone, performance photograph cropped to a band above the heading, with the featured recording below
-    caption: The library on a phone, where most of his audience meets it.
+    caption: The library as most of his audience meets it.
   - src: /img/floks-speaks-piece-1200.webp
     w: 1200
     h: 750
@@ -119,13 +119,13 @@ shots:
     alt: The Contact page on a light ground, an enquiry type selector set to Booking above fields for name, email, event date and venue
     caption: The booking path. Enquiry type first, then the date and venue fields that make a booking answerable in one reply.
 decisions:
-  - title: Listening is the primary action, not reading
+  - title: The play control comes before the navigation
     body: >
       The hero gives a featured track its own play control with the title and runtime visible
       before any navigation. "My Real Gee", Faith, 2:18. A visitor can hear the work in one
       click rather than reading about it first, which for a spoken-word artist is the whole
       proposition.
-  - title: Photography carries the brand, not graphics
+  - title: The identity rests on original studio photography
     body: >
       The identity leans on original studio photography rather than illustration or stock.
       The hero image is the artist mid-performance, lit warm against a dark field. That sets
@@ -147,5 +147,6 @@ outcome:
     The merchandise sells. It had nowhere to live before this, which was the clearest of
     the costs of not having an address of his own.
 pending:
+  - "10 Outcome: written from Felix's account. Nothing is confirmed in writing yet, so no metrics block."
   - "11 Client quote: Felix's own words. Permission to publish is granted, the sentence itself is still outstanding."
 ---
