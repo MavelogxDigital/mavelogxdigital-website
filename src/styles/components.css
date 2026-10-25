@@ -222,6 +222,20 @@
 .nav__panel-cta{margin-top:var(--s-3);justify-content:center}
 @media (min-width:1000px){ .nav__panel{display:none} }
 
+/* ===========================================================
+   Tagline lockup. Logotype, documented exception to 6.2.
+   =========================================================== */
+.tagline{font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:0;
+  font-size:clamp(1.75rem,7vw,5rem);white-space:nowrap}
+.tagline__from{color:var(--coral)}
+.tagline__idea{color:var(--amber-text)}
+.tagline__to{color:var(--purple-text)}
+.tagline__impact{color:var(--teal-text)}
+/* Full width above the footer columns, so it holds one line at every size.
+   Inside the 2fr brand column it could not. */
+.footer__tagline{padding-bottom:var(--s-5);margin-bottom:var(--s-5);
+  border-bottom:1px solid var(--border)}
+
 .footer{background:var(--bg);border-top:1px solid var(--border);padding-block:var(--s-6)}
 .footer__top{display:grid;gap:var(--s-5)}
 @media (min-width:900px){ .footer__top{grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--s-4)} }
