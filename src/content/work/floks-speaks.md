@@ -84,40 +84,40 @@ identity:
 shots:
   - src: /img/floks-speaks-full-960.webp
     w: 960
-    h: 4034
+    h: 3410
     device: full
-    alt: The complete Floks Speaks homepage, from the hero through releases, the artist profile, themes, blog, events, merchandise and the footer
-    caption: The full homepage, scrollable. The featured track sits above the fold with its title and runtime, so listening is one click from arrival.
-  - src: /img/floks-speaks-mobile-780.webp
+    alt: The complete Floks Speaks homepage, from the hero through latest releases, the artist profile, a scripture panel, themes, the blog, events, merchandise and the platform row
+    caption: The full homepage. Listening sits above the fold, and everything beneath it is a reason to keep going.
+  - src: /img/floks-speaks-home-mobile-780.webp
     w: 780
-    h: 1697
+    h: 1688
     device: mobile
-    alt: The Floks Speaks homepage on a phone, photography stacked above the headline
-    caption: Mobile. The photograph moves above the headline and the two calls to action stack full width.
-  - src: /img/floks-speaks-listen-1200.webp
-    w: 1200
-    h: 610
-    device: desktop
-    alt: The Listen page on Floks Speaks, a full-bleed performance photograph behind the heading Every word, in one place
-    caption: The library. One address for everything he has recorded, searchable by theme or by a line you half remember.
-  - src: /img/floks-speaks-listen-mobile-376.webp
-    w: 376
-    h: 855
+    alt: The Floks Speaks homepage on a phone, the studio photograph above the headline with both calls to action stacked beneath
+    caption: The same hero on a phone. Photograph first, then the claim, then the play control.
+  - src: /img/floks-speaks-listen-full-960.webp
+    w: 960
+    h: 2646
+    device: full
+    alt: The complete Listen page, hero and featured recording above a searchable grid of eight pieces, theme filters, collections and the podcast platform row
+    caption: The library in full. Search, four themes, and collections that hold pieces in the order they are meant to be heard.
+  - src: /img/floks-speaks-listen-mobile-780.webp
+    w: 780
+    h: 1688
     device: mobile
-    alt: The Listen page on a phone, the performance photograph stacked above the heading and the first recording below it
-    caption: The library on a phone. The photograph crops to a band and the first piece sits immediately beneath it.
+    alt: The Listen page on a phone, performance photograph cropped to a band above the heading, with the featured recording below
+    caption: The library on a phone, where most of his audience meets it.
   - src: /img/floks-speaks-piece-1200.webp
     w: 1200
-    h: 610
+    h: 750
     device: desktop
-    alt: A single recording page on Floks Speaks, cover artwork beside the title My Real Gee with a theme tag, date, runtime and a play control
-    caption: A single piece. Cover art, theme, date and runtime, and a play control before any description. Each recording has its own URL.
-  - src: /img/floks-speaks-piece-mobile-376.webp
-    w: 376
-    h: 855
-    device: mobile
-    alt: A single recording page on a phone, cover artwork above the title and the play control at the foot
-    caption: The same piece on a phone. Artwork first, then the title, then the reason to press play.
+    alt: A single recording page, cover artwork beside the title My Real Gee with theme, date and runtime, a play control, sharing options and related pieces
+    caption: One recording, one URL. Share controls and a route onward to the next piece in the same theme.
+  - src: /img/floks-speaks-contact-1200.webp
+    w: 1200
+    h: 750
+    device: desktop
+    alt: The Contact page on a light ground, an enquiry type selector set to Booking above fields for name, email, event date and venue
+    caption: The booking path. Enquiry type first, then the date and venue fields that make a booking answerable in one reply.
 decisions:
   - title: Listening is the primary action, not reading
     body: >
