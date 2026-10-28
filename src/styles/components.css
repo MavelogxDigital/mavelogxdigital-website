@@ -110,7 +110,6 @@
    the attribution each absorb a share of the slack, so a short quote floats
    in its own column. */
 .quote{display:grid;gap:var(--s-3);align-content:start}
-.quote__stars{display:flex;gap:3px;color:var(--amber-text)}
 .quote__text{font-family:var(--ff-serif);font-size:var(--fs-quote);
   font-style:italic;line-height:1.42}
 .quote__who{border-top:1px solid var(--border);padding-top:var(--s-2);
