@@ -105,7 +105,11 @@
    testimonial. Owner decision, 25 Oct 2026, supersedes 6.5. The shorter rules
    on blockquotes, key decisions and service notes stay: at 50 to 151px they
    are conventional markers, not long lines. */
-.quote{display:grid;gap:var(--s-3)}
+/* align-content:start matters once the columns are uneven. The grid cell
+   stretches to the tallest column, and without this the stars, the text and
+   the attribution each absorb a share of the slack, so a short quote floats
+   in its own column. */
+.quote{display:grid;gap:var(--s-3);align-content:start}
 .quote__stars{display:flex;gap:3px;color:var(--amber-text)}
 .quote__text{font-family:var(--ff-serif);font-size:var(--fs-quote);
   font-style:italic;line-height:1.42}
