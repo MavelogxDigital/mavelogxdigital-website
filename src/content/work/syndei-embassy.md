@@ -136,7 +136,28 @@ decisions:
     body: >
       The primary nav runs vertically down the right-hand side rather than across the top. That frees the full width for the display type and
       the portrait.
-pending:
-  - "10 Outcome: what changed, evidenced only"
-  - "11 Client quote: approved, verbatim"
+outcome:
+  - >
+    The ministry can now receive the people it reaches. First-time visitors have found
+    Syndei Embassy through the site. That was the whole gap: reaching someone through a
+    social feed and being findable by them afterwards are two different problems, and only
+    the second one needs an address.
+  - >
+    Prayer requests arrive through the site. Someone who hears a teaching and wants prayer
+    no longer has to open a direct message to ask for it.
+  - >
+    Giving has been received through the giving details on the site. Tithes, offerings and
+    the missions fund have somewhere to live that is not a conversation thread.
+  - >
+    The Spirit Word has gained listeners who came from the site. The teaching was already
+    on four platforms before the build. What it did not have was a page pointing people to
+    it.
+quote:
+  text: >-
+    Syndei means bound together, and the website has become one more place where people
+    meet the Jesus who does the binding. Prayer requests, new visitors and new listeners
+    are the proof.
+  name: Prophet AK Lawrence
+  role: Founder, Syndei Embassy
+pending: []
 ---
