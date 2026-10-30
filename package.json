@@ -7,8 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "qa": "node scripts/qa.cjs && node scripts/check-image-renames.cjs",
-    "check:images": "node scripts/check-image-renames.cjs"
+    "qa": "node scripts/check-site-assets.cjs && node scripts/qa.cjs && node scripts/check-image-renames.cjs",
+    "check:images": "node scripts/check-image-renames.cjs",
+    "check:assets": "node scripts/check-site-assets.cjs"
   },
   "keywords": [],
   "author": "",

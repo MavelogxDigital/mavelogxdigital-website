@@ -7,7 +7,8 @@ import Eyebrow from '../components/Eyebrow.astro';
 import ReadAloud from '../components/ReadAloud.astro';
 import { SITE } from '../site';
 ---
-<BaseLayout page="" title="Privacy Policy | MavelogxDigital" description="How MavelogxDigital collects, uses and safeguards personal information. Compliant with GDPR, PIPEDA, CCPA and CASL.">
+<BaseLayout page=""
+  crumbs={[{ name: "Privacy Policy", path: "/privacy/" }]} title="Privacy Policy | MavelogxDigital" description="How MavelogxDigital collects, uses and safeguards personal information. Compliant with GDPR, PIPEDA, CCPA and CASL.">
   <section class="section container">
     <Eyebrow>Legal</Eyebrow>
     <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">Privacy Policy</h1>

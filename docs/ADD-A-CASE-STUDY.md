@@ -199,10 +199,13 @@ npm run preview        # in one terminal
 npm run qa             # in another
 ```
 
-`npm run qa` drives a real browser over every page at three widths in both
-light and dark, and checks contrast, headings, alt text, tap target sizes,
-banned words and glyphs, the contact links, and the image-renaming rule. It
-takes a couple of minutes. It must say `ALL CHECKS PASS`.
+`npm run qa` runs three checks. The first walks the whole build: files missing
+from the site root, dangling references, the sitemap, and the structured data on
+your new page. The second drives a real browser over every page at three widths
+in both light and dark, checking contrast, headings, alt text, tap target sizes,
+banned words and glyphs and the contact links. The third catches an image
+replaced without a rename. It takes a couple of minutes, and all three must
+pass.
 
 Then look at the page yourself on a phone. The guards check rules; they cannot
 tell you whether the story reads well.

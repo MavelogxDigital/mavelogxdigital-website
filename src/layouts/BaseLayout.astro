@@ -14,6 +14,12 @@ interface Props {
   ogImage?: string;
   /* 11.1 structured data. Defaults to a plain page with no trail; the pages
      that carry an entity pass their own. */
+  /* Keeps a page out of the index. BaseLayout always emitted index,follow and
+     had no head slot, so the styleguide's own noindex tag was dropped at build
+     time and that page has been indexable since the scaffold went up. A prop
+     rather than a slot: two robots tags on one page is a contradiction to
+     resolve, not a thing to ship. */
+  noindex?: boolean;
   schema?: 'home' | 'services' | 'case-study' | 'article' | 'page';
   schemaImage?: string;
   schemaDate?: string;
@@ -21,7 +27,7 @@ interface Props {
   transparentNav?: boolean;   // true on Home only (5.2)
 }
 const { title, description, page = '', ogImage = '/og-facebook-whatsapp-linkedin.png',
-        transparentNav = false, schema = 'page', schemaImage, schemaDate,
+        transparentNav = false, noindex = false, schema = 'page', schemaImage, schemaDate,
         crumbs = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogAbs = new URL(ogImage, SITE.url).href;
@@ -41,7 +47,9 @@ const ogH = ogIsHero ? '720'  : '630';
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
   <meta name="author" content={SITE.name} />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  {noindex
+    ? <meta name="robots" content="noindex, nofollow" />
+    : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
   <meta name="theme-color" content="#3BBFA0" />
 
   <meta property="og:type" content="website" />

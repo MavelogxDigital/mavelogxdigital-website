@@ -6,7 +6,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import ReadAloud from '../components/ReadAloud.astro';
 ---
-<BaseLayout page="" title="Terms of Service | MavelogxDigital" description="The terms governing MavelogxDigital services, project agreements, fees, intellectual property and liability.">
+<BaseLayout page=""
+  crumbs={[{ name: "Terms of Service", path: "/terms/" }]} title="Terms of Service | MavelogxDigital" description="The terms governing MavelogxDigital services, project agreements, fees, intellectual property and liability.">
   <section class="section container">
     <Eyebrow>Legal</Eyebrow>
     <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">Terms of Service</h1>

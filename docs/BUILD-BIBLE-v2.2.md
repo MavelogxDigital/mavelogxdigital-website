@@ -78,6 +78,9 @@ here rather than left in a conversation, per 15.1.
 | 35 | The location claim is split: one base, Toronto, and the markets served stated separately. | Rewrites 9.3, 9.6 and the footer in 8.10. |
 | 36 | Reach beyond the two markets is stated wherever the base is, in copy and in areaServed. | Extends 9.3, 9.6, 8.3 and 11.1. |
 | 37 | Structured data is restored. The rebuild had none on any page. | Closes 11.1, which had never been built. |
+| 38 | A third guard walks the build rather than a route list, covering site-level assets and structured data. | Extends 13.5. |
+| 39 | noindex becomes a layout prop. The styleguide's own tag was being discarded at build time, so it was indexable. | Corrects 5.4 and the 13.4 note on the styleguide. |
+| 40 | Privacy, Terms and the styleguide gain a BreadcrumbList. | Completes 11.1. |
 
 ### Decisions taken and then reversed
 ### Decisions taken and then reversed
@@ -706,10 +709,28 @@ npm run qa          runs both scripts
 npm run check:images runs the rename guard alone
 ```
 
-`scripts/qa.cjs` drives a real browser over every route at three widths in dark
-and at 1440 in light, scrolling first so sticky chrome is measured in its
-scrolled state. `scripts/check-image-renames.cjs` compares tracked images
-against the previous commit.
+Three scripts, run in that order, cheapest first.
+
+`scripts/check-site-assets.cjs` walks `dist/` and checks the whole build. No
+browser, no route list. `scripts/qa.cjs` drives a real browser over every route
+at three widths in dark and at 1440 in light, scrolling first so sticky chrome
+is measured in its scrolled state. `scripts/check-image-renames.cjs` compares
+tracked images against the previous commit.
+
+### Why a third script, and why it walks the build
+
+The browser suite passed on every route for six days while four defects sat in
+the build: a `site.webmanifest` referenced from every page and absent from
+`public/`, the noindex styleguide listed in the sitemap, no `robots.txt`, and no
+404 page. A per-page browser check cannot see any of them. A missing asset is
+not a broken page, and a file that is absent from the root is not on any route.
+
+It also cannot see a page that was never added to `ROUTES`. That list has been
+edited by hand four times, and anything missing from it is simply unchecked.
+
+So this one walks `dist/` instead. Every page is covered the moment it is built,
+and the rules are written as what a page must carry rather than as a list of
+pages.
 
 ### What each guard enforces
 
@@ -723,6 +744,11 @@ against the previous commit.
 | Contact wiring | No digits in the label of a `wa.me` link. No `tel:` pointing at the Ghanaian number. 11.4 |
 | Infrastructure names | No host, framework, CMS or form handler named in visible copy. 10.1 |
 | Image renames | No tracked image modified in place. A rename or a new file is fine. 5.5 |
+| Root assets | `robots.txt`, `sitemap-index.xml`, `site.webmanifest`, `404.html` and `favicon.ico` all exist. 13.4 |
+| robots and sitemap | robots declares a sitemap, in the canonical host form, that exists. The sitemap lists no URL without a page, and no page marked noindex. 11.3 |
+| The manifest | Parses as JSON, names the site, carries no em dash, and every icon it lists is in the build. 13.4 |
+| Dangling references | No page links or sources a local file that is not in the build. This is the general form of the manifest defect. 13.4 |
+| Structured data | Exactly one JSON-LD block per page, valid, carrying Organization and WebSite, with BreadcrumbList below the root, CreativeWork on a case study, Article on an article, Service on Services, and a telephone that is not the WhatsApp number. 11.1, 11.4 |
 
 ### The suite has been run
 
@@ -737,6 +763,25 @@ Re-run it before the branch merges and after any batch of content changes:
 npm run build && npm run preview     # in one shell
 npm run qa                           # in another
 ```
+
+### The checks were proven by breaking the build
+
+A guard that has never failed is a guard nobody has tested. Each class was
+confirmed by deliberately reintroducing the defect and watching it fail: the
+manifest removed from the root, an icon pointed at a file that does not exist,
+the JSON-LD stripped from one page, a stylesheet referenced that was never
+built, and the noindex styleguide added back to the sitemap. All five were
+caught, including the three that had actually shipped.
+
+On its first real run it found three more: no BreadcrumbList on Privacy, Terms
+or the styleguide. Chasing the third one turned up a defect older than any of
+this. `BaseLayout` always emitted `index, follow` and had no head slot, so the
+`<Fragment slot="head">` carrying the styleguide's noindex tag was discarded at
+build time. **That page has been indexable since the scaffold went up**, while
+this document, the sitemap filter and the comment at the top of the file all
+described it as noindex. It is now a `noindex` prop on the layout rather than a
+slot, because two robots tags on one page is a contradiction to resolve rather
+than a thing to ship.
 
 ### What the guards do not cover
 
