@@ -678,6 +678,23 @@ the WhatsApp number, per 11.4.
 
 ---
 
+## 15.3 (amended) Definition of done
+
+Four items were outstanding on 30 October. The owner confirmed three and the
+fourth is now written.
+
+| Item | State |
+|---|---|
+| Written client permission on file | **Confirmed by the owner, 30 October.** Floks Speaks and Syndei Embassy have both given explicit permission to publish the work, the screenshots and the quotes. Worth keeping the confirmation somewhere you can point at later, a message thread is enough: permission you cannot show anyone is hard to rely on a year from now. |
+| Manual QA pass | **Confirmed done by the owner, 30 October.** The screen-reader pass and real-device testing that the automated suite cannot cover. |
+| The enquiry form submits and the notification arrives | **Confirmed working by the owner, 30 October.** This is 11.5's test, and the one failure mode nobody discovers on their own: a form that submits cleanly and lands in spam looks identical to a form that works. |
+| You can add a case study yourself, and the procedure is written down | **Written, 30 October.** `docs/ADD-A-CASE-STUDY.md`. Verified by following it end to end: a case study built from frontmatter alone, appeared on `/work/`, rendered every block, and was then removed. The guard caught a deliberately half-complete image set during that run, which is now in the document's troubleshooting table. |
+
+What remains outside Phase 2 is the SVG logo sources at Appendix F, and the
+commercial decisions listed there.
+
+---
+
 ## Appendix F (updated) Open decisions
 
 | Question | Status | Owner | Needed by |

@@ -36,6 +36,15 @@ public/
   favicon*, og-*           carried over unchanged
 ```
 
+## Publishing a case study
+
+See **[docs/ADD-A-CASE-STUDY.md](docs/ADD-A-CASE-STUDY.md)**. It assumes no
+knowledge of Astro: you edit two text files and add some pictures. Build Bible
+15.3 requires that this be possible without a developer.
+
+The current specification is **[docs/BUILD-BIBLE-v2.2.md](docs/BUILD-BIBLE-v2.2.md)**,
+which supersedes v2.1 in the sections it reproduces.
+
 ## Phase 0 decisions worth knowing
 
 - **Four accents only.** `--steel-blue` and `--orange` are retired (6.1). They
