@@ -41,7 +41,7 @@ Three things change in how a project actually runs.
 
 **You see work earlier.** When a first pass costs hours instead of days, there is no reason to hold it back until it is polished. Expect to see rough, and expect to be asked to react to it. A studio that still disappears for three weeks and returns with a reveal is not working this way, whatever the website says.
 
-**You get more options at the cheap end of the process.** Three positioning directions instead of one. Several layout structures before committing. The cost of exploring an idea has dropped far more than the cost of executing one, so the exploration should visibly widen.
+**You get more options where they cost least.** Three positioning directions instead of one. Several layout structures before committing. The cost of exploring an idea has dropped far more than the cost of executing one, so the exploration should visibly widen.
 
 **The questions you are asked get harder.** This is the real tell. If the saved time is going where it should, the conversations become more pointed. Who exactly is this for. What happens if they do not buy. Which of these two audiences are you willing to lose. An agency using AI to go faster will ask you fewer questions. One using it properly will ask you more.
 

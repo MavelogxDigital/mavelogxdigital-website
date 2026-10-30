@@ -4,7 +4,8 @@
 const {chromium}=require('playwright');
 const ROUTES=['/','/services/','/work/','/about/','/process/','/contact/','/insights/','/privacy/','/terms/',
  '/work/floks-speaks/','/work/syndei-embassy/','/work/mavelogx-enterprise/','/work/mavels-corner/',
- '/insights/ai-augmented-studio/','/insights/canada-ghana-corridor/','/insights/positioning-before-logo/'];
+ '/insights/ai-augmented-studio/','/insights/canada-ghana-corridor/','/insights/positioning-before-logo/',
+ '/404.html'];
 function lum(c){const m=c.match(/[\d.]+/g);if(!m)return 0;const [r,g,b]=m.slice(0,3).map(Number).map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*r+0.7152*g+0.0722*b}
 function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05)}
 (async()=>{
@@ -76,7 +77,11 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
    if(d.small) fails.push(`${tag}: ${d.small} target under 24px (WCAG 2.2)`);
    if(d.emptyhref) fails.push(`${tag}: ${d.emptyhref} empty href`);
    if(/[↗→←]|—|–/.test(d.t)) fails.push(`${tag}: arrow or dash in text`);
-   if(/budget|affordab|price tag|without the premium/i.test(d.t)) fails.push(`${tag}: retired phrase`);
+   // 13.3 lists five words to grep for. The guard checked three of them, so
+   // "cheap" reached a published article and only a hand pass caught it. The
+   // list here is now 13.3's list, in full.
+   {const v=d.t.match(/budget|affordab|cheap|price tag|price that works|without the premium/i);
+    if(v) fails.push(`${tag}: retired phrase ("${v[0]}")`);}
    if(d.miswired) fails.push(`${tag}: ${d.miswired} contact link showing a number it should not`);
    // Case studies describe what was built, not the plumbing it was built on.
    // Naming a client's host, CMS, form handler or framework helps a competitor
