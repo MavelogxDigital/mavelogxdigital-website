@@ -56,6 +56,22 @@ conversation, per 15.1.
 | 21 | Podcast building and distribution is shipped work across three ventures, not a Floks Speaks detail. | Amends 10.3. |
 | 22 | The automated guards that enforce the above are specified in new section 13.5. | New section. |
 
+### Added 30 October 2026
+
+Eight further decisions, taken after this document was first written. Recorded
+here rather than left in a conversation, per 15.1.
+
+| # | Change | What it supersedes |
+|---|---|---|
+| 23 | Syndei Embassy blocks 10 and 11 are written. Three of four case studies now carry every written block. | Closes two rows of the pending list in 10.1. |
+| 24 | A project that is recaptured ships under a new filename stem, and `ProjectCard` takes an `imgBase` to make that possible. The stem lives in `site.ts` behind a `cardStem` helper. | Extends 5.5. Amends component 05 in Section 07. |
+| 25 | The client voice quotes move from markup in `index.astro` to `TESTIMONIALS` in `site.ts`. | Closes the drift note in 8.7. |
+| 26 | The client voice arrangement follows the count: a 2 by 2 at four quotes, the featured split below four. | Rewrites the layout half of 8.7. |
+| 27 | `site.webmanifest`, `robots.txt` and a 404 page exist. | Closes three rows of 13.4 that had never been true. |
+| 28 | The styleguide is excluded from the sitemap. | Amends 11.3. |
+| 29 | The retired-phrase guard checks all five words 13.3 names, not three. | Amends 13.5. |
+| 30 | The guard suite has been run and passes. | Closes the known gap in 13.5. |
+
 ### Decisions taken and then reversed
 
 Recorded because 15.1 asks for the reasoning, not only the outcome.
@@ -269,6 +285,25 @@ correct the file on the server is, and the failure is invisible to whoever made
 the change, because their own cache was busted by the deploy. This is enforced
 by the build, per 13.5.
 
+#### A recapture needs somewhere to put the new name
+
+Most images are named explicitly in content frontmatter, so renaming one is an
+edit in two places. The card images are not: `ProjectCard` assembles its srcset
+from the project slug, so a renamed card set had nowhere to go and the rule
+above could not be obeyed without breaking the component.
+
+`ProjectCard` therefore takes an optional `imgBase`, defaulting to the slug, and
+`site.ts` holds the stem per project behind a `cardStem` helper. A project that
+has never been recaptured carries no stem and resolves to its slug exactly as
+before. Pages read the helper rather than assembling image paths themselves.
+
+Syndei Embassy was recaptured on 29 October and is the first project to carry
+one. The stem is `syndei-embassy-v2`; the next recapture takes the next number.
+A crop that replaces an older one is measured against the elements it must keep,
+not estimated: for that hero the logo starts at y=39, the lower button ends at
+y=909 and the floating WhatsApp control runs 922 to 973, which fixes the 16:9
+window at y=21 to 921.
+
 ---
 
 ## 7 (amended) Component inventory
@@ -292,14 +327,29 @@ markers. The testimonial rule was not.
 
 ## 8.7 (rewritten) Client testimonials
 
-Three quotes. The ceiling stays at four.
+Four quotes, which is the ceiling. A fifth means deciding which one comes out.
 
-### Layout
+### Layout follows the count
 
-- One featured quote in 7 columns, with the other two stacked in 5.
-- The external client leads. Felix Lokko of Floks Speaks is the only
-  third-party voice in the section, so the two in-house ventures sit beside him
-  rather than above him.
+v2.1 asked for the component to take a count rather than hard-coding the
+arrangement, and this is what that means in practice.
+
+| Count | Arrangement |
+|---|---|
+| Four | An even 2 by 2. No featured quote. |
+| Three or fewer | One featured quote in 7 columns, the rest stacked in 5. |
+
+**Why the feature is dropped at four.** A featured quote beside three stacked
+ones leaves the left column short by roughly 600px at desktop width, because the
+feature runs out level with the second of the three. That reads as a gap rather
+than a composition. The 7 by 5 split is right up to three quotes and wrong at
+four, which is why the page branches on the count instead of committing to one.
+
+### Layout, both arrangements
+
+- The external clients lead. A third-party voice carries more with a prospect
+  than an in-house one, however good the words, so Felix Lokko and Prophet AK
+  Lawrence take the first two positions and the two in-house ventures follow.
 - Quote text in Cormorant italic at `--fs-quote`, rising on the featured quote.
 - Attribution in Plus Jakarta Sans 600, with the project name as a link in
   `--teal-text`.
@@ -308,13 +358,28 @@ Three quotes. The ceiling stays at four.
   made it render consistently.
 - Section head: eyebrow "Client Voice", H2 "What our clients say."
 
-### The three quotes
+### The four quotes
 
-| Quote | Attribution |
+Held in `TESTIMONIALS` in `src/site.ts`, in display order.
+
+| Position | Attribution |
 |---|---|
-| Featured | Felix Lokko, Founder and spoken-word artist, Floks Speaks. Carved from his own written answers at intake, using the passage that carries the results. |
-| Second | Mavelogx Enterprise, Brand Identity and Web Design. Trimmed to end at "The quality was outstanding", per the v2.1 edit note. |
-| Third | Mavel's Corner, Brand Voice and Content Strategy. |
+| 1 | Felix Lokko, Founder and spoken-word artist, Floks Speaks. Carved from his own written answers at intake, using the passage that carries the results. |
+| 2 | Prophet AK Lawrence, Founder, Syndei Embassy. His own closing sentence, verbatim. |
+| 3 | Mavelogx Enterprise, Brand Identity and Web Design. Trimmed to end at "The quality was outstanding", per the v2.1 edit note. |
+| 4 | Mavel's Corner, Brand Voice and Content Strategy. |
+
+**A client who gives two publishable passages does not get both printed.**
+Prophet Lawrence supplied a quote written to carry his name and, separately, an
+account of what changed after launch. The purpose-written quote is block 11 of
+his case study. The homepage takes a sentence from the other passage instead,
+because running identical words in two places weakens both.
+
+**Carving is trimming, never assembly.** A passage may be cut down to its
+strongest continuous run. It may not be stitched together from separate
+sentences, and a bulleted answer is never reflowed into prose: the result would
+be words the client did not write, published under their name. Where an answer
+arrives as a list, it stays a list, in block 10 where lists belong.
 
 ### The Torah Farms quote is withdrawn
 
@@ -323,13 +388,13 @@ subsequently re-added and then withdrawn again on 28 October. It stays out. A
 testimonial from a client whose site the agency no longer shows, with no link to
 follow, asks the reader to take it on trust and gives them nothing to check.
 
-### Known drift, not yet resolved
+### The drift noted here is resolved
 
-The three quotes are written inline in `src/pages/index.astro`. Every other
-piece of repeated content on the site is typed data in `src/site.ts`, per 5.4,
-and adding a fourth quote is currently a markup edit rather than a data entry.
-**Move them to `src/site.ts` before the section reaches four.** Recorded here so
-it is not discovered at the point of adding the fourth.
+The quotes were written inline in `src/pages/index.astro` while every other
+piece of repeated content was typed data in `src/site.ts`, per 5.4. They moved
+to `TESTIMONIALS` on 30 October, at the point the fourth arrived, which is what
+this note asked for. A fifth voice is now a data entry plus a decision about
+which one comes out, not a markup edit.
 
 ---
 
@@ -496,6 +561,32 @@ Two additions:
 
 ---
 
+## 13.4 (amended) Pre-launch
+
+Every item in v2.1 stands. Four rows had never been true and now are, and one
+is recorded as a permitted exception so the next person running the grep does
+not re-open it.
+
+| Row | State |
+|---|---|
+| Favicons and `site.webmanifest` resolving from the root | **Now true.** The manifest was referenced from every page and absent from `public/`, so every page requested a 404 from the day the Astro scaffold went up. Restored with `app-icon-512x512.png`, which it references and which was also missing. Its `theme_color` is Teal, matching the meta tag per 6.1, and its `background_color` is the dark page background rather than white. |
+| `sitemap.xml` regenerated | **Now correct.** The styleguide is filtered out: it carries a noindex tag, and listing it asked a crawler to fetch a page it would then be told to ignore. Sixteen real pages. |
+| `robots.txt` | **Now exists.** Allows everything and declares the sitemap in the non-www host form. It deliberately does not disallow the styleguide, because blocking a crawl stops the crawler ever seeing the noindex tag it is there to obey. |
+| 404 page exists, is branded, offers Home and Work | **Now true.** It leads with the homepage and the portfolio rather than Contact: someone who lands here followed a link that no longer resolves, and a stale project URL is the likeliest candidate. It is in the guard route list and excluded from the sitemap. |
+
+### One permitted instance of a retired word
+
+13.3 says to grep for "budget" and expect nothing. `/styleguide/` contains one
+instance, in the annotation on the form-field component reading "No budget
+field, see 9.6". It documents the deliberate absence of the thing the word
+names, on a page that is noindex and unlinked and never reaches a prospect.
+
+It stays. Rewording it would make an internal annotation vaguer than the
+specification it points at. Recorded here so the next grep does not re-litigate
+it, and the guard does not check that page because it is not in the route list.
+
+---
+
 ## 13.5 (new) Automated guards
 
 The rules in this document are only true if something checks them. Six guards
@@ -527,19 +618,44 @@ against the previous commit.
 | Structure | One H1 per page, no skipped heading level, `lang="en"`, a skip link, alt on every image, no broken image, width and height on every image, every form control labelled, no empty or `#` href, no JavaScript error. 7.2, 13.1 |
 | Target size | No interactive target under 24px, excluding links inline in prose. WCAG 2.2, 13.1 |
 | Banned glyphs | No arrow or dash character in visible text. Owner standing rule, recorded at change 8 in 1.4 |
-| Retired language | No instance of budget, affordab, price tag, or "without the premium". 3.2, 13.3 |
+| Retired language | No instance of budget, affordab, cheap, price tag, "price that works", or "without the premium". 3.2, 13.3 |
 | Contact wiring | No digits in the label of a `wa.me` link. No `tel:` pointing at the Ghanaian number. 11.4 |
 | Infrastructure names | No host, framework, CMS or form handler named in visible copy. 10.1 |
 | Image renames | No tracked image modified in place. A rename or a new file is fine. 5.5 |
 
-### Known gap
+### The suite has been run
 
-The guard suite has not been run against the commits made since 24 October.
-Playwright's browser download is refused by the proxy in the environment the
-work was done in, so the checks have been satisfied by reading the markup and
-the stylesheet rather than by executing. **Run `npm run build && npm run preview`
-then `npm run qa` locally before this branch merges.** Until that happens, every
-claim in this section is a specification rather than a verified result.
+Last run 30 October 2026 against `c32e5d0`: **17 routes, 68 viewport and theme
+combinations, 7,484 contrast pairs, all checks pass.** The gap recorded when
+this section was written, that the suite had never run and every claim in it was
+a specification rather than a result, is closed.
+
+Re-run it before the branch merges and after any batch of content changes:
+
+```
+npm run build && npm run preview     # in one shell
+npm run qa                           # in another
+```
+
+### What the guards do not cover
+
+A passing suite is not a passed Section 13. The guards check what someone
+remembered to write into them, and a pass means only that those checks found
+nothing. Reading Section 13 against the built output on 30 October turned up
+four defects the suite had never looked at: a `site.webmanifest` referenced from
+every page that did not exist, the noindex styleguide listed in the sitemap, no
+`robots.txt` at all, and no 404 page. None of them is subtle. All four had
+survived every previous run.
+
+Two of the gaps that allowed this are now closed. The retired-language guard
+checked three of the five words 13.3 names, which is how "cheap" reached a
+published article; it now checks all five. The 404 joined the route list and
+failed on its first run, catching a skipped heading level in itself.
+
+The standing lesson: **when a check is added to Section 13, add it to a guard in
+the same change, or it will be true only on the day it was written.** The
+remaining manual items are a screen-reader pass, real-device testing, and a
+Lighthouse run, and none of them can be automated here.
 
 ---
 
@@ -570,15 +686,19 @@ the WhatsApp number, per 11.4.
 | Founder photograph | **RESOLVED.** The warm studio frame, on About. Renamed on replacement, per 5.5. | Closed | Closed |
 | Which three articles launch Insights | **RESOLVED.** All three are written and live: the AI-augmented studio, the Canada to Ghana corridor, and positioning before logo. | Closed | Closed |
 | Which industries carry a Proven tag | **RESOLVED.** Four of ten, per 9.1. | Closed | Closed |
-| Client quotes | IN PROGRESS. Floks Speaks is in. Syndei Embassy is outstanding and needs Prophet AK Lawrence. The permission message is drafted and unsent. | Owner | Phase 2 |
+| Client quotes | **RESOLVED.** Floks Speaks and Syndei Embassy are both in. Four quotes, which is 8.7's ceiling. | Closed | Closed |
 | Mavelogx Enterprise blocks 04 to 07 and 10 | OPEN. Thirteen intake questions are with the owner. In-house, so no block 11. | Owner | Phase 2 |
 | Mavel's Corner app screenshots | OPEN. Waiting on the store build. | Owner | Phase 2 |
 | The 98 per cent satisfaction figure on mavelogx.com | OPEN. It is not carried into the case study, per 9.3 and 10.1. Whether it stays on the Enterprise site is a separate decision. | Owner | Phase 2 |
 | Five swept elements in the footer | OPEN, and asked twice without an answer. Whether five continuously swept elements read as busy, and whether the three footer headings should drop the sweep. | Owner | Phase 5 |
-| Testimonials in `site.ts` | OPEN. See the drift note in 8.7. Move them before the section reaches four. | Build | Before quote four |
-| Run the guard suite | OPEN. See the known gap in 13.5. | Owner | Before merge |
-| Legacy hotfix | OPEN. `legacy/index-hotfix.html` is not committed to the live single-file site, so the live site still shows the v2.1 contact arrangement. | Owner | Immediate |
+| Testimonials in `site.ts` | **RESOLVED.** Moved on 30 October, at the point the fourth arrived. | Closed | Closed |
+| Run the guard suite | **RESOLVED.** Run 30 October against `c32e5d0`, all checks pass. Re-run before merge. | Closed | Closed |
+| Legacy hotfix | **DEFERRED BY DECISION, 28 October.** The hotfix is corrected and on the branch. It will not ship separately: the owner chose to fix the live site by merging the rebuild. Until that merge, the live site displays the Canadian number inside a `tel:` that dials Ghana, and its structured data names the Ghanaian line as the business telephone. | Owner | At merge |
 | Pricing page | OPEN. Not specified here. If added it belongs at `/pricing/`, reached from Services and Contact, never from the homepage hero. | Owner | Post-launch |
+| Custom work beyond the ladder | OPEN. A project that fits no tier at the outset, such as e-commerce as the main build, a portal, or more than ten pages, has nowhere to go in the Service Menu. Two decisions needed: a floor for custom engagements, and whether scoping is charged and credited against the build. | Owner | Before the docs ship |
+| Which pricing set is current | OPEN. Two overlapping sets were in circulation. The merged ladder is drafted and researched against both markets, and the Canadian column roughly doubles. Unconfirmed, so the four client documents are drafts. | Owner | Before the docs ship |
+| Brand palette, four accents or six | OPEN. The Brand Guidelines PDF lists six and says the palette derives from the four-petal mark. 6.1 retires Steel Blue and Orange as outside the brand identity. One document is wrong, and the guidelines are the one handed to clients. The build uses four. | Owner | Before the guidelines are reissued |
+| Publishing rates on the site | OPEN. Recommendation: keep the menu internal until the new rates have held through several real quotes, then publish floors rather than ranges at `/pricing/`, with the two markets explained rather than left to be worked out. | Owner | Post-launch |
 | Host form, www or non-www | RESOLVED: non-www. | Closed | Closed |
 | Analytics and consent | RESOLVED: deferred. | Closed | Closed |
 | Injected vs hard-coded header | RESOLVED: neither. Astro renders it at build time. | Closed | Closed |
@@ -586,5 +706,5 @@ the WhatsApp number, per 11.4.
 
 ---
 
-*MavelogxDigital, Website Build Bible, v2.2, 28 October 2026*
+*MavelogxDigital, Website Build Bible, v2.2, 28 October 2026, amended 30 October 2026*
 *From Idea To Impact*
