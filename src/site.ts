@@ -125,6 +125,39 @@ export const cardStem = (slug: string): string =>
   (PROJECTS.find(p => p.slug === slug) as { cardBase?: string } | undefined)?.cardBase ?? slug;
 
 
+/** Client voice (8.7). Ceiling is four, and four is what this is.
+ *
+ *  Order matters and is not alphabetical: the external clients lead, because a
+ *  third-party voice carries more with a prospect than an in-house one however
+ *  good the words. Felix and Prophet Lawrence are the two external clients, so
+ *  they take the feature and the head of the stack.
+ *
+ *  Every quote is the client's own words, trimmed but never rewritten, and
+ *  every one carries a name and the project it refers to. No floating
+ *  anonymous quotes (Appendix C). A quote with no case study to link to does
+ *  not belong here: it asks the reader to take it on trust and gives them
+ *  nothing to check.
+ *
+ *  Held here rather than inline in a page so a fifth voice is a data entry and
+ *  a reordering is one line. Moved out of index.astro on 29 Oct 2026, which
+ *  the v2.2 drift note in 8.7 asked for before the section reached four. */
+export const TESTIMONIALS = [
+  { feature: true,
+    quote: 'Since the launch, the website has expanded my reach, strengthened my brand’s credibility, generated booking inquiries, and contributed to encouraging merchandise sales. What I value most is having a dedicated platform where my work can live beyond social media and remain accessible to audiences around the world.',
+    name: 'Felix Lokko', role: 'Founder and spoken-word artist, Floks Speaks',
+    project: 'floks-speaks' },
+  { quote: 'The site has given people a clear place to learn who we are, reach us, and respond, and that has made the ministry easier to find and to connect with.',
+    name: 'Prophet AK Lawrence', role: 'Founder, Syndei Embassy',
+    project: 'syndei-embassy' },
+  { quote: 'MavelogxDigital completely transformed the way we show up online. They understood our vision from day one and delivered a brand identity that truly captures who we are. The quality was outstanding.',
+    name: 'Mavelogx Enterprise', role: 'Brand Identity & Web Design',
+    project: 'mavelogx-enterprise' },
+  { quote: 'Working with MavelogxDigital felt like having a creative partner who genuinely cared about the mission. They helped us craft a voice and visual identity that resonates deeply with our readers.',
+    name: "Mavel's Corner", role: 'Brand Voice & Content Strategy',
+    project: 'mavels-corner' },
+] as const;
+
+
 /** Industries. `proof` links to a case study; the rest are reach, not evidence (9.1). */
 export const INDUSTRIES = [
   { name:'Faith & Community',        proof:'syndei-embassy' },

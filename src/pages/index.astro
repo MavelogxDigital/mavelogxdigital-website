@@ -15,13 +15,17 @@ import Testimonial from '../components/Testimonial.astro';
 import CtaBand from '../components/CtaBand.astro';
 import InsightCard from '../components/InsightCard.astro';
 import { getCollection } from 'astro:content';
-import { SITE, SERVICES, PILLARS, PROCESS, FEATURED, cardStem } from '../site';
+import { SITE, SERVICES, PILLARS, PROCESS, FEATURED, cardStem, TESTIMONIALS } from '../site';
 
 const posts = (await getCollection('insights', (e) => !e.data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
 const [lead, ...rest] = FEATURED;
+/* 8.7: one featured quote beside the rest. The data carries the order, so
+   the page never picks which client leads. */
+const featuredQuote = TESTIMONIALS.find((q) => 'feature' in q && q.feature)!;
+const otherQuotes   = TESTIMONIALS.filter((q) => q !== featuredQuote);
 
 /** Card art: real screenshots captured at 1280x631 and cropped to the card ratios.
  *  Phase 2 recaptures at 1440x900 retina plus mobile, per 6.7. */
@@ -151,28 +155,38 @@ const ALT: Record<string, string> = {
     </div>
   </section>
 
-  {/* ---------- 07 · TESTIMONIALS, three. 8.7 allows four ---------- */}
+  {/* ---------- 07 · TESTIMONIALS, four. 8.7's ceiling ----------
+       The arrangement follows the count, as 8.7 asks, rather than being
+       hard-coded. At four the feature is dropped for an even 2x2: a featured
+       quote beside three stacked ones leaves the left column short by the
+       height of two quotes, which reads as a gap rather than a composition.
+       Below four the feature returns. Either way the data carries the order,
+       so the external clients lead and the page never picks. */}
   <section class="section section--band">
     <div class="container">
       <SectionHead eyebrow="Client Voice" heading="What our clients say." />
-      {/* Felix leads: the only third-party voice here. The other two are our own
-          ventures, so they sit beside rather than above him. */}
-      <div class="split-7-5">
-        <Testimonial feature
-          quote="Since the launch, the website has expanded my reach, strengthened my brand's credibility, generated booking inquiries, and contributed to encouraging merchandise sales. What I value most is having a dedicated platform where my work can live beyond social media and remain accessible to audiences around the world."
-          name="Felix Lokko" role="Founder and spoken-word artist, Floks Speaks"
-          projectHref="/work/floks-speaks/" />
-        <div class="quote-stack">
-          <Testimonial
-            quote="MavelogxDigital completely transformed the way we show up online. They understood our vision from day one and delivered a brand identity that truly captures who we are. The quality was outstanding."
-            name="Mavelogx Enterprise" role="Brand Identity & Web Design"
-            projectHref="/work/mavelogx-enterprise/" delay={1} />
-          <Testimonial
-            quote="Working with MavelogxDigital felt like having a creative partner who genuinely cared about the mission. They helped us craft a voice and visual identity that resonates deeply with our readers."
-            name="Mavel's Corner" role="Brand Voice & Content Strategy"
-            projectHref="/work/mavels-corner/" delay={2} />
+      {TESTIMONIALS.length >= 4 ? (
+        <div class="grid grid-2">
+          {TESTIMONIALS.map((q, i) => (
+            <Testimonial
+              quote={q.quote} name={q.name} role={q.role}
+              projectHref={`/work/${q.project}/`} delay={Math.min(i, 3)} />
+          ))}
         </div>
-      </div>
+      ) : (
+        <div class="split-7-5">
+          <Testimonial feature
+            quote={featuredQuote.quote} name={featuredQuote.name} role={featuredQuote.role}
+            projectHref={`/work/${featuredQuote.project}/`} />
+          <div class="quote-stack">
+            {otherQuotes.map((q, i) => (
+              <Testimonial
+                quote={q.quote} name={q.name} role={q.role}
+                projectHref={`/work/${q.project}/`} delay={i + 1} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
