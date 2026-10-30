@@ -5,24 +5,41 @@
    =========================================================== */
 
 :root{
-  /* ---- Accents, four only (6.1) ---- */
-  --coral:#E85C6E;        /* primary action, clickable things only */
-  --amber:#F5A825;        /* emphasis, numerals, stats, never a button */
-  --purple:#7070BB;       /* depth, tags, LARGE text only (4.0:1) */
-  --purple-lt:#8F8FD0;    /* purple for small text on dark (5.6:1) */
-  --teal:#3BBFA0;         /* eyebrows, progress, success */
+  /* ---- Accents, four, sampled from the logo (6.1) ----
+     Taken from the four petals of the mark in the canonical logo file, not
+     chosen alongside it. Three palettes were in circulation and none agreed:
+     the mark, the Brand Guidelines PDF, and the site. The mark wins, because
+     it is the only one a client ever sees. Owner decision, 30 Oct 2026.
 
-  /* Contrast-safe variants. The four accents were validated as text on dark
-     only. White on Coral is 3.39:1 and Teal on a light ground is 2.20:1, both
-     below AA, so fills and light contexts use these instead. Same hues. */
-  --coral-strong:#E12C43; /* button fill: white on it is 4.52:1 */
-  --amber-ink:#BF7C09;    /* amber as large text on a light ground: 3.08:1 */
-  --teal-ink:#267C68;     /* teal as text on a light ground: 4.51:1 on #F2F2F4 */
-  --purple-ink:#6565BE;   /* purple as text on a light ground: 4.52:1 on #F2F2F4 */
+     The third petal is periwinkle BLUE. It was carried as "purple" #7070BB,
+     which is a different hue and never appeared in the logo. Renamed as well
+     as revalued, because a token named purple holding blue is a trap. */
+  --coral:#FD4950;        /* primary action, clickable things only */
+  --amber:#FED136;        /* emphasis, numerals, stats, never a button */
+  --blue:#6682F9;         /* depth, tags, the Two Markets pillar */
+  --teal:#2CD4AD;         /* eyebrows, progress, success */
 
-  /* Theme-resolved ink tones, repointed in light contexts below. */
+  /* Contrast-safe variants. The logo was drawn for a dark ground, so the raw
+     accents clear AA there and half of them fail on light. Same hue and
+     saturation, lightness walked down until each clears its target. Targets
+     differ because the uses differ: amber only ever sets large (44px service
+     numerals, 40px stats, the 28px tagline), so it needs 3:1, while teal sets
+     13px eyebrows and needs 4.5. */
+  --coral-strong:#E3141C; /* button fill: white on it is 4.79:1. Saturation is
+                             pulled back slightly from the raw accent: at full
+                             saturation the fill reads as a warning rather than
+                             an invitation, and 4.79 leaves headroom over the
+                             4.5 floor instead of sitting exactly on it. */
+  --amber-ink:#AD8701;    /* amber as large text on light: 3.01:1 on #F2F2F4 */
+  --blue-ink:#3C5FF7;     /* blue as text on light: 4.50:1 on #F2F2F4 */
+  --teal-ink:#1A7D66;     /* teal as text on light: 4.51:1 on #F2F2F4 */
+
+  /* Theme-resolved ink tones, repointed in light contexts below.
+     Blue needs no lightened variant on dark the way purple did: it reads
+     5.74:1 there, where #7070BB was 4.0 and failed body text outright. That
+     retires --purple-lt rather than renaming it. */
   --teal-text:var(--teal);
-  --purple-text:var(--purple-lt);
+  --blue-text:var(--blue);
   --amber-text:var(--amber);
 
   /* ---- Neutral sets. Accents never change between themes (6.1). ----
@@ -72,14 +89,15 @@
   /* ---- Layout ---- */
   --container:1280px;
   --reading:760px;
-  --gutter:24px;
+  --gutter:16px;
 }
+@media (min-width:360px){ :root{ --gutter:24px } }
 @media (min-width:768px){ :root{ --gutter:40px } }
 @media (min-width:1100px){ :root{ --gutter:64px } }
 
 /* ---- Light theme ---- */
 :root[data-theme="light"]{
-  --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
+  --teal-text:var(--teal-ink); --blue-text:var(--blue-ink); --amber-text:var(--amber-ink);
   --nav-scrim:rgba(250,250,250,.9);
   --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
   --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
@@ -88,7 +106,7 @@
 /* Honour the OS preference until the visitor chooses for themselves. */
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
-    --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
+    --teal-text:var(--teal-ink); --blue-text:var(--blue-ink); --amber-text:var(--amber-ink);
     --nav-scrim:rgba(250,250,250,.9);
     --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
     --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
@@ -100,21 +118,21 @@
    Replaces the old .theme-light, which hard-coded light values and so
    collapsed into the page once the whole site could go light. */
 .section--invert,.theme-light{
-  --teal-text:var(--teal-ink); --purple-text:var(--purple-ink); --amber-text:var(--amber-ink);
+  --teal-text:var(--teal-ink); --blue-text:var(--blue-ink); --amber-text:var(--amber-ink);
   --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
   --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
   background:var(--bg); color:var(--text-1);
 }
 :root[data-theme="light"] .section--invert,
 :root[data-theme="light"] .theme-light{
-  --teal-text:var(--teal); --purple-text:var(--purple-lt); --amber-text:var(--amber);
+  --teal-text:var(--teal); --blue-text:var(--blue); --amber-text:var(--amber);
   --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
   --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]) .section--invert,
   :root:not([data-theme="dark"]) .theme-light{
-    --teal-text:var(--teal); --purple-text:var(--purple-lt); --amber-text:var(--amber);
+    --teal-text:var(--teal); --blue-text:var(--blue); --amber-text:var(--amber);
     --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
     --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
   }

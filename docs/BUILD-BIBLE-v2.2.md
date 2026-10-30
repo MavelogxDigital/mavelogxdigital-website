@@ -81,6 +81,10 @@ here rather than left in a conversation, per 15.1.
 | 38 | A third guard walks the build rather than a route list, covering site-level assets and structured data. | Extends 13.5. |
 | 39 | noindex becomes a layout prop. The styleguide's own tag was being discarded at build time, so it was indexable. | Corrects 5.4 and the 13.4 note on the styleguide. |
 | 40 | Privacy, Terms and the styleguide gain a BreadcrumbList. | Completes 11.1. |
+| 41 | The palette is sampled from the logo. The third accent is blue, not purple, and is renamed. | Rewrites 6.1. Retires `--purple-lt`. |
+| 42 | The sweep reads the four accent tokens instead of six hard-coded hexes. | Amends 6.2. Steel Blue and Orange are not in the mark. |
+| 43 | The mark joins the wordmark in the header and footer. | New section 5.2 addendum. |
+| 44 | The asset guard also reports images nothing references. | Extends 13.5. |
 
 ### Decisions taken and then reversed
 ### Decisions taken and then reversed
@@ -895,6 +899,113 @@ reach claim from being the usual empty one.
 
 ---
 
+## 6.1 (rewritten) Colour, sampled from the logo
+
+Three palettes were in circulation and none of them agreed: the logo artwork,
+the Brand Guidelines PDF, and the site. The mark wins, because it is the only
+one a client ever sees. Owner decision, 30 October 2026.
+
+### The canonical artwork
+
+Four logo files existed, all raster, none matching the others. The canonical
+file is the one with an alpha channel, which is the only one that can sit on
+both themes. A logo with white baked in can only ever appear on white, and on a
+dark page that means a white pill around the mark, which is the defect v2.1
+recorded about the old site.
+
+| File | Role |
+|---|---|
+| The transparent lockup, 1630x965 | **Canonical.** Mark, wordmark and tagline. The palette is sampled from this file. |
+| The mark alone, 1254x1254 | **Kept.** Its white ground was keyed out to produce `mark-petals-*`, used in the header and footer. |
+| The two remaining lockups | Redundant. Same artwork, baked backgrounds. |
+
+Appendix F's SVG item stays open. These are rasters and they drift between
+generations, which is how three palettes happened. What this decision fixes is
+that the drift now has a single reference point.
+
+### The accents
+
+Sampled from the four petals. The third one is **periwinkle blue**, not purple.
+It was carried as `--purple` `#7070BB`, a different hue that appears nowhere in
+the logo, and the token is renamed as well as revalued: a token named purple
+holding blue is a trap for whoever reads it next.
+
+| Token | Value | Role |
+|---|---|---|
+| `--coral` | `#FD4950` | Primary action, clickable things only |
+| `--amber` | `#FED136` | Emphasis, numerals, stats. Never a button |
+| `--blue` | `#6682F9` | Depth, tags, the Two Markets pillar |
+| `--teal` | `#2CD4AD` | Eyebrows, progress, success |
+
+### Contrast-safe variants
+
+The logo was drawn for a dark ground. The raw accents clear AA there and half of
+them fail on light, so the ink variants hold the same hue and saturation with
+lightness walked down until each clears its target.
+
+**The targets differ because the uses differ.** Amber only ever sets large: 44px
+service numerals, 40px stat figures, the 28px tagline. It needs 3:1, and forcing
+4.5 on it produces an olive that is no longer recognisably the brand. Teal sets
+13px eyebrows and needs 4.5.
+
+| Token | Value | Measured |
+|---|---|---|
+| `--coral-strong` | `#E3141C` | White on it, 4.79:1 |
+| `--amber-ink` | `#AD8701` | 3.01:1 on `#F2F2F4`, large text only |
+| `--blue-ink` | `#3C5FF7` | 4.50:1 on `#F2F2F4` |
+| `--teal-ink` | `#1A7D66` | 4.51:1 on `#F2F2F4` |
+
+The button fill is not the raw accent darkened to the 4.5 floor. At full
+saturation that lands on `#EE030C`, which reads as a warning rather than an
+invitation. Saturation is pulled back slightly and the result sits at 4.79, with
+headroom over the floor rather than exactly on it.
+
+**`--purple-lt` is retired rather than renamed.** It existed because purple read
+4.0:1 on dark and failed body text. Blue reads 5.74:1 there, so no lightened
+variant is needed and one token leaves the system.
+
+### What this resolves and what it does not
+
+The question that started this was why the site did not seem to use all the
+brand colours. Three answers, and only the first was a real defect:
+
+- Two colours, Steel Blue and Orange, were in the Brand Guidelines PDF and in
+  the sweep gradient but **not in the logo at all**. The mark has four petals.
+  The PDF says the palette derives from a four-petal mark and then lists six,
+  which is internally inconsistent. The sweep now reads the four accent tokens
+  rather than six hard-coded hexes, so it cannot drift from the palette again.
+- Blue was being shown as purple, so the site never quite matched the mark.
+- One accent per section (6.2) is unchanged and still correct. The restraint is
+  the point, and it is why four accents read premium where eight read busy.
+
+**The Brand Guidelines PDF is now wrong** and needs reissuing at four colours
+with these values. It is the document handed to clients, so it is the one place
+the old palette still lives.
+
+---
+
+## 5.2 (addendum) The brand lockup
+
+The header and footer carry the mark beside the wordmark. The wordmark stays
+live text rather than becoming part of the image: it keeps its edges at any
+size, it is selectable, and the swept treatment in 6.2 needs real text to work.
+
+The mark is decorative in that context, so its `alt` is empty. The link already
+carries an accessible name.
+
+Adding it made the lockup 33px wider than the wordmark alone, which pushed the
+header past the viewport on small screens. **The wordmark is not dropped in
+response.** An icon-only header loses the name at exactly the width where a
+visitor is least able to guess it. Both parts shrink instead and grow back as
+room appears, at 360 and again at 420, with the page gutter stepping down to
+16px below 360 and the menu control's side padding tightening there. Its 44px
+minimum height is untouched.
+
+Verified at 320, 360, 390, 420, 768 and 1440. 320 is below the floor 13.2 sets
+and now has no overflow at all, where it had 2px before this change.
+
+---
+
 ## Appendix F (updated) Open decisions
 
 | Question | Status | Owner | Needed by |
@@ -915,7 +1026,7 @@ reach claim from being the usual empty one.
 | Price for the podcast service | OPEN. Service 07 is sellable on the website and absent from the Service Menu's five packages. Needs either a package of its own or an add-on line, and a number. See 8.4. | Owner | Before the docs ship |
 | Custom work beyond the ladder | OPEN. A project that fits no tier at the outset, such as e-commerce as the main build, a portal, or more than ten pages, has nowhere to go in the Service Menu. Two decisions needed: a floor for custom engagements, and whether scoping is charged and credited against the build. | Owner | Before the docs ship |
 | Which pricing set is current | OPEN. Two overlapping sets were in circulation. The merged ladder is drafted and researched against both markets, and the Canadian column roughly doubles. Unconfirmed, so the four client documents are drafts. | Owner | Before the docs ship |
-| Brand palette, four accents or six | OPEN. The Brand Guidelines PDF lists six and says the palette derives from the four-petal mark. 6.1 retires Steel Blue and Orange as outside the brand identity. One document is wrong, and the guidelines are the one handed to clients. The build uses four. | Owner | Before the guidelines are reissued |
+| Brand palette, four accents or six | **RESOLVED.** Four, sampled from the logo. The Brand Guidelines PDF still says six and needs reissuing: see 6.1. | Owner | PDF reissue |
 | Publishing rates on the site | OPEN. Recommendation: keep the menu internal until the new rates have held through several real quotes, then publish floors rather than ranges at `/pricing/`, with the two markets explained rather than left to be worked out. | Owner | Post-launch |
 | Host form, www or non-www | RESOLVED: non-www. | Closed | Closed |
 | Analytics and consent | RESOLVED: deferred. | Closed | Closed |

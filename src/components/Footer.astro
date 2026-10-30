@@ -10,7 +10,13 @@ import Tagline from './Tagline.astro';
 
     <div class="footer__top">
       <div>
-        <a class="sweep brandmark" href="/" style="display:inline-block;margin-bottom:var(--s-2);font-size:21px">MavelogxDigital</a>
+        <a class="footer__brand" href="/" aria-label={`${SITE.name}, home`}>
+          <picture>
+            <source type="image/webp" srcset="/img/mark-petals-64.webp 1x, /img/mark-petals-128.webp 2x" />
+            <img src="/img/mark-petals-64.png" alt="" width="34" height="34" loading="lazy" decoding="async" />
+          </picture>
+          <span class="sweep brandmark" style="font-size:21px">MavelogxDigital</span>
+        </a>
         <p style="color:var(--text-2);font-size:var(--fs-small);max-width:34ch">
           A digital creative agency helping ambitious brands build stronger digital experiences.
         </p>

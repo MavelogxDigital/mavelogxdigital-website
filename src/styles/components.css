@@ -128,7 +128,7 @@
 
 /* ---- 11  Insight card ----------------------------------------------- */
 .insight{display:grid;gap:var(--s-2);align-content:start;text-decoration:none;color:inherit}
-.insight__tag{justify-self:start;background:transparent;border:1px solid var(--border);color:var(--purple-text);
+.insight__tag{justify-self:start;background:transparent;border:1px solid var(--border);color:var(--blue-text);
   border-radius:var(--r-full);padding:5px 12px;
   font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
 
@@ -198,6 +198,29 @@
 .nav__link[aria-current="page"]{color:var(--text-1)}
 .nav__link[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:2px;
   height:2px;background:var(--coral)}
+/* Brand lockup: mark beside the wordmark. The mark is decorative here, so its
+   alt is empty: the link already carries an accessible name. */
+/* Adding the mark made the lockup 33px wider than the wordmark alone, which
+   pushed the header past the viewport on small screens. The wordmark is not
+   dropped in response: an icon-only header loses the name at exactly the width
+   where a visitor is least able to guess it. Instead both parts shrink, and
+   grow back as room appears. Measured at 320, 360, 390 and 420. */
+.nav__brand{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.nav__mark{display:block;width:22px;height:22px}
+.nav__brand .brandmark{font-size:16px}
+@media (min-width:360px){
+  .nav__brand{gap:7px}
+  .nav__mark{width:26px;height:26px}
+  .nav__brand .brandmark{font-size:18px}
+}
+@media (min-width:420px){
+  .nav__brand{gap:10px}
+  .nav__mark{width:32px;height:32px}
+  .nav__brand .brandmark{font-size:21px}
+}
+.footer__brand{display:inline-flex;align-items:center;gap:10px;
+  text-decoration:none;margin-bottom:var(--s-2)}
+.footer__brand img{display:block;width:34px;height:34px}
 .nav__burger{display:inline-flex;align-items:center;gap:8px;
   min-height:44px;padding:0 18px;
   background:none;border:1px solid var(--border);border-radius:var(--r-full);
@@ -205,6 +228,13 @@
 .nav__burger:hover{border-color:var(--text-2)}
 .nav__burger:active{background:rgba(128,128,150,.18)}
 .nav__burger-label{font-size:15px;font-weight:600;letter-spacing:.01em}
+/* Below 360 the bar is tight enough that the control's side padding is the
+   last thing with slack in it. The 44px minimum height is untouched, so the
+   target still meets 13.1. */
+@media (max-width:359px){
+  .nav__burger{padding:0 11px;gap:6px}
+  .nav__burger-label{font-size:14px}
+}
 .nav__burger .i-close{display:none}
 .nav__burger[aria-expanded="true"] .i-open{display:none}
 .nav__burger[aria-expanded="true"] .i-close{display:block}
@@ -280,7 +310,7 @@
   font-size:clamp(1.75rem,7vw,5rem);white-space:nowrap}
 .tagline__from{color:var(--coral)}
 .tagline__idea{color:var(--amber-text)}
-.tagline__to{color:var(--purple-text)}
+.tagline__to{color:var(--blue-text)}
 .tagline__impact{color:var(--teal-text)}
 /* Full width above the footer columns, so it holds one line at every size.
    Inside the 2fr brand column it could not. */
@@ -565,17 +595,16 @@
    Footer brandmark: the animated sweep used on the credit line
    of client sites, brought onto our own footer.
 
-   This is the one place the two retired accents (Steel Blue, Orange)
-   still appear. They are in the logo artwork, and the sweep is the
-   logotype rather than interface, so 6.1 does not apply here. Nothing
-   else on the site may use them. Switch to the four-accent version by
-   swapping --brandmark-sweep below.
+   Four accents now, read from the tokens rather than hard-coded, so
+   the sweep cannot drift from the palette. It used to carry six,
+   including Steel Blue and Orange, on the argument that they were in
+   the logo artwork. They are not: the mark has four petals, and the
+   two extras came from the Brand Guidelines PDF, not the logo. See
+   6.1 as amended 30 Oct 2026.
    =========================================================== */
 :root{
   --brandmark-sweep:linear-gradient(90deg,
-    #E85C6E,#F5A825,#7070BB,#3BBFA0,#4A9DC4,#F47820,#E85C6E);
-  /* four-accent alternative:
-     linear-gradient(90deg,#E85C6E,#F5A825,#7070BB,#3BBFA0,#E85C6E); */
+    var(--coral),var(--amber),var(--blue),var(--teal),var(--coral));
 }
 .sweep{
   color:var(--coral-strong);                 /* fallback where clip is unsupported */

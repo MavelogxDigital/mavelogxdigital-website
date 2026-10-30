@@ -48,7 +48,7 @@ export const SERVICES = [
       'Accessibility to WCAG 2.2 AA','Handover and a walkthrough so you can run it'],
     fit:'Anyone whose site is slow, hard to update, or no longer reflects the business behind it.',
     proof:'syndei-embassy' },
-  { n:'03', slug:'content', title:'Content Creation', accent:'var(--purple-text)',
+  { n:'03', slug:'content', title:'Content Creation', accent:'var(--blue-text)',
     desc:'Copy, graphics and multimedia that speak to a specific audience in a specific market.',
     deliverables:['Brand voice and tone guide','Website and landing page copy',
       'Editorial calendar','Graphics and multimedia assets','Photography art direction'],
@@ -73,7 +73,7 @@ export const SERVICES = [
      podcasts built and distributed, substantive in three of the four case
      studies, and absent from the Services page entirely. A prospect who wanted
      one had nowhere to land. Supersedes the six-service count in 8.4. */
-  { n:'07', slug:'podcast', title:'Podcast Production & Distribution', accent:'var(--purple-text)',
+  { n:'07', slug:'podcast', title:'Podcast Production & Distribution', accent:'var(--blue-text)',
     desc:'A show set up, published and carried to the platforms your audience already uses, run from a workflow you own.',
     deliverables:['Show setup: name, artwork, description and category',
       'Hosting and feed configuration in your own account',
@@ -90,7 +90,7 @@ export const PILLARS = [
     body:'Every engagement opens with the business problem, the audience and the competitive position. Design decisions follow from that. It is why they hold up when a client asks why.' },
   { title:'AI-Augmented Delivery', accent:'var(--amber-text)',
     body:'Intelligent workflows absorb the research, iteration and production load. The thinking gets the time it deserves and the timeline still shortens.' },
-  { title:'Built for Two Markets', accent:'var(--purple-text)',
+  { title:'Built for Two Markets', accent:'var(--blue-text)',
     body:'Active delivery across Canada and Ghana means designing for real differences in device, bandwidth, payment habit and cultural read. Not one assumed default audience.' },
   { title:'One Accountable Team', accent:'var(--teal-text)',
     body:'Strategy, identity, build and launch under a single point of contact. Nothing is subcontracted into a gap where accountability disappears.' },

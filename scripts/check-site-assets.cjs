@@ -146,6 +146,32 @@ for (const file of pages) {
   }
 }
 
+/* ---- 6. images nothing references ------------------------------------
+   The mirror of the dangling-reference check above. Eight logo files sat in
+   public/img unreferenced from the day the scaffold went up, roughly half a
+   megabyte, and nothing noticed because an unused file breaks nothing. Scoped
+   to /img/ because the root holds favicons and share cards, which are
+   referenced from places this walk does not read. References are collected
+   from the built HTML and CSS, so a path assembled at build time still
+   counts. */
+const imgDir = path.join(DIST, 'img');
+if (fs.existsSync(imgDir)) {
+  const referenced = new Set();
+  const collect = (text) => {
+    for (const m of text.matchAll(/\/img\/([^"'\s,)]+)/g)) referenced.add(m[1]);
+  };
+  for (const f of pages) collect(read(f));
+  (function css(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p2 = path.join(dir, e.name);
+      if (e.isDirectory()) css(p2);
+      else if (/\.(css|js)$/.test(e.name)) collect(read(p2));
+    }
+  })(DIST);
+  const orphans = fs.readdirSync(imgDir).filter((f) => !referenced.has(f));
+  for (const o of orphans) fail(`public/img/${o} is in the build and nothing references it`);
+}
+
 console.log(`site assets: ${pages.length} pages walked, ${listed.size} sitemap URLs`);
 if (fails.length) {
   console.error(`\nSITE ASSET FAILURES (${fails.length}):`);

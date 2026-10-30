@@ -8,8 +8,17 @@ const { page = '', transparent = false } = Astro.props;
     slide-in overlay panel in 5.2. */}
 <header class="nav" data-transparent={transparent ? 'true' : 'false'}>
   <div class="container nav__in">
-    <a class="sweep brandmark nav__brand" href="/" aria-label={`${SITE.name}, home`}>
-      MavelogxDigital
+    {/* Mark plus wordmark. The mark is the four-petal logo, which the palette
+        in 6.1 is now sampled from, so the two cannot drift apart. The wordmark
+        stays live text rather than part of the image: it keeps its edges at
+        any size, it is selectable, and the swept treatment needs real text. */}
+    <a class="nav__brand" href="/" aria-label={`${SITE.name}, home`}>
+      <picture>
+        <source type="image/webp" srcset="/img/mark-petals-64.webp 1x, /img/mark-petals-128.webp 2x" />
+        <img class="nav__mark" src="/img/mark-petals-64.png" alt="" width="32" height="32"
+             decoding="async" />
+      </picture>
+      <span class="sweep brandmark">MavelogxDigital</span>
     </a>
 
     <nav class="nav__links" aria-label="Primary">
