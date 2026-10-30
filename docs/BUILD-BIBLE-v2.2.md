@@ -73,7 +73,7 @@ here rather than left in a conversation, per 15.1.
 | 30 | The guard suite has been run and passes. | Closes the known gap in 13.5. |
 | 31 | Podcast Production & Distribution becomes service 07. | Supersedes the six-service count settled in 8.4 and the conflict log at 1.4. Rewrites 9.1's service list, the homepage heading in 8.4, and Appendix A section 04. |
 | 32 | The hero location strip is removed. | Rewrites 8.1 and Appendix A section 01. |
-| 33 | The fifteen years of design practice claim is removed from the site entirely. | Rewrites 8.3, 9.3 and Appendix A section 03. |
+| 33 | The fifteen years claim is cut from six places to three, and says what the years were in. | Rewrites 8.3, 9.3 and Appendix A section 03. |
 | 34 | A fourth Insights article ships, on podcast distribution. | Extends 8.8. The homepage still shows three, newest first. |
 
 ### Decisions taken and then reversed
@@ -454,30 +454,42 @@ a moment later.
 
 ---
 
-## 8.3 and 9.3 (amended) The fifteen years claim is removed
+## 8.3 and 9.3 (amended) The fifteen years claim, cut from six to three
 
 "Fifteen years of design practice" appeared six times across the homepage and
-About, including as a section heading, a stat, a line in the founder block and
-the About page meta description. All six are gone, by owner decision on
-30 October.
+About: a section heading, a stat, the story, the founder block, the homepage
+agency introduction and the About meta description.
 
-The claim was accurate and it was still worth removing. Three reasons it was not
-earning its place:
+Six instances of one credential across two pages is padding, and 3.6 asks for
+economical rather than padded. A claim repeated that often starts to sound like
+the only one available. It was cut to three, each doing a different job.
 
-- **It was repeated to the point of padding.** Six instances of one credential
-  on two pages. 3.6 asks for economical rather than padded, and a claim repeated
-  that often starts to sound like the only one available.
-- **It invited the wrong inference.** On a web studio's site, "fifteen years"
-  reads as fifteen years of building websites. The experience is in design
-  practice, which the copy said, but a reader does the easier arithmetic.
-- **It sat next to "Founded 2026" in the same stat row.** Two figures that need
-  reconciling, presented without the reconciliation, in the one block on the
-  site whose whole premise is "only what can be verified".
+| Where | What it does there |
+|---|---|
+| The story | The reason the judgement is worth anything. "That judgement comes from somewhere: fifteen years in graphic design, long enough to have seen which decisions hold up and which ones get rebuilt a year later." The number justifies the claim above it rather than standing alone. |
+| The founder block | The biography, and the only place that says what the fifteen years actually were. "Emmanuel spent fifteen years in graphic design before founding MavelogxDigital." |
+| The stat row | The verifiable fact. `15+ Years in design`. |
 
-What replaces it is nothing. The founder block still names a founder and shows a
-face, which is what 9.3 says answers the real question a prospect has. The
-approach section now reads "What we insist on, every time", which says the same
-thing without leaning on a number.
+Two problems were fixed on the way, and both are worth keeping in mind for any
+seniority claim:
+
+- **Say what the years were in.** On a web studio's site a bare "fifteen years"
+  reads as fifteen years of building websites. The experience is in graphic
+  design. Naming it is both more accurate and more useful, because it explains
+  why the work looks the way it does.
+- **Reconcile it with "Founded 2026" rather than leaving the reader to.** Those
+  two figures sit in the same stat row, and in the one block whose premise is
+  "only what can be verified" an unexplained gap is the wrong thing to leave.
+  The founder block now carries "before founding MavelogxDigital", which does
+  the reconciling in prose, so the stat label can stay short. It has to stay
+  short: a label long enough to carry the explanation broke the row onto two
+  lines and orphaned the last figure.
+
+What was dropped and stays dropped: the section heading, which read "What
+fifteen years taught us to insist on" and is now "What we insist on, every
+time", and the homepage mention. A section heading is the weakest possible place
+for a credential, and the homepage introduction says what the agency does
+without needing to cite seniority to do it.
 
 ---
 
@@ -511,9 +523,13 @@ ones, not to add tags.
 | Figure | Label |
 |---|---|
 | 2026 | Founded |
+| 15+ | Years in design |
 | 2 | Markets served |
 | 6 | Websites shipped |
 | 3 | Podcasts built and distributed |
+
+Five figures fit on one line at desktop width. A sixth, or a label longer than
+about three words, wraps the row and orphans the last one.
 
 v2.1 showed four projects shipped. The real figure is nine: six websites and
 three podcasts. They are split across two stats rather than merged into one,
