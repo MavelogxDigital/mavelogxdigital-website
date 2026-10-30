@@ -11,6 +11,7 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
 ---
 <BaseLayout
   page="contact"
+  crumbs={[{ name: "Contact", path: "/contact/" }]}
   title="Contact | MavelogxDigital"
   description="Tell us about your project. We reply within one business day with honest thoughts on what it needs."
 >
@@ -97,7 +98,7 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
         </div>
         <div class="channel">
           <dt>Where we are</dt>
-          <dd style="color:var(--text-2)">{SITE.base}. Delivering across {SITE.delivers}.</dd>
+          <dd style="color:var(--text-2)">{SITE.base}. {SITE.delivers} are the markets we know best. {SITE.reach}</dd>
         </div>
         <div class="channel">
           <dt>Response time</dt>

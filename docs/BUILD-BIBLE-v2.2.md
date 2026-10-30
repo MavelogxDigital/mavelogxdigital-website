@@ -75,6 +75,9 @@ here rather than left in a conversation, per 15.1.
 | 32 | The hero location strip is removed. | Rewrites 8.1 and Appendix A section 01. |
 | 33 | The fifteen years claim is cut from six places to three, and says what the years were in. | Rewrites 8.3, 9.3 and Appendix A section 03. |
 | 34 | A fourth Insights article ships, on podcast distribution. | Extends 8.8. The homepage still shows three, newest first. |
+| 35 | The location claim is split: one base, Toronto, and the markets served stated separately. | Rewrites 9.3, 9.6 and the footer in 8.10. |
+| 36 | Reach beyond the two markets is stated wherever the base is, in copy and in areaServed. | Extends 9.3, 9.6, 8.3 and 11.1. |
+| 37 | Structured data is restored. The rebuild had none on any page. | Closes 11.1, which had never been built. |
 
 ### Decisions taken and then reversed
 ### Decisions taken and then reversed
@@ -794,6 +797,56 @@ fourth is now written.
 
 What remains outside Phase 2 is the SVG logo sources at Appendix F, and the
 commercial decisions listed there.
+
+---
+
+## 11.1 (amended) Structured data was missing entirely
+
+The Astro rebuild shipped with no JSON-LD on any page. The single-file site it
+replaces carries a twelve-type graph: Organization, ProfessionalService,
+WebSite, SearchAction, Service, OfferCatalog, Offer, Place, PostalAddress,
+ContactPoint, EntryPoint and ImageObject. v2.1 called that foundation genuinely
+good and said it carries forward. It did not.
+
+Merging in that state would have stripped the live site of every
+machine-readable signal it has. Restored on 30 October as
+`src/components/StructuredData.astro`, generated per page from `site.ts` rather
+than pasted, so it cannot drift from the data the way a hand-maintained block
+does.
+
+| Page | Graph |
+|---|---|
+| Every page | Organization, WebSite |
+| Services | Plus one Service per service, seven of them |
+| Case study | Plus CreativeWork, with the hero as its image |
+| Article | Plus Article, with its publication date |
+| Every page below the root | Plus BreadcrumbList |
+
+The Organization entity carries the Canadian voice number, a Toronto postal
+address and the logo. This is also where 11.4's split gets its machine-readable
+form: one telephone, the voice line, as the earlier graph named the Ghanaian
+WhatsApp number as the business phone.
+
+### areaServed, and saying so in copy
+
+`areaServed` names Canada and Ghana as countries and Worldwide alongside them.
+The previous graph declared no service area at all, which left a search engine
+to infer one from an address in Toronto.
+
+The same claim is made in copy, in `SITE.reach`, wherever the base is stated:
+About under the stats, Contact under "Where we are", the homepage introduction
+and the FAQ. The wording is **"The work is remote, so where you are is rarely
+the constraint."**
+
+It is deliberately not "working with brands worldwide". That phrase fails the
+test in 3.6 outright, since any competitor could put their name on it unchanged,
+and it would undercut the Built for Two Markets pillar, where the specificity is
+the entire point. The claim to make is that two markets are known deeply and
+distance is not a barrier, not that everywhere is served equally well.
+
+The FAQ answer carries the honest half: if a market needs knowledge the agency
+does not have, it says so rather than guessing. That sentence is what stops the
+reach claim from being the usual empty one.
 
 ---
 

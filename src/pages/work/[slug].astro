@@ -28,6 +28,10 @@ const isDev = import.meta.env.DEV;
   title={`${d.client}, Case Study | MavelogxDigital`}
   description={`${d.descriptor}. ${d.sector}, ${d.year}.`}
   ogImage={d.hero}
+  schema="case-study"
+  schemaImage={d.hero}
+  crumbs={[{ name: 'Our Work', path: '/work/' },
+           { name: d.client, path: `/work/${entry.id}/` }]}
 >
   {/* ---------- 01 HERO ---------- */}
   <section class="container cs-hero">

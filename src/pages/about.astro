@@ -12,6 +12,7 @@ import { PILLARS, SITE } from '../site';
 ---
 <BaseLayout
   page="about"
+  crumbs={[{ name: "About", path: "/about/" }]}
   title="About | MavelogxDigital"
   description="A digital creative agency based in Toronto, working across Ghana and Canada, built on fifteen years of design practice and AI-augmented delivery."
 >
@@ -127,7 +128,7 @@ import { PILLARS, SITE } from '../site';
         <Stat figure="3" label="Podcasts built and distributed" />
       </div>
       <p style="color:var(--text-2);font-size:var(--fs-small);margin-top:var(--s-4)">
-        Based in {SITE.base}. Delivering across {SITE.delivers}.
+        Based in {SITE.base}. {SITE.delivers} are the markets we know best. {SITE.reach}
       </p>
     </div>
   </section>

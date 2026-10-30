@@ -1,6 +1,7 @@
 ---
 /** Bible 11.1, every page carries its own complete metadata set. No inheritance. */
 import { SITE } from '../site';
+import StructuredData from '../components/StructuredData.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -11,10 +12,17 @@ interface Props {
   description: string;
   page?: string;              // drives nav active state
   ogImage?: string;
+  /* 11.1 structured data. Defaults to a plain page with no trail; the pages
+     that carry an entity pass their own. */
+  schema?: 'home' | 'services' | 'case-study' | 'article' | 'page';
+  schemaImage?: string;
+  schemaDate?: string;
+  crumbs?: { name: string; path: string }[];
   transparentNav?: boolean;   // true on Home only (5.2)
 }
 const { title, description, page = '', ogImage = '/og-facebook-whatsapp-linkedin.png',
-        transparentNav = false } = Astro.props;
+        transparentNav = false, schema = 'page', schemaImage, schemaDate,
+        crumbs = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogAbs = new URL(ogImage, SITE.url).href;
 /* Share cards must declare the real size. The default card is 1200x630; a case
@@ -77,6 +85,9 @@ const ogH = ogIsHero ? '720'  : '630';
       if (t && location.pathname === '/') location.replace(t);
     })();
   </script>
+
+  <StructuredData kind={schema} title={title} description={description}
+    image={schemaImage} datePublished={schemaDate} crumbs={crumbs} />
 </head>
 <body data-page={page}>
   <a class="skip" href="#main">Skip to content</a>

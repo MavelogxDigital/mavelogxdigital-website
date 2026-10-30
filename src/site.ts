@@ -18,6 +18,11 @@ export const SITE = {
      it meant the second. There is one base. Owner correction, 30 Oct 2026. */
   base: 'Toronto, Canada',
   delivers: 'Ghana and Canada',
+  /* Said wherever the base is said, so a reader outside those two markets does
+     not rule themselves out. Deliberately not "working with brands worldwide":
+     every agency claims that, it says nothing, and it would undercut the Built
+     for Two Markets pillar, where the specificity is the point. */
+  reach: 'The work is remote, so where you are is rarely the constraint.',
 } as const;
 
 export const NAV = [
@@ -226,7 +231,7 @@ export const FAQ = [
   { q:'Can I update the site myself?',
     a:'Yes. The handover covers how to edit content, add a project or publish a post. If you can edit a document you can run the site.' },
   { q:'Do you work with clients outside Canada and Ghana?',
-    a:'Yes. Those are the two markets we know best and design for by default, but the work is not limited to them.' },
+    a:'Yes. Those are the two markets we design for by default, and the work is remote, so where you are is rarely the constraint. If your market needs knowledge we do not have, we will say so rather than guess at it.' },
   { q:'What do you need from me to start?',
     a:'A conversation, any existing brand material, and one person who can make decisions. Everything else we work out together in Discover.' },
 ] as const;
