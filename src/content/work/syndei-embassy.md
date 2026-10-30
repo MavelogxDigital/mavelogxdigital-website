@@ -7,7 +7,7 @@ year: "2026"
 live: https://syndeiembassy.org
 inHouse: false
 order: 2
-hero: /img/syndei-embassy-1280.webp
+hero: /img/syndei-embassy-v2-1280.webp
 heroAlt: The Syndei Embassy homepage, "Revealing Jesus. Living bound to Him." beside a portrait of Prophet AK Lawrence, who founded the ministry
 lead: >
   Syndei Embassy is a church in Accra. A church website is usually asked to be everything to
@@ -86,41 +86,41 @@ identity:
     - Instrument Sans for body and controls
     - Instrument Serif for scripture and pull quotes
 shots:
-  - src: /img/syndei-embassy-full-960.webp
+  - src: /img/syndei-embassy-home-complete-960.webp
     w: 960
-    h: 5144
+    h: 5253
     device: full
-    alt: The complete Syndei Embassy homepage, from the pastor portrait hero through service times, the welcome, the vision band, the podcast, four ministries, next steps, prayer, giving and a closing invitation
+    alt: The complete Syndei Embassy homepage, from the portrait hero through service times, the welcome, the vision band, the podcast, four ministries, next steps, prayer, giving and a closing invitation
     caption: End to end. Every section answers either whether you would belong here or how to turn up.
-  - src: /img/syndei-embassy-home-mobile-780.webp
+  - src: /img/syndei-embassy-home-phone-780.webp
     w: 780
     h: 1688
     device: mobile
-    alt: The homepage on a phone, the pastor portrait above the headline Revealing Jesus, Living bound to Him, with Plan Your Visit as the first action
-    caption: On a phone. Plan Your Visit is the first thing a hand reaches, and a WhatsApp control stays within thumb reach throughout.
-  - src: /img/syndei-embassy-ministries-1200.webp
+    alt: The homepage on a phone, the portrait above the headline Revealing Jesus, Living bound to Him, with Plan Your Visit as the first full-width button and a WhatsApp control floating at the lower right
+    caption: On a phone. Plan Your Visit is the first thing a hand reaches, and the WhatsApp control sits in the corner a thumb already rests on.
+  - src: /img/syndei-embassy-visit-1200.webp
     w: 1200
     h: 750
     device: desktop
-    alt: The ministries page, Find your place among us over a photograph of the congregation, above a plan-your-visit panel covering when, where, what to expect and joining remotely
-    caption: When, where, what to expect, and what to do if you cannot come in person. The questions a first visit actually raises.
-  - src: /img/syndei-embassy-ministries-mobile-780.webp
+    alt: The plan your visit section, Everything you need before you come, with four cards reading When, Where, What to expect and Can't make it, above a map of Teshie-Nungua
+    caption: The four questions a first visit actually raises, answered in four cards and a map. The fourth one, can't make it, is the one most church sites leave out.
+  - src: /img/syndei-embassy-visit-phone-780.webp
     w: 780
     h: 1688
     device: mobile
-    alt: The ministries page on a phone, the congregation photograph behind the heading with Plan Your Visit and Request Prayer stacked full width
-    caption: Both actions go full width rather than sitting side by side.
-  - src: /img/syndei-embassy-spirit-word-1200.webp
+    alt: The same plan your visit section on a phone, the When, Where and What to expect cards stacked full width with Get Directions under the address
+    caption: The cards stack rather than shrink, so each answer keeps its own screen.
+  - src: /img/syndei-embassy-podcast-1200.webp
     w: 1200
     h: 750
     device: desktop
-    alt: The Spirit Word page, Revealing Christ, Restoring Hope over an open Bible, with Spotify, Apple Podcasts, Audible and Amazon Music buttons
-    caption: The teaching podcast, with the platforms stated plainly. A visitor can hear the church before deciding to visit it.
-  - src: /img/syndei-embassy-about-1200.webp
+    alt: The Spirit Word page, Revealing Christ, Restoring Hope over an open Bible, with Spotify, Apple Podcasts, Audible and Amazon Music buttons beneath
+    caption: The teaching, with the platforms stated plainly. A visitor can hear the church before deciding to attend it.
+  - src: /img/syndei-embassy-story-1200.webp
     w: 1200
     h: 750
     device: desktop
-    alt: The about page story section, From a fast to an Embassy, a dated timeline beginning January 2015 with photographs of the early congregation
+    alt: The about page story section, From a fast to an Embassy, a dated timeline opening on 5 January 2015 with photographs of the early congregation
     caption: The story as a dated timeline. A church that can show where it came from is easier to trust than one that only states what it believes.
 decisions:
   - title: Service times get their own place in the hero

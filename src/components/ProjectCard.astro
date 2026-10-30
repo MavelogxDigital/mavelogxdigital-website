@@ -7,20 +7,25 @@ interface Props {
   imgAlt: string;
   /** Omit to use /img/<slug>-<w>.{webp,jpg}; pass `img` for a one-off like the placeholder. */
   img?: string;
+  /** Filename stem for the card srcset, defaulting to the slug. A recapture
+   *  ships under a new stem so returning visitors are not served the previous
+   *  picture out of cache (5.5). Held per project in site.ts, not here. */
+  imgBase?: string;
   wide?: boolean; inHouse?: boolean; delay?: number; plate?: boolean;
   /** h2 directly under a page h1, h3 when nested under a section h2. */
   level?: 2 | 3;
 }
-const { slug, client, tags, imgAlt, img, wide = false, inHouse = false,
+const { slug, client, tags, imgAlt, img, imgBase, wide = false, inHouse = false,
         delay = 0, plate = false, level = 3 } = Astro.props;
+const stem = imgBase ?? slug;
 const H = `h${level}` as 'h2' | 'h3';
 
 const widths = wide ? [1280, 960] : [960, 480];
 const w = wide ? 1280 : 960;
 const h = wide ? 720 : 720;
-const src    = img ?? `/img/${slug}-${w}.jpg`;
-const srcset = img ? undefined : widths.map(x => `/img/${slug}-${x}.webp ${x}w`).join(', ');
-const jpgset = img ? undefined : widths.map(x => `/img/${slug}-${x}.jpg ${x}w`).join(', ');
+const src    = img ?? `/img/${stem}-${w}.jpg`;
+const srcset = img ? undefined : widths.map(x => `/img/${stem}-${x}.webp ${x}w`).join(', ');
+const jpgset = img ? undefined : widths.map(x => `/img/${stem}-${x}.jpg ${x}w`).join(', ');
 const sizes  = wide ? '(min-width: 900px) 1216px, 100vw' : '(min-width: 900px) 592px, 100vw';
 ---
 <a class={`proj-card rv ${wide ? 'proj-card--wide' : ''}`} data-d={delay} href={`/work/${slug}/`}>

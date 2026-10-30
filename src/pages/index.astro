@@ -15,7 +15,7 @@ import Testimonial from '../components/Testimonial.astro';
 import CtaBand from '../components/CtaBand.astro';
 import InsightCard from '../components/InsightCard.astro';
 import { getCollection } from 'astro:content';
-import { SITE, SERVICES, PILLARS, PROCESS, FEATURED } from '../site';
+import { SITE, SERVICES, PILLARS, PROCESS, FEATURED, cardStem } from '../site';
 
 const posts = (await getCollection('insights', (e) => !e.data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -71,12 +71,12 @@ const ALT: Record<string, string> = {
       />
       <div class="grid" style="margin-bottom:var(--s-4)">
         <ProjectCard wide slug={lead.slug} client={lead.client} tags={lead.tags}
-          inHouse={lead.inHouse} imgAlt={ALT[lead.slug]} />
+          inHouse={lead.inHouse} imgAlt={ALT[lead.slug]} imgBase={cardStem(lead.slug)} />
       </div>
       <div class="grid grid-2">
         {rest.map((p, i) => (
           <ProjectCard slug={p.slug} client={p.client} tags={p.tags} inHouse={p.inHouse}
-            imgAlt={ALT[p.slug]} delay={i + 1} />
+            imgAlt={ALT[p.slug]} imgBase={cardStem(p.slug)} delay={i + 1} />
         ))}
       </div>
     </div>

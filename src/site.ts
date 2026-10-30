@@ -95,6 +95,9 @@ export const PROJECTS = [
   { slug:'syndei-embassy', client:'Syndei Embassy', live:'https://syndeiembassy.org',
     sector:'Church / community', year:'2026', inHouse:false,
     featured:true, caseStudy:true,
+    /* Recaptured 29 Oct 2026. New stem rather than new bytes under the old
+       names, so returning visitors get the new picture (5.5). */
+    cardBase:'syndei-embassy-v2',
     tags:['Brand Identity','Web Design','Digital Presence'],
     blurb:'A church in Accra given a restrained, confident digital home with WhatsApp built into the visit journey.' },
   { slug:'mavelogx-enterprise', client:'Mavelogx Enterprise', live:'https://mavelogx.com',
@@ -114,6 +117,12 @@ export const PROJECTS = [
 /** Helpers so pages never hand-pick projects. */
 export const FEATURED    = PROJECTS.filter(p => p.featured);
 export const CASE_STUDIES = PROJECTS.filter(p => p.caseStudy);
+
+/** Filename stem for a project's card images. Defaults to the slug; a project
+ *  that has been recaptured carries a cardBase so the new pictures ship under
+ *  new names (5.5). Pages read this rather than assembling paths themselves. */
+export const cardStem = (slug: string): string =>
+  (PROJECTS.find(p => p.slug === slug) as { cardBase?: string } | undefined)?.cardBase ?? slug;
 
 
 /** Industries. `proof` links to a case study; the rest are reach, not evidence (9.1). */
