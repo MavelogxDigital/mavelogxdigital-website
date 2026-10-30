@@ -13,7 +13,11 @@ export const SITE = {
   phone: '+1 (437) 259-1010',
   phoneHref: 'tel:+14372591010',
   whatsapp: 'https://wa.me/233247493949',
-  locations: 'Toronto, Canada & Accra, Ghana',
+  /* Where the agency is and where it delivers are two different claims, and
+     one string saying "Toronto, Canada & Accra, Ghana" asserted the first when
+     it meant the second. There is one base. Owner correction, 30 Oct 2026. */
+  base: 'Toronto, Canada',
+  delivers: 'Ghana and Canada',
 } as const;
 
 export const NAV = [
