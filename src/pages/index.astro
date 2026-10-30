@@ -57,11 +57,11 @@ const ALT: Record<string, string> = {
         <a class="btn btn--ghost" href="/work/">Explore Our Work</a>
       </div>
     </div>
-    <div class="container">
-      <div class="hero__foot rv" data-d="4">
-        Toronto, Canada &nbsp;•&nbsp; Accra, Ghana &nbsp;•&nbsp; Working with brands worldwide
-      </div>
-    </div>
+    {/* The location strip specified in 8.1 is removed. Owner decision,
+        30 Oct 2026. Both locations still appear in the footer on every page,
+        which is where 13.1's consistent-help criterion wants them, and the
+        agency introduction two sections down says the same thing in a
+        sentence rather than a label. */}
   </section>
 
   {/* ---------- 02 · SELECTED WORK, proof before explanation ---------- */}
@@ -102,9 +102,9 @@ const ALT: Record<string, string> = {
           Commercially, visually and technically.
         </p>
         <p>
-          Every engagement starts with the business problem, not the deliverable. Fifteen years
-          of design practice sits behind that. AI-augmented workflows sit underneath it, so the
-          thinking gets the time it deserves and the production work still moves faster.
+          Every engagement starts with the business problem, not the deliverable.
+          AI-augmented workflows sit underneath that, so the thinking gets the time it
+          deserves and the production work still moves faster.
         </p>
         <p>
           We work with founders directly. One team, one point of contact, from the first
@@ -120,7 +120,7 @@ const ALT: Record<string, string> = {
     <div class="container">
       <SectionHead
         eyebrow="What We Do"
-        heading="Six ways we build your brand."
+        heading="Seven ways we build your brand."
         lead="From the first brand touchpoint to a fully scaled digital presence, under one accountable team."
       />
       {SERVICES.map((s, i) => <ServiceRow {...s} delay={Math.min(i, 6)} />)}
@@ -248,10 +248,7 @@ const ALT: Record<string, string> = {
   }
   .hero__lead { font-size: var(--fs-lead); color: var(--text-2); max-width: 46ch }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2) }
-  .hero__foot {
-    position: relative; z-index: 1; margin-top: var(--s-7);
-    padding-top: var(--s-3); border-top: 1px solid var(--border);
-    font-size: var(--fs-eyebrow); letter-spacing: .1em; text-transform: uppercase;
-    color: var(--text-2);
-  }
+  /* .hero__foot removed with the location strip, 30 Oct 2026. An unused rule
+     becomes a used rule within a month, which is how eight accent colours
+     happened the first time (15.2). */
 </style>

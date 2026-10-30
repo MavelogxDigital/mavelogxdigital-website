@@ -2,7 +2,7 @@
 client: Mavel's Corner
 descriptor: Publication, podcast infrastructure and brand voice for a faith-lifestyle ministry
 sector: In-house venture, faith lifestyle
-services: [Web Design & Development, Podcast Infrastructure, Brand Voice, Content Strategy]
+services: [Web Design & Development, Podcast Production & Distribution, Brand Voice, Content Strategy]
 year: "2026"
 live: https://mavelscorner.blog
 inHouse: true

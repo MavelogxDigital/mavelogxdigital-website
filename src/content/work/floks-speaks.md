@@ -2,7 +2,7 @@
 client: Floks Speaks
 descriptor: Brand identity, website and podcast infrastructure for a Christ-centred spoken-word artist
 sector: Spoken word / faith
-services: [Brand Identity, Web Design & Development, Podcast Infrastructure, Photography Direction]
+services: [Brand Identity, Web Design & Development, Podcast Production & Distribution, Photography Direction]
 year: "2026"
 live: https://floksspeaks.org
 inHouse: false

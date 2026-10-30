@@ -71,7 +71,12 @@ here rather than left in a conversation, per 15.1.
 | 28 | The styleguide is excluded from the sitemap. | Amends 11.3. |
 | 29 | The retired-phrase guard checks all five words 13.3 names, not three. | Amends 13.5. |
 | 30 | The guard suite has been run and passes. | Closes the known gap in 13.5. |
+| 31 | Podcast Production & Distribution becomes service 07. | Supersedes the six-service count settled in 8.4 and the conflict log at 1.4. Rewrites 9.1's service list, the homepage heading in 8.4, and Appendix A section 04. |
+| 32 | The hero location strip is removed. | Rewrites 8.1 and Appendix A section 01. |
+| 33 | The fifteen years of design practice claim is removed from the site entirely. | Rewrites 8.3, 9.3 and Appendix A section 03. |
+| 34 | A fourth Insights article ships, on podcast distribution. | Extends 8.8. The homepage still shows three, newest first. |
 
+### Decisions taken and then reversed
 ### Decisions taken and then reversed
 
 Recorded because 15.1 asks for the reasoning, not only the outcome.
@@ -398,6 +403,84 @@ which one comes out, not a markup edit.
 
 ---
 
+## 8.4 (amended) Services, now seven
+
+v2.0 settled on six after a specific argument, recorded in the 1.4 conflict log:
+the other document wanted five with AI-augmentation listed as a service, and
+that was rejected because AI-augmentation is a method rather than a line item.
+That reasoning still holds. This is a different case.
+
+**07. Podcast Production & Distribution.** Accent Purple. Proof links to Floks
+Speaks.
+
+This was already shipped work with no line on the menu. It is substantive in
+three of the four case studies, two of them third-party clients, and it appeared
+nowhere on the Services page. A prospect who wanted a podcast built had nothing
+to land on, and you cannot be hired for something you do not list.
+
+The test 8.4 applied to E-Commerce applies here and gives the same answer: it is
+a package already delivered and absent from the website. The difference from the
+rejected AI-augmentation case is that this is a deliverable a client buys, not a
+way of working.
+
+Two consequences follow, both now done:
+
+- The homepage heading reads "Seven ways we build your brand." The Services page
+  lead and metadata say seven capabilities.
+- Two case studies tagged this work "Podcast Infrastructure". They now read
+  "Podcast Production & Distribution", so a prospect moving from the service to
+  the proof sees the same words. "Infrastructure" also leaned toward naming the
+  plumbing, which 10.1 rules out of published copy.
+
+### Still open: the podcast line has no price
+
+The Service Menu prices five packages and none of them is a podcast. The service
+is now sellable on the website and unpriced in the document a prospect receives.
+That is a commercial decision, not a documentation one, and it sits in Appendix F
+with the rest of the pricing work.
+
+---
+
+## 8.1 (amended) Hero, the location strip is removed
+
+v2.1 specified a location strip at the foot of the hero, above a 1px rule. It is
+removed, by owner decision on 30 October, along with its `.hero__foot` rule.
+
+Nothing is lost. Both locations appear in the footer on every page, which is
+where 13.1's consistent-help criterion wants contact details, and the agency
+introduction two sections down says the same thing in a sentence rather than a
+label. The strip was repeating in the first screen what the page says properly
+a moment later.
+
+---
+
+## 8.3 and 9.3 (amended) The fifteen years claim is removed
+
+"Fifteen years of design practice" appeared six times across the homepage and
+About, including as a section heading, a stat, a line in the founder block and
+the About page meta description. All six are gone, by owner decision on
+30 October.
+
+The claim was accurate and it was still worth removing. Three reasons it was not
+earning its place:
+
+- **It was repeated to the point of padding.** Six instances of one credential
+  on two pages. 3.6 asks for economical rather than padded, and a claim repeated
+  that often starts to sound like the only one available.
+- **It invited the wrong inference.** On a web studio's site, "fifteen years"
+  reads as fifteen years of building websites. The experience is in design
+  practice, which the copy said, but a reader does the easier arithmetic.
+- **It sat next to "Founded 2026" in the same stat row.** Two figures that need
+  reconciling, presented without the reconciliation, in the one block on the
+  site whose whole premise is "only what can be verified".
+
+What replaces it is nothing. The founder block still names a founder and shows a
+face, which is what 9.3 says answers the real question a prospect has. The
+approach section now reads "What we insist on, every time", which says the same
+thing without leaning on a number.
+
+---
+
 ## 9.1 (amended) Services, the industries grid
 
 Ten industries, four carrying a Proven tag that links to a real case study. v2.1
@@ -428,7 +511,6 @@ ones, not to add tags.
 | Figure | Label |
 |---|---|
 | 2026 | Founded |
-| 15+ | Years of design practice |
 | 2 | Markets served |
 | 6 | Websites shipped |
 | 3 | Podcasts built and distributed |
@@ -668,13 +750,17 @@ Three changes across the deck.
   full process", "All insights". None carries a trailing character.
 - **No em dashes** in any body copy. Periods, commas or colons instead. The
   paragraphs in sections 03 and 05 of the v2.1 deck are rewritten accordingly.
-- **Section 07, Client Testimonials**, is replaced by the three quotes in 8.7.
+- **Section 07, Client Testimonials**, is replaced by the four quotes in 8.7.
   The "Incoming" note about collecting two more is closed: the Floks Speaks
   quote arrived, the Syndei Embassy one is still outstanding, and the ceiling is
   four.
 
 The footer contact line shows the email and the voice number. It does not show
 the WhatsApp number, per 11.4.
+
+Three further changes on 30 October: the hero foot strip in section 01 is
+removed per 8.1, the services list in section 04 runs to seven, and the
+fifteen-years sentence in section 03 is gone per 8.3.
 
 ---
 
@@ -712,6 +798,7 @@ commercial decisions listed there.
 | Run the guard suite | **RESOLVED.** Run 30 October against `c32e5d0`, all checks pass. Re-run before merge. | Closed | Closed |
 | Legacy hotfix | **DEFERRED BY DECISION, 28 October.** The hotfix is corrected and on the branch. It will not ship separately: the owner chose to fix the live site by merging the rebuild. Until that merge, the live site displays the Canadian number inside a `tel:` that dials Ghana, and its structured data names the Ghanaian line as the business telephone. | Owner | At merge |
 | Pricing page | OPEN. Not specified here. If added it belongs at `/pricing/`, reached from Services and Contact, never from the homepage hero. | Owner | Post-launch |
+| Price for the podcast service | OPEN. Service 07 is sellable on the website and absent from the Service Menu's five packages. Needs either a package of its own or an add-on line, and a number. See 8.4. | Owner | Before the docs ship |
 | Custom work beyond the ladder | OPEN. A project that fits no tier at the outset, such as e-commerce as the main build, a portal, or more than ten pages, has nowhere to go in the Service Menu. Two decisions needed: a floor for custom engagements, and whether scoping is charged and credited against the build. | Owner | Before the docs ship |
 | Which pricing set is current | OPEN. Two overlapping sets were in circulation. The merged ladder is drafted and researched against both markets, and the Canadian column roughly doubles. Unconfirmed, so the four client documents are drafts. | Owner | Before the docs ship |
 | Brand palette, four accents or six | OPEN. The Brand Guidelines PDF lists six and says the palette derives from the four-petal mark. 6.1 retires Steel Blue and Orange as outside the brand identity. One document is wrong, and the guidelines are the one handed to clients. The build uses four. | Owner | Before the guidelines are reissued |

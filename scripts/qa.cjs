@@ -5,6 +5,7 @@ const {chromium}=require('playwright');
 const ROUTES=['/','/services/','/work/','/about/','/process/','/contact/','/insights/','/privacy/','/terms/',
  '/work/floks-speaks/','/work/syndei-embassy/','/work/mavelogx-enterprise/','/work/mavels-corner/',
  '/insights/ai-augmented-studio/','/insights/canada-ghana-corridor/','/insights/positioning-before-logo/',
+ '/insights/podcast-distribution-corridor/',
  '/404.html'];
 function lum(c){const m=c.match(/[\d.]+/g);if(!m)return 0;const [r,g,b]=m.slice(0,3).map(Number).map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*r+0.7152*g+0.0722*b}
 function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05)}

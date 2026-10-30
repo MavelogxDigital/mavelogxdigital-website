@@ -60,6 +60,20 @@ export const SERVICES = [
     deliverables:['Audit of what you have now','Competitive and audience review',
       'A prioritised roadmap','A written plan you keep, whether or not you build with us'],
     fit:'Founders who know something needs to change and want a clear order of operations first.' },
+  /* 07 added 30 Oct 2026. This was shipped work with no line on the menu: three
+     podcasts built and distributed, substantive in three of the four case
+     studies, and absent from the Services page entirely. A prospect who wanted
+     one had nowhere to land. Supersedes the six-service count in 8.4. */
+  { n:'07', slug:'podcast', title:'Podcast Production & Distribution', accent:'var(--purple-text)',
+    desc:'A show set up, published and carried to the platforms your audience already uses, run from a workflow you own.',
+    deliverables:['Show setup: name, artwork, description and category',
+      'Hosting and feed configuration in your own account',
+      'Distribution to the major listening platforms',
+      'Audio cleanup and consistent levelling',
+      'A publishing workflow you can run without us',
+      'A player on your own site, so the work lives on your domain too'],
+    fit:'Anyone with something worth saying on a schedule and no reliable way to get it heard. Teachers, churches, artists and founders building an audience that listens before it reads.',
+    proof:'floks-speaks' },
 ] as const;
 
 export const PILLARS = [
