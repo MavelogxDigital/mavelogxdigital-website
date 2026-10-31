@@ -48,6 +48,10 @@ strategy:
     site is five hand-coded pages. No framework, no CMS, no build step, which means the
     ministry can hand it to anyone who can read HTML.
   - >
+    The word address is meant literally as well as figuratively. The ministry now
+    writes from its own domain rather than a personal free account, which matters
+    for a registered body asking people to send it money.
+  - >
     The podcast does work no amount of copy can. The Spirit Word is verse-by-verse teaching
     that already exists on Spotify, Apple Podcasts, Audible and Amazon Music, so a visitor can
     hear the church before deciding to attend it. That is a better answer to would I belong

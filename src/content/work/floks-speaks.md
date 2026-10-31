@@ -166,8 +166,9 @@ outcome:
     The merchandise has somewhere to live and is selling. Ordering still runs through
     WhatsApp while the shop is finished, so that leg has not moved yet. Booking has.
   - >
-    He owns his feed, his audio, his domain and his words. He publishes without asking
-    anyone.
+    He owns his feed, his audio, his domain, his email address and his words. He
+    publishes without asking anyone, and a booking enquiry reaches him at his own
+    name rather than a free mailbox.
 pending:
   - "11 Client quote: carried on the homepage rather than here. Owner decision, 25 Oct 2026."
 ---
