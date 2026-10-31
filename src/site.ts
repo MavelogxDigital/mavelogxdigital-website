@@ -45,7 +45,13 @@ export const SERVICES = [
     desc:'Conversion-focused, mobile-first websites engineered for speed, search visibility and growth.',
     deliverables:['Sitemap and page-by-page content plan','Responsive design across phone, tablet and desktop',
       'Hand-built front end, no page-builder bloat','Per-page SEO, metadata and structured data',
-      'Accessibility to WCAG 2.2 AA','Handover and a walkthrough so you can run it'],
+      'Accessibility to WCAG 2.2 AA',
+      /* Shipped on Floks Speaks and Syndei Embassy and priced in the Service
+         Menu as an add-on, but stated nowhere a prospect could read it. It
+         belongs here rather than as a service of its own: nobody shops for an
+         agency to set up their email, they buy it with the site. See 8.4. */
+      'Email on your own domain, set up and working',
+      'Handover and a walkthrough so you can run it'],
     fit:'Anyone whose site is slow, hard to update, or no longer reflects the business behind it.',
     proof:'syndei-embassy' },
   { n:'03', slug:'content', title:'Content Creation', accent:'var(--blue-text)',

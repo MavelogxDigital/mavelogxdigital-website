@@ -442,6 +442,31 @@ Two consequences follow, both now done:
   the proof sees the same words. "Infrastructure" also leaned toward naming the
   plumbing, which 10.1 rules out of published copy.
 
+### Email on your own domain is a deliverable, not an eighth service
+
+Asked on 31 October, on the strength of having shipped it for Floks Speaks and
+Syndei Embassy. It goes in the Web Design and Development deliverables instead,
+and the test that made podcast a service is the same one that keeps this out.
+
+| | Podcast, became service 07 | Email setup, stays a deliverable |
+|---|---|---|
+| Can a client buy it as a project? | Yes. A show is a thing you commission. | No. Nobody shops for an agency to set up their email; they buy it with the site. |
+| Was it sold anywhere? | Nowhere. Not on the site, not priced. | Already priced in the Service Menu as an add-on at GHS 450 or CAD 150. |
+| Size | A multi-part engagement | A few hours inside a build |
+
+So the gap was narrower than it looked: not unsold work, just work the site never
+mentioned. One line in the deliverables closes it, where a prospect reading the
+service will actually see it.
+
+The dilution argument matters too. Eight top-level services against a four
+project portfolio starts to read as anyone who will pay, which is the failure
+9.1 already warns about for the industries grid. The conflict log at 1.4
+rejected AI-augmentation as a service for being a method rather than a line
+item; email setup is closer still to a task than a line item.
+
+It also joins the special-features list in the Client Brief, so a client can ask
+for it before anyone has to remember to offer it.
+
 ### Still open: the podcast line has no price
 
 The Service Menu prices five packages and none of them is a podcast. The service
