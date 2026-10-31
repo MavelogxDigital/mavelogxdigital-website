@@ -1,0 +1,13 @@
+---
+import Eyebrow from './Eyebrow.astro';
+interface Props { eyebrow: string; heading: string; lead?: string; linkHref?: string; linkLabel?: string }
+const { eyebrow, heading, lead, linkHref, linkLabel } = Astro.props;
+---
+<div class={`sec-head ${linkHref ? 'sec-head--row' : ''}`}>
+  <div>
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h2 style="margin-top:var(--s-2)">{heading}</h2>
+    {lead && <p class="lead" style="margin-top:var(--s-2)">{lead}</p>}
+  </div>
+  {linkHref && <a class="sec-link quote__proj" href={linkHref}>{linkLabel}</a>}
+</div>

@@ -1,0 +1,11 @@
+---
+interface Props { quote: string; name: string; role: string; projectHref?: string; feature?: boolean; delay?: number }
+const { quote, name, role, projectHref, feature = false, delay = 0 } = Astro.props;
+---
+<figure class={`quote rv ${feature ? 'quote--feature' : ''}`} data-d={delay}>
+  <blockquote class="quote__text">{quote}</blockquote>
+  <figcaption class="quote__who">
+    <span class="quote__name">{name}</span> · {role}
+    {projectHref && <> · <a class="quote__proj" href={projectHref}>case study</a></>}
+  </figcaption>
+</figure>

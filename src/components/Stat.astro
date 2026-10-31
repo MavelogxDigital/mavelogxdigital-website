@@ -1,0 +1,5 @@
+---
+interface Props { figure: string; label: string }
+const { figure, label } = Astro.props;
+---
+<div class="stat"><span class="stat__fig">{figure}</span><span class="stat__label">{label}</span></div>

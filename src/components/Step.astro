@@ -1,0 +1,9 @@
+---
+interface Props { n: string; title: string; body: string; delay?: number }
+const { n, title, body, delay = 0 } = Astro.props;
+---
+<div class="step rv" data-d={delay}>
+  <span class="step__num" aria-hidden="true">{n}</span>
+  <h3 class="step__title">{title}</h3>
+  <p class="step__body">{body}</p>
+</div>

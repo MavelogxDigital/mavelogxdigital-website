@@ -1,0 +1,49 @@
+---
+/** Bible 07 #05, the whole card is one <a>: one tab stop, one announcement.
+ *  Art: screenshots use the default dark media; `plate` is for logo art, which
+ *  needs a light plate because those brands are drawn for light backgrounds. */
+interface Props {
+  slug: string; client: string; tags: readonly string[];
+  imgAlt: string;
+  /** Omit to use /img/<slug>-<w>.{webp,jpg}; pass `img` for a one-off like the placeholder. */
+  img?: string;
+  /** Filename stem for the card srcset, defaulting to the slug. A recapture
+   *  ships under a new stem so returning visitors are not served the previous
+   *  picture out of cache (5.5). Held per project in site.ts, not here. */
+  imgBase?: string;
+  wide?: boolean; inHouse?: boolean; delay?: number; plate?: boolean;
+  /** h2 directly under a page h1, h3 when nested under a section h2. */
+  level?: 2 | 3;
+}
+const { slug, client, tags, imgAlt, img, imgBase, wide = false, inHouse = false,
+        delay = 0, plate = false, level = 3 } = Astro.props;
+const stem = imgBase ?? slug;
+const H = `h${level}` as 'h2' | 'h3';
+
+const widths = wide ? [1280, 960] : [960, 480];
+const w = wide ? 1280 : 960;
+const h = wide ? 720 : 720;
+const src    = img ?? `/img/${stem}-${w}.jpg`;
+const srcset = img ? undefined : widths.map(x => `/img/${stem}-${x}.webp ${x}w`).join(', ');
+const jpgset = img ? undefined : widths.map(x => `/img/${stem}-${x}.jpg ${x}w`).join(', ');
+const sizes  = wide ? '(min-width: 900px) 1216px, 100vw' : '(min-width: 900px) 592px, 100vw';
+---
+<a class={`proj-card rv ${wide ? 'proj-card--wide' : ''}`} data-d={delay} href={`/work/${slug}/`}>
+  <div class={`proj-card__media ${plate ? 'proj-card__media--plate' : ''}`}>
+    {srcset ? (
+      <picture>
+        <source type="image/webp" srcset={srcset} sizes={sizes} />
+        <source type="image/jpeg" srcset={jpgset} sizes={sizes} />
+        <img src={src} alt={imgAlt} width={w} height={h} loading="lazy" decoding="async" />
+      </picture>
+    ) : (
+      <img src={src} alt={imgAlt} width="640" height="480" loading="lazy" decoding="async" />
+    )}
+  </div>
+  <div class="proj-card__body">
+    <H class="proj-card__name">{client}</H>
+    <ul class="proj-card__tags">{tags.map(t => <li>{t}</li>)}</ul>
+    {inHouse && <span class="proj-card__tags" style="color:var(--text-2)">In-house venture</span>}
+    <span class="proj-card__cta">View case study</span>
+  </div>
+</a>

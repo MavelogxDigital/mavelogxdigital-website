@@ -1,11 +1,11 @@
 {
   "name": "MavelogxDigital",
   "short_name": "MavelogxDigital",
-  "description": "From Idea To Impact — Digital strategy, design, and development.",
+  "description": "From Idea To Impact. Digital strategy, design and development.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#0B0B0D",
+  "theme_color": "#3BBFA0",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

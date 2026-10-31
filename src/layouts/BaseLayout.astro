@@ -1,0 +1,150 @@
+---
+/** Bible 11.1, every page carries its own complete metadata set. No inheritance. */
+import { SITE } from '../site';
+import StructuredData from '../components/StructuredData.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import '../styles/components.css';
+
+interface Props {
+  title: string;
+  description: string;
+  page?: string;              // drives nav active state
+  ogImage?: string;
+  /* 11.1 structured data. Defaults to a plain page with no trail; the pages
+     that carry an entity pass their own. */
+  /* Keeps a page out of the index. BaseLayout always emitted index,follow and
+     had no head slot, so the styleguide's own noindex tag was dropped at build
+     time and that page has been indexable since the scaffold went up. A prop
+     rather than a slot: two robots tags on one page is a contradiction to
+     resolve, not a thing to ship. */
+  noindex?: boolean;
+  schema?: 'home' | 'services' | 'case-study' | 'article' | 'page';
+  schemaImage?: string;
+  schemaDate?: string;
+  crumbs?: { name: string; path: string }[];
+  transparentNav?: boolean;   // true on Home only (5.2)
+}
+const { title, description, page = '', ogImage = '/og-facebook-whatsapp-linkedin.png',
+        transparentNav = false, noindex = false, schema = 'page', schemaImage, schemaDate,
+        crumbs = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogAbs = new URL(ogImage, SITE.url).href;
+/* Share cards must declare the real size. The default card is 1200x630; a case
+   study passes its 1280x720 hero instead, and announcing 1200x630 for it made
+   every case study share card lie about its own dimensions. */
+const ogIsHero = /-1280\.(webp|jpg|png)$/.test(ogImage);
+const ogW = ogIsHero ? '1280' : '1200';
+const ogH = ogIsHero ? '720'  : '630';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="author" content={SITE.name} />
+  {noindex
+    ? <meta name="robots" content="noindex, nofollow" />
+    : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
+  <meta name="theme-color" content="#3BBFA0" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogAbs} />
+  <meta property="og:image:width" content={ogW} />
+  <meta property="og:image:height" content={ogH} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogAbs} />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" />
+
+  <!-- Theme: applied before first paint so there is no flash of the wrong one. -->
+  <script is:inline>
+    (function () {
+      try {
+        var t = localStorage.getItem('mxd-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- 5.3: hash fragments never reach the server; resolve them here. -->
+  <script is:inline>
+    (function () {
+      var map = { '#about':'/about/','#services':'/services/','#portfolio':'/work/',
+        '#testimonials':'/work/','#process':'/process/','#contact':'/contact/',
+        '#industries':'/services/#industries','#mod-privacy':'/privacy/','#mod-terms':'/terms/' };
+      var t = map[location.hash];
+      if (t && location.pathname === '/') location.replace(t);
+    })();
+  </script>
+
+  <StructuredData kind={schema} title={title} description={description}
+    image={schemaImage} datePublished={schemaDate} crumbs={crumbs} />
+</head>
+<body data-page={page}>
+  <a class="skip" href="#main">Skip to content</a>
+  <Header page={page} transparent={transparentNav} />
+  <main id="main"><slot /></main>
+  <Footer />
+
+  <script>
+    // Reveal on scroll (6.6), fires once, then unobserves.
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll<HTMLElement>('.rv');
+    if (reduce) { items.forEach(el => el.classList.add('in')); }
+    else {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }
+      }, { threshold: 0.12 });
+      items.forEach(el => io.observe(el));
+    }
+    // Theme toggle. localStorage is a per-viewer convenience, so every access
+    // is guarded: it throws in private mode and returns null with site data cleared.
+    const root = document.documentElement;
+    const stored = (() => { try { return localStorage.getItem('mxd-theme'); } catch { return null; } })();
+    const systemLight = matchMedia('(prefers-color-scheme: light)');
+    const current = () => root.dataset.theme || (systemLight.matches ? 'light' : 'dark');
+    const btn = document.querySelector<HTMLButtonElement>('.theme-btn');
+    const label = () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      btn?.setAttribute('aria-label', `Switch to ${next} theme`);
+      btn?.setAttribute('title', `Switch to ${next} theme`);
+    };
+    label();
+    btn?.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('mxd-theme', next); } catch {}
+      label();
+    });
+    // Follow the OS only while the visitor has not chosen for themselves.
+    if (!stored) systemLight.addEventListener('change', label);
+
+    // Nav scroll state (5.2)
+    const nav = document.querySelector('.nav');
+    if (nav) {
+      const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 80);
+      onScroll();
+      addEventListener('scroll', onScroll, { passive: true });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,634 @@
+/* ===========================================================
+   MavelogxDigital, components.css
+   The 14 components from Build Bible Section 07,
+   in the build order set by 7.1, with every state from 6.8.
+   =========================================================== */
+
+/* ---- 01/02  Buttons ------------------------------------------------ */
+.btn{display:inline-flex;align-items:center;gap:var(--s-1);
+  min-height:44px;padding:14px 28px;border-radius:var(--r-full);
+  font-size:15px;font-weight:600;line-height:1;text-decoration:none;
+  border:1px solid transparent;cursor:pointer;
+  transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast)}
+.btn--primary{background:var(--coral-strong);color:#fff}
+.btn--primary:hover{background:#ED4259}
+.btn--primary:active{background:#C41E35}
+.btn--ghost{background:transparent;border-color:var(--border);color:var(--text-1)}
+.btn--ghost:hover{border-color:var(--text-2);background:rgba(255,255,255,.04)}
+.theme-light .btn--ghost:hover{background:rgba(0,0,0,.04)}
+.btn--ghost:active{background:rgba(255,255,255,.07)}
+.btn[disabled],.btn[aria-disabled="true"]{
+  background:var(--bg-alt);color:var(--text-2);border-color:var(--border);
+  box-shadow:none;cursor:not-allowed;pointer-events:none}
+
+/* ---- 03  Eyebrow. No decorative rule: the label stands on its own. ---- */
+.eyebrow{font-size:var(--fs-eyebrow);font-weight:700;line-height:1.3;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--teal-text)}
+
+/* ---- 04  Section head ----------------------------------------------- */
+.sec-head{margin-bottom:var(--s-5);display:grid;gap:var(--s-2)}
+.sec-head h2{font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em}
+.sec-head .lead{font-size:var(--fs-lead);color:var(--text-2);max-width:34em}
+.sec-head--row{align-items:end}
+@media (min-width:900px){
+  .sec-head--row{grid-template-columns:1fr auto;align-items:end}
+  .sec-head--row .sec-link{justify-self:end}
+.sec-link{display:inline-block;padding-block:4px;min-height:24px}
+}
+
+/* ---- 05  Project card ----------------------------------------------- */
+.proj-card{display:block;text-decoration:none;color:inherit;
+  transition:transform 420ms var(--ease),box-shadow 420ms var(--ease)}
+.proj-card__media{overflow:hidden;border-radius:var(--r-lg);
+  background:var(--bg-card);border:1px solid var(--border);aspect-ratio:4/3;
+  display:grid;place-items:center}
+/* Screenshots fill the card edge to edge (6.7: no decorative frame). */
+.proj-card__media picture,.proj-card__media picture img{width:100%;height:100%;display:block}
+.proj-card__media picture img{object-fit:cover;object-position:top center}
+.proj-card--wide .proj-card__media{aspect-ratio:16/9}
+.proj-card__media img{transition:transform 420ms var(--ease);max-height:100%;width:auto}
+/* Logo art on a dark card: brands drawn for light backgrounds need a deliberate
+   plate, not a transparent cut-out that loses its dark strokes. Screenshots
+   (6.7) use the default dark media and need no plate. */
+.proj-card__media--plate{background:#F4F4F6;border-color:#E4E4EC;padding:var(--s-5)}
+.proj-card__media--plate img{mix-blend-mode:multiply}
+.proj-card:hover,.proj-card:focus-visible{transform:translateY(-6px);box-shadow:var(--shadow-2)}
+.proj-card:hover .proj-card__media img,
+.proj-card:focus-visible .proj-card__media img{transform:scale(1.04)}
+.proj-card__body{padding-top:var(--s-3);display:grid;gap:var(--s-1)}
+.proj-card__name{font-size:var(--fs-h3);font-weight:600;letter-spacing:-.01em}
+.proj-card__tags{display:flex;flex-wrap:wrap;gap:var(--s-1);
+  font-size:var(--fs-small);color:var(--text-2)}
+.proj-card__tags li:not(:last-child)::after{content:" ·";color:var(--border)}
+.proj-card__cta{font-size:var(--fs-small);font-weight:600;color:var(--teal-text)}
+
+/* ---- 06  Service row ------------------------------------------------ */
+.svc-row{display:grid;grid-template-columns:auto 1fr;gap:var(--s-3);
+  align-items:start;padding:var(--s-4) 0;
+  border-top:2px solid var(--accent,var(--coral));
+  transition:background var(--t-base)}
+.svc-row+.svc-row{border-top:1px solid var(--border)}
+.svc-row:hover{background:var(--bg-card)}
+.svc-row__num{font-family:var(--ff-serif);font-size:44px;line-height:.9;
+  color:var(--amber-text);font-weight:600}
+.svc-row__title{font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--s-1)}
+.svc-row__desc{color:var(--text-2);max-width:48ch}
+.svc-row:hover .svc-row__title{color:var(--accent,var(--coral))}
+.svc-row__title{transition:color var(--t-base)}
+
+/* ---- 07  Pillar card ------------------------------------------------ */
+.pillar{background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--r-md);padding:var(--s-4);display:grid;gap:var(--s-2);
+  align-content:start}
+.pillar__icon{width:28px;height:28px;color:var(--accent,var(--coral))}
+.pillar__title{font-size:var(--fs-h4);font-weight:600}
+.pillar__body{color:var(--text-2);font-size:var(--fs-small)}
+
+/* ---- 08  Process step ----------------------------------------------- */
+.step{position:relative;padding-top:var(--s-5);display:grid;gap:var(--s-1)}
+.step__num{position:absolute;top:0;left:-6px;font-family:var(--ff-serif);
+  font-size:72px;line-height:1;color:var(--teal-text);opacity:.24;
+  font-weight:600;pointer-events:none}
+.step__title{font-size:var(--fs-h3);font-weight:600;position:relative}
+.step__body{color:var(--text-2);font-size:var(--fs-small)}
+.steps{display:grid;gap:var(--s-5)}
+@media (min-width:900px){
+  .steps{grid-template-columns:repeat(4,1fr);gap:var(--s-4)}
+  .steps .step{border-top:1px solid var(--border);padding-top:var(--s-6)}
+}
+
+.quote-stack{display:grid;gap:var(--s-5);align-content:start}
+
+/* ---- 09  Testimonial ------------------------------------------------ */
+/* No rule down the side. At 478px it was the longest line on the site and it
+   earned nothing: the serif italic, the stars and the attribution already say
+   testimonial. Owner decision, 25 Oct 2026, supersedes 6.5. The shorter rules
+   on blockquotes, key decisions and service notes stay: at 50 to 151px they
+   are conventional markers, not long lines. */
+/* align-content:start matters once the columns are uneven. The grid cell
+   stretches to the tallest column, and without this the stars, the text and
+   the attribution each absorb a share of the slack, so a short quote floats
+   in its own column. */
+.quote{display:grid;gap:var(--s-3);align-content:start}
+.quote__text{font-family:var(--ff-serif);font-size:var(--fs-quote);
+  font-style:italic;line-height:1.42}
+.quote__who{border-top:1px solid var(--border);padding-top:var(--s-2);
+  font-size:var(--fs-small)}
+.quote__name{font-weight:600}
+.quote__proj{color:var(--teal-text);text-decoration:none;
+  display:inline-block;padding-block:4px;min-height:24px}
+.quote__proj:hover{text-decoration:underline}
+.quote--feature .quote__text{font-size:clamp(1.5rem,3vw,2.125rem)}
+
+/* ---- 10  Stat block ------------------------------------------------- */
+.stat{display:grid;gap:4px}
+.stat__fig{font-size:40px;font-weight:800;color:var(--amber-text);line-height:1}
+.stat__label{font-size:var(--fs-eyebrow);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-2)}
+
+/* ---- 11  Insight card ----------------------------------------------- */
+.insight{display:grid;gap:var(--s-2);align-content:start;text-decoration:none;color:inherit}
+.insight__tag{justify-self:start;background:transparent;border:1px solid var(--border);color:var(--blue-text);
+  border-radius:var(--r-full);padding:5px 12px;
+  font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+
+.insight__title{font-size:var(--fs-h3);font-weight:600;letter-spacing:-.01em}
+.insight__excerpt{color:var(--text-2);font-size:var(--fs-small)}
+.insight__meta{color:var(--text-2);font-size:var(--fs-small)}
+.insight:hover .insight__title{text-decoration:underline;text-underline-offset:4px}
+
+/* ---- 12  CTA band --------------------------------------------------- */
+.cta-band{background:var(--bg-alt);padding-block:var(--s-8);position:relative;overflow:hidden}
+@media (min-width:768px){ .cta-band{padding-block:var(--s-9)} }
+.cta-band__in{display:grid;gap:var(--s-3);justify-items:center;text-align:center;
+  position:relative;z-index:1}
+.cta-band__glow{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 40%,rgba(232,92,110,.08),transparent 70%)}
+.cta-band h2{font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em}
+.cta-band .lead{color:var(--text-2);font-size:var(--fs-lead);max-width:44ch}
+.cta-band__actions{display:flex;flex-wrap:wrap;gap:var(--s-2);justify-content:center;
+  margin-top:var(--s-2)}
+
+/* ---- 13  Form field -------------------------------------------------- */
+.field{display:grid;gap:var(--s-1)}
+.field label{font-size:var(--fs-eyebrow);font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--text-2)}
+.field input,.field textarea,.field select{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:14px 16px;font-size:16px;color:var(--text-1);width:100%;
+  transition:border-color var(--t-fast),box-shadow var(--t-fast)}
+.field textarea{min-height:140px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-2);opacity:.7}
+.field input:focus,.field textarea:focus,.field select:focus{
+  outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(59,191,160,.18)}
+.field--filled input{border-color:var(--text-2)}
+.field--error input,.field--error textarea{border-color:var(--coral)}
+.field--error .field__msg{color:var(--coral)}
+.field--success input,.field--success textarea{border-color:var(--teal)}
+.field__msg{font-size:var(--fs-small)}
+.field--hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---- Nav + 14 Footer ------------------------------------------------- */
+.nav{position:sticky;top:0;z-index:90;display:block;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  transition:background var(--t-base),backdrop-filter var(--t-base)}
+.nav__in{height:64px}
+@media (min-width:768px){ .nav__in{height:72px} }
+.nav[data-transparent="true"]{background:transparent;border-bottom-color:transparent}
+.nav.is-scrolled{background:var(--nav-scrim);backdrop-filter:blur(12px);
+  border-bottom-color:var(--border)}
+/* An open menu always needs a solid ground, including over the Home hero
+   where the bar itself is transparent. */
+.nav.is-menu-open{background:var(--bg);border-bottom-color:var(--border);
+  backdrop-filter:none}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:var(--s-2)}
+.nav__right{display:flex;align-items:center;gap:var(--s-1)}
+.nav__brand{font-size:18px;line-height:1.2;flex:none;
+  display:inline-flex;align-items:center;min-height:28px}
+/* The sweep is a paint effect on text, so the link still needs a real focus
+   ring. -webkit-text-fill-color:transparent would otherwise hide an outline
+   drawn on the glyphs themselves. */
+.brandmark:focus-visible{outline:2px solid var(--text-1);outline-offset:4px;border-radius:4px}
+.nav__links{display:none;gap:var(--s-3);align-items:center}
+@media (min-width:1000px){ .nav__links{display:flex} }
+@media (min-width:1180px){ .nav__links{gap:var(--s-4)} }
+.nav__link{text-decoration:none;color:var(--text-2);font-size:15px;font-weight:500;
+  padding:10px 2px;position:relative;transition:color var(--t-fast)}
+.nav__link:hover{color:var(--text-1)}
+.nav__link[aria-current="page"]{color:var(--text-1)}
+.nav__link[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:2px;
+  height:2px;background:var(--coral)}
+/* Brand lockup: mark beside the wordmark. The mark is decorative here, so its
+   alt is empty: the link already carries an accessible name. */
+/* Adding the mark made the lockup 33px wider than the wordmark alone, which
+   pushed the header past the viewport on small screens. The wordmark is not
+   dropped in response: an icon-only header loses the name at exactly the width
+   where a visitor is least able to guess it. Instead both parts shrink, and
+   grow back as room appears. Measured at 320, 360, 390 and 420. */
+.nav__brand{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.nav__mark{display:block;width:22px;height:22px}
+.nav__brand .brandmark{font-size:16px}
+@media (min-width:360px){
+  .nav__brand{gap:7px}
+  .nav__mark{width:26px;height:26px}
+  .nav__brand .brandmark{font-size:18px}
+}
+@media (min-width:420px){
+  .nav__brand{gap:10px}
+  .nav__mark{width:32px;height:32px}
+  .nav__brand .brandmark{font-size:21px}
+}
+.footer__brand{display:inline-flex;align-items:center;gap:10px;
+  text-decoration:none;margin-bottom:var(--s-2)}
+.footer__brand img{display:block;width:34px;height:34px}
+.nav__burger{display:inline-flex;align-items:center;gap:8px;
+  min-height:44px;padding:0 18px;
+  background:none;border:1px solid var(--border);border-radius:var(--r-full);
+  cursor:pointer;color:var(--text-1);transition:border-color var(--t-fast)}
+.nav__burger:hover{border-color:var(--text-2)}
+.nav__burger:active{background:rgba(128,128,150,.18)}
+.nav__burger-label{font-size:15px;font-weight:600;letter-spacing:.01em}
+/* Below 360 the bar is tight enough that the control's side padding is the
+   last thing with slack in it. The 44px minimum height is untouched, so the
+   target still meets 13.1. */
+@media (max-width:359px){
+  .nav__burger{padding:0 11px;gap:6px}
+  .nav__burger-label{font-size:14px}
+}
+.nav__burger .i-close{display:none}
+.nav__burger[aria-expanded="true"] .i-open{display:none}
+.nav__burger[aria-expanded="true"] .i-close{display:block}
+@media (min-width:1000px){ .nav__burger{display:none} }
+.nav__cta{display:none}
+@media (min-width:1000px){ .nav__cta{display:inline-flex} }
+/* Expands in the flow of the header, so the page below is pushed down rather
+   than covered. The 0fr to 1fr row is what lets an auto height animate. */
+.nav__panel{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows var(--t-base) var(--ease)}
+.nav__panel[data-open="true"]{grid-template-rows:1fr}
+.nav__panel-clip{overflow:hidden;visibility:hidden;
+  transition:visibility var(--t-base)}
+.nav__panel[data-open="true"] .nav__panel-clip{visibility:visible}
+.nav__panel-in{display:flex;flex-direction:column;align-items:start;
+  padding-block:var(--s-3) var(--s-4)}
+.nav__panel-links{display:flex;flex-direction:column;align-items:start;width:100%}
+.nav__panel-links a{text-decoration:none;font-size:22px;font-weight:600;
+  padding:12px 0;color:var(--text-2);position:relative;width:fit-content;
+  transition:color var(--t-fast)}
+.nav__panel-links a:hover{color:var(--text-1)}
+.nav__panel-links a[aria-current="page"]{color:var(--text-1)}
+.nav__panel-links a[aria-current="page"]::after{content:"";position:absolute;
+  left:0;right:0;bottom:6px;height:2px;background:var(--coral)}
+.nav__panel-cta{margin-top:var(--s-3);justify-content:center}
+@media (min-width:1000px){ .nav__panel{display:none} }
+
+/* ===========================================================
+   Read aloud (v2.2). Browser speech, so the control must look native to
+   the page and disappear entirely where the API is missing.
+   =========================================================== */
+.ra{display:flex;align-items:center;flex-wrap:wrap;gap:var(--s-2);
+  margin-block:var(--s-4);max-width:var(--reading)}
+.ra[hidden]{display:none}
+.ra__btn{display:inline-flex;align-items:center;gap:10px;
+  min-height:44px;padding:0 20px;cursor:pointer;
+  background:var(--bg-card);color:var(--text-1);
+  border:1px solid var(--border);border-radius:var(--r-full);
+  font-size:var(--fs-small);font-weight:600;
+  transition:border-color var(--t-fast),background var(--t-fast)}
+.ra__btn:hover{border-color:var(--teal-text)}
+.ra__btn:active{background:color-mix(in srgb, var(--teal-text) 16%, var(--bg-card))}
+.ra__stop:active{background:rgba(128,128,150,.18);color:var(--text-1)}
+.ra__icon{display:grid;place-items:center;width:16px;height:16px;color:var(--teal-text)}
+.ra__pause{display:none}
+.ra[data-state="playing"] .ra__play{display:none}
+.ra[data-state="playing"] .ra__pause{display:block}
+.ra__stop{display:grid;place-items:center;width:44px;height:44px;cursor:pointer;
+  background:none;color:var(--text-2);
+  border:1px solid var(--border);border-radius:var(--r-full);
+  transition:color var(--t-fast),border-color var(--t-fast)}
+.ra__stop:hover{color:var(--text-1);border-color:var(--text-2)}
+.ra__stop[hidden]{display:none}
+.ra__status{flex:1 1 100%;order:3;margin:0;
+  color:var(--text-2);font-size:var(--fs-eyebrow);letter-spacing:.06em}
+.ra__status:empty{display:none}
+.ra__track{flex:1 1 100%;order:4;height:2px;border-radius:2px;
+  background:var(--border);overflow:hidden}
+.ra[data-state="idle"] .ra__track{opacity:0}
+.ra__fill{display:block;height:100%;width:0;background:var(--teal-text);
+  transition:width var(--t-base) linear}
+@media (prefers-reduced-motion:reduce){ .ra__fill{transition:none} }
+/* The block being spoken. Deliberately faint: it follows the voice, it does
+   not compete with it. */
+.ra-now{background:color-mix(in srgb, var(--teal-text) 12%, transparent);
+  border-radius:var(--r-sm);
+  box-shadow:0 0 0 6px color-mix(in srgb, var(--teal-text) 12%, transparent)}
+
+/* ===========================================================
+   Tagline lockup. Logotype, documented exception to 6.2.
+   =========================================================== */
+.tagline{font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:0;
+  font-size:clamp(1.75rem,7vw,5rem);white-space:nowrap}
+.tagline__from{color:var(--coral)}
+.tagline__idea{color:var(--amber-text)}
+.tagline__to{color:var(--blue-text)}
+.tagline__impact{color:var(--teal-text)}
+/* Full width above the footer columns, so it holds one line at every size.
+   Inside the 2fr brand column it could not. */
+.footer__tagline{padding-bottom:var(--s-5);margin-bottom:var(--s-5);
+  border-bottom:1px solid var(--border)}
+
+.footer{background:var(--bg);border-top:1px solid var(--border);padding-block:var(--s-6)}
+.footer__top{display:grid;gap:var(--s-5)}
+@media (min-width:900px){ .footer__top{grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--s-4)} }
+.footer h3{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:var(--s-2);font-weight:700;display:inline-block}
+.footer ul{display:grid;gap:4px;list-style:none;padding:0;margin:0}
+.footer a{text-decoration:none;color:var(--text-2);font-size:var(--fs-small);
+  display:inline-flex;align-items:center;min-height:24px;padding-block:2px}
+.footer a:hover{color:var(--text-1)}
+.footer__base{margin-top:var(--s-5);padding-top:var(--s-3);
+  border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:var(--s-2);
+  justify-content:space-between;font-size:var(--fs-small);color:var(--text-2)}
+
+
+/* ===========================================================
+   Case study, Build Bible 10.1, the eleven blocks
+   =========================================================== */
+.cs-hero{padding-block:var(--s-6) var(--s-5)}
+.cs-hero__h1{font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em}
+.cs-hero__desc{font-size:var(--fs-lead);color:var(--text-2);max-width:40ch;margin-top:var(--s-2)}
+.cs-hero__media{margin-top:var(--s-5);border-radius:var(--r-lg);overflow:hidden;
+  border:1px solid var(--border);background:var(--bg-card)}
+/* No aspect-ratio and no cover: the hero capture is shown whole. Cropping it
+   to a fixed ratio hid part of the work, which defeats the point. */
+.cs-hero__media img{width:100%;height:auto;display:block}
+
+/* 02 meta strip */
+.cs-meta{display:grid;gap:var(--s-3);padding-block:var(--s-4);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+@media (min-width:700px){.cs-meta{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}}
+.cs-meta dt{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-2);font-weight:700;margin-bottom:6px}
+.cs-meta dd{font-size:var(--fs-small)}
+.cs-meta a{color:var(--teal-text);text-decoration:none;
+  display:inline-block;padding-block:3px;min-height:24px}
+.cs-meta a:hover{text-decoration:underline}
+
+/* 03 lead, the only serif block on the page (6.3) */
+.cs-lead{font-family:var(--ff-serif);font-size:clamp(1.375rem,2.4vw,1.75rem);
+  font-style:italic;line-height:1.45;max-width:30ch;margin-block:var(--s-6)}
+
+/* body blocks */
+.cs-block{max-width:var(--reading);margin-block:var(--s-6)}
+.cs-block h2{font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--s-3)}
+.cs-block p+p{margin-top:var(--s-3)}
+.cs-block p{color:var(--text-2)}
+.cs-block p:first-of-type{color:var(--text-1)}
+
+/* 09 key decisions */
+.cs-decisions{display:grid;gap:var(--s-4);max-width:var(--reading)}
+.cs-decision{border-left:2px solid var(--amber-text);padding-left:var(--s-3)}
+.cs-decision h3{font-size:var(--fs-h4);font-weight:600;margin-bottom:6px}
+.cs-decision p{color:var(--text-2);font-size:var(--fs-small)}
+
+/* 08 shots. A desktop and a mobile capture of the same screen read as one
+   exhibit, so pair them rather than stacking two unrelated images. */
+.cs-shots{display:grid;gap:var(--s-5)}
+.cs-shots--pair{align-items:start}
+@media (min-width:860px){
+  .cs-shots--pair{grid-template-columns:minmax(0,2.3fr) minmax(0,1fr);gap:var(--s-4)}
+}
+/* A full-page capture is far taller than it is wide. Showing it whole would
+   swamp the page, and cropping it hides the work, so it scrolls inside a plain
+   browser frame: nothing is hidden and the layout stays intact (6.7). */
+.cs-frame{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;
+  background:var(--bg-card)}
+.cs-frame__bar{display:flex;align-items:center;gap:6px;padding:10px 14px;
+  border-bottom:1px solid var(--border);background:var(--bg-alt)}
+.cs-frame__dot{width:9px;height:9px;border-radius:var(--r-full);background:var(--border)}
+.cs-frame__url{margin-left:var(--s-2);font-size:12px;color:var(--text-2);
+  letter-spacing:.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cs-frame__scroll{height:460px;overflow-y:auto;overscroll-behavior:contain}
+@media (min-width:860px){.cs-frame__scroll{height:600px}}
+.cs-frame__scroll img{width:100%;display:block;border:0;border-radius:0}
+.cs-frame__hint{margin-top:var(--s-2);font-size:var(--fs-small);color:var(--text-2)}
+
+.cs-shot--mobile img{max-width:340px}
+@media (min-width:860px){.cs-shot--mobile img{max-width:none}}
+.cs-shot figure{margin:0}
+.cs-shot img{border-radius:var(--r-md);border:1px solid var(--border);width:100%}
+.cs-shot figcaption{margin-top:var(--s-2);font-size:var(--fs-small);color:var(--text-2)}
+
+/* 07 identity */
+.cs-swatches{display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-3)}
+.cs-swatch{border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;width:120px}
+.cs-swatch span{display:block;height:52px}
+.cs-swatch small{display:block;padding:8px 10px;font-size:12px;color:var(--text-2)}
+
+/* 10 metrics, only rendered when confirmed in writing (10.2) */
+.cs-metrics{display:flex;flex-wrap:wrap;gap:var(--s-5);margin-top:var(--s-4)}
+
+/* next project */
+.cs-next{border-top:1px solid var(--border);padding-block:var(--s-6)}
+
+/* author-only pending note: dev builds only, never production */
+.cs-pending{border:1px dashed var(--amber);border-radius:var(--r-md);
+  padding:var(--s-3);margin-block:var(--s-5);max-width:var(--reading)}
+.cs-pending h2{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--amber);font-weight:700;margin-bottom:var(--s-2)}
+.cs-pending li{color:var(--text-2);font-size:var(--fs-small);margin-bottom:6px}
+.cs-pending code{color:var(--teal-text)}
+
+/* ===========================================================
+   Services page, Build Bible 9.1
+   =========================================================== */
+.svc-block{padding-block:var(--s-6);border-top:1px solid var(--border);scroll-margin-top:96px}
+.svc-block:first-of-type{border-top:0}
+.svc-block__grid{display:grid;gap:var(--s-4)}
+@media (min-width:900px){.svc-block__grid{grid-template-columns:5fr 7fr;gap:var(--s-6)}}
+.svc-block__num{font-family:var(--ff-serif);font-size:56px;line-height:.9;
+  color:var(--accent-ink,var(--accent,var(--coral)));font-weight:600}
+.svc-block__title{font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em;margin-top:var(--s-2)}
+.svc-block__desc{color:var(--text-2);margin-top:var(--s-3);max-width:40ch}
+.svc-block h3{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-2);font-weight:700;margin-bottom:var(--s-2)}
+.svc-list{display:grid;gap:10px;margin-bottom:var(--s-5)}
+.svc-list li{position:relative;padding-left:18px;font-size:var(--fs-small)}
+.svc-list li::before{content:"";position:absolute;left:0;top:9px;
+  width:6px;height:6px;border-radius:var(--r-full);
+  background:var(--accent,var(--coral))}
+.svc-fit{border-left:2px solid var(--border);padding-left:var(--s-3);
+  color:var(--text-2);font-size:var(--fs-small);margin-bottom:var(--s-4)}
+
+/* Industries. A Proven tag marks the ones backed by a case study. */
+.ind-grid{display:flex;flex-wrap:wrap;gap:10px}
+.ind{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;
+  border:1px solid var(--border);border-radius:var(--r-full);
+  font-size:var(--fs-small);text-decoration:none;color:var(--text-2)}
+.ind--proven{color:var(--text-1);border-color:var(--text-2)}
+.ind--proven:hover{background:var(--bg-card)}
+.ind__tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal-text)}
+
+/* ===========================================================
+   Phase 4: About, Process, Contact, legal
+   =========================================================== */
+/* Founder block (9.3). The highest-value single addition to About. */
+.founder{display:grid;gap:var(--s-4);align-items:start}
+@media (min-width:860px){.founder{grid-template-columns:4fr 7fr;gap:var(--s-6)}}
+.founder__photo{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);
+  background:var(--bg-card);aspect-ratio:4/5}
+.founder__photo img{width:100%;height:100%;object-fit:cover;display:block}
+.founder__name{font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em}
+.founder__role{color:var(--teal-text);font-size:var(--fs-eyebrow);font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;margin-top:var(--s-1)}
+.founder p{color:var(--text-2);margin-top:var(--s-3);max-width:46ch}
+.founder p:first-of-type{color:var(--text-1)}
+
+/* Process detail */
+.proc{border-top:1px solid var(--border);padding-block:var(--s-6)}
+.proc:first-of-type{border-top:0}
+.proc__grid{display:grid;gap:var(--s-4)}
+@media (min-width:900px){.proc__grid{grid-template-columns:4fr 8fr;gap:var(--s-6)}}
+.proc__num{font-family:var(--ff-serif);font-size:64px;line-height:.9;color:var(--teal-text);
+  opacity:.5;font-weight:600}
+.proc__title{font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em;margin-top:var(--s-1)}
+.proc__dur{color:var(--text-2);font-size:var(--fs-small);margin-top:var(--s-2)}
+.proc__cols{display:grid;gap:var(--s-4)}
+@media (min-width:700px){.proc__cols{grid-template-columns:1fr 1fr}}
+.proc h3{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-2);font-weight:700;margin-bottom:var(--s-2)}
+.proc ul{display:grid;gap:8px;list-style:none;padding:0}
+.proc li{position:relative;padding-left:17px;
+  font-size:var(--fs-small);color:var(--text-2)}
+.proc li::before{content:"";position:absolute;left:0;top:9px;
+  width:5px;height:5px;border-radius:var(--r-full);
+  background:var(--teal-text)}
+
+/* FAQ */
+.faq{max-width:var(--reading);display:grid;gap:0}
+.faq details{border-bottom:1px solid var(--border)}
+.faq summary{cursor:pointer;padding:var(--s-3) 0;font-weight:600;list-style:none;
+  display:flex;justify-content:space-between;gap:var(--s-3);align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--teal-text);font-weight:400;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"\2013"}
+.faq p{padding-bottom:var(--s-3);color:var(--text-2);font-size:var(--fs-small);max-width:60ch}
+
+/* Contact */
+.contact__grid{display:grid;gap:var(--s-6)}
+@media (min-width:900px){.contact__grid{grid-template-columns:7fr 5fr;gap:var(--s-7)}}
+.contact__channels{display:grid;gap:var(--s-4);align-content:start}
+.channel{display:grid;gap:4px}
+.channel dt{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-2);font-weight:700}
+.channel dd a{color:var(--text-1);text-decoration:none;font-weight:600;
+  display:inline-block;padding-block:3px;min-height:24px}
+.channel dd a:hover{color:var(--teal-text)}
+.choices{display:flex;flex-wrap:wrap;gap:10px}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;width:0;height:0}
+.choice span{display:inline-block;padding:10px 16px;border:1px solid var(--border);
+  border-radius:var(--r-full);font-size:var(--fs-small);cursor:pointer;
+  transition:border-color var(--t-fast),background var(--t-fast),color var(--t-fast)}
+.choice input:checked+span{border-color:var(--teal);color:var(--text-1);
+  background:rgba(59,191,160,.12)}
+.choice input:focus-visible+span{outline:2px solid var(--text-1);outline-offset:3px}
+.form-privacy{color:var(--text-2);font-size:var(--fs-small);max-width:46ch;
+  line-height:1.55}
+.form-privacy a{color:var(--text-1);text-decoration:underline;text-underline-offset:3px}
+.form-success{border:1px solid var(--teal-ink);border-radius:var(--r-md);padding:var(--s-4);
+  background:rgba(59,191,160,.08)}
+.form-success h2{font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--s-2)}
+
+/* Legal pages */
+.legal{max-width:var(--reading)}
+.legal h2{font-size:var(--fs-h3);font-weight:600;margin-top:var(--s-5);margin-bottom:var(--s-2)}
+.legal h3{font-size:var(--fs-h4);font-weight:600;margin-top:var(--s-4);margin-bottom:var(--s-1)}
+.legal p{color:var(--text-2);margin-bottom:var(--s-2)}
+.legal ul,.legal ol{list-style:none;padding:0}
+.legal li{color:var(--text-2);margin-bottom:8px;position:relative;padding-left:17px}
+.legal li::before{content:"";position:absolute;left:0;top:9px;
+  width:5px;height:5px;border-radius:var(--r-full);
+  background:var(--border)}
+.legal__meta{color:var(--text-2);font-size:var(--fs-small);
+  border-bottom:1px solid var(--border);padding-bottom:var(--s-3);margin-bottom:var(--s-4)}
+
+/* ===========================================================
+   Insights, Build Bible 8.8 and 9.5
+   =========================================================== */
+.art{max-width:var(--reading)}
+.art__meta{display:flex;flex-wrap:wrap;gap:var(--s-2);align-items:center;
+  color:var(--text-2);font-size:var(--fs-small);margin-top:var(--s-3)}
+.art__lead{font-family:var(--ff-serif);font-size:clamp(1.3rem,2.2vw,1.625rem);
+  font-style:italic;line-height:1.45;margin-block:var(--s-5);max-width:32ch}
+.art__body{font-size:var(--fs-body);line-height:1.68}
+.art__body > *+*{margin-top:var(--s-3)}
+.art__body h2{font-size:var(--fs-h3);font-weight:600;margin-top:var(--s-6);
+  letter-spacing:-.01em}
+.art__body h3{font-size:var(--fs-h4);font-weight:600;margin-top:var(--s-5)}
+.art__body p{color:var(--text-2)}
+.art__body p:first-of-type{color:var(--text-1)}
+.art__body strong{color:var(--text-1);font-weight:600}
+.art__body ul,.art__body ol{display:grid;gap:10px;padding-left:0;list-style:none}
+.art__body li{position:relative;padding-left:17px;color:var(--text-2)}
+.art__body ul li::before{content:"";position:absolute;left:0;top:10px;
+  width:5px;height:5px;
+  border-radius:var(--r-full);background:var(--teal-text)}
+.art__body ol{counter-reset:n}
+.art__body ol li{counter-increment:n;padding-left:30px}
+.art__body ol li::before{content:counter(n);position:absolute;left:0;top:0;
+  color:var(--teal-text);font-weight:700;
+  font-size:var(--fs-small);width:22px}
+.art__body blockquote{border-left:2px solid var(--coral);padding-left:var(--s-3);
+  font-family:var(--ff-serif);font-style:italic;font-size:var(--fs-quote);
+  line-height:1.42;color:var(--text-1)}
+/* Contextual links out of an article, to the service and the case study it
+   argues for (review item, 24 Oct 2026). */
+.art__related{margin-top:var(--s-6);padding-top:var(--s-4);
+  border-top:1px solid var(--border)}
+.art__related-h{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-2);font-weight:700;margin-bottom:var(--s-3)}
+.art__related ul{display:grid;gap:var(--s-2);list-style:none;padding:0}
+.art__related li{padding:0}
+.art__related li::before{content:none}
+.art__related a{display:grid;gap:2px;text-decoration:none;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:var(--s-3);transition:border-color var(--t-fast),background var(--t-fast)}
+.art__related a:hover{border-color:var(--text-2)}
+.art__related-k{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal-text);font-weight:700}
+.art__related-t{font-size:var(--fs-h4);font-weight:600;color:var(--text-1)}
+@media (min-width:700px){ .art__related ul{grid-template-columns:1fr 1fr} }
+.art__draft{border:1px dashed var(--amber);border-radius:var(--r-md);
+  padding:var(--s-3);margin-bottom:var(--s-5)}
+.art__draft p{color:var(--text-2);font-size:var(--fs-small)}
+.art__draft strong{color:var(--amber);letter-spacing:.08em;text-transform:uppercase;
+  font-size:var(--fs-eyebrow)}
+.insight-list{display:grid;gap:0}
+.insight-row{display:grid;gap:var(--s-2);padding-block:var(--s-5);
+  border-top:1px solid var(--border);text-decoration:none;color:inherit}
+@media (min-width:860px){.insight-row{grid-template-columns:3fr 9fr;gap:var(--s-5)}}
+.insight-row:hover .insight__title{text-decoration:underline;text-underline-offset:4px}
+
+/* ===========================================================
+   Footer brandmark: the animated sweep used on the credit line
+   of client sites, brought onto our own footer.
+
+   Four accents now, read from the tokens rather than hard-coded, so
+   the sweep cannot drift from the palette. It used to carry six,
+   including Steel Blue and Orange, on the argument that they were in
+   the logo artwork. They are not: the mark has four petals, and the
+   two extras came from the Brand Guidelines PDF, not the logo. See
+   6.1 as amended 30 Oct 2026.
+   =========================================================== */
+:root{
+  --brandmark-sweep:linear-gradient(90deg,
+    var(--coral),var(--amber),var(--blue),var(--teal),var(--coral));
+}
+.sweep{
+  color:var(--coral-strong);                 /* fallback where clip is unsupported */
+  background-image:var(--brandmark-sweep);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:brandmark-sweep 4s linear infinite;
+}
+.brandmark{
+  display:inline-block;
+  font-weight:800;letter-spacing:-.01em;text-decoration:none;
+  transition:opacity var(--t-base);
+}
+.brandmark:hover{opacity:.82}
+@keyframes brandmark-sweep{
+  0%{background-position:0% center}
+  100%{background-position:200% center}
+}
+/* Reduced motion: hold the sweep still rather than removing the colour. */
+@media (prefers-reduced-motion:reduce){
+  .sweep{animation:none;background-position:0% center}
+}
+/* Forced colours: drop the clip so the text is painted by the OS palette. */
+@media (forced-colors:active){
+  .sweep{-webkit-text-fill-color:currentColor;background-image:none;animation:none}
+}

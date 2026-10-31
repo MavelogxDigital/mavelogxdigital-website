@@ -1,0 +1,237 @@
+/* ===========================================================
+   MavelogxDigital, global.css
+   Build Bible v2.0 · Appendix D token set + base layer
+   Nothing in this project may use a value absent from :root
+   =========================================================== */
+
+:root{
+  /* ---- Accents, four, sampled from the logo (6.1) ----
+     Taken from the four petals of the mark in the canonical logo file, not
+     chosen alongside it. Three palettes were in circulation and none agreed:
+     the mark, the Brand Guidelines PDF, and the site. The mark wins, because
+     it is the only one a client ever sees. Owner decision, 30 Oct 2026.
+
+     The third petal is periwinkle BLUE. It was carried as "purple" #7070BB,
+     which is a different hue and never appeared in the logo. Renamed as well
+     as revalued, because a token named purple holding blue is a trap. */
+  --coral:#FD4950;        /* primary action, clickable things only */
+  --amber:#FED136;        /* emphasis, numerals, stats, never a button */
+  --blue:#6682F9;         /* depth, tags, the Two Markets pillar */
+  --teal:#2CD4AD;         /* eyebrows, progress, success */
+
+  /* Contrast-safe variants. The logo was drawn for a dark ground, so the raw
+     accents clear AA there and half of them fail on light. Same hue and
+     saturation, lightness walked down until each clears its target. Targets
+     differ because the uses differ: amber only ever sets large (44px service
+     numerals, 40px stats, the 28px tagline), so it needs 3:1, while teal sets
+     13px eyebrows and needs 4.5. */
+  --coral-strong:#E3141C; /* button fill: white on it is 4.79:1. Saturation is
+                             pulled back slightly from the raw accent: at full
+                             saturation the fill reads as a warning rather than
+                             an invitation, and 4.79 leaves headroom over the
+                             4.5 floor instead of sitting exactly on it. */
+  --amber-ink:#AD8701;    /* amber as large text on light: 3.01:1 on #F2F2F4 */
+  --blue-ink:#3C5FF7;     /* blue as text on light: 4.50:1 on #F2F2F4 */
+  --teal-ink:#1A7D66;     /* teal as text on light: 4.51:1 on #F2F2F4 */
+
+  /* Theme-resolved ink tones, repointed in light contexts below.
+     Blue needs no lightened variant on dark the way purple did: it reads
+     5.74:1 there, where #7070BB was 4.0 and failed body text outright. That
+     retires --purple-lt rather than renaming it. */
+  --teal-text:var(--teal);
+  --blue-text:var(--blue);
+  --amber-text:var(--amber);
+
+  /* ---- Neutral sets. Accents never change between themes (6.1). ----
+     --*-d is the dark set, --*-l the light set. The active theme points
+     --bg and friends at one set, and .section--invert at the other, so the
+     light-break rhythm in Section 08 survives in both themes. */
+  --bg-d:#0B0B0D;   --bg-alt-d:#131316; --bg-card-d:#18181C;
+  --border-d:#222228; --text-1-d:#EFEFF3; --text-2-d:#9898A8;
+
+  --bg-l:#FAFAFA;   --bg-alt-l:#F2F2F4; --bg-card-l:#FFFFFF;
+  --border-l:#E4E4EC; --text-1-l:#0D0D10; --text-2-l:#5C5C6A;
+
+  /* Active set, dark by default. */
+  --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
+  --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
+  --nav-scrim:rgba(11,11,13,.88);
+  color-scheme:dark;
+
+  /* ---- Type ---- */
+  --ff-sans:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --ff-serif:'Cormorant Garamond',Georgia,serif;
+  --fs-display:clamp(2.75rem,7vw,5.5rem);
+  --fs-h1:clamp(2.25rem,5vw,3.75rem);
+  --fs-h2:clamp(1.75rem,3.5vw,2.75rem);
+  --fs-h3:clamp(1.25rem,2vw,1.625rem);
+  --fs-h4:1.0625rem;
+  --fs-lead:clamp(1.0625rem,1.5vw,1.3125rem);
+  --fs-body:1.0625rem;
+  --fs-small:.9375rem;
+  --fs-eyebrow:.8125rem;
+  --fs-quote:clamp(1.375rem,2.5vw,1.875rem);
+
+  /* ---- Space, 8px base ---- */
+  --s-1:8px;  --s-2:16px; --s-3:24px; --s-4:32px;
+  --s-5:48px; --s-6:64px; --s-7:96px; --s-8:128px; --s-9:160px;
+
+  /* ---- Radius & elevation ---- */
+  --r-sm:8px; --r-md:14px; --r-lg:22px; --r-full:999px;
+  --shadow-1:0 1px 2px rgba(0,0,0,.4);
+  --shadow-2:0 18px 50px -12px rgba(0,0,0,.65);
+  --shadow-glow:0 0 70px -10px rgba(232,92,110,.28);
+
+  /* ---- Motion (6.6) ---- */
+  --ease:cubic-bezier(.16,1,.3,1);
+  --t-fast:180ms; --t-base:260ms; --t-slow:620ms;
+
+  /* ---- Layout ---- */
+  --container:1280px;
+  --reading:760px;
+  --gutter:16px;
+}
+@media (min-width:360px){ :root{ --gutter:24px } }
+@media (min-width:768px){ :root{ --gutter:40px } }
+@media (min-width:1100px){ :root{ --gutter:64px } }
+
+/* ---- Light theme ---- */
+:root[data-theme="light"]{
+  --teal-text:var(--teal-ink); --blue-text:var(--blue-ink); --amber-text:var(--amber-ink);
+  --nav-scrim:rgba(250,250,250,.9);
+  --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
+  --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
+  color-scheme:light;
+}
+/* Honour the OS preference until the visitor chooses for themselves. */
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --teal-text:var(--teal-ink); --blue-text:var(--blue-ink); --amber-text:var(--amber-ink);
+    --nav-scrim:rgba(250,250,250,.9);
+    --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
+    --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
+    color-scheme:light;
+  }
+}
+
+/* ---- Inverted sections: always the opposite of the active theme. ----
+   Replaces the old .theme-light, which hard-coded light values and so
+   collapsed into the page once the whole site could go light. */
+.section--invert,.theme-light{
+  --teal-text:var(--teal-ink); --blue-text:var(--blue-ink); --amber-text:var(--amber-ink);
+  --bg:var(--bg-l); --bg-alt:var(--bg-alt-l); --bg-card:var(--bg-card-l);
+  --border:var(--border-l); --text-1:var(--text-1-l); --text-2:var(--text-2-l);
+  background:var(--bg); color:var(--text-1);
+}
+:root[data-theme="light"] .section--invert,
+:root[data-theme="light"] .theme-light{
+  --teal-text:var(--teal); --blue-text:var(--blue); --amber-text:var(--amber);
+  --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
+  --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .section--invert,
+  :root:not([data-theme="dark"]) .theme-light{
+    --teal-text:var(--teal); --blue-text:var(--blue); --amber-text:var(--amber);
+    --bg:var(--bg-d); --bg-alt:var(--bg-alt-d); --bg-card:var(--bg-card-d);
+    --border:var(--border-d); --text-1:var(--text-1-d); --text-2:var(--text-2-d);
+  }
+}
+
+/* The grain reads as dirt on a light ground, so soften it there. */
+:root[data-theme="light"] body::after{opacity:.018}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) body::after{opacity:.018}
+}
+
+/* ---- Theme toggle ---- */
+.theme-btn{display:grid;place-items:center;width:44px;height:44px;flex:none;
+  background:none;border:0;border-radius:var(--r-full);color:var(--text-2);cursor:pointer;
+  transition:color var(--t-fast),background var(--t-fast)}
+.theme-btn:hover{color:var(--text-1);background:rgba(128,128,150,.12)}
+.theme-btn:active{color:var(--text-1);background:rgba(128,128,150,.22)}
+.theme-btn svg{width:19px;height:19px}
+.theme-btn .i-sun{display:none}
+:root[data-theme="light"] .theme-btn .i-sun{display:block}
+:root[data-theme="light"] .theme-btn .i-moon{display:none}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .theme-btn .i-sun{display:block}
+  :root:not([data-theme="dark"]) .theme-btn .i-moon{display:none}
+}
+
+/* =========================== reset =========================== */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text-1);
+  font-family:var(--ff-sans); font-size:var(--fs-body); font-weight:400;
+  line-height:1.68; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,picture,svg,video{display:block;max-width:100%;height:auto}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{line-height:1.1;text-wrap:balance}
+p{text-wrap:pretty}
+a{color:inherit}
+ul[class],ol[class]{list-style:none;padding:0}
+
+/* ---- Focus ring (6.8): --text-1 of the active theme, never coral ---- */
+:focus-visible{outline:2px solid var(--text-1);outline-offset:3px;border-radius:2px}
+:focus:not(:focus-visible){outline:none}
+
+/* ---- Touch ----
+   Chrome's default tap highlight is a 40% blue rectangle that ignores
+   border-radius, so every pill on the site flashed a square box on tap.
+   Off site-wide. Every rounded control carries its own :active state
+   instead, so touch still gets feedback. Colour change, not motion, so
+   it holds under prefers-reduced-motion. */
+a,button,summary,label,input,select,textarea{-webkit-tap-highlight-color:transparent}
+
+/* ---- Skip link (13.1) ---- */
+.skip{position:absolute;left:var(--s-2);top:-60px;z-index:200;
+  background:var(--coral-strong);color:#fff;padding:12px 20px;border-radius:var(--r-sm);
+  font-weight:600;transition:top var(--t-fast)}
+.skip:focus-visible{top:var(--s-2)}
+
+/* ---- Grain overlay (6.6), CSS only, no image request ---- */
+body::after{
+  content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =========================== layout =========================== */
+.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.reading{max-width:var(--reading)}
+.section{padding-block:var(--s-7)}
+@media (min-width:768px){ .section{padding-block:var(--s-8)} }
+.section--hero{padding-block:var(--s-8)}
+@media (min-width:768px){ .section--hero{padding-block:var(--s-9)} }
+.section--band{background:var(--bg-alt)}
+.measure{max-width:34em}
+.grid{display:grid;gap:var(--s-3)}
+@media (min-width:768px){ .grid{gap:var(--s-4)} }
+.grid-2{grid-template-columns:1fr}
+@media (min-width:900px){ .grid-2{grid-template-columns:1fr 1fr} }
+/* asymmetry, not 6/6 (6.5) */
+.split-5-7{display:grid;gap:var(--s-5)}
+@media (min-width:900px){ .split-5-7{grid-template-columns:5fr 7fr;gap:var(--s-6)} }
+.split-7-5{display:grid;gap:var(--s-5)}
+@media (min-width:900px){ .split-7-5{grid-template-columns:7fr 5fr;gap:var(--s-6)} }
+.hr{border:0;border-top:1px solid var(--border);margin-block:var(--s-6)}
+
+/* =========================== motion =========================== */
+.rv{opacity:0;transform:translateY(24px);
+  transition:opacity var(--t-slow) var(--ease),transform var(--t-slow) var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv[data-d="1"]{transition-delay:70ms}  .rv[data-d="2"]{transition-delay:140ms}
+.rv[data-d="3"]{transition-delay:210ms} .rv[data-d="4"]{transition-delay:280ms}
+.rv[data-d="5"]{transition-delay:350ms} .rv[data-d="6"]{transition-delay:420ms}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .rv{opacity:1!important;transform:none!important}
+  html{scroll-behavior:auto}
+}

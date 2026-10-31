@@ -1,0 +1,24 @@
+{
+  "name": "mavelogxdigital-website",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "qa": "node scripts/check-site-assets.cjs && node scripts/qa.cjs && node scripts/check-image-renames.cjs",
+    "check:images": "node scripts/check-image-renames.cjs",
+    "check:assets": "node scripts/check-site-assets.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.14.1",
+    "sharp": "^0.34.4"
+  },
+  "private": true,
+  "type": "module"
+}
