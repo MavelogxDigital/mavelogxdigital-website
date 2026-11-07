@@ -26,7 +26,7 @@ import Tagline from './Tagline.astro';
         </p>
       </div>
       <div>
-        <h3 class="sweep">Company</h3>
+        <h3>Company</h3>
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/process/">Our Process</a></li>
@@ -35,11 +35,11 @@ import Tagline from './Tagline.astro';
         </ul>
       </div>
       <div>
-        <h3 class="sweep">Services</h3>
+        <h3>Services</h3>
         <ul>{SERVICES.map(s => <li><a href={`/services/#${s.slug}`}>{s.title}</a></li>)}</ul>
       </div>
       <div>
-        <h3 class="sweep">Work</h3>
+        <h3>Work</h3>
         <ul>
           {PROJECTS.map(p => <li><a href={`/work/${p.slug}/`}>{p.client}</a></li>)}
           <li><a href="/work/">All work</a></li>
