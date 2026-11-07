@@ -14,6 +14,49 @@ lead: >
   trade corridors: China to Ghana, China to Canada, and Canada to Ghana.
   The problem a procurement site solves is not persuasion but trust. A buyer sending money
   abroad needs to know what happens, in what order, and who is accountable at each step.
+brief:
+  - >
+    Mavelogx Enterprise is a sourcing and procurement business working three trade corridors:
+    China to Ghana, China to Canada, and Canada to Ghana. It exists because finding a
+    manufacturer is the easy part of importing. A buyer also has to judge whether the supplier
+    is real, settle a price, confirm the goods match the specification, move money across a
+    border, clear customs, and get the shipment to a door. The business takes the whole chain
+    rather than one link of it.
+  - >
+    The site has to hold four buyers at once. Wholesalers buying volume, retailers restocking,
+    businesses sourcing equipment and materials to a specification, and individuals importing a
+    single order. The spread is deliberate: orders run from under $1,000 to past $150,000 with
+    no strict minimum. A page pitched at the wholesaler alone reads as closed to the individual,
+    and a page pitched at the individual reads as too small for the wholesaler.
+  - >
+    This is an in-house venture, so the brief was argued across a table rather than sent in.
+    The ask was a site that could do the one thing a message thread cannot: let a buyer who has
+    never spoken to anyone at the company understand the offer, follow the process from brief to
+    delivery, and hand over enough detail to be quoted.
+challenge:
+  - >
+    Before the site, orders arrived two ways. A WhatsApp message, or a phone call. Both are
+    direct, both still work, and that is why WhatsApp sits on every screen of the finished site.
+    The limit was never the channel. It is that either conversation can only begin once someone
+    already has the number, which leaves the business reachable by the people who know it and
+    invisible to everyone else.
+  - >
+    The second limit is what those channels capture. A sourcing enquiry carries eight variables
+    before anyone can price it: what the product is, the specification, the quantity, where it is
+    going, when it is needed, how it should ship, what it can cost, and which
+    parts of the job the buyer wants handled. A phone call tends to deliver three of them. A
+    first message usually delivers one, the product, and asks for a price. The rest has to be
+    drawn out across the exchanges that follow, and until it is there is nothing to quote on.
+    That is the real cost, and it was paid in effort and elapsed time rather than in any loss
+    anyone counted.
+  - >
+    The objection the site has to answer is not price and it is not interest. It is whether a
+    buyer will send money abroad to a company they found on the internet. Five separate doubts
+    sit under that one. Whether the supplier and the goods are real. Whether what arrives matches
+    what was agreed. Whether the landed cost is knowable before committing. Whether the shipment
+    turns up in a usable timeframe. And who picks up the problem when something goes wrong.
+    Visual polish answers none of the five. A named process, stated in order, with someone
+    accountable at each stage, answers all of them.
 shots:
   - src: /img/mavelogx-enterprise-home-mobile-780.webp
     w: 780
@@ -68,8 +111,6 @@ decisions:
       On a near-black ground that keeps the next step
       obvious, even on a page carrying a lot of operational detail.
 pending:
-  - "04 The brief: the business case for the site"
-  - "05 The challenge: what was in place before, and its cost"
   - "06 Strategy and direction: the central insight, and what you rejected"
   - "07 Identity and design system: logo rules, palette values, type specimen"
   - "10 Outcome: what changed, evidenced only"
