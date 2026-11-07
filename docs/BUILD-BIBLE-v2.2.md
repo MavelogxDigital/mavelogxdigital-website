@@ -85,8 +85,10 @@ here rather than left in a conversation, per 15.1.
 | 42 | The sweep reads the four accent tokens instead of six hard-coded hexes. | Amends 6.2. Steel Blue and Orange are not in the mark. |
 | 43 | The mark joins the wordmark in the header and footer. | New section 5.2 addendum. |
 | 44 | The asset guard also reports images nothing references. | Extends 13.5. |
+| 45 | Each case study gets a purpose-built share card, PNG at 1200x630, generated from the studio's own type and palette. Case studies previously shared the 1280x720 hero screenshot in WebP, which WhatsApp and LinkedIn render unreliably, so a shared link often arrived with no picture. | Rewrites 11.2. Adds `scripts/build-og-cards.cjs` and `scripts/og-fonts/`. Retires the 1280x720 branch in `BaseLayout`. |
+| 46 | `theme-color` and the manifest `theme_color` are repointed from `#3BBFA0` to `#2CD4AD`. Teal was revalued when the palette was sampled from the logo and these two carried the superseded value. | Corrects drift against 6.1. |
+| 47 | The asset guard checks share cards by their bytes, not their markup: present, PNG, really 1200x630, declared size matching the file, and each case study sharing its own card. It also checks `theme-color` and the manifest against `--teal`. | Extends 13.5. Both were proven to fail before being relied on. |
 
-### Decisions taken and then reversed
 ### Decisions taken and then reversed
 
 Recorded because 15.1 asks for the reasoning, not only the outcome.

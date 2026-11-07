@@ -172,6 +172,77 @@ if (fs.existsSync(imgDir)) {
   for (const o of orphans) fail(`public/img/${o} is in the build and nothing references it`);
 }
 
+/* --- Share cards (11.2) ------------------------------------------------
+   Case studies used to share the hero screenshot: WebP at 1280x720. WhatsApp
+   is this studio's main sharing channel and renders WebP unreliably, so a
+   shared case study often arrived with no picture at all, and nothing in the
+   build said so. The browser suite cannot see this: the page looks perfect.
+   So the card is checked here, by its real bytes rather than its markup. */
+const pngSize = (abs) => {
+  const b = fs.readFileSync(abs);
+  if (b.length < 24 || b.toString('hex', 0, 8) !== '89504e470d0a1a0a') return null;
+  if (b.toString('ascii', 12, 16) !== 'IHDR') return null;
+  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+};
+
+for (const f of pages) {
+  const r = route(f);
+  const html = read(f);
+  const src = (html.match(/<meta property="og:image" content="([^"]+)"/) || [])[1];
+  if (!src) { fail(`${r}: no og:image`); continue; }
+  if (!src.startsWith(HOST)) { fail(`${r}: og:image is not an absolute URL on the canonical host: ${src}`); continue; }
+  const rel = src.slice(HOST.length);
+  if (!exists(rel)) { fail(`${r}: og:image points at a file that is not in the build: ${rel}`); continue; }
+  if (!/\.png$/i.test(rel)) {
+    fail(`${r}: og:image is ${path.extname(rel) || 'extensionless'}, not PNG. WhatsApp and LinkedIn render WebP unreliably (11.2): ${rel}`);
+    continue;
+  }
+  const real = pngSize(path.join(DIST, rel.replace(/^\//, '')));
+  if (!real) { fail(`${r}: og:image is named .png but is not a PNG: ${rel}`); continue; }
+  if (real.w !== 1200 || real.h !== 630) {
+    fail(`${r}: og:image is ${real.w}x${real.h}, and a share card must be 1200x630: ${rel}`);
+  }
+  const dw = (html.match(/<meta property="og:image:width" content="(\d+)"/) || [])[1];
+  const dh = (html.match(/<meta property="og:image:height" content="(\d+)"/) || [])[1];
+  if (Number(dw) !== real.w || Number(dh) !== real.h) {
+    fail(`${r}: og:image declares ${dw}x${dh} but the file is ${real.w}x${real.h}`);
+  }
+}
+
+/* Each case study needs its own card. Sharing the default one would be a
+   silent regression: the markup is valid, the picture is just the wrong one. */
+for (const f of pages) {
+  const r = route(f);
+  const m = r.match(/^\/work\/([^/]+)\/$/);
+  if (!m) continue;
+  const want = `/img/og-${m[1]}-1200x630.png`;
+  if (!read(f).includes(`content="${HOST}${want}"`)) fail(`${r}: does not share its own card, expected ${want}`);
+}
+
+/* --- Brand colour drift ------------------------------------------------
+   Teal was revalued when the palette was sampled from the logo (6.1), and
+   the browser chrome colour kept the superseded value for weeks. Nothing on
+   screen looks wrong when this drifts, so it is checked rather than watched. */
+{
+  const css = fs.readFileSync(path.join(__dirname, '..', 'src', 'styles', 'global.css'), 'utf8');
+  const teal = (css.match(/--teal:\s*(#[0-9A-Fa-f]{6})/) || [])[1];
+  if (!teal) fail('global.css does not define --teal, so the theme colour cannot be checked');
+  else {
+    for (const f of pages) {
+      const got = (read(f).match(/<meta name="theme-color" content="([^"]+)"/) || [])[1];
+      if (!got) { fail(`${route(f)}: no theme-color`); break; }
+      if (got.toUpperCase() !== teal.toUpperCase()) {
+        fail(`theme-color is ${got} but --teal is ${teal} (6.1)`);
+        break;
+      }
+    }
+    const man = JSON.parse(read(path.join(DIST, 'site.webmanifest')));
+    if (String(man.theme_color).toUpperCase() !== teal.toUpperCase()) {
+      fail(`site.webmanifest theme_color is ${man.theme_color} but --teal is ${teal} (6.1)`);
+    }
+  }
+}
+
 console.log(`site assets: ${pages.length} pages walked, ${listed.size} sitemap URLs`);
 if (fails.length) {
   console.error(`\nSITE ASSET FAILURES (${fails.length}):`);

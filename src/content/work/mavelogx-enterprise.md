@@ -57,6 +57,32 @@ challenge:
     turns up in a usable timeframe. And who picks up the problem when something goes wrong.
     Visual polish answers none of the five. A named process, stated in order, with someone
     accountable at each stage, answers all of them.
+strategy:
+  - >
+    The obvious version of this site is a catalogue. Products, prices, a basket. It was
+    rejected, and almost everything else follows from rejecting it. A catalogue implies fixed
+    stock at a fixed price, available now. None of those three hold here. The price moves with
+    the supplier, the quantity, the corridor and the week, and a quote for 500 units into Accra
+    tells a wholesaler ordering 10,000 into Toronto nothing at all. A catalogue would have to
+    either invent figures or hedge every one of them, and a hedged price is worse than no price.
+  - >
+    So the site sells the process rather than the goods. Six stages, named and numbered: submit
+    the brief, match the supplier, quote and review, negotiate and sample, production and quality
+    control, delivery. That sequence is the spine of the page, not an explainer tucked under the
+    services. It is there because the thing a first-time buyer is actually buying is somebody
+    else's competence, and competence is only legible as a sequence of steps with a name on each.
+  - >
+    The sourcing request is the instrument of that strategy, not a contact form. It asks for the
+    product, the specification, the quantity, the destination, the timeline, the shipping
+    preference, the cost it has to sit inside, and which parts of the job the buyer wants
+    handled. Asking eight questions before a conversation starts costs some people, and it is
+    worth it: the ones who answer have described a job that can be quoted, and the first reply
+    can be a quote rather than another question.
+  - >
+    The trade is deliberate and worth stating plainly. Nobody can buy anything on this site.
+    There is no checkout and no instant transaction, which means the site cannot be judged on
+    conversion the way a shop can. What it can be judged on is whether what arrives is complete
+    enough to act on. That was the brief, and it is the only measure that matches the business.
 shots:
   - src: /img/mavelogx-enterprise-home-mobile-780.webp
     w: 780
@@ -111,7 +137,6 @@ decisions:
       On a near-black ground that keeps the next step
       obvious, even on a page carrying a lot of operational detail.
 pending:
-  - "06 Strategy and direction: the central insight, and what you rejected"
   - "07 Identity and design system: logo rules, palette values, type specimen"
   - "10 Outcome: what changed, evidenced only"
 ---

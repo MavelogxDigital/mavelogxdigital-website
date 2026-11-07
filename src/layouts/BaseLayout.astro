@@ -31,12 +31,13 @@ const { title, description, page = '', ogImage = '/og-facebook-whatsapp-linkedin
         crumbs = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogAbs = new URL(ogImage, SITE.url).href;
-/* Share cards must declare the real size. The default card is 1200x630; a case
-   study passes its 1280x720 hero instead, and announcing 1200x630 for it made
-   every case study share card lie about its own dimensions. */
-const ogIsHero = /-1280\.(webp|jpg|png)$/.test(ogImage);
-const ogW = ogIsHero ? '1280' : '1200';
-const ogH = ogIsHero ? '720'  : '630';
+/* Every share card is PNG at 1200x630, including the per-case-study cards
+   built by scripts/build-og-cards.cjs. Case studies used to share the 1280x720
+   hero screenshot in WebP, which WhatsApp and LinkedIn render unreliably, so a
+   shared link often arrived with no picture. One ratio, one format, no lie
+   about the dimensions. */
+const ogW = '1200';
+const ogH = '630';
 ---
 <!doctype html>
 <html lang="en">
@@ -50,7 +51,7 @@ const ogH = ogIsHero ? '720'  : '630';
   {noindex
     ? <meta name="robots" content="noindex, nofollow" />
     : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
-  <meta name="theme-color" content="#3BBFA0" />
+  <meta name="theme-color" content="#2CD4AD" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content={SITE.name} />
