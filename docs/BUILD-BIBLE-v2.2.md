@@ -772,7 +772,7 @@ at three widths in dark and at 1440 in light, scrolling first so sticky chrome
 is measured in its scrolled state. `scripts/check-image-renames.cjs` compares
 tracked images against the previous commit.
 
-### Why a third script, and why it walks the build
+### Why the asset guard walks the build rather than a route list
 
 The browser suite passed on every route for six days while four defects sat in
 the build: a `site.webmanifest` referenced from every page and absent from
@@ -871,9 +871,9 @@ Three changes across the deck.
 - **No em dashes** in any body copy. Periods, commas or colons instead. The
   paragraphs in sections 03 and 05 of the v2.1 deck are rewritten accordingly.
 - **Section 07, Client Testimonials**, is replaced by the four quotes in 8.7.
-  The "Incoming" note about collecting two more is closed: the Floks Speaks
-  quote arrived, the Syndei Embassy one is still outstanding, and the ceiling is
-  four.
+  The "Incoming" note about collecting two more is closed: both the Floks Speaks
+  and the Syndei Embassy quotes arrived on 30 October, and four is the ceiling.
+  The section head changed on 7 November, per change 53.
 
 The footer contact line shows the email and the voice number. It does not show
 the WhatsApp number, per 11.4.
@@ -1072,7 +1072,7 @@ and now has no overflow at all, where it had 2px before this change.
 | The 98 per cent satisfaction figure on mavelogx.com | **DECIDED 7 November, not yet applied.** It comes off and is replaced by trade corridors served. Blocked: mavelogx.com is a Netlify drop with no git source reachable from here. Two further fixes wait on the same access, a `Quality Control Guaranteed` claim that contradicts Section 8 of its own Terms, and quote turnaround stated five ways, settling at two business days. | Owner | Phase 2 |
 | Five swept elements in the footer | **RESOLVED 7 November.** The three headings drop the sweep; the two wordmarks keep it. See change 49. Closing it also closed a contrast-audit hole, change 50. | Closed | Closed |
 | Testimonials in `site.ts` | **RESOLVED.** Moved on 30 October, at the point the fourth arrived. | Closed | Closed |
-| Run the guard suite | **RESOLVED.** Run 30 October against `c32e5d0`, all checks pass. Re-run before merge. | Closed | Closed |
+| Run the guard suite | **RESOLVED.** Last run 7 November, all four scripts pass. Re-run before merge. | Closed | Closed |
 | Legacy hotfix | **DEFERRED BY DECISION, 28 October.** The hotfix is corrected and on the branch. It will not ship separately: the owner chose to fix the live site by merging the rebuild. Until that merge, the live site displays the Canadian number inside a `tel:` that dials Ghana, and its structured data names the Ghanaian line as the business telephone. | Owner | At merge |
 | Pricing page | OPEN. Not specified here. If added it belongs at `/pricing/`, reached from Services and Contact, never from the homepage hero. | Owner | Post-launch |
 | Price for the podcast service | OPEN. Service 07 is sellable on the website and absent from the Service Menu's five packages. Needs either a package of its own or an add-on line, and a number. See 8.4. | Owner | Before the docs ship |
