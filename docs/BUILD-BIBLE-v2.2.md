@@ -27,9 +27,10 @@ in 6.5 or the build sequence in Section 14.
 
 ## 1.4 (addendum) Version history, v2.2 changes
 
-Twenty-six commits between 24 and 28 October 2026. Each decision below
-contradicts something in v2.1 and is recorded here rather than left in a
-conversation, per 15.1.
+Changes between 24 October and 7 November 2026. Each decision below
+contradicts something in v2.1, or corrects something in this file that went
+stale after a later section superseded it, and is recorded here rather than
+left in a conversation, per 15.1.
 
 | # | Change | What it supersedes |
 |---|---|---|
@@ -88,6 +89,14 @@ here rather than left in a conversation, per 15.1.
 | 45 | Each case study gets a purpose-built share card, PNG at 1200x630, generated from the studio's own type and palette. Case studies previously shared the 1280x720 hero screenshot in WebP, which WhatsApp and LinkedIn render unreliably, so a shared link often arrived with no picture. | Rewrites 11.2. Adds `scripts/build-og-cards.cjs` and `scripts/og-fonts/`. Retires the 1280x720 branch in `BaseLayout`. |
 | 46 | `theme-color` and the manifest `theme_color` are repointed from `#3BBFA0` to `#2CD4AD`. Teal was revalued when the palette was sampled from the logo and these two carried the superseded value. | Corrects drift against 6.1. |
 | 47 | The asset guard checks share cards by their bytes, not their markup: present, PNG, really 1200x630, declared size matching the file, and each case study sharing its own card. It also checks `theme-color` and the manifest against `--teal`. | Extends 13.5. Both were proven to fail before being relied on. |
+| 48 | The legacy single-file site retires its `100% Client Satisfaction` stat for `6 Websites Shipped`. A satisfaction figure with no denominator, method or date is the claim this build already refused on the about page. | Applies the 8.9 verified-claims rule to `legacy/index-hotfix.html`. Not live until the file is published. |
+| 49 | The brandmark sweep is dropped from the three footer column headings. It now marks the nav wordmark and the footer wordmark only. Five continuously swept elements put the site's highest motion density in its lowest-attention region. | Rewrites the footer row of 6.2's first documented exception. |
+| 50 | Closing 49 also closed a hole in the contrast audit. 13.5 exempts `.sweep` from the contrast check as a logotype treatment under WCAG 1.4.3. That exemption was written two hours after `.sweep` was put on the three footer headings, so it had been covering three navigation headings, which 1.4.3 does not exempt. They are measured for the first time and pass. | Corrects the scope of the 13.5 exemption. No rendered output was failing. |
+| 51 | The homepage agency introduction drops two of its three paragraphs. They restated pillars 01, 02 and 04 from the same page, with "the thinking gets the time it deserves" appearing verbatim in both the intro and pillar 02. 94 words to 53. | Rewrites the Section 03 copy in Appendix A. The four pillars are unchanged. |
+| 52 | The pillars head becomes "Four reasons to work with us." "Four reasons clients stay." implies a retention record that cannot be evidenced. | Applies the 8.9 verified-claims rule to the homepage. |
+| 53 | The client voice head becomes eyebrow "Voices", H2 "In their words." Two of the four quotes are in-house ventures that the portfolio identifies as such, and the old head labelled them clients. Count and external-first order unchanged. | Rewrites the section-head line of 8.7. |
+| 54 | Four sections carried the palette as it stood before 41. 2.2 listed Purple as a retained core accent, 6.1 (extended) gave superseded hex values for all four ink variants, 6.2 instructed the reader to use `--purple-lt` eight days after it left the system, and 8.4 gave service 07 a purple accent. 6.2's clamp rationale was also wrong on the facts: amber is the contrast floor, not the third accent. | Corrects 2.2, 6.1 (extended), 6.2 and 8.4 against 6.1 (rewritten). |
+| 55 | Every custom property the bible names must be defined in the stylesheet. The check keeps no list of retired tokens, because such a list goes stale the way the bible did. A token may be named without being defined when the surrounding two lines record that it was retired or renamed. | Extends 13.5. Adds `scripts/check-bible-tokens.cjs`. Proven to fail before being relied on. |
 
 ### Decisions taken and then reversed
 
@@ -110,7 +119,7 @@ decision changed at v2.2.
 | Element | Decision |
 |---|---|
 | Tagline | "From Idea To Impact" is retained across the site, social and documents. Its typographic treatment is specified in 6.2 and Section 07. |
-| Brand palette | All four core accents (Coral, Amber, Purple, Teal) and the dark base are retained. No new brand hues are introduced. The contrast-safe variants in 6.1 are the same hues at different lightness, not new colours. |
+| Brand palette | All four core accents (Coral, Amber, Blue, Teal) and the dark base are retained. No new brand hues are introduced. The contrast-safe variants in 6.1 are the same hues at different lightness, not new colours. |
 | Typefaces | Plus Jakarta Sans and Cormorant Garamond are both retained. Only their usage rules change. |
 | Technology | Astro static build, output as plain HTML, CSS and a few KB of JavaScript. Deployment stays GitHub to Netlify. No WordPress, no CMS, no server runtime. |
 | Theme | **Changed at v2.2.** Both themes are fully supported, with a visitor-facing toggle. See 6.1. |
@@ -172,8 +181,12 @@ never a `<div>`.
 
 ## 6.1 (extended) Colour
 
-The four core accents and the two neutral sets are unchanged from v2.1. Two
-additions.
+The two neutral sets are unchanged from v2.1. Two additions.
+
+**Superseded in part by 6.1 (rewritten).** The accents were resampled from the
+logo on 30 October 2026 and every value in the table below was replaced. The
+table is kept for the reasoning about why each variant exists. For any value,
+read 6.1 (rewritten). The third accent is blue, not purple.
 
 ### Contrast-safe variants
 
@@ -184,14 +197,14 @@ component has to invent a value.
 
 | Token | Hex | Why it exists |
 |---|---|---|
-| `--coral-strong` | `#E12C43` | Button fill. White on raw Coral is 3.39:1, below AA. White on this is 4.52:1. |
-| `--amber-ink` | `#BF7C09` | Amber as large text on a light ground: 3.08:1. |
-| `--teal-ink` | `#267C68` | Teal as text on a light ground: 4.51:1 on `#F2F2F4`. Raw Teal there is 2.20:1. |
-| `--purple-ink` | `#6565BE` | Purple as text on a light ground: 4.52:1 on `#F2F2F4`. |
+| `--coral-strong` | `#E3141C` | Button fill. White on raw Coral is 3.39:1, below AA. White on this is 4.79:1. |
+| `--amber-ink` | `#AD8701` | Amber as large text on a light ground: 3.01:1. |
+| `--teal-ink` | `#1A7D66` | Teal as text on a light ground: 4.51:1 on `#F2F2F4`. Raw Teal there is 2.20:1. |
+| `--blue-ink` | `#3C5FF7` | Blue as text on a light ground: 4.50:1 on `#F2F2F4`. |
 
 ### Theme-resolved ink tokens
 
-`--teal-text`, `--amber-text` and `--purple-text` point at the raw accent in a
+`--teal-text`, `--amber-text` and `--blue-text` point at the raw accent in a
 dark context and at the ink variant in any light one. Light contexts are the
 light theme, the OS light preference before the visitor has chosen, and any
 `.section--invert` band inside a dark page.
@@ -218,7 +231,7 @@ after which the choice persists.
 
 - Maximum one accent per section, outside the two documented exceptions below.
   A section may use its assigned accent plus neutrals.
-- `--coral-strong` is the only colour permitted on a solid button. Amber, Purple
+- `--coral-strong` is the only colour permitted on a solid button. Amber, Blue
   and Teal appear as text, rules, icons, numerals and borders only.
 - No gradient uses more than two stops outside the exceptions, and both stops
   come from the same accent family or run accent to transparent.
@@ -242,8 +255,11 @@ exemption WCAG 1.4.3 grants.
 order of the four-petal mark in the brand guidelines. Two constraints on it are
 not negotiable:
 
-- **Never set below 24px.** Purple is the floor and is AA for large text only in
-  both themes, so the clamp minimum is 28px.
+- **Never set below 24px.** Amber is the floor. `--amber-ink` is 3.01:1, AA for
+  large text only, so the clamp minimum is 28px. The floor used to be the third
+  accent: purple read 4.0:1 on dark and was large-text-only there. Blue reads
+  5.74:1 on dark and 4.50:1 as `--blue-ink` on light, clearing normal text in
+  both, so it no longer constrains the clamp. Amber does, and 28px stands.
 - **Never hard-code the raw accents in it.** Amber and Teal at full strength are
   1.91:1 and 2.20:1 on a light ground, both well below AA. The words read
   `--amber-text` and `--teal-text`.
@@ -254,10 +270,11 @@ the breakpoint.
 ### Contrast is a requirement, not a preference
 
 Coral on `--bg-d` is roughly 5.1:1, Teal 8.4:1 and Amber 10.2:1, all passing AA
-for normal text. Purple on `--bg-d` is roughly 4.0:1 and **fails** AA for body
-text under 18.66px: use `--purple-lt` (5.6:1) for small text on dark, which is
-what `--purple-text` already resolves to. Every pair is verified by 13.5 on
-every route in both themes rather than trusted from this table.
+for normal text. Blue on `--bg-d` is 5.74:1 and passes too. That is why
+`--purple-lt` was retired rather than renamed: the lightened variant existed
+only because purple read 4.0:1 there and failed body text. Nothing needs it now.
+Every pair is verified by 13.5 on every route in both themes rather than trusted
+from this table.
 
 ---
 
@@ -373,7 +390,12 @@ four, which is why the page branches on the count instead of committing to one.
 - **No star marks.** Removed site-wide. A five-star rating an agency awards
   itself on behalf of a client is not evidence, and rendering it as SVG only
   made it render consistently.
-- Section head: eyebrow "Client Voice", H2 "What our clients say."
+- Section head: eyebrow "Voices", H2 "In their words."
+  Two of the four quotes are in-house ventures that the portfolio page
+  identifies as such. A head reading "What our clients say" labelled them
+  as clients, and a prospect who reads both pages sees the contradiction.
+  The head now covers a client and a venture equally and claims nothing.
+  The quote count and the external-first order are unchanged.
 
 ### The four quotes
 
@@ -422,7 +444,7 @@ the other document wanted five with AI-augmentation listed as a service, and
 that was rejected because AI-augmentation is a method rather than a line item.
 That reasoning still holds. This is a different case.
 
-**07. Podcast Production & Distribution.** Accent Purple. Proof links to Floks
+**07. Podcast Production & Distribution.** Accent Blue. Proof links to Floks
 Speaks.
 
 This was already shipped work with no line on the menu. It is substantive in
