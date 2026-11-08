@@ -6,6 +6,13 @@
 section of v2.1 not reproduced here is unchanged and still governs.
 **Status** Approved for build
 **Branch** `rebuild/astro`, under PR #1. Not merged to `main`.
+**Authority** The governed copy of this document is `docs/BUILD-BIBLE-v2.2.md`
+on `rebuild/astro`. It is the only copy `npm run qa` checks. Any other copy,
+including the one in the claude.ai Project, is a snapshot that may be behind,
+and is resynced at merge rather than continuously. Where a snapshot and the
+branch disagree, the branch wins. This rule exists because on 7 November four
+sections of this file were still describing a palette that had been replaced
+eight days earlier, and nothing was looking.
 
 ---
 
