@@ -109,6 +109,7 @@ here rather than left in a conversation, per 15.1.
 | 58 | Four places that read as a hard limit to Ghana and Canada are broadened to the owner's framing, clients across different markets and industries: the About and Insights meta descriptions, the Insights lead and the homepage insights lead. Four others already carried the reach claim and are untouched. | Amends 9.3 and the Insights copy. 11.1's reach mechanism is unchanged and is what made the other four already correct. |
 | 59 | The About stat reads `2 Core markets`, not `2 Markets served`. Once the agency works beyond the two, "served" is inaccurate rather than merely narrow. Two words, so 9.3's label ceiling holds and the row still sets on one line at desktop width. | Rewrites one row of 9.3. |
 | 60 | The Built for Two Markets pillar is kept verbatim. Owner decision, 8 November, taken against the option of broadening it. It is the one pillar a competitor cannot copy, and the reach claim already sits wherever the base is stated, so the specificity costs nothing in reach. | Confirms 11.1 rather than superseding it. |
+| 61 | The founder portrait is replaced. The new frame ships under the stem `founder-portrait`, and the six `founder-studio` files are deleted rather than left in place. Alt text rewritten to describe the new frame, since it describes a different photograph. | Applies 5.5. Reopens and re-closes the founder photograph row in Appendix F. |
 
 ### Decisions taken and then reversed
 
@@ -1075,7 +1076,7 @@ and now has no overflow at all, where it had 2px before this change.
 | Question | Status | Owner | Needed by |
 |---|---|---|---|
 | SVG logo sources | OPEN. Still extracted from a flattened raster. | Owner | Phase 1 |
-| Founder photograph | **RESOLVED.** The warm studio frame, on About. Renamed on replacement, per 5.5. | Closed | Closed |
+| Founder photograph | **RESOLVED, replaced 8 November.** A new frame under the stem `founder-portrait`. The previous `founder-studio` set was deleted, not overwritten, per 5.5, and the orphan guard in 13.5 is what forces that rather than leaving six unreferenced files in the build. | Closed | Closed |
 | Which three articles launch Insights | **RESOLVED.** All three are written and live: the AI-augmented studio, the Canada to Ghana corridor, and positioning before logo. | Closed | Closed |
 | Which industries carry a Proven tag | **RESOLVED.** Four of ten, per 9.1. | Closed | Closed |
 | Client quotes | **RESOLVED.** Floks Speaks and Syndei Embassy are both in. Four quotes, which is 8.7's ceiling. | Closed | Closed |
