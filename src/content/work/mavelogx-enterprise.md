@@ -83,6 +83,29 @@ strategy:
     There is no checkout and no instant transaction, which means the site cannot be judged on
     conversion the way a shop can. What it can be judged on is whether what arrives is complete
     enough to act on. That was the brief, and it is the only measure that matches the business.
+identity:
+  note: >
+    One crimson on near-black, and the pairing is the whole system. #CC1111 was drawn for a
+    light ground. It reads 5.74 to 1 on the off-white sections and 3.29 on the near-black that
+    covers most of the site, so it cannot carry small text where the site spends most of its
+    time. That single fact sets every rule that follows. Red takes the display type, the stat
+    figures and the solid fills, where scale and surface do the work instead of contrast.
+    White on the red button reads 5.74, so the primary action clears AA without lightening the
+    brand colour to get there. Body copy on dark goes to a light grey at 11.76 rather than a
+    tinted one, which keeps red rare enough to still mean something wherever it does appear.
+  palette:
+    - { name: Crimson, hex: "#CC1111" }
+    - { name: Crimson lift, hex: "#E31E1E" }
+    - { name: Crimson deep, hex: "#A00D0D" }
+    - { name: Near black, hex: "#111111" }
+    - { name: Panel, hex: "#1A1A1A" }
+    - { name: Off white, hex: "#F8F8F8" }
+    - { name: Grey on dark, hex: "#CCCCCC" }
+    - { name: Muted, hex: "#666666" }
+  type:
+    - Barlow Condensed at 700 and 800 for display
+    - Barlow for body and controls
+    - DM Sans for the payment module
 shots:
   - src: /img/mavelogx-enterprise-home-mobile-780.webp
     w: 780
@@ -137,6 +160,10 @@ decisions:
       On a near-black ground that keeps the next step
       obvious, even on a page carrying a lot of operational detail.
 pending:
-  - "07 Identity and design system: logo rules, palette values, type specimen"
-  - "10 Outcome: what changed, evidenced only"
+  - "10 Outcome: what changed, evidenced only. Blocked on evidence, not on writing. The
+    analytics property on the site is live, so the data exists and is not reachable from
+    here. Two facts would unblock it: whether any sourcing request has arrived through the
+    form rather than by WhatsApp or phone, and what the property shows for sessions and for
+    the sourcing section since launch. Nothing is written here until one of them is in hand,
+    per 9.3."
 ---
