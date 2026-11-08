@@ -746,7 +746,7 @@ it, and the guard does not check that page because it is not in the route list.
 
 ## 13.5 (new) Automated guards
 
-The rules in this document are only true if something checks them. Six guards
+The rules in this document are only true if something checks them. Seven guards
 run against a built site before anything is committed.
 
 ### Where the logic lives
@@ -758,13 +758,15 @@ disagree about what a rule is, that is a defect in one of them and it gets
 resolved here, not worked around.
 
 ```
-npm run qa          runs both scripts
+npm run qa          runs all four scripts
 npm run check:images runs the rename guard alone
 ```
 
-Three scripts, run in that order, cheapest first.
+Four scripts, run in that order, cheapest first.
 
-`scripts/check-site-assets.cjs` walks `dist/` and checks the whole build. No
+`scripts/check-bible-tokens.cjs` reads this document and the stylesheet. No
+build and no browser, so it runs first. `scripts/check-site-assets.cjs` walks
+`dist/` and checks the whole build. No
 browser, no route list. `scripts/qa.cjs` drives a real browser over every route
 at three widths in dark and at 1440 in light, scrolling first so sticky chrome
 is measured in its scrolled state. `scripts/check-image-renames.cjs` compares
@@ -797,6 +799,7 @@ pages.
 | Contact wiring | No digits in the label of a `wa.me` link. No `tel:` pointing at the Ghanaian number. 11.4 |
 | Infrastructure names | No host, framework, CMS or form handler named in visible copy. 10.1 |
 | Image renames | No tracked image modified in place. A rename or a new file is fine. 5.5 |
+| Bible tokens | Every custom property this document names is defined in the stylesheet. A name may go undefined where the surrounding two lines record it as retired or renamed. 6.1, 6.2 |
 | Root assets | `robots.txt`, `sitemap-index.xml`, `site.webmanifest`, `404.html` and `favicon.ico` all exist. 13.4 |
 | robots and sitemap | robots declares a sitemap, in the canonical host form, that exists. The sitemap lists no URL without a page, and no page marked noindex. 11.3 |
 | The manifest | Parses as JSON, names the site, carries no em dash, and every icon it lists is in the build. 13.4 |
@@ -805,8 +808,8 @@ pages.
 
 ### The suite has been run
 
-Last run 30 October 2026 against `c32e5d0`: **17 routes, 68 viewport and theme
-combinations, 7,484 contrast pairs, all checks pass.** The gap recorded when
+Last run 7 November 2026: **19 pages walked, 18 routes, 72 viewport and theme
+combinations, 8,468 contrast pairs, all checks pass.** The gap recorded when
 this section was written, that the suite had never run and every claim in it was
 a specification rather than a result, is closed.
 
@@ -1064,10 +1067,10 @@ and now has no overflow at all, where it had 2px before this change.
 | Which three articles launch Insights | **RESOLVED.** All three are written and live: the AI-augmented studio, the Canada to Ghana corridor, and positioning before logo. | Closed | Closed |
 | Which industries carry a Proven tag | **RESOLVED.** Four of ten, per 9.1. | Closed | Closed |
 | Client quotes | **RESOLVED.** Floks Speaks and Syndei Embassy are both in. Four quotes, which is 8.7's ceiling. | Closed | Closed |
-| Mavelogx Enterprise blocks 04 to 07 and 10 | OPEN. Thirteen intake questions are with the owner. In-house, so no block 11. | Owner | Phase 2 |
+| Mavelogx Enterprise blocks 07 and 10 | OPEN. Blocks 04, 05 and 06 were written on 31 October. In-house, so no block 11. | Owner | Phase 2 |
 | Mavel's Corner app screenshots | OPEN. Waiting on the store build. | Owner | Phase 2 |
-| The 98 per cent satisfaction figure on mavelogx.com | OPEN. It is not carried into the case study, per 9.3 and 10.1. Whether it stays on the Enterprise site is a separate decision. | Owner | Phase 2 |
-| Five swept elements in the footer | OPEN, and asked twice without an answer. Whether five continuously swept elements read as busy, and whether the three footer headings should drop the sweep. | Owner | Phase 5 |
+| The 98 per cent satisfaction figure on mavelogx.com | **DECIDED 7 November, not yet applied.** It comes off and is replaced by trade corridors served. Blocked: mavelogx.com is a Netlify drop with no git source reachable from here. Two further fixes wait on the same access, a `Quality Control Guaranteed` claim that contradicts Section 8 of its own Terms, and quote turnaround stated five ways, settling at two business days. | Owner | Phase 2 |
+| Five swept elements in the footer | **RESOLVED 7 November.** The three headings drop the sweep; the two wordmarks keep it. See change 49. Closing it also closed a contrast-audit hole, change 50. | Closed | Closed |
 | Testimonials in `site.ts` | **RESOLVED.** Moved on 30 October, at the point the fourth arrived. | Closed | Closed |
 | Run the guard suite | **RESOLVED.** Run 30 October against `c32e5d0`, all checks pass. Re-run before merge. | Closed | Closed |
 | Legacy hotfix | **DEFERRED BY DECISION, 28 October.** The hotfix is corrected and on the branch. It will not ship separately: the owner chose to fix the live site by merging the rebuild. Until that merge, the live site displays the Canadian number inside a `tel:` that dials Ghana, and its structured data names the Ghanaian line as the business telephone. | Owner | At merge |
@@ -1084,5 +1087,5 @@ and now has no overflow at all, where it had 2px before this change.
 
 ---
 
-*MavelogxDigital, Website Build Bible, v2.2, 28 October 2026, amended 30 October 2026*
+*MavelogxDigital, Website Build Bible, v2.2, 28 October 2026, amended 7 November 2026*
 *From Idea To Impact*
