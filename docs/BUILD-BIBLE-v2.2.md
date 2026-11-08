@@ -1,6 +1,6 @@
 # MavelogxDigital Website Build Bible, v2.2
 
-**Prepared for** Emmanuel Kofi Avleshie, Founder, MavelogxDigital
+**Prepared for** Emmanuel Avleshie, Founder, MavelogxDigital
 **Date** 28 October 2026
 **Supersedes** v2.1 (23 October 2026) in the sections reproduced below. Every
 section of v2.1 not reproduced here is unchanged and still governs.
@@ -34,7 +34,7 @@ in 6.5 or the build sequence in Section 14.
 
 ## 1.4 (addendum) Version history, v2.2 changes
 
-Changes between 24 October and 7 November 2026. Each decision below
+Changes between 24 October and 8 November 2026. Each decision below
 contradicts something in v2.1, or corrects something in this file that went
 stale after a later section superseded it, and is recorded here rather than
 left in a conversation, per 15.1.
@@ -104,6 +104,11 @@ here rather than left in a conversation, per 15.1.
 | 53 | The client voice head becomes eyebrow "Voices", H2 "In their words." Two of the four quotes are in-house ventures that the portfolio identifies as such, and the old head labelled them clients. Count and external-first order unchanged. | Rewrites the section-head line of 8.7. |
 | 54 | Four sections carried the palette as it stood before 41. 2.2 listed Purple as a retained core accent, 6.1 (extended) gave superseded hex values for all four ink variants, 6.2 instructed the reader to use `--purple-lt` eight days after it left the system, and 8.4 gave service 07 a purple accent. 6.2's clamp rationale was also wrong on the facts: amber is the contrast floor, not the third accent. | Corrects 2.2, 6.1 (extended), 6.2 and 8.4 against 6.1 (rewritten). |
 | 55 | Every custom property the bible names must be defined in the stylesheet. The check keeps no list of retired tokens, because such a list goes stale the way the bible did. A token may be named without being defined when the surrounding two lines record that it was retired or renamed. | Extends 13.5. Adds `scripts/check-bible-tokens.cjs`. Proven to fail before being relied on. |
+| 56 | Mavelogx Enterprise block 07 is written. Palette and type are read off the live stylesheet rather than sampled from screenshots, which put the red at `#CC1211` against a declared `#CC1111`. The block turns on the one fact governing that system: the crimson is a light-ground colour on a dark-dominant site, 5.74 to 1 on the off-white and 3.29 on the near-black. | Closes one row of the pending list in 10.1. |
+| 57 | The founder block carries the owner's own bio, six paragraphs, replacing the two that were there. Six Oxford commas were removed to match house style, which runs without them seven instances to one. Nothing else in the supplied copy was altered. | Supersedes the founder-block wording in 8.3. The fifteen-years count stays at three places and still says what the years were in. |
+| 58 | Four places that read as a hard limit to Ghana and Canada are broadened to the owner's framing, clients across different markets and industries: the About and Insights meta descriptions, the Insights lead and the homepage insights lead. Four others already carried the reach claim and are untouched. | Amends 9.3 and the Insights copy. 11.1's reach mechanism is unchanged and is what made the other four already correct. |
+| 59 | The About stat reads `2 Core markets`, not `2 Markets served`. Once the agency works beyond the two, "served" is inaccurate rather than merely narrow. Two words, so 9.3's label ceiling holds and the row still sets on one line at desktop width. | Rewrites one row of 9.3. |
+| 60 | The Built for Two Markets pillar is kept verbatim. Owner decision, 8 November, taken against the option of broadening it. It is the one pillar a competitor cannot copy, and the reach claim already sits wherever the base is stated, so the specificity costs nothing in reach. | Confirms 11.1 rather than superseding it. |
 
 ### Decisions taken and then reversed
 
@@ -1074,7 +1079,7 @@ and now has no overflow at all, where it had 2px before this change.
 | Which three articles launch Insights | **RESOLVED.** All three are written and live: the AI-augmented studio, the Canada to Ghana corridor, and positioning before logo. | Closed | Closed |
 | Which industries carry a Proven tag | **RESOLVED.** Four of ten, per 9.1. | Closed | Closed |
 | Client quotes | **RESOLVED.** Floks Speaks and Syndei Embassy are both in. Four quotes, which is 8.7's ceiling. | Closed | Closed |
-| Mavelogx Enterprise blocks 07 and 10 | OPEN. Blocks 04, 05 and 06 were written on 31 October. In-house, so no block 11. | Owner | Phase 2 |
+| Mavelogx Enterprise block 10 | OPEN, and blocked on evidence rather than writing. Block 07 was written on 8 November. The analytics property on mavelogx.com is live, so the data exists and is not reachable from the build. Either a sourcing request confirmed as arriving through the form, or the session figures since launch, unblocks it. | Owner | Phase 2 |
 | Mavel's Corner app screenshots | OPEN. Waiting on the store build. | Owner | Phase 2 |
 | The 98 per cent satisfaction figure on mavelogx.com | **DECIDED 7 November, not yet applied.** It comes off and is replaced by trade corridors served. Blocked: mavelogx.com is a Netlify drop with no git source reachable from here. Two further fixes wait on the same access, a `Quality Control Guaranteed` claim that contradicts Section 8 of its own Terms, and quote turnaround stated five ways, settling at two business days. | Owner | Phase 2 |
 | Five swept elements in the footer | **RESOLVED 7 November.** The three headings drop the sweep; the two wordmarks keep it. See change 49. Closing it also closed a contrast-audit hole, change 50. | Closed | Closed |
@@ -1094,5 +1099,5 @@ and now has no overflow at all, where it had 2px before this change.
 
 ---
 
-*MavelogxDigital, Website Build Bible, v2.2, 28 October 2026, amended 7 November 2026*
+*MavelogxDigital, Website Build Bible, v2.2, 28 October 2026, amended 8 November 2026*
 *From Idea To Impact*
