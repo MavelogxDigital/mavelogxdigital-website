@@ -62,7 +62,32 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
        brk:[...document.querySelectorAll('img')].filter(i=>i.complete&&i.naturalWidth===0).length,
        nodim:[...document.querySelectorAll('img')].filter(i=>!i.getAttribute('width')&&!i.closest('.cs-frame')).length,
        of:document.documentElement.scrollWidth>document.documentElement.clientWidth+1,
-       emptyhref:[...document.querySelectorAll('a')].filter(a=>{const h=a.getAttribute('href');return !h||h==='#'}).length};
+       emptyhref:[...document.querySelectorAll('a')].filter(a=>{const h=a.getAttribute('href');return !h||h==='#'}).length,
+       // The brand name is cased MavelogxDigital. Two ways it renders wrong:
+       // a case-changing treatment applied over it, or a mistyped literal.
+       // Both are caught. Addresses and domains are stripped first, because
+       // projects@mavelogxdigital.com is lowercase and correct.
+       // Owner rule, 8 Nov 2026.
+       brandcase:(()=>{
+         const bad=[]; const BRAND='MavelogxDigital';
+         const ADDR=/[\w.+-]*@[\w.-]+|https?:\/\/\S+|\b[\w-]+\.(?:com|org|net|blog|app|ca)\b/gi;
+         document.querySelectorAll('body *').forEach(e=>{
+           if(e.children.length) return;
+           const raw=(e.textContent||'').trim();
+           if(!/mavelogxdigital/i.test(raw)) return;
+           // A block with no lowercase at all is a deliberate convention, such
+           // as the conspicuous all-caps a liability clause is written in. The
+           // bug being guarded is the name rendering wrong while the text
+           // around it reads normally.
+           if(!/[a-z]/.test(raw)) return;
+           const tt=getComputedStyle(e).textTransform;
+           if(tt==='uppercase'||tt==='lowercase'||tt==='capitalize'){
+             bad.push(tt+' applied to "'+raw.slice(0,32)+'"'); return; }
+           for(const hit of (raw.replace(ADDR,'').match(/mavelogxdigital/gi)||[]))
+             if(hit!==BRAND) bad.push('"'+hit+'" should be '+BRAND);
+         });
+         return [...new Set(bad)].slice(0,3);
+       })()};
    });
    const tag=`${route} @${w}/${sch}`;
    if(r.status()!==200) fails.push(`${tag}: HTTP ${r.status()}`);
@@ -84,6 +109,7 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
    {const v=d.t.match(/budget|affordab|cheap|price tag|price that works|without the premium/i);
     if(v) fails.push(`${tag}: retired phrase ("${v[0]}")`);}
    if(d.miswired) fails.push(`${tag}: ${d.miswired} contact link showing a number it should not`);
+   for(const bc of d.brandcase) fails.push(`${tag}: brand name mis-cased, ${bc}`);
    // Case studies describe what was built, not the plumbing it was built on.
    // Naming a client's host, CMS, form handler or framework helps a competitor
    // and a reconnaissance scan, and tells a prospect nothing. Owner rule, 25 Oct 2026.
@@ -101,4 +127,8 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
  console.log(`routes: ${ROUTES.length}  viewport/theme combos: ${ROUTES.length*4}  contrast pairs: ${checks}`);
  console.log(fails.length? 'FAILURES ('+fails.length+'):\n'+[...new Set(fails)].slice(0,40).map(f=>'  '+f).join('\n') : 'ALL CHECKS PASS');
  await b.close();
+ // This script printed its failures and exited 0 until 8 Nov 2026, so every
+ // contrast failure, banned glyph and retired phrase it ever found went green
+ // in the chain behind it. 13.5 again: the guard ran and enforced nothing.
+ process.exit(fails.length ? 1 : 0);
 })();

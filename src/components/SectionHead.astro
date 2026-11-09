@@ -1,11 +1,16 @@
 ---
 import Eyebrow from './Eyebrow.astro';
+import { SITE } from '../site';
 interface Props { eyebrow: string; heading: string; lead?: string; linkHref?: string; linkLabel?: string }
 const { eyebrow, heading, lead, linkHref, linkLabel } = Astro.props;
+// An eyebrow carrying the brand name drops the uppercase treatment, because
+// the name is cased and MAVELOGXDIGITAL is wrong. Detected here rather than
+// left to whoever writes the next section head.
+const cased = eyebrow.includes(SITE.name) ? 'eyebrow--cased' : '';
 ---
 <div class={`sec-head ${linkHref ? 'sec-head--row' : ''}`}>
   <div>
-    <Eyebrow>{eyebrow}</Eyebrow>
+    <Eyebrow class={cased}>{eyebrow}</Eyebrow>
     <h2 style="margin-top:var(--s-2)">{heading}</h2>
     {lead && <p class="lead" style="margin-top:var(--s-2)">{lead}</p>}
   </div>

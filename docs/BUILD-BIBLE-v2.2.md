@@ -113,6 +113,8 @@ here rather than left in a conversation, per 15.1.
 | 62 | The published email address is `projects@mavelogxdigital.com`, not the Gmail address. Three places had the old address hard-coded in copy rather than reading `SITE.email`, in the privacy rights clause, the terms notices clause and a comment on the contact form. All three now read from the source, so the next change is one line. | Rewrites the email row of 9.6 and the contact details in 11.4. Closes a 5.4 drift. |
 | 63 | The founder role line reads "Founder, MavelogxDigital". | Rewrites the founder block role line in 8.3. |
 | 64 | The founder role line is not uppercased. It carries the brand name, which is cased MavelogxDigital, and the eyebrow treatment was rendering it MAVELOGXDIGITAL. Tracking drops from .12em to .06em, which is what the caps were carrying. | Amends component 03 in Section 07: the eyebrow treatment does not apply where the text carries the brand name. |
+| 65 | The brand name reads MavelogxDigital everywhere on the site. No treatment may change its case. `SectionHead` detects the name in an eyebrow and drops the uppercase itself, so no author has to remember, and a guard fails the build on either failure mode: a case-changing treatment over the name, or a mistyped literal. A block with no lowercase at all is exempt, because that is a deliberate convention, such as the conspicuous all-caps of the liability clause in the Terms. | Amends component 03 in Section 07 and extends 13.5. Owner rule, 8 November 2026. |
+| 66 | `scripts/qa.cjs` exits non-zero when it finds failures. It never did. It printed them and exited 0, so every contrast failure, skipped heading, banned glyph, retired phrase and miswired contact link it ever found went green in the chain behind it, and `npm run qa` could not fail a build. Found while proving guard 65. | Corrects 13.5, which described a suite that could not enforce anything it checked. |
 
 ### Decisions taken and then reversed
 
@@ -762,7 +764,7 @@ it, and the guard does not check that page because it is not in the route list.
 
 ## 13.5 (new) Automated guards
 
-The rules in this document are only true if something checks them. Seven guards
+The rules in this document are only true if something checks them. Eight guards
 run against a built site before anything is committed.
 
 ### Where the logic lives
@@ -815,6 +817,7 @@ pages.
 | Contact wiring | No digits in the label of a `wa.me` link. No `tel:` pointing at the Ghanaian number. 11.4 |
 | Infrastructure names | No host, framework, CMS or form handler named in visible copy. 10.1 |
 | Image renames | No tracked image modified in place. A rename or a new file is fine. 5.5 |
+| Brand case | The brand name renders as MavelogxDigital. Fails on a case-changing treatment over it or a mistyped literal. A block with no lowercase is exempt as deliberate convention. 6.2, change 65 |
 | Bible tokens | Every custom property this document names is defined in the stylesheet. A name may go undefined where the surrounding two lines record it as retired or renamed. 6.1, 6.2 |
 | Root assets | `robots.txt`, `sitemap-index.xml`, `site.webmanifest`, `404.html` and `favicon.ico` all exist. 13.4 |
 | robots and sitemap | robots declares a sitemap, in the canonical host form, that exists. The sitemap lists no URL without a page, and no page marked noindex. 11.3 |

@@ -24,6 +24,10 @@
 /* ---- 03  Eyebrow. No decorative rule: the label stands on its own. ---- */
 .eyebrow{font-size:var(--fs-eyebrow);font-weight:700;line-height:1.3;
   letter-spacing:.14em;text-transform:uppercase;color:var(--teal-text)}
+/* The brand name is cased MavelogxDigital and an uppercasing treatment
+   mangles it. SectionHead applies this automatically when the eyebrow
+   carries the name, so no author has to remember. Owner rule, 8 Nov 2026. */
+.eyebrow--cased{text-transform:none;letter-spacing:.06em}
 
 /* ---- 04  Section head ----------------------------------------------- */
 .sec-head{margin-bottom:var(--s-5);display:grid;gap:var(--s-2)}
