@@ -461,7 +461,9 @@
 .founder__photo img{width:100%;height:100%;object-fit:cover;display:block}
 .founder__name{font-size:var(--fs-h2);font-weight:700;letter-spacing:-.015em}
 .founder__role{color:var(--teal-text);font-size:var(--fs-eyebrow);font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;margin-top:var(--s-1)}
+  letter-spacing:.06em;margin-top:var(--s-1)}
+/* No uppercase here. The line carries the brand name, which is cased
+   MavelogxDigital and must render that way. Owner instruction, 8 Nov 2026. */
 .founder p{color:var(--text-2);margin-top:var(--s-3);max-width:46ch}
 .founder p:first-of-type{color:var(--text-1)}
 

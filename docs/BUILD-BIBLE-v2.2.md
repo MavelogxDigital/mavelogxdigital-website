@@ -112,6 +112,7 @@ here rather than left in a conversation, per 15.1.
 | 61 | The founder portrait is replaced. The new frame ships under the stem `founder-portrait`, and the six `founder-studio` files are deleted rather than left in place. Alt text rewritten to describe the new frame, since it describes a different photograph. | Applies 5.5. Reopens and re-closes the founder photograph row in Appendix F. |
 | 62 | The published email address is `projects@mavelogxdigital.com`, not the Gmail address. Three places had the old address hard-coded in copy rather than reading `SITE.email`, in the privacy rights clause, the terms notices clause and a comment on the contact form. All three now read from the source, so the next change is one line. | Rewrites the email row of 9.6 and the contact details in 11.4. Closes a 5.4 drift. |
 | 63 | The founder role line reads "Founder, MavelogxDigital". | Rewrites the founder block role line in 8.3. |
+| 64 | The founder role line is not uppercased. It carries the brand name, which is cased MavelogxDigital, and the eyebrow treatment was rendering it MAVELOGXDIGITAL. Tracking drops from .12em to .06em, which is what the caps were carrying. | Amends component 03 in Section 07: the eyebrow treatment does not apply where the text carries the brand name. |
 
 ### Decisions taken and then reversed
 
