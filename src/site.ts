@@ -3,7 +3,7 @@ export const SITE = {
   name: 'MavelogxDigital',
   tagline: 'From Idea To Impact',
   url: 'https://mavelogxdigital.com',          // non-www, per Appendix F decision
-  email: 'MavelogxDigital@gmail.com',
+  email: 'projects@mavelogxdigital.com',
   /* Phone and WhatsApp are two different numbers and two different channels.
      Owner decision, 24 Oct 2026, supersedes the single-number entry in 11.4
      and closes defect 12.2: the Canadian line is the voice number, the

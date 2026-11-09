@@ -3,6 +3,7 @@
  *  with one correction: the retired Canadian phone number replaced with the
  *  current one, per defect 12.2. Edit here from now on. */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site';
 import Eyebrow from '../components/Eyebrow.astro';
 import ReadAloud from '../components/ReadAloud.astro';
 ---
@@ -46,7 +47,7 @@ import ReadAloud from '../components/ReadAloud.astro';
       <h2>10. Governing Law and Disputes</h2>
       <p>These Terms are governed by the laws of Ontario, Canada. Disputes will first be addressed through good-faith negotiation (30 days), then non-binding mediation, then the exclusive jurisdiction of Ontario courts. Nothing prevents either party from seeking urgent injunctive relief.</p>
       <h2>11. General Provisions</h2>
-      <p>MavelogxDigital is an independent contractor. These Terms may be updated with notice posted on our website; continued use constitutes acceptance. If any provision is invalid, the remainder continues in full force. These Terms and any Project Agreement constitute the entire agreement between the parties. All notices shall be in writing to MavelogxDigital@gmail.com.</p>
+      <p>MavelogxDigital is an independent contractor. These Terms may be updated with notice posted on our website; continued use constitutes acceptance. If any provision is invalid, the remainder continues in full force. These Terms and any Project Agreement constitute the entire agreement between the parties. All notices shall be in writing to {SITE.email}.</p>
     </div>
   </section>
 </BaseLayout>

@@ -110,6 +110,8 @@ here rather than left in a conversation, per 15.1.
 | 59 | The About stat reads `2 Core markets`, not `2 Markets served`. Once the agency works beyond the two, "served" is inaccurate rather than merely narrow. Two words, so 9.3's label ceiling holds and the row still sets on one line at desktop width. | Rewrites one row of 9.3. |
 | 60 | The Built for Two Markets pillar is kept verbatim. Owner decision, 8 November, taken against the option of broadening it. It is the one pillar a competitor cannot copy, and the reach claim already sits wherever the base is stated, so the specificity costs nothing in reach. | Confirms 11.1 rather than superseding it. |
 | 61 | The founder portrait is replaced. The new frame ships under the stem `founder-portrait`, and the six `founder-studio` files are deleted rather than left in place. Alt text rewritten to describe the new frame, since it describes a different photograph. | Applies 5.5. Reopens and re-closes the founder photograph row in Appendix F. |
+| 62 | The published email address is `projects@mavelogxdigital.com`, not the Gmail address. Three places had the old address hard-coded in copy rather than reading `SITE.email`, in the privacy rights clause, the terms notices clause and a comment on the contact form. All three now read from the source, so the next change is one line. | Rewrites the email row of 9.6 and the contact details in 11.4. Closes a 5.4 drift. |
+| 63 | The founder role line reads "Founder, MavelogxDigital". | Rewrites the founder block role line in 8.3. |
 
 ### Decisions taken and then reversed
 
