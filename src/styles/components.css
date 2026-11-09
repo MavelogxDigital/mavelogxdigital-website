@@ -322,7 +322,11 @@
 .footer__tagline{padding-bottom:var(--s-5);margin-bottom:var(--s-5);
   border-bottom:1px solid var(--border)}
 
-.footer{background:var(--bg);border-top:1px solid var(--border);padding-block:var(--s-6)}
+.footer{background:var(--bg);border-top:1px solid var(--border);
+  padding-top:var(--s-6);
+  /* Bottom padding carries the floating WhatsApp control's clearance so the
+     last line of footer text is never underneath it at the end of a page. */
+  padding-bottom:calc(var(--s-6) + var(--fab-space) + env(safe-area-inset-bottom,0px))}
 .footer__top{display:grid;gap:var(--s-5)}
 @media (min-width:900px){ .footer__top{grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--s-4)} }
 .footer h3{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
@@ -638,4 +642,46 @@
 /* Forced colours: drop the clip so the text is painted by the OS palette. */
 @media (forced-colors:active){
   .sweep{-webkit-text-fill-color:currentColor;background-image:none;animation:none}
+}
+
+
+/* ---------- Floating WhatsApp control (every page) ----------
+   Sits bottom right above the nav (90) and the grain overlay (100), below the
+   skip link (200) so keyboard users still reach the skip target first.
+
+   Colour comes from the site's own teal token rather than WhatsApp green.
+   --teal-text resolves per theme and is already audited by the contrast guard,
+   where bright WhatsApp green fails against the light theme's near-white card
+   at 1.98:1. The handset glyph carries the recognition on its own. */
+.wafab{
+  position:fixed; z-index:110;
+  right:var(--fab-gap);
+  bottom:calc(var(--fab-gap) + env(safe-area-inset-bottom,0px));
+  display:inline-flex; align-items:center; gap:var(--s-1);
+  height:var(--fab-size); padding:0 10px;
+  border:1px solid var(--border); border-radius:var(--r-full);
+  background:var(--bg-card); color:var(--text-1);
+  font-size:var(--fs-small); font-weight:600; line-height:1;
+  text-decoration:none; box-shadow:var(--shadow-2);
+  transition:transform .22s var(--ease), border-color .22s var(--ease);
+}
+.wafab__mark{
+  display:grid; place-items:center; flex:0 0 auto;
+  width:36px; height:36px; border-radius:var(--r-full);
+  background:var(--bg-alt); color:var(--teal-text);
+}
+.wafab__label{padding-right:var(--s-1); white-space:nowrap}
+.wafab:hover{transform:translateY(-2px); border-color:var(--text-2)}
+.wafab:active{transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .wafab{transition:none}
+  .wafab:hover{transform:none}
+}
+/* The label stays visible at every width. Under 400px the padding tightens so
+   the control keeps well under half the screen on the narrowest phones; the
+   height, and so the footer clearance, is unchanged. */
+@media (max-width:399px){
+  .wafab{padding:0 6px; gap:6px; font-size:13px}
+  .wafab__mark{width:32px; height:32px}
+  .wafab__label{padding-right:6px}
 }

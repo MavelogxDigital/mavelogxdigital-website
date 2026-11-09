@@ -4,6 +4,7 @@ import { SITE } from '../site';
 import StructuredData from '../components/StructuredData.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
 import '../styles/global.css';
 import '../styles/components.css';
 
@@ -103,6 +104,7 @@ const ogH = '630';
   <Header page={page} transparent={transparentNav} />
   <main id="main"><slot /></main>
   <Footer />
+  <WhatsAppFab />
 
   <script>
     // Reveal on scroll (6.6), fires once, then unobserves.

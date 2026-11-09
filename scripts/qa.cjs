@@ -121,6 +121,36 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
      const rr=ratio(x.fg,x.bg);
      if(rr<need) fails.push(`${tag}: contrast ${rr.toFixed(2)}:1 (need ${need}) on "${x.txt}" ${x.size}px`);
    }
+   // A fixed element is the one thing on the page that can sit on top of copy.
+   // Scroll to the very end, where the footer's last line comes closest to it,
+   // and measure the rectangles. Owner requirement, 9 Nov 2026: the WhatsApp
+   // control must not cover any text. The footer reserves --fab-space to make
+   // that true; this proves it is still true rather than assuming it.
+   await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+   await p.waitForTimeout(250);
+   const fab = await p.evaluate(() => {
+     const el = document.querySelector('.wafab');
+     if (!el) return { missing: true, hits: [] };
+     const f = el.getBoundingClientRect();
+     const SEL = 'p,li,h1,h2,h3,h4,a,span,dd,dt,button,label,strong,em,td,th';
+     const hits = [];
+     for (const e of document.querySelectorAll(SEL)) {
+       if (el.contains(e) || e.contains(el)) continue;
+       if (e.querySelector(SEL)) continue;            // leaf nodes only
+       const txt = (e.textContent || '').trim();
+       if (!txt) continue;
+       const cs = getComputedStyle(e);
+       if (cs.visibility === 'hidden' || cs.display === 'none' || +cs.opacity === 0) continue;
+       if (cs.clipPath && cs.clipPath !== 'none') continue;   // visually hidden
+       const r = e.getBoundingClientRect();
+       if (r.width === 0 || r.height === 0) continue;
+       if (r.left < f.right && r.right > f.left && r.top < f.bottom && r.bottom > f.top)
+         hits.push(txt.slice(0, 40));
+     }
+     return { missing: false, hits: [...new Set(hits)].slice(0, 3) };
+   });
+   if (fab.missing) fails.push(`${tag}: no WhatsApp control on the page`);
+   for (const h of fab.hits) fails.push(`${tag}: WhatsApp control covers text ("${h}")`);
    await p.close();
   }
  }
