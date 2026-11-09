@@ -1,0 +1,22 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import { SITE } from '../site';
+interface Props { eyebrow: string; heading: string; lead?: string; linkHref?: string; linkLabel?: string }
+const { eyebrow, heading, lead, linkHref, linkLabel } = Astro.props;
+// The eyebrow stays uppercase, but the brand name inside it does not. The
+// label reads WHY and the name reads MavelogxDigital. Split here rather than
+// left to whoever writes the next section head.
+const at = eyebrow.indexOf(SITE.name);
+const split = at === -1 ? null
+  : { before: eyebrow.slice(0, at), after: eyebrow.slice(at + SITE.name.length) };
+---
+<div class={`sec-head ${linkHref ? 'sec-head--row' : ''}`}>
+  <div>
+    <Eyebrow>{split
+      ? <Fragment>{split.before}<span class="brand">{SITE.name}</span>{split.after}</Fragment>
+      : eyebrow}</Eyebrow>
+    <h2 style="margin-top:var(--s-2)">{heading}</h2>
+    {lead && <p class="lead" style="margin-top:var(--s-2)">{lead}</p>}
+  </div>
+  {linkHref && <a class="sec-link quote__proj" href={linkHref}>{linkLabel}</a>}
+</div>

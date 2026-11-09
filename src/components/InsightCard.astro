@@ -1,0 +1,10 @@
+---
+interface Props { href: string; tag: string; title: string; excerpt: string; readTime: string; delay?: number }
+const { href, tag, title, excerpt, readTime, delay = 0 } = Astro.props;
+---
+<a class="insight rv" data-d={delay} href={href}>
+  <span class="insight__tag">{tag}</span>
+  <h3 class="insight__title">{title}</h3>
+  <p class="insight__excerpt">{excerpt}</p>
+  <span class="insight__meta">{readTime}</span>
+</a>

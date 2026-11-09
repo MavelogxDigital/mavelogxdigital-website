@@ -1,0 +1,12 @@
+---
+interface Props { title: string; body: string; accent: string; delay?: number }
+const { title, body, accent, delay = 0 } = Astro.props;
+---
+<div class="pillar rv" data-d={delay} style={`--accent:${accent}`}>
+  <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.75" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>
+  </svg>
+  <h3 class="pillar__title">{title}</h3>
+  <p class="pillar__body">{body}</p>
+</div>

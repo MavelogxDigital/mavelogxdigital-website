@@ -1,0 +1,26 @@
+---
+/** The tagline lockup. Four words, four accents, one per word, in the order of
+ *  the four-petal mark in the brand guidelines.
+ *
+ *  This is logotype, not body copy, and it is the documented exception to the
+ *  one-accent-per-section rule in 6.2, alongside .sweep. Owner decision,
+ *  24 Oct 2026. The exception covers this component and nothing else: 6.2
+ *  still governs every other surface on the site.
+ *
+ *  Two constraints that must not be relaxed:
+ *  1. Never set below 24px. Purple is the floor, AA for large text only in
+ *     both themes, so the clamp minimum is 28px.
+ *  2. Amber and Teal at full strength fail AA on a light ground, 1.91 and
+ *     2.20. The words read --amber-text and --teal-text, which the stylesheet
+ *     repoints to darker inks in any light context. Never hard-code the raw
+ *     accents here.
+ */
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<p class={`tagline ${cls}`.trim()}>
+  <span class="tagline__from">From</span>
+  <span class="tagline__idea">Idea</span>
+  <span class="tagline__to">To</span>
+  <span class="tagline__impact">Impact</span>
+</p>

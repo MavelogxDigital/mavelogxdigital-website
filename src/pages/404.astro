@@ -1,0 +1,52 @@
+---
+/** 404, required by 13.4: exists, branded, and offers a way back to Home and
+ *  Work. Netlify serves this for any unmatched path automatically because the
+ *  build emits /404.html at the root.
+ *
+ *  Work is the second link rather than Contact on purpose. Someone who lands
+ *  here followed a link that no longer resolves, and the most likely candidate
+ *  is an old project URL, so the portfolio index is where they were going. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { CASE_STUDIES } from '../site';
+---
+<BaseLayout
+  page=""
+  title="Page not found | MavelogxDigital"
+  description="That page does not exist. Links to the homepage, the portfolio and the rest of the site."
+>
+  <section class="section container">
+    <Eyebrow>404</Eyebrow>
+    <h1 style="font-size:var(--fs-h1);font-weight:700;letter-spacing:-.02em;margin-top:var(--s-2)">
+      That page is not here.
+    </h1>
+    <p class="lead measure" style="color:var(--text-2);margin-top:var(--s-3)">
+      The link may be out of date, or the address may have a typo in it.
+      Everything below still works.
+    </p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-5)">
+      <a class="btn btn--primary" href="/">Back to the homepage</a>
+      <a class="btn btn--ghost" href="/work/">See the work</a>
+    </div>
+
+    {/* Reuses the related-articles list, which is already a card grid with its
+        markers suppressed. A new list scope here would be a fifth place to get
+        the li{display:grid} marker bug wrong. */}
+    <div class="art__related" style="margin-top:var(--s-7);border:0;padding:0">
+      {/* A real h2, not a styled p. The footer columns are h3, so a page whose
+          body carries no h2 jumps h1 to h3 and skips a level. */}
+      <h2 class="art__related-h">Case studies</h2>
+      <ul>
+        {CASE_STUDIES.map((p) => (
+          <li>
+            <a href={`/work/${p.slug}/`}>
+              <span class="art__related-k">{p.sector}</span>
+              <span class="art__related-t">{p.client}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

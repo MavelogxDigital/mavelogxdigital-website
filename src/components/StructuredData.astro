@@ -1,0 +1,141 @@
+---
+/** JSON-LD, Build Bible 11.1.
+ *
+ *  The Astro rebuild shipped without any structured data at all, while the
+ *  single-file site it replaces carries a twelve-type graph. Merging in that
+ *  state would have stripped the live site of every machine-readable signal it
+ *  has. Restored here, generated per page rather than pasted, so it cannot
+ *  drift from site.ts the way a hand-maintained block does.
+ *
+ *  11.1 asks for: Organization and WebSite on the homepage, Service on
+ *  /services/, CreativeWork or Article per case study, BreadcrumbList on every
+ *  child page.
+ *
+ *  areaServed is the machine-readable half of the reach claim in SITE.reach.
+ *  The two markets are named because they are real, and Worldwide is named
+ *  alongside them so a search engine does not conclude this is a two-country
+ *  business. The previous single-file site declared no areaServed at all.
+ */
+import { SITE, SERVICES } from '../site';
+
+interface Props {
+  /** Which page-level entity to emit alongside the sitewide graph. */
+  kind?: 'home' | 'services' | 'case-study' | 'article' | 'page';
+  title?: string;
+  description?: string;
+  /** Case study and article only. */
+  image?: string;
+  datePublished?: string;
+  /** Trail for BreadcrumbList, in order, excluding Home. */
+  crumbs?: { name: string; path: string }[];
+}
+const { kind = 'page', title, description, image, datePublished, crumbs = [] } = Astro.props;
+
+const abs = (p: string) => new URL(p, SITE.url).href;
+const here = abs(Astro.url.pathname);
+
+const ORG_ID = abs('/') + '#organization';
+const SITE_ID = abs('/') + '#website';
+
+const organization = {
+  '@type': 'Organization',
+  '@id': ORG_ID,
+  name: SITE.name,
+  url: abs('/'),
+  email: SITE.email,
+  telephone: SITE.phone,
+  slogan: SITE.tagline,
+  logo: { '@type': 'ImageObject', url: abs('/og-square-instagram-pinterest.png') },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Toronto',
+    addressRegion: 'Ontario',
+    addressCountry: 'CA',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    telephone: SITE.phone,
+    email: SITE.email,
+    availableLanguage: 'English',
+  },
+  areaServed: [
+    { '@type': 'Country', name: 'Canada' },
+    { '@type': 'Country', name: 'Ghana' },
+    'Worldwide',
+  ],
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': SITE_ID,
+  url: abs('/'),
+  name: SITE.name,
+  description: SITE.tagline,
+  publisher: { '@id': ORG_ID },
+  inLanguage: 'en',
+};
+
+const graph: Record<string, unknown>[] = [organization, website];
+
+if (kind === 'services') {
+  for (const s of SERVICES) {
+    graph.push({
+      '@type': 'Service',
+      '@id': abs(`/services/#${s.slug}`),
+      name: s.title,
+      description: s.desc,
+      provider: { '@id': ORG_ID },
+      areaServed: organization.areaServed,
+    });
+  }
+}
+
+if (kind === 'case-study') {
+  graph.push({
+    '@type': 'CreativeWork',
+    '@id': here + '#work',
+    name: title,
+    description,
+    url: here,
+    ...(image ? { image: abs(image) } : {}),
+    creator: { '@id': ORG_ID },
+    inLanguage: 'en',
+  });
+}
+
+if (kind === 'article') {
+  graph.push({
+    '@type': 'Article',
+    '@id': here + '#article',
+    headline: title,
+    description,
+    url: here,
+    ...(image ? { image: abs(image) } : {}),
+    ...(datePublished ? { datePublished } : {}),
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+    inLanguage: 'en',
+  });
+}
+
+/* Every page below the root gets a trail, per 11.1. */
+if (crumbs.length) {
+  graph.push({
+    '@type': 'BreadcrumbList',
+    '@id': here + '#breadcrumbs',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') },
+      ...crumbs.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 2,
+        name: c.name,
+        item: abs(c.path),
+      })),
+    ],
+  });
+}
+
+const payload = { '@context': 'https://schema.org', '@graph': graph };
+---
+<script type="application/ld+json" set:html={JSON.stringify(payload)} is:inline />

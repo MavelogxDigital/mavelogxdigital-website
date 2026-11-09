@@ -1,0 +1,12 @@
+---
+interface Props { n: string; slug: string; title: string; desc: string; accent: string; delay?: number }
+const { n, slug, title, desc, accent, delay = 0 } = Astro.props;
+---
+<a class="svc-row rv" data-d={delay} href={`/services/#${slug}`}
+   style={`--accent:${accent};text-decoration:none;color:inherit`}>
+  <span class="svc-row__num" aria-hidden="true">{n}</span>
+  <span>
+    <span class="svc-row__title">{title}</span>
+    <span class="svc-row__desc" style="display:block">{desc}</span>
+  </span>
+</a>

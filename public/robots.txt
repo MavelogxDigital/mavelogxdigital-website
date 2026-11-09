@@ -1,0 +1,9 @@
+# MavelogxDigital, Build Bible 11.3
+# Allow everything. The styleguide is deliberately not disallowed here: it
+# carries a noindex meta tag, and blocking a page from being crawled stops the
+# crawler ever seeing that tag.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://mavelogxdigital.com/sitemap-index.xml

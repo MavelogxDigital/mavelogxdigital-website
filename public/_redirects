@@ -1,0 +1,17 @@
+# Bible 5.3 — legacy anchors from the single-page build.
+# Hash fragments never reach the server, so BaseLayout also ships a
+# client-side map; these catch the encoded and path-style variants.
+/%23about            /about/      301
+/%23services         /services/   301
+/%23portfolio        /work/       301
+/%23testimonials     /work/       301
+/%23process          /process/    301
+/%23contact          /contact/    301
+/%23industries       /services/   301
+/%23mod-privacy      /privacy/    301
+/%23mod-terms        /terms/      301
+/about.html          /about/      301
+/services.html       /services/   301
+/portfolio           /work/       301
+/portfolio.html      /work/       301
+/contact.html        /contact/    301
