@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- noindex, not a robots.txt block. A disallowed page is never crawled, so
+     the crawler never sees the tag telling it to stay out of the index. Same
+     reasoning as the styleguide, Build Bible 11.3. -->
+<meta name="robots" content="noindex, nofollow" />
+<title>Insights CMS | MavelogxDigital</title>
+<link rel="icon" href="/favicon.ico" />
+<!-- This page is noindex and nobody will share it, so the share card and theme
+     colour below are not here for their own sake. check-site-assets.cjs
+     requires both on every page it finds in the build. Satisfying that is
+     better than exempting noindex pages from the rule, which would quietly
+     excuse the styleguide and every future noindex page as well. Two meta tags
+     against a weakened guard is not a close call. -->
+<meta name="theme-color" content="#2CD4AD" />
+<meta property="og:image" content="https://mavelogxdigital.com/og-facebook-whatsapp-linkedin.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<style>
+  :root{color-scheme:dark}
+  html,body{margin:0;height:100%;background:#0B0B0D;color:#F5F5F7;
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+  /* Shown until the CMS bundle paints over it. If the bundle fails to load,
+     this stays on screen and says so, rather than leaving a black page. */
+  #boot{position:fixed;inset:0;display:grid;place-content:center;
+    justify-items:center;gap:18px;text-align:center;padding:24px}
+  #boot b{font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:700;color:#2CD4AD}
+  #boot p{margin:0;max-width:34ch;font-size:14px;line-height:1.6;color:#A1A1A8}
+  #boot .bar{width:120px;height:2px;background:#26262B;overflow:hidden;border-radius:2px}
+  #boot .bar i{display:block;width:40%;height:100%;background:#2CD4AD;
+    animation:slide 1.1s cubic-bezier(.16,1,.3,1) infinite}
+  @keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
+  @media (prefers-reduced-motion:reduce){#boot .bar i{animation:none;width:100%}}
+</style>
+</head>
+<body>
+<div id="boot">
+  <b>MavelogxDigital</b>
+  <div class="bar"><i></i></div>
+  <p id="boot-msg">Loading the editor.</p>
+</div>
+
+<!-- Unversioned CDN URL, no type="module", no stylesheet link: all three are
+     required by Sveltia CMS. -->
+<script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+<script>
+  // The CMS replaces the document body once it boots. If it has not after a
+  // reasonable wait, the bundle did not load, and a blank screen tells the
+  // editor nothing about why.
+  setTimeout(function () {
+    var boot = document.getElementById('boot');
+    if (boot && document.body.contains(boot)) {
+      var msg = document.getElementById('boot-msg');
+      if (msg) {
+        msg.textContent =
+          'The editor did not load. Check the connection and reload. If it keeps ' +
+          'failing, the CMS bundle or its CDN is unreachable, and the site itself ' +
+          'is unaffected.';
+      }
+    }
+  }, 12000);
+</script>
+</body>
+</html>

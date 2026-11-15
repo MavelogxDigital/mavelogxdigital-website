@@ -1,0 +1,141 @@
+# Sveltia CMS — /admin/
+#
+# Posts are markdown files in this repository, so everything the CMS writes
+# goes through the same build, the same schema in src/content.config.ts and the
+# same guard suite as a hand-written commit. Nothing is stored in a third party.
+#
+# Roles are GitHub repository permissions, not a user table in here. On the
+# GitHub backend an editor signs in with their own GitHub account and can only
+# do what that account is allowed to do. See docs/CMS.md.
+#
+# The select options below are duplicated from src/site.ts. That duplication is
+# checked by scripts/check-cms-config.cjs, which fails the build if a slug here
+# stops matching the site, so this file cannot quietly drift the way the Build
+# Bible's token list did.
+
+backend:
+  name: github
+  repo: MavelogxDigital/mavelogxdigital-website
+  branch: main
+  # No base_url. Unset means the CMS uses Netlify as its OAuth client, which is
+  # what we want since the site is deployed there. Token sign-in works without
+  # any of that being configured.
+  commit_messages:
+    create: 'Insights: add {{slug}}'
+    update: 'Insights: update {{slug}}'
+    delete: 'Insights: remove {{slug}}'
+    openAuthoring: 'Insights: {{message}}'
+
+# Draft, In review, Ready. Each entry is a branch and a pull request rather than
+# a direct commit to main, so publishing is a merge and the guards in
+# .github/workflows/qa.yml run before anything can reach the live site.
+publish_mode: editorial_workflow
+
+media_folder: public/img
+public_folder: /img
+
+site_url: https://mavelogxdigital.com
+display_url: https://mavelogxdigital.com
+logo_url: https://mavelogxdigital.com/apple-touch-icon.png
+
+collections:
+  - name: insights
+    label: Insights
+    label_singular: Article
+    description: >
+      Articles on /insights/. Every field here matches the schema in
+      src/content.config.ts. An entry that does not satisfy that schema fails
+      the build rather than publishing broken, so required fields are required.
+    folder: src/content/insights
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    preview_path: insights/{{slug}}
+    summary: '{{title}}'
+    sortable_fields: [date, title, category]
+    view_groups:
+      - { label: Category, field: category }
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: >
+          Sentence case. The brand is written MavelogxDigital wherever it
+          appears, and the guard suite fails the build on any other casing.
+
+      - label: Meta description
+        name: description
+        widget: string
+        hint: >
+          One sentence for search results and link previews. Aim for 120 to 160
+          characters. This is not shown on the page itself.
+
+      - label: Category
+        name: category
+        widget: select
+        options: ['AI workflow', 'Brand', 'Distribution', 'Market']
+        hint: Shown on the article card and the article itself.
+
+      - label: Date
+        name: date
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+        hint: Publication date. Drives the order of the insights listing.
+
+      - label: Read time
+        name: readTime
+        widget: string
+        default: '6 min read'
+        pattern: ['^\d+ min read$', 'Write it as "6 min read".']
+
+      - label: Lead
+        name: lead
+        widget: text
+        hint: >
+          The opening paragraph, set apart from the body. Two or three
+          sentences. No em dashes or en dashes anywhere on the site.
+
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: true
+        hint: >
+          On, the article is built but left off /insights/ entirely. Turn it off
+          only when the piece is ready to be public.
+
+      - label: Related service
+        name: relatedService
+        widget: select
+        required: false
+        options:
+          - { label: 'Brand Strategy & Identity', value: brand-identity }
+          - { label: 'Web Design & Development', value: web }
+          - { label: 'Content Creation', value: content }
+          - { label: 'Social Media Management', value: social }
+          - { label: 'E-Commerce', value: ecommerce }
+          - { label: 'Digital Consultation', value: consultation }
+          - { label: 'Podcast Production & Distribution', value: podcast }
+        hint: Optional. Adds a link to that service at the foot of the article.
+
+      - label: Related case study
+        name: relatedWork
+        widget: select
+        required: false
+        options:
+          - { label: 'Floks Speaks', value: floks-speaks }
+          - { label: 'Syndei Embassy', value: syndei-embassy }
+          - { label: 'Mavelogx Enterprise', value: mavelogx-enterprise }
+          - { label: "Mavel's Corner", value: mavels-corner }
+        hint: Optional. Adds a link to that case study at the foot of the article.
+
+      - label: Body
+        name: body
+        widget: markdown
+        hint: >
+          Headings start at level two, since the title is the page's only level
+          one. Avoid naming a client's hosting, CMS or framework: the guard
+          suite fails the build on it.

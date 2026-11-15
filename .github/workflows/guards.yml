@@ -1,0 +1,86 @@
+# Runs the guard suite on every pull request into main, and on main itself.
+#
+# This exists because of how the CMS publishes. An editor working in /admin/
+# does not commit to main: the editorial workflow opens a pull request, and
+# publishing is the merge. That makes this workflow the gate. Make it a
+# required status check on main (docs/CMS.md) and nothing reaches the live site
+# without the guards passing.
+#
+# Until 15 Nov 2026 the guards ran only when someone remembered to run them by
+# hand, on one machine, and Netlify deployed whatever was on main regardless.
+
+name: Guards
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# A new push to the same branch cancels the run already in flight. Without
+# this, a run of corrections queues up behind itself.
+concurrency:
+  group: guards-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20          # matches NODE_VERSION in netlify.toml
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # qa.cjs drives a real browser. Only Chromium is used, so only Chromium
+      # is downloaded.
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build
+        run: npm run build
+
+      # The browser checks need the built site served. Start the preview
+      # server, wait for it to answer rather than sleeping a fixed amount, run
+      # the suite, then stop the server and exit with the suite's own status.
+      - name: Run the guard suite
+        run: |
+          set +e
+          npm run preview > /tmp/preview.log 2>&1 &
+          PREVIEW_PID=$!
+
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:4321/ > /dev/null && break
+            sleep 1
+          done
+
+          if ! curl -sf http://localhost:4321/ > /dev/null; then
+            echo "::error::preview server never answered on :4321"
+            cat /tmp/preview.log
+            kill $PREVIEW_PID 2>/dev/null
+            exit 1
+          fi
+
+          npm run qa
+          STATUS=$?
+
+          kill $PREVIEW_PID 2>/dev/null
+          exit $STATUS
+
+      # Only on failure, and only the built HTML, so a failed run can be read
+      # without reproducing the build locally.
+      - name: Upload the build on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.run_id }}
+          path: dist
+          retention-days: 7

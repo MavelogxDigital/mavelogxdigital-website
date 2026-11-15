@@ -7,9 +7,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "qa": "node scripts/check-bible-tokens.cjs && node scripts/check-site-assets.cjs && node scripts/qa.cjs && node scripts/check-image-renames.cjs",
+    "qa": "node scripts/check-bible-tokens.cjs && node scripts/check-cms-config.cjs && node scripts/check-site-assets.cjs && node scripts/qa.cjs && node scripts/check-image-renames.cjs",
     "check:images": "node scripts/check-image-renames.cjs",
-    "check:assets": "node scripts/check-site-assets.cjs"
+    "check:assets": "node scripts/check-site-assets.cjs",
+    "check:cms": "node scripts/check-cms-config.cjs"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +21,9 @@
     "sharp": "^0.34.4"
   },
   "private": true,
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "js-yaml": "^5.5.0",
+    "playwright": "^1.63.0"
+  }
 }
