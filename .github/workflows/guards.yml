@@ -2,9 +2,12 @@
 #
 # This exists because of how the CMS publishes. An editor working in /admin/
 # does not commit to main: the editorial workflow opens a pull request, and
-# publishing is the merge. That makes this workflow the gate. Make it a
-# required status check on main (docs/CMS.md) and nothing reaches the live site
-# without the guards passing.
+# publishing is the merge.
+#
+# This workflow reports on that pull request. It is not yet a gate: a required
+# status check is a branch rule, and branch rules do not apply to a private
+# repository on a personal Free account. Read the result before merging. See
+# "Restoring enforcement" in docs/CMS.md for what makes it blocking.
 #
 # Until 15 Nov 2026 the guards ran only when someone remembered to run them by
 # hand, on one machine, and Netlify deployed whatever was on main regardless.

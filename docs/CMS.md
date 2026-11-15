@@ -37,9 +37,27 @@ in a user interface, so a role cannot be bypassed by someone who knows the URL.
 | **Editor** | Write, merge blocked | Writes and edits articles, moves them to Ready. Cannot publish. |
 | **Reviewer** | Read or Triage | Reads and comments on an article in review. Cannot edit. |
 
-The difference between Publisher and Editor is a branch rule on `main`, set in
-GitHub, described in Setup below. Without that rule, Write permission means the
-ability to publish, and Editor and Publisher collapse into the same thing.
+The difference between Publisher and Editor is a branch rule on `main`. Without
+that rule, write access means the ability to publish, and Editor and Publisher
+collapse into the same thing.
+
+> **As of 15 November 2026 this table is aspirational, not current.** The
+> repository is private and owned by a personal account on the Free plan, and
+> that combination cannot enforce any of it. Two separate limits bite:
+>
+> 1. **Branch rules do not apply.** Protected branches and rulesets are
+>    available on public repositories on Free, and on private repositories only
+>    from Pro upward. Worse than unavailable: the ruleset form still lets you
+>    create one, and it displays as Active while enforcing nothing.
+> 2. **A personal-account repository has only two permission levels**, owner and
+>    collaborator, and on a private one a collaborator cannot be read-only.
+>    Every collaborator can push. Editor, Publisher and Reviewer have nowhere
+>    to live.
+>
+> For a single user this costs nothing today: you are the owner, and the table
+> above describes you. It matters the moment a second person is added, because
+> that person would arrive with full publish rights and no gate in front of
+> them. See *Restoring enforcement* below.
 
 ---
 
@@ -59,9 +77,16 @@ heading order, retired phrases, banned glyphs, brand casing, structured data,
 dangling asset references, and the floating WhatsApp control not covering text.
 Publishing is the merge, and the merge is blocked until those pass.
 
-That gate is the point. Before 15 November 2026 the guards ran only when someone
-remembered to run them by hand, and Netlify deployed whatever reached `main`
-regardless. An editor publishing from a CMS would have bypassed every check.
+Before 15 November 2026 the guards ran only when someone remembered to run them
+by hand, and Netlify deployed whatever reached `main` regardless. An editor
+publishing from a CMS would have bypassed every check.
+
+**The workflow runs and reports, but on this plan it cannot block.** A required
+status check is a branch rule, and branch rules do not apply to a private
+repository on Free. So a red run is visible on the pull request and nothing
+stops the merge. For one person reading their own results that is most of the
+value. For more than one person it is not a gate, and should not be described
+as one.
 
 **Draft toggle.** Separate from the workflow above. An article with Draft on is
 built but kept off `/insights/` entirely. Use it for a piece that is finished
@@ -104,20 +129,19 @@ server of ours is involved.
 No change to `config.yml`. `base_url` is deliberately unset, which is what makes
 the CMS use Netlify as its OAuth client.
 
-### 3. The branch rule that makes roles real
+### 3. The branch rule that makes roles real — not available right now
 
-GitHub → repository → Settings → Rules → Rulesets → New branch ruleset, target
-`main`:
+This is the step that turns the guard suite into a gate and separates Editor
+from Publisher. **It cannot be done on this repository as it stands**, for the
+reasons under Roles above. Do not create a ruleset and assume it is working: on
+a private repository on Free the form accepts it and shows it as Active while
+enforcing nothing, which is worse than having none, because it looks done.
 
-- **Require a pull request before merging** — stops anyone pushing to `main`
-  directly, including the CMS.
-- **Require status checks to pass** → select **Guards** — this is what makes the
-  guard suite a gate rather than a notification.
-- **Restrict who can merge** (bypass list) — add yourself and anyone you want to
-  be a Publisher. Everyone else with Write becomes an Editor.
-
-Without the status check selected, the workflow still runs and still reports,
-but a red run does not prevent a merge.
+See *Restoring enforcement*. Once the repository is on a plan where rules apply,
+the configuration is: Settings → Rules → Rulesets → New branch ruleset, target
+`main`, with **Require a pull request before merging**, **Require status checks
+to pass** → select **Guards**, and **Restrict who can merge** listing the people
+who may publish.
 
 ### 4. Adding someone
 
@@ -126,6 +150,28 @@ permission from the table above. Nothing to do in the CMS: it reads their
 GitHub identity when they sign in.
 
 ---
+
+## Restoring enforcement
+
+Three ways to get the gate and the roles back, in increasing cost. None is
+urgent while you are the only person with access.
+
+| Option | Cost | Gives back | Costs you |
+|---|---|---|---|
+| **Make the repository public again** | Free | Branch rules, required checks, the full role table | Source, commit history and article drafts become readable by anyone. The site is public either way; the workings would be too. |
+| **GitHub Pro on your personal account** | Paid, per month | Branch rules and required checks on a private repository, so the guards become a gate again | Does **not** fix roles. A personal-account repository still has only owner and collaborator, and every collaborator can push. |
+| **Move the repository into an Organization on the Team plan** | Paid, per user per month | Both: rules enforce on private repositories, and members get real Write, Maintain, Triage and Read roles | A migration, and a per-seat bill. An Organization on the *Free* plan does not help: it gets no private-repository enforcement either. |
+
+The honest read for a one-person studio: leave it private on Free, publish from
+the CMS yourself, and read the pull request's check result before merging.
+Revisit this before granting anyone else access, because that is the point at
+which the missing gate stops being theoretical.
+
+One caveat worth knowing: GitHub's own documentation lists protected branches
+for private repositories from Pro upward, while some community reports argue
+that full enforcement on a personal account needs an Organization regardless.
+If you go the Pro route, verify the ruleset actually blocks a merge before
+trusting it, rather than taking the Active badge at face value.
 
 ## What is checked, and where
 
