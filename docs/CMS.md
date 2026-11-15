@@ -196,6 +196,31 @@ explanation.
 
 ---
 
+## Commit author, and why Netlify cares
+
+Commits to this repository must be authored by a **verified member of the
+Netlify account**, which means:
+
+```
+Emmanuel Kofi Avleshie <emmavleshie@gmail.com>
+```
+
+On 15 November 2026 two commits were authored as `Claude
+<noreply@anthropic.com>` and Netlify refused to build both:
+
+> Build blocked: Unrecognized Git contributor. This plan allows only verified
+> account members to push to private repos.
+
+The author had not changed; the repository had. That restriction applies to
+private repositories on this Netlify plan and not to public ones, so the same
+authorship deployed without complaint the week before. The live site simply
+stopped moving, while GitHub Actions carried on reporting green, because the
+two systems were checking different things.
+
+Work done with an assistant keeps that author and records the assistant in a
+`Co-Authored-By:` trailer, which is both accurate and recognised by Netlify.
+Nothing needs configuring in Netlify; the author line is the whole fix.
+
 ## Known limits
 
 - **A contributor without a GitHub account cannot use this.** See the top of
