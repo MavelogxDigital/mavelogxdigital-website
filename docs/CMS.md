@@ -41,23 +41,24 @@ The difference between Publisher and Editor is a branch rule on `main`. Without
 that rule, write access means the ability to publish, and Editor and Publisher
 collapse into the same thing.
 
-> **As of 15 November 2026 this table is aspirational, not current.** The
-> repository is private and owned by a personal account on the Free plan, and
-> that combination cannot enforce any of it. Two separate limits bite:
+> **Whether this table is enforced depends on the repository's visibility and
+> plan, and it has already changed twice.** Check before relying on it.
 >
-> 1. **Branch rules do not apply.** Protected branches and rulesets are
->    available on public repositories on Free, and on private repositories only
->    from Pro upward. Worse than unavailable: the ruleset form still lets you
->    create one, and it displays as Active while enforcing nothing.
-> 2. **A personal-account repository has only two permission levels**, owner and
->    collaborator, and on a private one a collaborator cannot be read-only.
->    Every collaborator can push. Editor, Publisher and Reviewer have nowhere
->    to live.
+> | Repository | Branch rules and required checks | Roles |
+> |---|---|---|
+> | **Public**, personal account, Free | Enforced | Owner and collaborator only |
+> | **Private**, personal account, Free | Not available. The ruleset form still accepts one and shows it Active while enforcing nothing | Owner and collaborator only |
+> | **Private**, personal account, Pro | Enforced | Owner and collaborator only |
+> | Organization on Team | Enforced | Full Write, Maintain, Triage, Read |
 >
-> For a single user this costs nothing today: you are the owner, and the table
-> above describes you. It matters the moment a second person is added, because
-> that person would arrive with full publish rights and no gate in front of
-> them. See *Restoring enforcement* below.
+> Two limits are worth separating. Branch rules are about **plan and
+> visibility**. Roles are about **ownership**: a repository owned by a personal
+> account has two permission levels, owner and collaborator, and on a private
+> one a collaborator cannot be read-only, so every collaborator can push. Only
+> moving into an Organization changes that, whatever the visibility.
+>
+> For a single user none of it bites: you are the owner. It matters the moment
+> a second person is added. See *Restoring enforcement*.
 
 ---
 
@@ -81,12 +82,12 @@ Before 15 November 2026 the guards ran only when someone remembered to run them
 by hand, and Netlify deployed whatever reached `main` regardless. An editor
 publishing from a CMS would have bypassed every check.
 
-**The workflow runs and reports, but on this plan it cannot block.** A required
-status check is a branch rule, and branch rules do not apply to a private
-repository on Free. So a red run is visible on the pull request and nothing
-stops the merge. For one person reading their own results that is most of the
-value. For more than one person it is not a gate, and should not be described
-as one.
+**Whether the workflow blocks or merely reports depends on the table above.** A
+required status check is a branch rule. Where branch rules apply, selecting
+**Guards** makes a red run stop the merge. Where they do not, the run is
+visible on the pull request and nothing prevents merging anyway. For one person
+reading their own results before merging, reporting is most of the value; for
+more than one it is not a gate and should not be called one.
 
 **Draft toggle.** Separate from the workflow above. An article with Draft on is
 built but kept off `/insights/` entirely. Use it for a piece that is finished
@@ -129,19 +130,23 @@ server of ours is involved.
 No change to `config.yml`. `base_url` is deliberately unset, which is what makes
 the CMS use Netlify as its OAuth client.
 
-### 3. The branch rule that makes roles real — not available right now
+### 3. The branch rule that makes roles real
 
-This is the step that turns the guard suite into a gate and separates Editor
-from Publisher. **It cannot be done on this repository as it stands**, for the
-reasons under Roles above. Do not create a ruleset and assume it is working: on
-a private repository on Free the form accepts it and shows it as Active while
-enforcing nothing, which is worse than having none, because it looks done.
+This turns the guard suite into a gate and separates Editor from Publisher.
+Check the table under Roles first: **it only works where branch rules apply.**
 
-See *Restoring enforcement*. Once the repository is on a plan where rules apply,
-the configuration is: Settings → Rules → Rulesets → New branch ruleset, target
-`main`, with **Require a pull request before merging**, **Require status checks
-to pass** → select **Guards**, and **Restrict who can merge** listing the people
-who may publish.
+Settings → Rules → Rulesets → New branch ruleset, target `main`:
+
+- **Require a pull request before merging** — stops anyone pushing to `main`
+  directly, including the CMS.
+- **Require status checks to pass** → select **Guards**.
+- **Restrict who can merge** — list the people who may publish.
+
+Where branch rules do not apply, the form still accepts a ruleset and displays
+it as **Active while enforcing nothing**. That is worse than having none,
+because it looks done. If you are unsure which case you are in, test it: open a
+pull request that fails the Guards check and confirm the merge button is
+actually blocked. Do not trust the Active badge.
 
 ### 4. Adding someone
 
@@ -198,8 +203,10 @@ explanation.
 
 ## Commit author, and why Netlify cares
 
-Commits to this repository must be authored by a **verified member of the
-Netlify account**, which means:
+**While the repository is private**, commits must be authored by a **verified
+member of the Netlify account** or the production build is refused. The rule
+does not apply while it is public. Authoring as the member is correct either
+way, so it is simply the convention here:
 
 ```
 Emmanuel Kofi Avleshie <emmavleshie@gmail.com>
@@ -211,11 +218,15 @@ On 15 November 2026 two commits were authored as `Claude
 > Build blocked: Unrecognized Git contributor. This plan allows only verified
 > account members to push to private repos.
 
-The author had not changed; the repository had. That restriction applies to
-private repositories on this Netlify plan and not to public ones, so the same
-authorship deployed without complaint the week before. The live site simply
-stopped moving, while GitHub Actions carried on reporting green, because the
-two systems were checking different things.
+The author had not changed; the repository had. The same authorship deployed
+without complaint the week before. The live site simply stopped moving while
+GitHub Actions carried on reporting green, because the two systems check
+different things: Actions validates the code, Netlify decides whether it ships.
+
+Changing the repository back to public clears the block, but **it does not
+retry the builds that were already refused**. Those stay failed and the site
+stays where it was until something triggers a new deploy, by a push or by Retry
+in the Netlify UI.
 
 Work done with an assistant keeps that author and records the assistant in a
 `Co-Authored-By:` trailer, which is both accurate and recognised by Netlify.
