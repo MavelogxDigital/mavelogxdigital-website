@@ -24,7 +24,25 @@ function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+0.05)/(Mat
    await p.waitForTimeout(350);
    const d=await p.evaluate(()=>{
      const t=document.body.innerText;
-     const hs=[...document.querySelectorAll('h1,h2,h3,h4')].map(h=>+h.tagName[1]);
+     // Only headings that reach the accessibility tree. Until 18 Nov 2026 this
+     // collected every heading in the DOM, hidden ones included, and that made
+     // the check wrong rather than merely incomplete: on /contact/ the success
+     // message's hidden h2 sat between the h1 and the footer's h3s, so the
+     // sequence looked valid here while a screen reader, which never sees that
+     // h2, went straight from h1 to h3. Lighthouse flagged it; this did not.
+     // A visually-hidden heading (clipped, not display:none) is still announced,
+     // so it still counts, which is why this tests rendering rather than size.
+     const inA11yTree=(h)=>{
+       if(h.closest('[aria-hidden="true"]')) return false;
+       if(h.hidden||h.closest('[hidden]')) return false;
+       for(let e=h; e && e!==document.body; e=e.parentElement){
+         const cs=getComputedStyle(e);
+         if(cs.display==='none'||cs.visibility==='hidden') return false;
+       }
+       return true;
+     };
+     const hs=[...document.querySelectorAll('h1,h2,h3,h4,h5,h6')]
+       .filter(inA11yTree).map(h=>+h.tagName[1]);
      let skip=false; for(let i=1;i<hs.length;i++) if(hs[i]-hs[i-1]>1) skip=true;
      const small=[...document.querySelectorAll('a,button,summary,input[type=checkbox]+span')]
        .filter(e=>{const r=e.getBoundingClientRect();

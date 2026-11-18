@@ -509,7 +509,16 @@
 /* Contact */
 .contact__grid{display:grid;gap:var(--s-6)}
 @media (min-width:900px){.contact__grid{grid-template-columns:7fr 5fr;gap:var(--s-7)}}
-.contact__channels{display:grid;gap:var(--s-4);align-content:start}
+/* The aside carries a heading so the column is announced rather than arriving
+   as an unlabelled list after the form, and so the page has an h2 between its
+   h1 and the footer's h3s. Before 18 Nov 2026 the only h2 here lived inside the
+   hidden success message, so a screen reader went h1 straight to h3. The note
+   below the list used to sit inside the <dl>, which is not a permitted child. */
+.contact__aside{display:grid;gap:var(--s-4);align-content:start}
+.contact__aside-title{font-size:var(--fs-h3);font-weight:700;letter-spacing:-.01em}
+.contact__note{color:var(--text-2);font-size:var(--fs-small);
+  border-top:1px solid var(--border);padding-top:var(--s-3);margin:0}
+.contact__channels{display:grid;gap:var(--s-4);align-content:start;margin:0}
 .channel{display:grid;gap:4px}
 .channel dt{font-size:var(--fs-eyebrow);letter-spacing:.12em;text-transform:uppercase;
   color:var(--text-2);font-weight:700}

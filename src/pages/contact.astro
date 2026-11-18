@@ -83,32 +83,35 @@ const NEEDS = ['Brand Identity','Website','Content','Social Media','E-Commerce',
         </div>
       </div>
 
-      <dl class="contact__channels">
-        <div class="channel">
-          <dt>WhatsApp</dt>
-          <dd><a href={SITE.whatsapp} rel="noopener">Chat on WhatsApp</a></dd>
-        </div>
-        <div class="channel">
-          <dt>Phone</dt>
-          <dd><a href={SITE.phoneHref}>{SITE.phone}</a></dd>
-        </div>
-        <div class="channel">
-          <dt>Email</dt>
-          <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
-        </div>
-        <div class="channel">
-          <dt>Where we are</dt>
-          <dd style="color:var(--text-2)">{SITE.base}. {SITE.delivers} are the markets we know best. {SITE.reach}</dd>
-        </div>
-        <div class="channel">
-          <dt>Response time</dt>
-          <dd style="color:var(--text-2)">Within one business day</dd>
-        </div>
-        <p style="color:var(--text-2);font-size:var(--fs-small);border-top:1px solid var(--border);padding-top:var(--s-3)">
+      <div class="contact__aside">
+        <h2 class="contact__aside-title">Other ways to reach us</h2>
+        <dl class="contact__channels">
+          <div class="channel">
+            <dt>WhatsApp</dt>
+            <dd><a href={SITE.whatsapp} rel="noopener">Chat on WhatsApp</a></dd>
+          </div>
+          <div class="channel">
+            <dt>Phone</dt>
+            <dd><a href={SITE.phoneHref}>{SITE.phone}</a></dd>
+          </div>
+          <div class="channel">
+            <dt>Email</dt>
+            <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+          </div>
+          <div class="channel">
+            <dt>Where we are</dt>
+            <dd style="color:var(--text-2)">{SITE.base}. {SITE.delivers} are the markets we know best. {SITE.reach}</dd>
+          </div>
+          <div class="channel">
+            <dt>Response time</dt>
+            <dd style="color:var(--text-2)">Within one business day</dd>
+          </div>
+        </dl>
+        <p class="contact__note">
           We do not ask for numbers on this form. Scope first, costing once we both
           understand what the work involves.
         </p>
-      </dl>
+      </div>
     </div>
   </section>
 </BaseLayout>
